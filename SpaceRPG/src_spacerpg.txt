@@ -1,7 +1,10 @@
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameApplet.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameState.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameView.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Global.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\mergeSort.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Obj.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Player.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\PointS.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Sprite.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\TestObj.java

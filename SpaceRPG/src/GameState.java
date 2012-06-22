@@ -10,16 +10,33 @@
  * With the different gamestate subclasses, we can change how the game behaves by overriding Tick().
  */
 
+import java.util.*;
 
 public class GameState {
 
 	double time = 0.0;
+	
+	ArrayList<Obj> activeObjects = new ArrayList(0);
 
     public GameState() {
+    	Global.state = this;
+    	ArrayList<PointS> Pointss = new ArrayList(0);
+    	
+    	String image = "Resources/Sprites/Flak Frigate 1 - Thrust.png";
+    	
+    	Pointss.add(new PointS(-1,-1));
+    	Pointss.add(new PointS(-1,1));
+    	Pointss.add(new PointS(1,-1));
+    	Pointss.add(new PointS(1,1));
+    	
+    	new TestObj(Pointss, image, Global.codeContext);
     }
     
     public void Tick(){
     	time += 0.01;//This is in seconds.
+    	for(Obj O:activeObjects){
+    		O.Step();
+    	}
     }
     
 }

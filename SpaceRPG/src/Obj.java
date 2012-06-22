@@ -29,7 +29,7 @@ import java.util.*;
 public class Obj implements Comparable{
 	
 	public Sprite sprite;
-	public Color color;
+	public Color color = Color.white;
 	//public AffineTransform transform = new AffineTransform();
 	
 	public ArrayList<PointS> vertices;
@@ -45,11 +45,15 @@ public class Obj implements Comparable{
 	
 	public boolean density = true;
 	
+	public Obj(){
+		
+	}
+	
     public Obj(ArrayList<PointS> Pointss, String image) {
     	vertices = (ArrayList)Pointss.clone();
     	if(image != null) {
 	    	sprite = new Sprite(image);
-	    	//World.world.addObj(this);
+	    	Init();
     	}
     }
     
@@ -59,7 +63,14 @@ public class Obj implements Comparable{
     	{
     		sprite = new Sprite(image, spritecontext);
 	    	context = spritecontext;
-	    	//World.world.addObj(this);
+	    	Init();
+    	}
+    }
+    
+    public void Init(){
+    	Global.state.activeObjects.add(this);
+    	if(CameraCanSee()){
+    		Global.view.drawObjects.add(this);
     	}
     }
     
@@ -274,7 +285,8 @@ public class Obj implements Comparable{
 		}
 		
 		angle += theta;
-		//sprite.rotate(theta,cx,cy);
+		if(angle >= 360) angle-=360;
+		if(angle < 0) angle += 360;
 	}
 	
 	public void setAngle(double theta){
@@ -326,7 +338,7 @@ public class Obj implements Comparable{
 		}
 		
 		angle = theta;
-		//sprite.setAngle(theta,cx,cy);
+		angle = Math.max(0,Math.min(359,angle));
 	}
 	
 	public void flip(){
@@ -434,16 +446,6 @@ public class Obj implements Comparable{
 		//sprite.scaleTo(dw,dh);
 	}
     
-    public void Draw(Graphics2D G, ImageObserver loc){
-    	
-    	//Once testing sprite/polygon coherence is complete, there needs to be a section added
-    	//Where the transform is modified to make the drawn coordinates relative to the player.
-    	
-    	transform(); //Applies the object's transformations to the sprite
-    	sprite.Draw(G,loc); //Draws the object's sprite
-    	linkVertices();//I'm not too sure why this is here, of all places.
-    }
-    
     public void linkVertices(){
     	
     	for(int i=0;i<vertices.size();i++){
@@ -462,10 +464,28 @@ public class Obj implements Comparable{
     
     public void transform(){
     	AffineTransform transform = new AffineTransform();
-    	transform.translate(x,y);
-    	transform.rotate(angle);
-    	transform.scale(dx,dy);
+    	
+    	double rx, ry;
+    	rx = (x - Global.player.cx) * Global.player.zoom + Global.view.sizex/2;
+    	ry = (y - Global.player.cy) * Global.player.zoom * Global.xyRatio + Global.view.sizey/2;
+    	rx -= (sprite.frameX/2) * Global.player.zoom;
+    	ry -= (sprite.frameY/2) * Global.player.zoom;
+    	
+    	transform.translate(rx, ry);
+    	//transform.rotate(angle);
+    	transform.scale(dx * Global.player.zoom, dy * Global.player.zoom);
+    	
     	sprite.setTransform(transform);
+    }
+    
+    public void Draw(Graphics2D G, ImageObserver loc){
+    	
+    	//Once testing sprite/polygon coherence is complete, there needs to be a section added
+    	//Where the transform is modified to make the drawn coordinates relative to the player.
+    	
+    	transform(); //Applies the object's transformations to the sprite
+    	sprite.Draw(G,loc); //Draws the object's sprite
+    	linkVertices();//I'm not too sure why this is here, of all places.
     }
     
 	public void flipX(){
@@ -490,6 +510,25 @@ public class Obj implements Comparable{
     	return O.toString().compareTo(this.toString());
     }
     
-    public void Update(){
+    public boolean CameraCanSee(){
+    	if(Global.player == null) return false;
+    	
+    	double rx, ry;
+    	rx = Math.abs(x - Global.player.cx);
+    	ry = Math.abs(y - Global.player.cy);
+    	
+    	if(sprite != null){
+    		rx -= sprite.frameX/2;
+    		ry -= sprite.frameY/2;
+    		if(rx < 0) rx = 0;
+    		if(ry < 0) ry = 0;
+    	}
+    	
+    	if(rx * Global.player.zoom > Global.view.sizex/2) return false;
+    	if(ry * Global.player.zoom * Global.xyRatio > Global.view.sizey/2) return false;
+    	return true;
+    }
+    
+    public void Step(){ //This is what will be called by the gamestate every tick
     }
 }

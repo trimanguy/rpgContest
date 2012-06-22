@@ -12,25 +12,22 @@ import java.net.*;
 public class Sprite {
 	public AffineTransform transform = new AffineTransform();
 	BufferedImage img;
-	/*
-	double x;
-	double y;
-	double angle;
-	double dx;//draw width
-	double dy;//draw height
+	BufferedImage source;
 	
-	//Hot spot coordinates. Allows me to define the center of a sprite for rotations and transformations.
-	double hotx=0;
-	double hoty=0; 
-	*/
+	int frame;
+	int frameX;
+	int frameY;
 	
 	public Sprite(String dir, URL context){
 		
 		try {
 			URL url = new URL(context, dir);
-			img = ImageIO.read(url);
-			//hotx = img.getWidth()/2;
-			//hoty = img.getHeight()/2;
+			source = ImageIO.read(url);
+			
+			frameY = source.getHeight();
+			frameX = frameY;
+			
+			setFrame(1);
 		} catch (IOException e) {
 		}
 		
@@ -39,26 +36,37 @@ public class Sprite {
 	public Sprite(String dir){
 		
 		try {
-			img = ImageIO.read(new File(dir));
-			//hotx = img.getWidth()/2;
-			//hoty = img.getHeight()/2;
+			source = ImageIO.read(new File(dir));
+			
+			frameY = source.getHeight();
+			frameX = frameY;
+			
+			setFrame(1);
 		} catch (IOException e) {
 		}
 		
 	}
-	/*
-	public void setHotspot(double nx, double ny){
-		hotx = nx;
-		hoty = ny;
+	
+	public void setFrame(int f){
+		frame = f;
+		//if(source == null) return;
+		int gx,gy;
+		gx = (frame-1)*frameX;
+		gy = 0;
+		/*
+		if(gx > source.getWidth()){
+			gx -= frameX;
+		}
+		*/
+		img = source.getSubimage(gx, gy, frameX, frameY);
 	}
-	*/
 	
 	public void setTransform(AffineTransform at){
 		transform = at;
 	}
 	
 	public void setImage(BufferedImage image){
-		img = image;
+		source = image;
 	}
 	
 	public void Draw (Graphics2D graphic, ImageObserver loc){

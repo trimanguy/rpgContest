@@ -13,6 +13,14 @@
 				<dir>classes</dir>
 			</folderitem>
 			<folderitem>
+				<path>SpaceRPG\classes\Resources</path>
+				<dir>classes\Resources</dir>
+			</folderitem>
+			<folderitem>
+				<path>SpaceRPG\classes\Resources\Sprites</path>
+				<dir>classes\Resources\Sprites</dir>
+			</folderitem>
+			<folderitem>
 				<path>SpaceRPG\src</path>
 				<dir>src</dir>
 			</folderitem>
@@ -53,19 +61,7 @@
 			<path>SpaceRPG\src\PointS.java</path>
 			<source>true</source>
 			<index>5</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>..\..\..\Desktop\about:blank</path>
-			<source>false</source>
-			<index>6</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src_spacerpg.txt</path>
-			<source>true</source>
-			<index>7</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 	</open_files>
 	<batchbuilds>

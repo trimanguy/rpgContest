@@ -79,18 +79,24 @@ public class GameView implements Runnable{
     		Obj O = (Obj) drawObjects.get(i);
     		O.Draw(buffergraphics,I);
     		
-    		//buffergraphics.drawString(""+O.getClass()+" : "+O.layer, 0, sizey-10-(i*10));
-    		//This is a debug message of sorts that displays every object being drawn and its layer
+    		//Debug Message to list objects and their draw layers
+    		buffergraphics.setColor(O.color);
+    		buffergraphics.drawString(""+O.getClass()+" - DrawLayer: "+O.layer+
+    			" ObjectAngle: "+O.angle+" SpriteFrame: "+O.sprite.frame,
+    		 	0, sizey-10-(i*10));
     	}
     	
     	//Draw UI stuff here
     	
     	
     	
+    	//Debug message here for the drawn objects list size
+    	buffergraphics.setColor(Color.white);
+    	buffergraphics.drawString("Objects drawn: "+drawObjects.size(), 0, 10);
+    	
+    	
     	//Draw the buffer onto the screen
     	G.drawImage(buffer,0,0,I);
-    	
-    	
     }
     
     public boolean checkSortedLayers(){

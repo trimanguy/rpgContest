@@ -29,8 +29,8 @@ public class GameApplet extends JApplet implements Runnable {
 	// Called once when Applet is first opened in browser 	  
 	public void init() {
 		//Applet dimensions
-		int x=1024;
-		int y=768;
+		int x=800;
+		int y=600;
 		
 		// Set GUI attributes
 		this.setLayout(new FlowLayout());
@@ -40,8 +40,20 @@ public class GameApplet extends JApplet implements Runnable {
 		this.add(board);
 		view = new GameView(this, x, y, createImage(x,y));
 		
-		//Add input listeners
+		//Add input listener(s)
+		Player p = new Player();
+		addKeyListener(p);
+		addMouseListener(p);
 		
+		
+		//Initialize the global variables
+		Global.game = this;
+		Global.view = view;
+		Global.codeContext = getCodeBase();
+		
+		
+		state = new GameState();
+		Global.state = state;
 		
 		// Start the thread, which calls the run() method.
 		view.thread.start();
@@ -68,5 +80,10 @@ public class GameApplet extends JApplet implements Runnable {
 	
 	public void destroy(){
 		//Unload resources and stuff here
+	}
+	
+	public void setState(GameState newState){
+		state = newState;
+		Global.state = newState;
 	}
 }
