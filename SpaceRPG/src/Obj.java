@@ -201,21 +201,8 @@ public class Obj implements Comparable{
     	return true;
     }
     */
-	public void translate(double nx, double ny){
-		//sprite.translate(nx,ny);
-		double theta = Math.atan2(ny,nx);
-		double r = Math.sqrt((nx*nx)+(ny*ny));
-		nx = (Math.cos(theta+angle)*r);
-		ny = (Math.sin(theta+angle)*r);
-		x+=nx;
-		y+=ny;
-		for(PointS P:vertices){
-			P.x += nx;
-			P.y += ny;
-		}
-	}
 	
-	public void move(double nx, double ny){
+	public void translate(double nx, double ny){
 		for(PointS P:vertices){
 			P.x += nx-x;
 			P.y += ny-y;
@@ -225,7 +212,7 @@ public class Obj implements Comparable{
 		//sprite.move(nx,ny);
 	}
 	
-	public void move(Point2D PointS){
+	public void translate(Point2D PointS){
 		double nx = PointS.getX();
 		double ny = PointS.getY();
 		for(PointS P:vertices){

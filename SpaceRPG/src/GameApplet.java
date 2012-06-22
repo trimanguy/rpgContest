@@ -26,6 +26,7 @@ public class GameApplet extends JApplet implements Runnable {
 
 	// Called once when Applet is first opened in browser 	  
 	public void init() {
+		//Applet dimensions
 		int x=1024;
 		int y=768;
 		
