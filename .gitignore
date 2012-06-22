@@ -1,4 +1,7 @@
 *.class
+*.jcw
+*.jcu
+*.jcp
 
 # Package Files #
 *.jar
