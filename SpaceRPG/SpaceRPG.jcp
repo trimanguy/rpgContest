@@ -19,7 +19,7 @@
 			<applet_ref/>
 			<debugger_ref/>
 			<param/>
-			<run/>
+			<run>classes\SpaceRPG.htm</run>
 			<verify>true</verify>
 		</runtime>
 	</runtimes>
@@ -39,7 +39,31 @@
 				<browser>true</browser>
 			</fileitem>
 			<fileitem>
-				<path>src\SpaceRPG.java</path>
+				<path>src\GameApplet.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\GameState.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\GameView.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\mergeSort.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\Obj.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\PointS.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\Sprite.java</path>
 				<folder>src</folder>
 			</fileitem>
 		</include>

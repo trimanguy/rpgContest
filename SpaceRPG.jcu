@@ -7,7 +7,7 @@
 	<projects>
 		<project>
 			<label>SpaceRPG</label>
-			<showfiles>false</showfiles>
+			<showfiles>true</showfiles>
 			<folderitem>
 				<path>SpaceRPG\classes</path>
 				<dir>classes</dir>
@@ -20,10 +20,58 @@
 	</projects>
 	<open_files>
 		<docitem>
-			<path>M:\Program Files (x86)\Xinox Software\JCreatorV4\start.zip</path>
-			<source>false</source>
+			<path>SpaceRPG\src\GameApplet.java</path>
+			<source>true</source>
 			<index>0</index>
-			<active>true</active>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\GameView.java</path>
+			<source>true</source>
+			<index>1</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\GameState.java</path>
+			<source>true</source>
+			<index>2</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\Obj.java</path>
+			<source>true</source>
+			<index>3</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\Sprite.java</path>
+			<source>true</source>
+			<index>4</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\PointS.java</path>
+			<source>true</source>
+			<index>5</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>..\..\..\Desktop\about:blank</path>
+			<source>false</source>
+			<index>6</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src_spacerpg.txt</path>
+			<source>true</source>
+			<index>7</index>
+			<active>false</active>
 		</docitem>
 	</open_files>
+	<batchbuilds>
+		<batchbuild>
+			<project>SpaceRPG</project>
+			<enabled>true</enabled>
+		</batchbuild>
+	</batchbuilds>
 </workspace_user>
