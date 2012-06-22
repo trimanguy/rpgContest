@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<workspace_user>
+	<active_project>
+		<label>SpaceRPG</label>
+	</active_project>
+	<projects>
+		<project>
+			<label>SpaceRPG</label>
+			<showfiles>false</showfiles>
+			<folderitem>
+				<path>SpaceRPG\classes</path>
+				<dir>classes</dir>
+			</folderitem>
+			<folderitem>
+				<path>SpaceRPG\src</path>
+				<dir>src</dir>
+			</folderitem>
+		</project>
+	</projects>
+	<open_files>
+		<docitem>
+			<path>M:\Program Files (x86)\Xinox Software\JCreatorV4\start.zip</path>
+			<source>false</source>
+			<index>0</index>
+			<active>true</active>
+		</docitem>
+	</open_files>
+</workspace_user>
