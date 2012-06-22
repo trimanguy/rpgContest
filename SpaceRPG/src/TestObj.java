@@ -12,9 +12,20 @@ import java.net.*;
 
 public class TestObj extends Obj {
     
+    double tang;
+    double maxAngVel = 1.5;
+    
     public void Step(){
+    	if(angle == tang&& Math.random() > 0.985){
+    		tang = Math.random()*360;
+    	}
     	
-    	rotate(-1);
+    	double dang = (tang - angle);
+    	if(dang < -180) dang += 360;
+    	if(dang > 180) dang -= 360;
+    	dang = Math.min(maxAngVel,Math.max(-maxAngVel,dang));
+    	
+    	rotate(dang);
     	int frame;
     	frame = (int) Math.floor(angle/5)+1;
     	sprite.setFrame(frame);
