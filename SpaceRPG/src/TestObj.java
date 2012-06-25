@@ -13,10 +13,11 @@ import java.net.*;
 public class TestObj extends Obj {
     
     double tang;
-    double maxAngVel = 1.5;
+    double maxAngVel = 1;
+    double velocity = 4;
     
     public void Step(){
-    	if(angle == tang&& Math.random() > 0.985){
+    	if(angle == tang&& Math.random() > 0.997){
     		tang = Math.random()*360;
     	}
     	
@@ -27,8 +28,16 @@ public class TestObj extends Obj {
     	
     	rotate(dang);
     	int frame;
-    	frame = (int) Math.floor(angle/5)+1;
+    	frame = (int) Math.round(angle/5)+1;
     	sprite.setFrame(frame);
+    	
+    	vx = velocity * Math.cos(angle/180*Math.PI);
+    	vy = velocity * Math.sin(angle/180*Math.PI);
+    	
+    	move(vx,vy);
+    	
+    	Global.player.cx += vx;
+    	Global.player.cy += vy;
     	
     }
     

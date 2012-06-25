@@ -51,6 +51,10 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\Global.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\mergeSort.java</path>
 				<folder>src</folder>
 			</fileitem>
@@ -59,11 +63,23 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\Player.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\PointS.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
 				<path>src\Sprite.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\StarField.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\TestObj.java</path>
 				<folder>src</folder>
 			</fileitem>
 		</include>

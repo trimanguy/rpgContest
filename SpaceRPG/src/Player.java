@@ -12,8 +12,8 @@ public class Player implements MouseListener, KeyListener {
 	
 	//Camera X and Camera Y. These are in 1:1 game world coordinates.
 	//This should not affect interface rendering.
-	int cx = 0;
-	int cy = 0;
+	double cx = 0;
+	double cy = 0;
 	
 	//Camera zoom. Any value > 1 will magnify.
 	//This should not affect interface rendering.

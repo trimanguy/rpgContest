@@ -29,8 +29,8 @@ public class GameApplet extends JApplet implements Runnable {
 	// Called once when Applet is first opened in browser 	  
 	public void init() {
 		//Applet dimensions
-		int x=800;
-		int y=600;
+		int x=1024;
+		int y=768;
 		
 		// Set GUI attributes
 		this.setLayout(new FlowLayout());
@@ -39,6 +39,9 @@ public class GameApplet extends JApplet implements Runnable {
 		// Place elements
 		this.add(board);
 		view = new GameView(this, x, y, createImage(x,y));
+		
+		//Loading screen & load game resources
+		
 		
 		//Add input listener(s)
 		Player p = new Player();

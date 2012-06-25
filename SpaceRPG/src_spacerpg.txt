@@ -7,4 +7,5 @@ C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Obj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Player.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\PointS.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Sprite.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\StarField.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\TestObj.java

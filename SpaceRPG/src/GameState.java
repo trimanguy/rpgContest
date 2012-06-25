@@ -33,7 +33,7 @@ public class GameState {
     }
     
     public void Tick(){
-    	time += 0.01;//This is in seconds.
+    	time = System.currentTimeMillis()/1000;
     	for(Obj O:activeObjects){
     		O.Step();
     	}

@@ -18,6 +18,14 @@ public class GameView implements Runnable{
 	
 	ArrayList <Obj> drawObjects = new ArrayList(0);
 	
+	long nextSecond = System.currentTimeMillis() + 1000;
+	int framesInLastSecond = 0;
+	int framesInCurrentSecond = 0;
+	
+	BufferedImage background;
+	
+	StarField starField;
+	
     public GameView() {
     	
     }
@@ -33,6 +41,7 @@ public class GameView implements Runnable{
     
     public void initialize(){
     	buffergraphics = (Graphics2D) buffer.getGraphics();
+    	starField = new StarField();
     }
     
 	public void run(){
@@ -42,15 +51,7 @@ public class GameView implements Runnable{
 			
 			
 			//Draw the current frame
-			Draw((Graphics2D) game.board.getGraphics(), game.board);
-			
-			
-			try{
-				thread.sleep(1); // capped at 1000fps hurrdurr
-			} catch(Exception E){
-				
-			}
-			
+			Draw((Graphics2D) game.board.getGraphics(), game.board);			
 		}
 	}
     
@@ -71,6 +72,13 @@ public class GameView implements Runnable{
     	
     	
     	//Draw background stuff here. Things like planets, nebulae, and scrolling starfields.
+    	if(background!= null){
+    		buffergraphics.drawImage(background,0,0,I);
+    	}
+    	
+    	if(starField!=null){
+    		starField.Draw(buffergraphics,I);
+    	}
     	
     	
     	
@@ -82,8 +90,8 @@ public class GameView implements Runnable{
     		//Debug Message to list objects and their draw layers
     		buffergraphics.setColor(O.color);
     		buffergraphics.drawString(""+O.getClass()+" - DrawLayer: "+O.layer+
-    			" ObjectAngle: "+O.angle+" SpriteFrame: "+O.sprite.frame,
-    		 	0, sizey-10-(i*10));
+    			" ObjectAngle: "+O.angle+" SpriteFrame: "+O.sprite.frame
+    		 	,5, sizey-10-(i*15));
     	}
     	
     	//Draw UI stuff here
@@ -92,8 +100,19 @@ public class GameView implements Runnable{
     	
     	//Debug message here for the drawn objects list size
     	buffergraphics.setColor(Color.white);
-    	buffergraphics.drawString("Objects drawn: "+drawObjects.size(), 0, 10);
+    	buffergraphics.drawString("Objects drawn: "+drawObjects.size(), 5, 10);
     	
+    	
+    	//Compute and display the current framerate
+	    long currentTime = System.currentTimeMillis();
+	    if (currentTime > nextSecond) {
+	        nextSecond += 1000;
+	        framesInLastSecond = framesInCurrentSecond;
+	        framesInCurrentSecond = 0;
+	    }
+	    framesInCurrentSecond++;
+	
+	    buffergraphics.drawString(framesInLastSecond + " fps", 5, 25);
     	
     	//Draw the buffer onto the screen
     	G.drawImage(buffer,0,0,I);

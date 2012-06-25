@@ -45,6 +45,9 @@ public class Obj implements Comparable{
 	
 	public boolean density = true;
 	
+	
+    double vx,vy;
+    
 	public Obj(){
 		
 	}
@@ -52,7 +55,7 @@ public class Obj implements Comparable{
     public Obj(ArrayList<PointS> Pointss, String image) {
     	vertices = (ArrayList)Pointss.clone();
     	if(image != null) {
-	    	sprite = new Sprite(image);
+	    	sprite = new Sprite(image, true);
 	    	Init();
     	}
     }
@@ -61,7 +64,7 @@ public class Obj implements Comparable{
     	vertices = (ArrayList)Pointss.clone();
     	if(image != null && spritecontext != null)
     	{
-    		sprite = new Sprite(image, spritecontext);
+    		sprite = new Sprite(image, spritecontext, true);
 	    	context = spritecontext;
 	    	Init();
     	}
@@ -212,6 +215,11 @@ public class Obj implements Comparable{
     	return true;
     }
     */
+	
+	public void move(double nx, double ny){
+		double px = nx+x, py = ny+y;
+		translate(px,py);
+	}
 	
 	public void translate(double nx, double ny){
 		for(PointS P:vertices){
@@ -467,7 +475,7 @@ public class Obj implements Comparable{
     	
     	double rx, ry;
     	rx = (x - Global.player.cx) * Global.player.zoom + Global.view.sizex/2;
-    	ry = (y - Global.player.cy) * Global.player.zoom * Global.xyRatio + Global.view.sizey/2;
+    	ry = (Global.player.cy - y) * Global.player.zoom * Global.xyRatio + Global.view.sizey/2;
     	rx -= (sprite.frameX/2) * Global.player.zoom;
     	ry -= (sprite.frameY/2) * Global.player.zoom;
     	

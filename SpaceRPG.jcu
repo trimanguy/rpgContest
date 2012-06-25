@@ -55,13 +55,25 @@
 			<path>SpaceRPG\src\Sprite.java</path>
 			<source>true</source>
 			<index>4</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
 			<path>SpaceRPG\src\PointS.java</path>
 			<source>true</source>
 			<index>5</index>
-			<active>true</active>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\Starfield.java</path>
+			<source>true</source>
+			<index>6</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\TestObj.java</path>
+			<source>true</source>
+			<index>7</index>
+			<active>false</active>
 		</docitem>
 	</open_files>
 	<batchbuilds>
