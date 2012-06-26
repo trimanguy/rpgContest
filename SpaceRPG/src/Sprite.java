@@ -53,10 +53,12 @@ public class Sprite {
 	}
 	
 	public void setFrame(int f){
-		
+		if(frame == f) return;
 		frame = f;
 		if(!hasFrames) {
 			img = source;
+			frameX = source.getWidth();
+			frameY = source.getHeight();
 			return;
 		}
 		//if(source == null) return;

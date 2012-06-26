@@ -24,6 +24,17 @@ public class Player implements MouseListener, KeyListener {
     }
     
     public void mouseClicked(MouseEvent e){
+    }
+    
+    public void mouseEntered(MouseEvent e){
+    	
+    }
+    
+    public void mouseExited(MouseEvent e){
+    	
+    }
+    
+    public void mousePressed(MouseEvent e){
     	//Convert screen coordinates to relative coordinates to world coordinates, and then go through
     	//The layered objects list to determine what was being clicked.
     	
@@ -52,6 +63,7 @@ public class Player implements MouseListener, KeyListener {
     		int alpha = (RGBA  >> 24) & 0xFF;
     		if(alpha == 0) continue;
     		else clickedObj = currentObj;
+    		break;
     	}
     	
     	Global.view.Clicked = clickedObj;
@@ -66,18 +78,6 @@ public class Player implements MouseListener, KeyListener {
     		case 3: 	this.middleClick(e, clickedObj);  //middle-button click
     					break;
     	}
-    }
-    
-    public void mouseEntered(MouseEvent e){
-    	
-    }
-    
-    public void mouseExited(MouseEvent e){
-    	
-    }
-    
-    public void mousePressed(MouseEvent e){
-
     }
     
     public void mouseReleased(MouseEvent e){
