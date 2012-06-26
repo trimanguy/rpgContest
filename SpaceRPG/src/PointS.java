@@ -1,9 +1,10 @@
 import java.awt.geom.*;
 
 public class PointS extends Point2D.Double{
-	public PointS next;
-	public PointS prev;
-	
+	/**next and prev may not be needed, deletion imminent**/
+	//public PointS next;
+	//public PointS prev;
+
 	public PointS(){
 		
 	}
@@ -20,18 +21,18 @@ public class PointS extends Point2D.Double{
 		return 0;
 	}
 	
-	public static PointS toScreen(PointS in){
+	public PointS toScreen(){
         double nx,ny;
-        nx = in.getX(); ny = in.getY();
+        nx = x; ny = y;
         nx = (nx - Global.player.cx) * Global.player.zoom + Global.view.sizex/2;
         ny = (Global.player.cy - ny) * Global.player.zoom * Global.xyRatio + Global.view.sizey/2;
                    
         return new PointS(nx,ny);
     }
      
-    public static PointS toWorld(PointS in){
+    public PointS toWorld(){
         double nx,ny;
-        nx = in.getX(); ny = in.getY();
+        nx = x; ny = y;
         nx -= Global.view.sizex/2;
         ny -= Global.view.sizey/2;
         nx = (nx/Global.player.zoom)+Global.player.cx;

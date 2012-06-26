@@ -116,10 +116,12 @@ public class Obj implements Comparable{
     		if(!contained)
     			newvertices.add(P);
     		
+    		/**
     		if(type == PathIterator.SEG_LINETO ){
     			last.next = P;
     			P.prev = last;
     		}
+    		**/
     		
     		last = P;
     		type = iterator.currentSegment(coords);
@@ -141,7 +143,10 @@ public class Obj implements Comparable{
     	return getPolygon().contains(P);
     }
     
+    
     public boolean checkCollision(Obj O){
+    	/** IMMINENT REMOVAL OF THIS METHOD
+    	
     	if(O == this) return true;
     	//If I'm colliding with myself? Seems redundant.
     	
@@ -174,8 +179,9 @@ public class Obj implements Comparable{
     			//Intersecting boundaries
     		}
     	}
-    	
+    	**/
     	return false; //No PointS collisions and boundary intersections.
+    	
     }
     
     public static PointS lineCollision(PointS p1, PointS p2,
@@ -455,7 +461,7 @@ public class Obj implements Comparable{
 	}
     
     public void linkVertices(){
-    	
+    	/** IMMINENT REMOVAL OF THIS METHOD
     	for(int i=0;i<vertices.size();i++){
     		PointS P = vertices.get(i);
     		//if(P.next != null && P.prev != null) continue;
@@ -468,6 +474,7 @@ public class Obj implements Comparable{
     			vertices.get(0).prev = P;
     		}
     	}
+    	**/
     }
     
     public void transform(){

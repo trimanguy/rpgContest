@@ -40,7 +40,7 @@ public class Player implements MouseListener, KeyListener {
     	
     	//determine REAL coord of the click 
     	PointS clickedPt = new PointS(e.getX(), e.getY());
-    	PointS realPt = clickedPt.toWorld(clickedPt);
+    	PointS realPt = clickedPt.toWorld();
     	
     	//determine what obj was being clicked
     	Obj clickedObj = null;
@@ -61,9 +61,8 @@ public class Player implements MouseListener, KeyListener {
     		//Grab the RGBA
     		int RGBA = currentObj.sprite.img.getRGB((int)dx,(int)dy);
     		int alpha = (RGBA  >> 24) & 0xFF;
-    		if(alpha == 0) continue;
-    		else clickedObj = currentObj;
-    		break;
+    		if(alpha == 0) {continue;}
+    		else {clickedObj = currentObj; break;}
     	}
     	
     	Global.view.Clicked = clickedObj;
