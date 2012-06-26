@@ -28,18 +28,34 @@ public class Player implements MouseListener, KeyListener {
     	//The layered objects list to determine what was being clicked.
     	
     	//determine REAL coord of the click 
-    	PointS clickedPt = new PointS(e.getXOnScreen(), e.getYOnScreen());
+    	PointS clickedPt = new PointS(e.getX(), e.getY());
     	PointS realPt = clickedPt.toWorld(clickedPt);
     	
     	//determine what obj was being clicked
-    	Obj clickedObj = new Obj();
+    	Obj clickedObj = null;
     	for(int x = Global.view.drawObjects.size()-1; x>=0; x--){ //check from obj closest to front
     		Obj currentObj = Global.view.drawObjects.get(x);
-    		if (currentObj.contains(realPt)) { //if click was on this obj
-    			clickedObj = currentObj;
-    			break;
-    		}
+    		
+    		//First skip objects whose sprite dimensions are not even close
+    		double dx = realPt.x - currentObj.x;//Relative X
+    		double dy = realPt.y - currentObj.y;//Relative Y
+    		if(Math.abs(dx) > currentObj.sprite.frameX/2) continue;
+    		if(Math.abs(dy) > currentObj.sprite.frameY/2) continue;
+    		
+    		//Now from relative coordinates to local sprite coordinates...
+    		//Sprite coordinates, I believe, are relative to the top left corner of the sprite
+    		dx += currentObj.sprite.frameX/2;
+    		dy = currentObj.sprite.frameY/2 - dy;
+    		
+    		//Grab the RGBA
+    		int RGBA = currentObj.sprite.img.getRGB((int)dx,(int)dy);
+    		int alpha = (RGBA  >> 24) & 0xFF;
+    		if(alpha == 0) continue;
+    		else clickedObj = currentObj;
     	}
+    	
+    	Global.view.Clicked = clickedObj;
+    	if(clickedObj == null) return;
     	
     	//check if right or left clicked
     	switch (e.getButton()) {

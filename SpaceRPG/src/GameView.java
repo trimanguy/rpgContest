@@ -27,6 +27,9 @@ public class GameView implements Runnable{
 	
 	StarField starField;
 	
+	//Debugging stuff
+	Obj Clicked;
+	
     public GameView() {
     	
     }
@@ -100,11 +103,12 @@ public class GameView implements Runnable{
     	for(int i=0;i<drawGUI.size();i++){
     		UIElement O = (UIElement) drawGUI.get(i);
     		O.Draw(buffergraphics,I);
-    		
+    		/*
     		buffergraphics.setColor(O.color);
     		buffergraphics.drawString(""+O.getClass()+" - DrawLayer: "+O.layer+
     			" SpriteFrame: "+O.sprite.frame
     		 	,5, sizey-10-(i*15));
+    		*/
     	}
     	
     	
@@ -124,7 +128,12 @@ public class GameView implements Runnable{
 	    framesInCurrentSecond++;
 	
 	    buffergraphics.drawString(framesInLastSecond + " fps", 5, 25);
-    	
+	    
+	    //Draw Debugging Clicked Object
+    	if(Clicked!=null){
+    		buffergraphics.setColor(Clicked.color);
+    		buffergraphics.drawString("Clicked Object: "+Clicked.getClass()+" - "+Clicked.x+", "+Clicked.y, 5, 40);
+    	}
     	//Draw the buffer onto the screen
     	G.drawImage(buffer,0,0,I);
     }

@@ -82,6 +82,10 @@
 				<path>src\TestObj.java</path>
 				<folder>src</folder>
 			</fileitem>
+			<fileitem>
+				<path>src\UIElement.java</path>
+				<folder>src</folder>
+			</fileitem>
 		</include>
 	</files>
 	<tasks/>

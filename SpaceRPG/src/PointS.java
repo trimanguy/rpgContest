@@ -20,7 +20,7 @@ public class PointS extends Point2D.Double{
 		return 0;
 	}
 	
-	public PointS toWorld(PointS in){
+	public static PointS toScreen(PointS in){
         double nx,ny;
         nx = in.getX(); ny = in.getY();
         nx = (nx - Global.player.cx) * Global.player.zoom + Global.view.sizex/2;
@@ -29,7 +29,7 @@ public class PointS extends Point2D.Double{
         return new PointS(nx,ny);
     }
      
-    public PointS toScreen(PointS in){
+    public static PointS toWorld(PointS in){
         double nx,ny;
         nx = in.getX(); ny = in.getY();
         nx -= Global.view.sizex/2;

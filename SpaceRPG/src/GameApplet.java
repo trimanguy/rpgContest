@@ -34,6 +34,7 @@ public class GameApplet extends JApplet implements Runnable {
 		
 		// Set GUI attributes
 		this.setLayout(new FlowLayout());
+		board.setMaximumSize(new Dimension(x,y));
 		board.setPreferredSize(new Dimension(x, y));
 
 		// Place elements
