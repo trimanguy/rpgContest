@@ -87,7 +87,7 @@ public class Obj implements Comparable{
     	px -= x; py-= y;
     	
     	for(HitCircle O:hitCircles){
-    		double d2 = px*px+py*py;
+    		double d2 = (px-O.rx)*(px-O.rx)+(py-O.ry)*(py-O.ry);
     		if(d2 <= O.r2) return O;
     	}
     	
