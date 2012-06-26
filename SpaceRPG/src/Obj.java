@@ -73,7 +73,7 @@ public class Obj implements Comparable{
     public void Init(){
     	Global.state.activeObjects.add(this);
     	if(CameraCanSee()){
-    		Global.view.drawObjects.add(this);
+    		Global.view.addDrawObject(this);
     	}
     }
     

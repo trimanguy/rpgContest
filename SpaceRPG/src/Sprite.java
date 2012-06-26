@@ -55,7 +55,10 @@ public class Sprite {
 	public void setFrame(int f){
 		
 		frame = f;
-		if(!hasFrames) return;
+		if(!hasFrames) {
+			img = source;
+			return;
+		}
 		//if(source == null) return;
 		int gx,gy;
 		gx = (frame-1)*frameX;
@@ -82,11 +85,6 @@ public class Sprite {
 	}
 	
 	public void Draw (Graphics2D graphic, ImageObserver loc){
-		if(hasFrames){
-			graphic.drawImage(img, transform, loc);
-		}else{
-			graphic.drawImage(source, transform, loc);
-		}
-		
+		graphic.drawImage(img, transform, loc);
 	}
 }

@@ -36,6 +36,9 @@ public class GameState {
     	time = System.currentTimeMillis()/1000;
     	for(Obj O:activeObjects){
     		O.Step();
+    		if(O.CameraCanSee()){
+    			Global.view.addDrawObject(O);
+    		}
     	}
     }
     
