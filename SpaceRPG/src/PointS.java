@@ -19,4 +19,25 @@ public class PointS extends Point2D.Double{
 		if(P.getY() < y) return 1;
 		return 0;
 	}
+	
+	public PointS toWorld(PointS in){
+        double nx,ny;
+        nx = in.getX(); ny = in.getY();
+        nx = (nx - Global.player.cx) * Global.player.zoom + Global.view.sizex/2;
+        ny = (Global.player.cy - ny) * Global.player.zoom * Global.xyRatio + Global.view.sizey/2;
+                   
+        return new PointS(nx,ny);
+    }
+     
+    public PointS toScreen(PointS in){
+        double nx,ny;
+        nx = in.getX(); ny = in.getY();
+        nx -= Global.view.sizex/2;
+        ny -= Global.view.sizey/2;
+        nx = (nx/Global.player.zoom)+Global.player.cx;
+        ny = (-ny/Global.player.zoom/Global.xyRatio)+Global.player.cy;
+                   
+        return new PointS(nx,ny);
+    }
+
 }
