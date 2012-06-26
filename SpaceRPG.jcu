@@ -28,34 +28,58 @@
 	</projects>
 	<open_files>
 		<docitem>
-			<path>SpaceRPG\src\GameState.java</path>
+			<path>SpaceRPG\src\GameApplet.java</path>
 			<source>true</source>
 			<index>0</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\Player.java</path>
+			<path>SpaceRPG\src\Sprite.java</path>
 			<source>true</source>
 			<index>1</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\Sprite.java</path>
+			<path>SpaceRPG\src\GameView.java</path>
 			<source>true</source>
 			<index>2</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\GameView.java</path>
+			<path>SpaceRPG\src\UIElement.java</path>
 			<source>true</source>
 			<index>3</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\TestObj.java</path>
+			<path>SpaceRPG\src\Obj.java</path>
 			<source>true</source>
 			<index>4</index>
-			<active>true</active>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>..\..\..\..\..\Windows\system32\about:blank</path>
+			<source>false</source>
+			<index>5</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\HitCircle.java</path>
+			<source>true</source>
+			<index>6</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\TestObj.java</path>
+			<source>true</source>
+			<index>7</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\Player.java</path>
+			<source>true</source>
+			<index>8</index>
+			<active>false</active>
 		</docitem>
 	</open_files>
 	<breakpoints>

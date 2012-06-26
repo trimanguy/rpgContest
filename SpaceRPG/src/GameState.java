@@ -24,12 +24,7 @@ public class GameState {
     	
     	String image = "Resources/Sprites/Flak Frigate 1 - Thrust.png";
     	
-    	Pointss.add(new PointS(-1,-1));
-    	Pointss.add(new PointS(-1,1));
-    	Pointss.add(new PointS(1,-1));
-    	Pointss.add(new PointS(1,1));
-    	
-    	new TestObj(Pointss, image, Global.codeContext);
+    	new TestObj(image, Global.codeContext);
     }
     
     public void Tick(){

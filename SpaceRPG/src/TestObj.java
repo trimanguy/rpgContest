@@ -16,6 +16,8 @@ public class TestObj extends Obj {
     double maxAngVel = 1;
     double velocity = 4;
     
+    double vx,vy;
+    
     public void Step(){
     	if(angle == tang&& Math.random() > 0.997){
     		tang = Math.random()*360;
@@ -41,11 +43,11 @@ public class TestObj extends Obj {
     	
     }
     
-    public TestObj(ArrayList<PointS> Pointss, String image) {
-    	super(Pointss, image);
+    public TestObj(String image) {
+    	super(image);
     }
     
-    public TestObj(ArrayList<PointS> Pointss, String image, URL spritecontext) {
-    	super(Pointss, image, spritecontext);
+    public TestObj(String image, URL spritecontext) {
+    	super(image, spritecontext);
     }
 }

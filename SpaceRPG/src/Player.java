@@ -46,6 +46,7 @@ public class Player implements MouseListener, KeyListener {
     	Obj clickedObj = null;
     	for(int x = Global.view.drawObjects.size()-1; x>=0; x--){ //check from obj closest to front
     		Obj currentObj = Global.view.drawObjects.get(x);
+    		if(currentObj.mouseOpacity == false) continue;
     		
     		//First skip objects whose sprite dimensions are not even close
     		double dx = realPt.x - currentObj.x;//Relative X

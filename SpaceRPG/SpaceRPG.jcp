@@ -55,6 +55,10 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\HitCircle.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\mergeSort.java</path>
 				<folder>src</folder>
 			</fileitem>
