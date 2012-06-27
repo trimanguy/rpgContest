@@ -10,10 +10,10 @@ import java.util.*;
 import java.net.*;
 
 
-public class TestObj extends GameObj {
+public class ShipObj extends GameObj {
     
     double tang;
-    double maxAngVel = 1;
+    double maxAngVel = 0.5;
     double velocity = 2.5;
     
     public void Init(){
@@ -51,11 +51,11 @@ public class TestObj extends GameObj {
     	
     }
     
-    public TestObj(String image) {
+    public ShipObj(String image) {
     	super(image);
     }
     
-    public TestObj(String image, URL spritecontext) {
+    public ShipObj(String image, URL spritecontext) {
     	super(image, spritecontext);
     }
 }

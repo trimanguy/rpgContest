@@ -58,27 +58,21 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>..\..\..\..\..\Windows\system32\about:blank</path>
-			<source>false</source>
-			<index>5</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
 			<path>SpaceRPG\src\HitCircle.java</path>
 			<source>true</source>
-			<index>6</index>
+			<index>5</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>SpaceRPG\src\TestObj.java</path>
 			<source>true</source>
-			<index>7</index>
+			<index>6</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>SpaceRPG\src\Player.java</path>
 			<source>true</source>
-			<index>8</index>
+			<index>7</index>
 			<active>false</active>
 		</docitem>
 	</open_files>

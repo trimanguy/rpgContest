@@ -43,6 +43,10 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\GameObj.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\GameState.java</path>
 				<folder>src</folder>
 			</fileitem>

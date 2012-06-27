@@ -17,7 +17,7 @@ public class GameState {
 	double time = 0.0;
 	
 	ArrayList<Obj> activeObjects = new ArrayList(0);
-	TestObj playerObject = null;
+	ShipObj playerObject = null;
 
     public GameState() {
     	Global.state = this;
@@ -25,7 +25,7 @@ public class GameState {
     	
     	String image = "Resources/Sprites/Flak Frigate 1 - Thrust.png";
     	
-    	new TestObj(image, Global.codeContext);
+    	new ShipObj(image, Global.codeContext);
     }
     
     public void Tick(){
