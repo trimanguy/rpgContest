@@ -132,8 +132,10 @@ public class GameView implements Runnable{
 	    //Draw Debugging Clicked Object
     	if(Clicked!=null){
     		buffergraphics.setColor(Clicked.color);
-    		buffergraphics.drawString("Clicked Object: "+Clicked.getClass()+" - "+Clicked.x+", "+Clicked.y, 5, 40);
+    		buffergraphics.drawString("Clicked Object: "+Clicked.getClass(), 5, 40);
     	}
+	    
+    	
     	//Draw the buffer onto the screen
     	G.drawImage(buffer,0,0,I);
     }

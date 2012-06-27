@@ -8,7 +8,7 @@
 import java.util.*;
 
 public class HitCircle {
-	Obj source;
+	GameObj source;
 	
 	double rx,ry; //The hitcircles should only keep track of relative coordinates, to keep things simple.
 	double radius;
@@ -17,7 +17,7 @@ public class HitCircle {
 	String tag;//My thought is you assign a tag to a pylon and then a tag to the associated hitCircles
 	
 	
-    public HitCircle(Obj s, double nx, double ny, double r) {
+    public HitCircle(GameObj s, double nx, double ny, double r) {
     	rx = nx; ry = ny;
     	source = s;
     	source.hitCircles.add(this);

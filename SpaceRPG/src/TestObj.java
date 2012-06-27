@@ -10,13 +10,11 @@ import java.util.*;
 import java.net.*;
 
 
-public class TestObj extends Obj {
+public class TestObj extends GameObj {
     
     double tang;
     double maxAngVel = 1;
-    double velocity = 4;
-    
-    double vx,vy;
+    double velocity = 2.5;
     
     public void Step(){
     	if(angle == tang&& Math.random() > 0.997){
@@ -33,13 +31,13 @@ public class TestObj extends Obj {
     	frame = (int) Math.round(angle/5)+1;
     	sprite.setFrame(frame);
     	
-    	vx = velocity * Math.cos(angle/180*Math.PI);
-    	vy = velocity * Math.sin(angle/180*Math.PI);
+    	velX = velocity * Math.cos(angle/180*Math.PI);
+    	velY = velocity * Math.sin(angle/180*Math.PI);
     	
-    	move(vx,vy);
+    	move(velX,velY);
     	
-    	Global.player.cx += vx;
-    	Global.player.cy += vy;
+    	Global.player.cx += velX;
+    	Global.player.cy += velY;
     	
     }
     

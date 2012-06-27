@@ -1,4 +1,5 @@
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameApplet.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameState.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameView.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Global.java

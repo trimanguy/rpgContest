@@ -31,11 +31,9 @@ public class Obj implements Comparable{
 	public Sprite sprite;
 	public Color color = Color.white;
 	
-	ArrayList<HitCircle> hitCircles = new ArrayList(0);
-	
 	public URL context;
 	
-	public double x; //World coordinates. Sprite is drawn centered on these coordinates
+	public double x;
 	public double y;
 	public double angle;//Angle
 	public double dx=1;//draw width (For scaling)
@@ -43,9 +41,7 @@ public class Obj implements Comparable{
 	
 	public double layer=3; //Drawing layer
 	
-	public boolean density = true;//Set to false if this object cannot collide
 	public boolean mouseOpacity = true; //Set to false if this object can never be clicked or dragged
-	public boolean passThroughTag; //Objects with the same passThroughTag will never register hits with eachother
 	
 	public Obj(){
 		
@@ -82,35 +78,8 @@ public class Obj implements Comparable{
     	sprite = s;
     }
     
-    public HitCircle contains(PointS P){
-    	double px = P.getX(), py = P.getY();
-    	px -= x; py-= y;
-    	
-    	for(HitCircle O:hitCircles){
-    		double d2 = (px-O.rx)*(px-O.rx)+(py-O.ry)*(py-O.ry);
-    		if(d2 <= O.r2) return O;
-    	}
-    	
-    	return null;
-    }
-    
-    public HitCircle checkCollision(Obj O){
-    	if(!O.density || !this.density) return null;
-    	if(O.passThroughTag == this.passThroughTag) return null;
-    	
-    	for(HitCircle A:hitCircles){
-    		for(HitCircle B:O.hitCircles){
-    			double d = (O.x-x+B.rx-A.rx)*(O.x-x+B.rx-A.rx)+(O.y-y+B.ry-A.ry)*(O.y-y+B.ry-A.ry);
-    			d = Math.sqrt(d);
-    			if(A.radius+B.radius>=d) return A;
-    		}
-    	}
-    	return null;
-    }
-	
 	public void move(double nx, double ny){
-		double px = nx+x, py = ny+y;
-		translate(px,py);
+		translate(nx+x,ny+y);
 	}
 	
 	public void translate(double nx, double ny){
@@ -130,48 +99,24 @@ public class Obj implements Comparable{
 		
 		while(angle >= 360) angle-=360;
 		while(angle < 0) angle+=360;
-		
-		for(HitCircle O:hitCircles){
-			double r,a;
-			r = Math.sqrt(O.rx*O.rx+O.ry*O.ry);
-			a = Math.atan2(O.ry,O.rx);
-			a += theta*Math.PI/180;
-			O.rx = r*Math.cos(a);
-			O.ry = r*Math.sin(a);
-		}
 	}
 	
 	public void setAngle(double theta){
 		double delta = theta-angle;
 		rotate(delta);
 	}
-	
-	public void flip(){
-		double cx=0, cy=0;
-		
-	}
     
     public void transform(){
     	AffineTransform transform = new AffineTransform();
     	
-    	double rx, ry;
-    	rx = (x - Global.player.cx) * Global.player.zoom + Global.view.sizex/2;
-    	ry = (Global.player.cy - y) * Global.player.zoom * Global.xyRatio + Global.view.sizey/2;
-    	rx -= (sprite.frameX/2) * Global.player.zoom;
-    	ry -= (sprite.frameY/2) * Global.player.zoom;
+    	transform.translate(x, y);
     	
-    	transform.translate(rx, ry);
-    	
-    	transform.scale(dx * Global.player.zoom, dy * Global.player.zoom);
+    	transform.scale(dx, dy);
     	
     	sprite.setTransform(transform);
     }
     
     public void Draw(Graphics2D G, ImageObserver loc){
-    	
-    	//Once testing sprite/polygon coherence is complete, there needs to be a section added
-    	//Where the transform is modified to make the drawn coordinates relative to the player.
-    	
     	transform(); //Applies the object's transformations to the sprite
     	sprite.Draw(G,loc); //Draws the object's sprite
     }
@@ -191,24 +136,30 @@ public class Obj implements Comparable{
     }
     
     public boolean CameraCanSee(){
-    	if(Global.player == null) return false;
-    	
-    	double rx, ry;
-    	rx = Math.abs(x - Global.player.cx);
-    	ry = Math.abs(y - Global.player.cy);
-    	
-    	if(sprite != null){
-    		rx -= sprite.frameX/2;
-    		ry -= sprite.frameY/2;
-    		if(rx < 0) rx = 0;
-    		if(ry < 0) ry = 0;
-    	}
-    	
-    	if(rx * Global.player.zoom > Global.view.sizex/2) return false;
-    	if(ry * Global.player.zoom * Global.xyRatio > Global.view.sizey/2) return false;
     	return true;
     }
     
     public void Step(){ //This is what will be called by the gamestate every tick
+    }
+    
+    public boolean CheckClick(PointS clickedPt){
+    	if(mouseOpacity == false) return false;
+    	
+    	//if the coordinates are not close to the sprite's bounding box... return false
+		double dx = clickedPt.x - x;//Relative X
+		double dy = clickedPt.y - y;//Relative Y
+		if(Math.abs(dx) > sprite.frameX/2) return false;
+		if(Math.abs(dy) > sprite.frameY/2) return false;
+		
+		//Now from relative coordinates to local sprite coordinates...
+		//Sprite coordinates, I believe, are relative to the top left corner of the sprite
+		dx += sprite.frameX/2;
+		dy = sprite.frameY/2 - dy;
+		
+		//Grab the RGBA
+		int RGBA = sprite.img.getRGB((int)dx,(int)dy);
+		int alpha = (RGBA  >> 24) & 0xFF;
+		
+		return (alpha > 0);
     }
 }
