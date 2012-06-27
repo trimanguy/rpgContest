@@ -60,9 +60,26 @@ public class Player implements MouseListener, KeyListener {
     		}
     	}
     	
-    	if(mouseObj == null){
-    		Global.view.Clicked = null;
+    	//System.out.print("Component is: " + e.getComponent().getClass().getName() + System.getProperty("line.separator"));
+    	
+    	//do stuff depending on if we clicked something
+    	if(mouseObj != null){ 
+    		//clicked on something; nothing here for now (testing purposes)
+    	} else { 
+    		//clicked on nothing
+    		Global.view.Clicked = null; //this for testing
     	}
+    	
+    	//check if right or left clicked
+	    switch (e.getButton()) {
+	    	case 1: 	this.leftClick(e, mouseObj);  //left-button click 
+	    				break;
+	    	case 2:		this.middleClick(e, mouseObj);  //right-button click
+	    				break;
+	    	case 3: 	this.rightClick(e, mouseObj);  //middle-button click
+	    				break;
+	    }
+	    
     }
     
     public void mouseReleased(MouseEvent e){
@@ -85,8 +102,7 @@ public class Player implements MouseListener, KeyListener {
     	
     	if(dropObj == null) return;
     	
-    	if(dropObj == mouseObj){
-    		//A click has occurred
+    	if(dropObj == mouseObj){ //A click has occurred
     		
     		Global.view.Clicked = mouseObj;//Draw debugging info on the clicked object
     		
@@ -94,9 +110,9 @@ public class Player implements MouseListener, KeyListener {
 	    	switch (e.getButton()) {
 	    		case 1: 	this.leftClick(e, mouseObj);  //left-button click 
 	    					break;
-	    		case 2:		this.rightClick(e, mouseObj);  //right-button click
+	    		case 2:		this.middleClick(e, mouseObj);  //right-button click
 	    					break;
-	    		case 3: 	this.middleClick(e, mouseObj);  //middle-button click
+	    		case 3: 	this.rightClick(e, mouseObj);  //middle-button click
 	    					break;
 	    	}
     	}else{
@@ -123,6 +139,23 @@ public class Player implements MouseListener, KeyListener {
     }
     
     private void rightClick(MouseEvent e, Obj clickedObj){
+    	//make player rotate towards click-location 	
+    	
+		PointS clickedPt = new PointS(e.getX(), e.getY());
+		PointS realPt = clickedPt.toWorld();
+		
+		double rotateTo = 0.0;
+		if (Math.toDegrees((Math.atan2(realPt.y-cy,realPt.x-cx ))) < 0){
+			rotateTo = Math.toDegrees((Math.atan2(realPt.y-cy,realPt.x-cx )))+360;
+		} else {
+			rotateTo = Math.toDegrees((Math.atan2(realPt.y-cy,realPt.x-cx )));
+		}
+		
+		System.out.print("Previous Direction is: " + Global.state.playerObject.angle + System.getProperty("line.separator"));
+		Global.state.playerObject.rotate( rotateTo - Global.state.playerObject.angle);
+		System.out.print("Theta is: " + rotateTo + System.getProperty("line.separator"));
+		System.out.print("Current Direction is: " + Global.state.playerObject.angle + System.getProperty("line.separator"));
+		
     	
     }
     

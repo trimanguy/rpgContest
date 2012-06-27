@@ -86,6 +86,11 @@ public class GameObj extends Obj {
     	return true;
     }
     
+    public void rotateTowards(PointS coord){
+    	
+    	
+    }
+    
 	public void rotate(double theta){
 		angle += theta;
 		
