@@ -144,6 +144,9 @@ public class GameObj extends Obj {
 		dx += sprite.frameX/2;
 		dy = sprite.frameY/2 - dy;
 		
+		dx = Math.max(0,Math.min(dx,sprite.frameX-1));
+		dy = Math.max(0,Math.min(dy,sprite.frameY-1));
+		
 		//Grab the RGBA
 		int RGBA = sprite.img.getRGB((int)dx,(int)dy);
 		int alpha = (RGBA  >> 24) & 0xFF;

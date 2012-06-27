@@ -19,6 +19,9 @@ public class Player implements MouseListener, KeyListener {
 	//This should not affect interface rendering.
 	double zoom = 1;
 	
+	Obj mouseObj;
+	Obj dropObj;
+	
     public Player() {
     	Global.player = this;
     }
@@ -43,13 +46,13 @@ public class Player implements MouseListener, KeyListener {
     	//PointS realPt = clickedPt.toWorld();
     	
     	//determine what obj was being clicked
-    	Obj clickedObj = null;
+    	mouseObj = null;
     	
     	for(int x = Global.view.drawObjects.size()-1; x>=0; x--){ //check from obj closest to front
     		Obj currentObj = Global.view.drawObjects.get(x);
     		
     		if(currentObj.CheckClick(clickedPt)){
-    			clickedObj = currentObj;
+    			mouseObj = currentObj;
     			break;
     		}
     		else {
@@ -57,21 +60,49 @@ public class Player implements MouseListener, KeyListener {
     		}
     	}
     	
-    	Global.view.Clicked = clickedObj;
-    	if(clickedObj == null) return;
-    	
-    	//check if right or left clicked
-    	switch (e.getButton()) {
-    		case 1: 	this.leftClick(e, clickedObj);  //left-button click 
-    					break;
-    		case 2:		this.rightClick(e, clickedObj);  //right-button click
-    					break;
-    		case 3: 	this.middleClick(e, clickedObj);  //middle-button click
-    					break;
+    	if(mouseObj == null){
+    		Global.view.Clicked = null;
     	}
     }
     
     public void mouseReleased(MouseEvent e){
+    	
+    	PointS clickedPt = new PointS(e.getX(), e.getY());
+    	
+    	dropObj = null;
+    	
+    	for(int x = Global.view.drawObjects.size()-1; x>=0; x--){ //check from obj closest to front
+    		Obj currentObj = Global.view.drawObjects.get(x);
+    		
+    		if(currentObj.CheckClick(clickedPt)){
+    			dropObj = currentObj;
+    			break;
+    		}
+    		else {
+    			continue;
+    		}
+    	}
+    	
+    	if(dropObj == null) return;
+    	
+    	if(dropObj == mouseObj){
+    		//A click has occurred
+    		
+    		Global.view.Clicked = mouseObj;//Draw debugging info on the clicked object
+    		
+	    	//check if right or left clicked
+	    	switch (e.getButton()) {
+	    		case 1: 	this.leftClick(e, mouseObj);  //left-button click 
+	    					break;
+	    		case 2:		this.rightClick(e, mouseObj);  //right-button click
+	    					break;
+	    		case 3: 	this.middleClick(e, mouseObj);  //middle-button click
+	    					break;
+	    	}
+    	}else{
+    		//A drag and drop has occurred
+    	}
+    	
     	
     }
     
