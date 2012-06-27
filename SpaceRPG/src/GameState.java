@@ -17,7 +17,7 @@ public class GameState {
 	double time = 0.0;
 	
 	ArrayList<Obj> activeObjects = new ArrayList(0);
-	Obj playerObject = null;
+	TestObj playerObject = null;
 
     public GameState() {
     	Global.state = this;

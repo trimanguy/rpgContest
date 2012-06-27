@@ -25,10 +25,10 @@ public class TestObj extends GameObj {
     }
     
     public void Step(){
-    	/**
+    	/*
     	if(angle == tang&& Math.random() > 0.997){
     		tang = Math.random()*360;
-    	}
+    	}*/
     	
     	double dang = (tang - angle);
     	if(dang < -180) dang += 360;
@@ -36,7 +36,7 @@ public class TestObj extends GameObj {
     	dang = Math.min(maxAngVel,Math.max(-maxAngVel,dang));
     	
     	rotate(dang);
-    	**/
+    	
     	int frame;
     	frame = (int) Math.round(angle/5)+1;
     	sprite.setFrame(frame);

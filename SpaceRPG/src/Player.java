@@ -152,7 +152,8 @@ public class Player implements MouseListener, KeyListener {
 		}
 		
 		System.out.print("Previous Direction is: " + Global.state.playerObject.angle + System.getProperty("line.separator"));
-		Global.state.playerObject.rotate( rotateTo - Global.state.playerObject.angle);
+		//Global.state.playerObject.rotate( rotateTo - Global.state.playerObject.angle);
+		Global.state.playerObject.tang = rotateTo;
 		System.out.print("Theta is: " + rotateTo + System.getProperty("line.separator"));
 		System.out.print("Current Direction is: " + Global.state.playerObject.angle + System.getProperty("line.separator"));
 		
