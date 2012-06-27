@@ -1,5 +1,5 @@
 /**
- * @(#)TestObj.java
+ * @(#)ShipObj.java
  *
  *
  * @author 
