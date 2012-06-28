@@ -92,11 +92,13 @@ public class GameView implements Runnable{
     		Obj O = (Obj) drawObjects.get(i);
     		O.Draw(buffergraphics,I);
     		
+    		/*
     		//Debug Message to list objects and their draw layers
     		buffergraphics.setColor(O.color);
     		buffergraphics.drawString(""+O.getClass()+" - DrawLayer: "+O.layer+
     			" ObjectAngle: "+O.currAngle+" SpriteFrame: "+O.sprite.frame
     		 	,5, sizey-10-(i*15));
+    		*/
     	}
     	
     	//Draw UI stuff here

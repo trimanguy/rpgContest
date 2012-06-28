@@ -19,26 +19,40 @@ public class MissileObj extends GameObj{
     int damage = 0;
     double timeLeft = 0; //how long the missle flies before it dies
     
-    
-    public void Init(GameObj targetObj, int dmg, double turnRate, double speed, double maxSpeed, double accelaration, double time){
-    	Global.state.activeObjs.add(this);
-    	if(CameraCanSee()){
-    		Global.view.addDrawObject(this);
-    	}
+    public MissileObj(String image, URL spritecontext, GameObj shipObj, GameObj targetObj, 
+    	int dmg, double turnRate, double speed, double maxSpeed, double acceleration, double time) {
+    	
+    	super(image, spritecontext);
+    	
+    	x = shipObj.x;
+    	y = shipObj.y;
+    	
     	target = targetObj;
     	timeLeft = time;
     	damage = dmg;
     	maxAngVel = turnRate;
     	velocity = speed;
     	maxVelocity = maxSpeed;
-    	accel = accelaration;
+    	accel = acceleration;
+    }
+    
+    public void Init(){
+    	
+    	velX = velocity * Math.cos(currAngle/180*Math.PI);
+    	velY = velocity * Math.sin(currAngle/180*Math.PI);
+    	
+    	move(velX,velY);
+    	
+    	super.Init();
     }
     
     public void Step(){
     	if (timeLeft <= 0){
     		//if missle is out of time, delete it here
+    		//delete();
+    		addDelete();
     	} else{
-    		timeLeft -= Global.state.dt;
+    		timeLeft -= Global.state.dt/1000;
         }
     	
     	if (target!=null) {
@@ -64,10 +78,10 @@ public class MissileObj extends GameObj{
     	velY = velocity * Math.sin(currAngle/180*Math.PI);
     	
     	move(velX,velY);
-    	
+    	/*
     	Global.player.cx += velX;
     	Global.player.cy += velY;
-    	
+    	*/
     }
     
     

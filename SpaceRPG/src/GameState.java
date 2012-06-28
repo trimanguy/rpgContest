@@ -14,6 +14,7 @@ import java.util.*;
 
 public class GameState {
 
+	double lastTime;
 	double time = 0.0;
 	double timeOfNeedGC = 0.0;
 	double dt = 0.0;
@@ -21,6 +22,9 @@ public class GameState {
 	
 	
 	ArrayList<Obj> activeObjs = new ArrayList(0);
+	ArrayList<Obj> newObjBuffer = new ArrayList(0);
+	ArrayList<Obj> deleteBuffer = new ArrayList(0);
+	
 	ShipObj playerObj = null;
 
     public GameState() {
@@ -34,15 +38,34 @@ public class GameState {
     }
     
     public void Tick(){
-    	dt = System.currentTimeMillis()/1000 - time;
-    	time += dt;
+    	
+    	dt = System.currentTimeMillis() - lastTime;
+    	lastTime = System.currentTimeMillis();
+    	
+    	//System.out.println("DELTA TIME: "+dt);
+    	
     	//time = System.currentTimeMillis()/1000;
+    	dt = 10;
+    	
+    	time += dt/1000;
+    	
     	for(Obj O:activeObjs){
     		O.Step();
     		if(O.CameraCanSee()){
     			Global.view.addDrawObject(O);
     		}
     	}
+    	
+    	for(Obj O:newObjBuffer){
+    		O.Init();
+    	}
+    	newObjBuffer.clear();
+    	
+    	for(Obj O:deleteBuffer){
+    		O.delete();
+    	}
+    	deleteBuffer.clear();
+    	
     	//garbage collection when needGC flag is on
     	if ( (needGC==true)&&(time==timeOfNeedGC+1) ){
     		System.gc();

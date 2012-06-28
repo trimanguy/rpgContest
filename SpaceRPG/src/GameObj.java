@@ -25,12 +25,16 @@ public class GameObj extends Obj {
 	
 	public double velX, velY; //X and Y components for velocity
 	
+	public double destAngle;//Destination angle for ShipObj and MissileObj
+	
 	public GameObj(){} //triman added
 	
     public GameObj(String image) {
     	if(image != null) {
 	    	sprite = new Sprite(image, true);
-	    	Init();
+	    	
+	    	//Init();
+	    	Global.state.newObjBuffer.add(this);
     	}
     }
     
@@ -39,7 +43,9 @@ public class GameObj extends Obj {
     	{
     		sprite = new Sprite(image, spritecontext, true);
 	    	context = spritecontext;
-	    	Init();
+	    	
+	    	//Init();
+	    	Global.state.newObjBuffer.add(this);
     	}
     }
     
@@ -97,7 +103,7 @@ public class GameObj extends Obj {
 			rotateTo = Math.toDegrees( Math.atan2(coord.y,coord.x) );
 		}
 		
-		Global.state.playerObj.destAngle = rotateTo;	
+		destAngle = rotateTo;	
     	
     }
     

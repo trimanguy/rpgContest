@@ -50,7 +50,9 @@ public class Obj implements Comparable{
     public Obj(String image) {
     	if(image != null) {
 	    	sprite = new Sprite(image, true);
-	    	Init();
+	    	
+	    	//Init();
+	    	Global.state.newObjBuffer.add(this);
     	}
     }
     
@@ -59,7 +61,9 @@ public class Obj implements Comparable{
     	{
     		sprite = new Sprite(image, spritecontext, true);
 	    	context = spritecontext;
-	    	Init();
+	    	
+	    	//Init();
+	    	Global.state.newObjBuffer.add(this);
     	}
     }
     
@@ -179,6 +183,10 @@ public class Obj implements Comparable{
     	if(ang < 0) ang += 360;
     	if(ang > 360) ang -= 360;
     	return ang;
+    }
+    
+    public void addDelete(){
+    	Global.state.deleteBuffer.add(this);
     }
     
     public void delete(){ //Note: Not guaranteed to clear this obj from memory

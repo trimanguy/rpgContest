@@ -17,7 +17,7 @@ public class Player implements MouseListener, KeyListener {
 	
 	//Camera zoom. Any value > 1 will magnify.
 	//This should not affect interface rendering.
-	double zoom = 1;
+	double zoom = 0.6;
 	
 	Obj mouseObj;
 	Obj dropObj;
@@ -67,9 +67,13 @@ public class Player implements MouseListener, KeyListener {
     		//clicked on something; nothing here for now (testing purposes)
     	} else { 
     		//clicked on nothing
-    		Global.view.Clicked = null; //this for testing
+    		
+    		if(e.getButton() == 1)
+    			Global.view.Clicked = null; //this for testing
     	}
     	
+    	
+    	//This is not appropriate here...
     	//check if right or left clicked
 	    switch (e.getButton()) {
 	    	case 1: 	this.leftClick(e, mouseObj);  //left-button click 
@@ -105,6 +109,9 @@ public class Player implements MouseListener, KeyListener {
     	if(dropObj == mouseObj){ //A click has occurred
     		
     		Global.view.Clicked = mouseObj;//Draw debugging info on the clicked object
+    		if(""+mouseObj.getClass() == "ShipObj"){
+    			Global.state.playerObj.aimTarget = (ShipObj) mouseObj;
+    		}
     		
 	    	//check if right or left clicked
 	    	switch (e.getButton()) {
