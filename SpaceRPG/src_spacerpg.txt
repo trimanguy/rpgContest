@@ -11,5 +11,4 @@ C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\PointS.java
 C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\ShipObj.java
 C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\Sprite.java
 C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\StarField.java
-C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\TestObj.java
 C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\UIElement.java

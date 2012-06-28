@@ -12,30 +12,26 @@ import java.net.*;
 
 public class ShipObj extends GameObj {
     
-    double tang;
+    double targetAng;
     double maxAngVel = 0.5;
     double velocity = 2.5;
     
     public void Init(){
-    	Global.state.activeObjects.add(this);
-    	Global.state.playerObject = this;
+    	Global.state.activeObjs.add(this);
+    	Global.state.playerObj = this;
     	if(CameraCanSee()){
     		Global.view.addDrawObject(this);
     	}
     }
     
     public void Step(){
-    	/*
-    	if(angle == tang&& Math.random() > 0.997){
-    		tang = Math.random()*360;
-    	}*/
     	
-    	double dang = (tang - angle);
-    	if(dang < -180) dang += 360;
-    	if(dang > 180) dang -= 360;
-    	dang = Math.min(maxAngVel,Math.max(-maxAngVel,dang));
+    	double deltaAng = (targetAng - angle);
+    	if(deltaAng < -180) deltaAng += 360;
+    	if(deltaAng > 180) deltaAng -= 360;
+    	deltaAng = Math.min(maxAngVel,Math.max(-maxAngVel,deltaAng));
     	
-    	rotate(dang);
+    	rotate(deltaAng);
     	
     	int frame;
     	frame = (int) Math.round(angle/5)+1;

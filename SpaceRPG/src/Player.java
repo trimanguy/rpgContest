@@ -140,24 +140,11 @@ public class Player implements MouseListener, KeyListener {
     
     private void rightClick(MouseEvent e, Obj clickedObj){
     	//make player rotate towards click-location 	
-    	
 		PointS clickedPt = new PointS(e.getX(), e.getY());
 		PointS realPt = clickedPt.toWorld();
+		realPt.x -= cx; realPt.y -= cy;
+		Global.state.playerObj.rotateTowards(realPt);
 		
-		double rotateTo = 0.0;
-		if (Math.toDegrees((Math.atan2(realPt.y-cy,realPt.x-cx ))) < 0){
-			rotateTo = Math.toDegrees((Math.atan2(realPt.y-cy,realPt.x-cx )))+360;
-		} else {
-			rotateTo = Math.toDegrees((Math.atan2(realPt.y-cy,realPt.x-cx )));
-		}
-		
-		System.out.print("Previous Direction is: " + Global.state.playerObject.angle + System.getProperty("line.separator"));
-		//Global.state.playerObject.rotate( rotateTo - Global.state.playerObject.angle);
-		Global.state.playerObject.tang = rotateTo;
-		System.out.print("Theta is: " + rotateTo + System.getProperty("line.separator"));
-		System.out.print("Current Direction is: " + Global.state.playerObject.angle + System.getProperty("line.separator"));
-		
-    	
     }
     
     private void middleClick(MouseEvent e, Obj clickedObj){

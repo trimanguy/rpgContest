@@ -87,7 +87,15 @@ public class GameObj extends Obj {
     }
     
     public void rotateTowards(PointS coord){
+    	double rotateTo = 0.0;
     	
+		if (Math.toDegrees((Math.atan2(coord.y,coord.x ))) < 0){
+			rotateTo = Math.toDegrees( Math.atan2(coord.y,coord.x) ) + 360;
+		} else {
+			rotateTo = Math.toDegrees( Math.atan2(coord.y,coord.x) );
+		}
+		
+		Global.state.playerObj.targetAng = rotateTo;	
     	
     }
     

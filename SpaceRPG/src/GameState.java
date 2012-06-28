@@ -16,8 +16,8 @@ public class GameState {
 
 	double time = 0.0;
 	
-	ArrayList<Obj> activeObjects = new ArrayList(0);
-	ShipObj playerObject = null;
+	ArrayList<Obj> activeObjs = new ArrayList(0);
+	ShipObj playerObj = null;
 
     public GameState() {
     	Global.state = this;
@@ -30,7 +30,7 @@ public class GameState {
     
     public void Tick(){
     	time = System.currentTimeMillis()/1000;
-    	for(Obj O:activeObjects){
+    	for(Obj O:activeObjs){
     		O.Step();
     		if(O.CameraCanSee()){
     			Global.view.addDrawObject(O);
