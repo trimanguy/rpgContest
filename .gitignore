@@ -2,6 +2,7 @@
 *.jcw
 *.jcu
 *.jcp
+src_spacerpg.txt
 
 # Package Files #
 *.jar
