@@ -12,9 +12,10 @@ import java.net.*;
 
 public class ShipObj extends GameObj {
     
-    double targetAng;
+    double destAngle;
     double maxAngVel = 0.5;
-    double velocity = 2.5;
+    double velocity = 0;
+    ShipObj aimTarget = null;
     
     public ShipObj(String image, URL spritecontext, double speed) { 
     	if(image != null && spritecontext != null)
@@ -34,24 +35,51 @@ public class ShipObj extends GameObj {
     	}
     }
     
-    public void Step(){
+    public ShipObj findTarget(){
+    	//autotarget if no aimTarget or aimTarget too far
+    	if (aimTarget==null){
+    		//TODO: autotarget, do auto-targetting here
+    		return null;
+    	} else {
+    		//clicked-target
+    		return aimTarget;
+    	}
+    }
+    
+    public void fireOn(ShipObj target){
+    	//First find angle to shoot towards
     	
-    	double deltaAng = (targetAng - angle);
+    	//Then create a missle shooting with that angle
+    	//leaving the rate-of-fire stuff for a little later
+    }
+    
+    /*** Find how much to rotate this step ***/
+    public double findDeltaAng(){
+    	double deltaAng = (destAngle - currAngle);
     	if(deltaAng < -180) deltaAng += 360;
     	if(deltaAng > 180) deltaAng -= 360;
     	deltaAng = Math.min(maxAngVel,Math.max(-maxAngVel,deltaAng));
+    	return deltaAng;
+    }
+    
+    public void Step(){
+    	//Combat 
+    	this.fireOn( this.findTarget() );
     	
-    	rotate(deltaAng);
+    	//Ship Rotation
+    	rotate( this.findDeltaAng() );
     	
+    	//Setting Ship Frame
     	int frame;
-    	frame = (int) Math.round(angle/5)+1;
+    	frame = (int) Math.round(currAngle/5)+1;
     	sprite.setFrame(frame);
     	
-    	velX = velocity * Math.cos(angle/180*Math.PI);
-    	velY = velocity * Math.sin(angle/180*Math.PI);
-    	
+    	//Ship Movement
+    	velX = velocity * Math.cos(currAngle/180*Math.PI);
+    	velY = velocity * Math.sin(currAngle/180*Math.PI);
     	move(velX,velY);
     	
+    	//Move camera if Ship is Player's Ship
     	if (this == Global.state.playerObj){
     		Global.player.cx += velX;
     		Global.player.cy += velY;
@@ -65,4 +93,5 @@ public class ShipObj extends GameObj {
     public ShipObj(String image, URL spritecontext) {
     	super(image, spritecontext);
     }
+    
 }

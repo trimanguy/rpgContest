@@ -42,13 +42,13 @@ public class MissileObj extends GameObj{
         }
     	
     	if (target!=null) {
-    		//Calculate targetAng from missle to target
+    		//Calculate destAngle from missle to target
     		//Ant: make getAngle in Obj!!
-    		double targetAng=0.0;
-    		targetAng = getAngle((Obj)target);
+    		double destAngle=0.0;
+    		destAngle = getAngle((Obj)target);
     	
     		//Then rotate missle towards target
-    		double deltaAng = (targetAng - angle);
+    		double deltaAng = (destAngle - currAngle);
     		if(deltaAng < -180) deltaAng += 360;
     		if(deltaAng > 180) deltaAng -= 360;
     		deltaAng = Math.min(maxAngVel,Math.max(-maxAngVel,deltaAng));
@@ -57,11 +57,11 @@ public class MissileObj extends GameObj{
     	}
     	
     	int frame;
-    	frame = (int) Math.round(angle/5)+1;
+    	frame = (int) Math.round(currAngle/5)+1;
     	sprite.setFrame(frame);
     	
-    	velX = velocity * Math.cos(angle/180*Math.PI);
-    	velY = velocity * Math.sin(angle/180*Math.PI);
+    	velX = velocity * Math.cos(currAngle/180*Math.PI);
+    	velY = velocity * Math.sin(currAngle/180*Math.PI);
     	
     	move(velX,velY);
     	

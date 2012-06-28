@@ -97,15 +97,15 @@ public class GameObj extends Obj {
 			rotateTo = Math.toDegrees( Math.atan2(coord.y,coord.x) );
 		}
 		
-		Global.state.playerObj.targetAng = rotateTo;	
+		Global.state.playerObj.destAngle = rotateTo;	
     	
     }
     
 	public void rotate(double theta){
-		angle += theta;
+		currAngle += theta;
 		
-		while(angle >= 360) angle-=360;
-		while(angle < 0) angle+=360;
+		while(currAngle >= 360) currAngle-=360;
+		while(currAngle < 0) currAngle+=360;
 		
 		for(HitCircle O:hitCircles){
 			double r,a;

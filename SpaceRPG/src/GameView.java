@@ -95,7 +95,7 @@ public class GameView implements Runnable{
     		//Debug Message to list objects and their draw layers
     		buffergraphics.setColor(O.color);
     		buffergraphics.drawString(""+O.getClass()+" - DrawLayer: "+O.layer+
-    			" ObjectAngle: "+O.angle+" SpriteFrame: "+O.sprite.frame
+    			" ObjectAngle: "+O.currAngle+" SpriteFrame: "+O.sprite.frame
     		 	,5, sizey-10-(i*15));
     	}
     	

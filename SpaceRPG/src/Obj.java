@@ -35,7 +35,7 @@ public class Obj implements Comparable{
 	
 	public double x;
 	public double y;
-	public double angle;//Angle
+	public double currAngle;//Angle
 	public double dx=1;//draw width (For scaling)
 	public double dy=1;//draw height (For scaling)
 	
@@ -95,14 +95,14 @@ public class Obj implements Comparable{
 	}
 	
 	public void rotate(double theta){
-		angle += theta;
+		currAngle += theta;
 		
-		while(angle >= 360) angle-=360;
-		while(angle < 0) angle+=360;
+		while(currAngle >= 360) currAngle-=360;
+		while(currAngle < 0) currAngle+=360;
 	}
 	
 	public void setAngle(double theta){
-		double delta = theta-angle;
+		double delta = theta-currAngle;
 		rotate(delta);
 	}
     
