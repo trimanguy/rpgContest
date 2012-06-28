@@ -15,7 +15,7 @@ import java.util.*;
 public class GameState {
 
 	double time = 0.0;
-	double timeOfNeedGC = 0.0
+	double timeOfNeedGC = 0.0;
 	Boolean needGC = false;
 	
 	

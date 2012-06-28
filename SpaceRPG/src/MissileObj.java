@@ -9,15 +9,18 @@
 import java.util.*;
 import java.net.*;
 
-public class MissleObj extends GameObj{
+public class MissileObj extends GameObj{
 	
 	GameObj target=null;
 	double maxAngVel = 0.5;
+	double maxVelocity = 2.5;
     double velocity = 2.5;
+    double accel = 1;
     int damage = 0;
     double timeLeft = 0; //how long the missle flies before it dies
     
-    public void Init(GameObj targetObj, int dmg, double turnRate, double speed, double time){
+    
+    public void Init(GameObj targetObj, int dmg, double turnRate, double speed, double maxSpeed, double accelaration, double time){
     	Global.state.activeObjs.add(this);
     	if(CameraCanSee()){
     		Global.view.addDrawObject(this);
@@ -27,6 +30,8 @@ public class MissleObj extends GameObj{
     	damage = dmg;
     	maxAngVel = turnRate;
     	velocity = speed;
+    	maxVelocity = maxSpeed;
+    	accel = accelaration;
     }
     
     public void Step(){
@@ -64,11 +69,11 @@ public class MissleObj extends GameObj{
     }
     
     
-    public ShipObj(String image) {
+    public MissileObj(String image) {
     	super(image);
     }
     
-    public ShipObj(String image, URL spritecontext) {
+    public MissileObj(String image, URL spritecontext) {
     	super(image, spritecontext);
     }
     
