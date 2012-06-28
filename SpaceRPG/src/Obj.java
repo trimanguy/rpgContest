@@ -165,4 +165,25 @@ public class Obj implements Comparable{
 		
 		return (alpha > 0);
     }
+    
+    public double getAngle(Obj O){
+    	double ang = Math.atan2(O.y-y,O.x-x);
+    	ang *= 180/Math.PI;
+    	if(ang < 0) ang += 360;
+    	if(ang > 360) ang -= 360;
+    	return ang;
+    }
+    public double getAngle(PointS P){
+    	double ang = Math.atan2(P.y,P.x);
+    	ang *= 180/Math.PI;
+    	if(ang < 0) ang += 360;
+    	if(ang > 360) ang -= 360;
+    	return ang;
+    }
+    
+    public void delete(){ //Note: Not guaranteed to clear this obj from memory
+    	Global.state.activeObjs.remove(this);
+    	Global.view.drawObjects.remove(this);
+    	System.gc();
+    }
 }

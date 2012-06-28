@@ -16,6 +16,7 @@ public class GameState {
 
 	double time = 0.0;
 	double timeOfNeedGC = 0.0;
+	double dt = 0.0;
 	Boolean needGC = false;
 	
 	
@@ -28,11 +29,14 @@ public class GameState {
     	
     	String image = "Resources/Sprites/Flak Frigate 1 - Thrust.png";
     	
+    	//Global.state.playerObj = new ShipObj(image, Global.codeContext);
     	new ShipObj(image, Global.codeContext);
     }
     
     public void Tick(){
-    	time = System.currentTimeMillis()/1000;
+    	dt = System.currentTimeMillis()/1000 - time;
+    	time += dt;
+    	//time = System.currentTimeMillis()/1000;
     	for(Obj O:activeObjs){
     		O.Step();
     		if(O.CameraCanSee()){

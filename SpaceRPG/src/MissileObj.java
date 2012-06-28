@@ -37,13 +37,15 @@ public class MissileObj extends GameObj{
     public void Step(){
     	if (timeLeft <= 0){
     		//if missle is out of time, delete it here
-    	}
+    	} else{
+    		timeLeft -= Global.state.dt;
+        }
     	
     	if (target!=null) {
     		//Calculate targetAng from missle to target
     		//Ant: make getAngle in Obj!!
     		double targetAng=0.0;
-    	
+    		targetAng = getAngle((Obj)target);
     	
     		//Then rotate missle towards target
     		double deltaAng = (targetAng - angle);
