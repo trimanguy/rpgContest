@@ -16,9 +16,19 @@ public class ShipObj extends GameObj {
     double maxAngVel = 0.5;
     double velocity = 2.5;
     
-    public void Init(){
+    public ShipObj(String image, URL spritecontext, double speed) { 
+    	if(image != null && spritecontext != null)
+    	{
+    		sprite = new Sprite(image, spritecontext, true);
+	    	context = spritecontext;
+	    	Init(speed);
+    	}
+    }
+    
+    public void Init(double speed){
+    	velocity = speed;
     	Global.state.activeObjs.add(this);
-    	Global.state.playerObj = this;
+    	//Global.state.playerObj = this;
     	if(CameraCanSee()){
     		Global.view.addDrawObject(this);
     	}
@@ -42,9 +52,10 @@ public class ShipObj extends GameObj {
     	
     	move(velX,velY);
     	
-    	Global.player.cx += velX;
-    	Global.player.cy += velY;
-    	
+    	if (this == Global.state.playerObj){
+    		Global.player.cx += velX;
+    		Global.player.cy += velY;
+    	}
     }
     
     public ShipObj(String image) {

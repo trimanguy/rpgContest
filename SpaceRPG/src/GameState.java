@@ -29,8 +29,8 @@ public class GameState {
     	
     	String image = "Resources/Sprites/Flak Frigate 1 - Thrust.png";
     	
-    	//Global.state.playerObj = new ShipObj(image, Global.codeContext);
-    	new ShipObj(image, Global.codeContext);
+    	Global.state.playerObj = new ShipObj(image, Global.codeContext, 1.5);
+    	new ShipObj(image, Global.codeContext, 1.0);
     }
     
     public void Tick(){

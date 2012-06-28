@@ -25,6 +25,8 @@ public class GameObj extends Obj {
 	
 	public double velX, velY; //X and Y components for velocity
 	
+	public GameObj(){} //triman added
+	
     public GameObj(String image) {
     	if(image != null) {
 	    	sprite = new Sprite(image, true);
@@ -32,7 +34,7 @@ public class GameObj extends Obj {
     	}
     }
     
-    public GameObj(String image, URL spritecontext) {
+    public GameObj(String image, URL spritecontext) { 
     	if(image != null && spritecontext != null)
     	{
     		sprite = new Sprite(image, spritecontext, true);
