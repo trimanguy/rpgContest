@@ -15,6 +15,9 @@ import java.util.*;
 public class GameState {
 
 	double time = 0.0;
+	double timeOfNeedGC = 0.0
+	Boolean needGC = false;
+	
 	
 	ArrayList<Obj> activeObjs = new ArrayList(0);
 	ShipObj playerObj = null;
@@ -35,6 +38,12 @@ public class GameState {
     		if(O.CameraCanSee()){
     			Global.view.addDrawObject(O);
     		}
+    	}
+    	//garbage collection when needGC flag is on
+    	if ( (needGC==true)&&(time==timeOfNeedGC+1) ){
+    		System.gc();
+    		needGC = false;
+    		timeOfNeedGC = 0.0;
     	}
     }
     
