@@ -148,10 +148,9 @@ public class GameObj extends Obj {
     }
     
     public boolean CheckClick(PointS clickedPt){
-    	if(mouseOpacity == false) return false;
-    	
     	PointS realPt = clickedPt.toWorld();
-    	
+    	return super.CheckClick(realPt);
+    	/*
     	//if the coordinates are not close to the sprite's bounding box... return false
 		double dx = realPt.x - x;//Relative X
 		double dy = realPt.y - y;//Relative Y
@@ -159,6 +158,8 @@ public class GameObj extends Obj {
 		
 		if(Math.abs(dx) > sprite.frameX/2) return false;
 		if(Math.abs(dy) > sprite.frameY/2) return false;
+		
+		if(mouseOpacity == 2) return true;
 		
 		//Now from relative coordinates to local sprite coordinates...
 		//Sprite coordinates, I believe, are relative to the top left corner of the sprite
@@ -173,5 +174,6 @@ public class GameObj extends Obj {
 		int alpha = (RGBA  >> 24) & 0xFF;
 		
 		return (alpha > 0);
+		*/
     }
 }

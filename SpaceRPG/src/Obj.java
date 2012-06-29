@@ -41,7 +41,7 @@ public class Obj implements Comparable{
 	
 	public double layer=3; //Drawing layer
 	
-	public boolean mouseOpacity = true; //Set to false if this object can never be clicked or dragged
+	public int mouseOpacity = 2; //Set to false if this object can never be clicked or dragged
 	
 	public Obj(){
 		
@@ -147,13 +147,15 @@ public class Obj implements Comparable{
     }
     
     public boolean CheckClick(PointS clickedPt){
-    	if(mouseOpacity == false) return false;
+    	if(mouseOpacity == 0) return false;
     	
     	//if the coordinates are not close to the sprite's bounding box... return false
 		double dx = clickedPt.x - x;//Relative X
 		double dy = clickedPt.y - y;//Relative Y
 		if(Math.abs(dx) > sprite.frameX/2) return false;
 		if(Math.abs(dy) > sprite.frameY/2) return false;
+		
+		if(mouseOpacity == 2) return true;
 		
 		//Now from relative coordinates to local sprite coordinates...
 		//Sprite coordinates, I believe, are relative to the top left corner of the sprite
