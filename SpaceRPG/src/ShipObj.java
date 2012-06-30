@@ -45,17 +45,13 @@ public class ShipObj extends GameObj {
     public ShipObj findTarget(){
     	//autotarget if no aimTarget or aimTarget too far
     	
-		ShipObj target = (ShipObj) Global.view.Clicked;
-		return target;
-		
-    	/*
     	if (aimTarget==null){
     		//TODO: autotarget, do auto-targetting here
     		return null;
     	} else {
     		//clicked-target
     		return aimTarget;
-    	}*/
+    	}
     }
     
     public void fireOn(ShipObj target, double missileSpeed, double inaccuracy){
