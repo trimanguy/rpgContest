@@ -46,6 +46,8 @@ public class MissileObj extends GameObj{
     	
     	move(velX*Global.state.dt/1000,velY*Global.state.dt/1000);
     	
+    	layer = 10;
+    	
     	super.Init();
     }
     
@@ -65,6 +67,11 @@ public class MissileObj extends GameObj{
         	
         	if (ShipObj.allShips.get(x).contains(thisMissile) !=null) {
         		//NOTE: this is where you process damage logic, ie which hitbox got hit
+        		
+        		new AnimatedParticle("Resources/Sprites/explode_2.png", Global.codeContext, 
+        			0.05, this.x, this.y);
+        		
+        		
         		addDelete();
         		return;
         	}

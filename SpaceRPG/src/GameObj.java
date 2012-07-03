@@ -50,6 +50,11 @@ public class GameObj extends Obj {
     	}
     }
     
+    public void Init(){
+    	super.Init();
+    	setLayer(layer);
+    }
+    
     public HitCircle contains(PointS P){
     	double px = P.getX(), py = P.getY();
     	px -= x; py-= y;

@@ -153,7 +153,6 @@ public class GameView implements Runnable{
     			Obj B = drawObjects.get(i);
     			if(A.compareTo(B)>0){
     				index = i+1;
-    				break;
     			}
     		}
     	}

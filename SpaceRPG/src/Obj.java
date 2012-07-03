@@ -79,7 +79,7 @@ public class Obj implements Comparable{
     	color = C;
     }
     
-    public void setLayer(int i){
+    public void setLayer(double i){
     	
     	if(layer != i){
     		Global.view.removeDrawObject(this);

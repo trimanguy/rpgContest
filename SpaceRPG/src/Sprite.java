@@ -52,6 +52,10 @@ public class Sprite {
 		
 	}
 	
+	public int getFrames(){
+		return source.getWidth()/frameX;
+	}
+	
 	public void setFrame(int f){
 		if(!hasFrames) {
 			img = source;

@@ -13,7 +13,7 @@ public class UIElement extends Obj {
 	//public double x=0;
 	//public double y=0;
 	
-	public double layer = 20;
+	//public double layer = 20;
 	
 	public int mouseOpacity = 2;
 	
@@ -32,6 +32,9 @@ public class UIElement extends Obj {
 	    	//Init();
 	    	Global.state.newObjBuffer.add(this);
     	}
+    	
+    	layer = 20;
+    	
     	move(x,y);
     }
     

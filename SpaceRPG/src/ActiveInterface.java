@@ -67,9 +67,9 @@ public class ActiveInterface extends Obj {
     	for(UIElement O:elements){
     		if(O!=background){
     			O.setParent(background);
-    			O.setLayer(21);
+    			O.layer = (21);
     		}else{
-    			O.setLayer(20);
+    			O.layer = (20);
     		}
     	}
     	
