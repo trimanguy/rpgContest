@@ -105,6 +105,7 @@ public class Player implements MouseListener, KeyListener {
     		//if we L-Clicked on ship, set it as target
     		if(mouseObj instanceof ShipObj){
     			Global.state.playerObj.aimTarget = (ShipObj) mouseObj;
+    			Global.view.Clicked = clickedObj;
     		}
     	}
     }

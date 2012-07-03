@@ -54,8 +54,11 @@ public class GameObj extends Obj {
     	double px = P.getX(), py = P.getY();
     	px -= x; py-= y;
     	
+    	//System.out.println("# OF HIT CIRCLES: "+hitCircles.size());
+    	
     	for(HitCircle O:hitCircles){
     		double d2 = (px-O.rx)*(px-O.rx)+(py-O.ry)*(py-O.ry);
+    		//System.out.println("PROCESSING HIT DETECTION: "+d2);
     		if(d2 <= O.r2) return O;
     	}
     	
@@ -149,14 +152,18 @@ public class GameObj extends Obj {
     }
     
     public boolean CheckClick(PointS clickedPt){
+    	/*
     	PointS realPt = clickedPt.toWorld();
     	return super.CheckClick(realPt);
-    	/*
+    	*/
+    	
+    	clickedPt = clickedPt.toWorld();
+    	
+    	if(mouseOpacity == 0) return false;
+    	
     	//if the coordinates are not close to the sprite's bounding box... return false
-		double dx = realPt.x - x;//Relative X
-		double dy = realPt.y - y;//Relative Y
-		realPt = null;
-		
+		double dx = clickedPt.x - x;//Relative X
+		double dy = clickedPt.y - y;//Relative Y
 		if(Math.abs(dx) > sprite.frameX/2) return false;
 		if(Math.abs(dy) > sprite.frameY/2) return false;
 		
@@ -175,6 +182,5 @@ public class GameObj extends Obj {
 		int alpha = (RGBA  >> 24) & 0xFF;
 		
 		return (alpha > 0);
-		*/
     }
 }

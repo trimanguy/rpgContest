@@ -11,6 +11,7 @@ import java.net.*;
 
 public class MissileObj extends GameObj{
 	
+	GameObj source = null;
 	GameObj target=null;
 	double maxAngVel = 0.5;
 	double maxVelocity = 2.5;
@@ -26,6 +27,8 @@ public class MissileObj extends GameObj{
     	
     	x = shipObj.x;
     	y = shipObj.y;
+    	
+    	source = shipObj;
     	
     	target = targetObj;
     	timeLeft = time;
@@ -58,10 +61,12 @@ public class MissileObj extends GameObj{
         PointS thisMissile = new PointS(this.x, this.y);
         //check to see if this missle hit any objects
         for(int x=0; x<(ShipObj.allShips.size()); x++){
+        	if(ShipObj.allShips.get(x)==source) continue;
+        	
         	if (ShipObj.allShips.get(x).contains(thisMissile) !=null) {
         		//NOTE: this is where you process damage logic, ie which hitbox got hit
         		addDelete();
-        		break;
+        		return;
         	}
         }
     	

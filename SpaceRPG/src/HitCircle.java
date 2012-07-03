@@ -20,7 +20,7 @@ public class HitCircle {
     public HitCircle(GameObj s, double nx, double ny, double r) {
     	rx = nx; ry = ny;
     	source = s;
-    	//source.hitCircles.add(this);
+    	if(s != null) s.hitCircles.add(this);
     	radius = r;
     	r2 = r*r;
     }

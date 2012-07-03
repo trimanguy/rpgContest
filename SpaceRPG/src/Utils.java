@@ -137,11 +137,12 @@ public class Utils {
     	ShipObj newShip = new ShipObj(template.imageName, Global.codeContext, template.velocity, template.maxAngVel, copiedHitCircles);
     	
     	//copy over each HitCircle from hitCircles to copiedHitCircles
-    	for(int x=0; x<(template.hitCircles.size()-1); x++){
+    	for(int x=0; x<(template.hitCircles.size()); x++){
     		HitCircle currTempHC = template.hitCircles.get(x); 
     		HitCircle newHitCirc = new HitCircle(newShip, currTempHC.rx, currTempHC.ry, currTempHC.radius);
-    		newShip.hitCircles.add(newHitCirc);
+    		//newShip.hitCircles.add(newHitCirc);
     	} 
+    	
     	return newShip;
     }
     
