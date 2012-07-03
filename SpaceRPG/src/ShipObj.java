@@ -114,7 +114,6 @@ public class ShipObj extends GameObj {
     	missile.setAngle(fireAngle+ (Math.random()*2-1)*inaccuracy);
     	
     	fireTimer = Global.state.time + fireDelay;
-
     }
     
     /*** Find how much to rotate this step ***/

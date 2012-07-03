@@ -39,6 +39,10 @@
 				<browser>true</browser>
 			</fileitem>
 			<fileitem>
+				<path>src\ActiveInterface.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\EquipObj.java</path>
 				<folder>src</folder>
 			</fileitem>
@@ -64,6 +68,14 @@
 			</fileitem>
 			<fileitem>
 				<path>src\HitCircle.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\InterfaceButton.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\InterfaceSlider.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
@@ -115,6 +127,10 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\Utils.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\Vector2D.java</path>
 				<folder>src</folder>
 			</fileitem>
@@ -124,5 +140,12 @@
 			</fileitem>
 		</include>
 	</files>
-	<tasks/>
+	<tasks>
+		<todotaskitem>
+			<description>TODO: autotarget, do auto-targetting here</description>
+			<filepath>src\ShipObj.java</filepath>
+			<line>55</line>
+			<timestamp>1341298520</timestamp>
+		</todotaskitem>
+	</tasks>
 </project>

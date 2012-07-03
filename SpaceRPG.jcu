@@ -13,8 +13,16 @@
 				<dir>classes</dir>
 			</folderitem>
 			<folderitem>
+				<path>SpaceRPG\classes\Data</path>
+				<dir>classes\Data</dir>
+			</folderitem>
+			<folderitem>
 				<path>SpaceRPG\classes\Resources</path>
 				<dir>classes\Resources</dir>
+			</folderitem>
+			<folderitem>
+				<path>SpaceRPG\classes\Resources\Interface</path>
+				<dir>classes\Resources\Interface</dir>
 			</folderitem>
 			<folderitem>
 				<path>SpaceRPG\classes\Resources\Sprites</path>
@@ -28,46 +36,28 @@
 	</projects>
 	<open_files>
 		<docitem>
-			<path>SpaceRPG\src\GameApplet.java</path>
+			<path>SpaceRPG\src\ShipObj.java</path>
 			<source>true</source>
 			<index>0</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\Sprite.java</path>
+			<path>SpaceRPG\src\MissileObj.java</path>
 			<source>true</source>
 			<index>1</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\GameView.java</path>
+			<path>SpaceRPG\src\GameState.java</path>
 			<source>true</source>
 			<index>2</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\UIElement.java</path>
+			<path>SpaceRPG\src\Player.java</path>
 			<source>true</source>
 			<index>3</index>
 			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\Obj.java</path>
-			<source>true</source>
-			<index>4</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\GameObj.java</path>
-			<source>true</source>
-			<index>5</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\ParticleSystem.java</path>
-			<source>true</source>
-			<index>6</index>
-			<active>true</active>
 		</docitem>
 	</open_files>
 	<breakpoints>
