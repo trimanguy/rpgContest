@@ -1,0 +1,21 @@
+#sample shipFile
+#
+#SHIP_NAME string
+#SHIP_MODEL string
+#HITBOXES (coord_x1,coord_y1,radius1)(coord_x2,coord_y2,radius2) no spaces
+#SPEED double
+#END
+
+SHIP_NAME flak1
+SHIP_MODEL Resources/Sprites/FlakFrigate1-Thrust.png
+SPEED 1.2
+ANG_SPEED 0.5
+HITBOXES (0.0,0.0,10.0)
+END
+
+SHIP_NAME escort1
+SHIP_MODEL Resources/Sprites/EscortFrigate1-Thrust.png
+SPEED 1.0
+ANG_SPEED 0.5 
+HITBOXES (0.0,0.0,10.0)(
+END

@@ -67,7 +67,7 @@ public class Sprite {
 		gx = (frame-1)*frameX;
 		gy = 0;
 		
-		while(gx+frameX >= source.getWidth()){
+		while(gx+frameX > source.getWidth()){
 			frame--;
 			gx = (frame-1)*frameX;
 		}

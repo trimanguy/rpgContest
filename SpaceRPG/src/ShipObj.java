@@ -13,34 +13,38 @@ import java.net.*;
 public class ShipObj extends GameObj {
     
     //double destAngle;
+    String imageName;
     double maxAngVel = 0.5;
     double velocity = 0;
-    ShipObj aimTarget = null;
+    ShipObj aimTarget = null; //ship's target
     
     //both the timer and delay are in seconds.
     double fireTimer;
     double fireDelay = 0.25;
     
-    public ShipObj(String image, URL spritecontext, double speed) { 
+    /*** Ship Constructor, puts ship on screen ***/
+    public ShipObj(String image, URL spritecontext, double speed, double maxAngVel, ArrayList<HitCircle> hitboxes) { 
     	if(image != null && spritecontext != null)
     	{
     		sprite = new Sprite(image, spritecontext, true);
 	    	context = spritecontext;
 	    	
 	    	velocity = speed;
-	    	//Init();
+	    	maxAngVel = maxAngVel;
+	    	hitCircles = hitboxes;
 	    	Global.state.newObjBuffer.add(this);
     	}
     }
-    /*
-    public void Init(double speed){
+    
+    /*** Ship Data Constructor, similar to C++ struct ***/
+    public ShipObj(String image, double speed, double maxAngVel, ArrayList<HitCircle> hitboxes){
+    	imageName = image;
     	velocity = speed;
-    	Global.state.activeObjs.add(this);
-    	//Global.state.playerObj = this;
-    	if(CameraCanSee()){
-    		Global.view.addDrawObject(this);
-    	}
-    }*/
+    	maxAngVel = maxAngVel;
+    	hitCircles = hitboxes;
+    	
+    	
+    }
     
     public ShipObj findTarget(){
     	//autotarget if no aimTarget or aimTarget too far
@@ -49,17 +53,18 @@ public class ShipObj extends GameObj {
     		//TODO: autotarget, do auto-targetting here
     		return null;
     	} else {
-    		//clicked-target
+    		//if we already have target, continue to fire on it
     		return aimTarget;
     	}
     }
     
+    /*** Does computation and perfoms pewpew ***/
     public void fireOn(ShipObj target, double missileSpeed, double inaccuracy){
     	
-    	if(Global.state.time < fireTimer) return;
+    	if(Global.state.time < fireTimer) return; //weapon cooling down
     	
-    	if(target == null) return;
-    	if(target == this) return;
+    	if( (target==null)||(target==this) ) return; //Ship can't fire on itself
+    	
     	//Compute the firing vector
     	double a,b,c,d,distance,t0,t1,t;
     	Vector2D V = new Vector2D(target.velX,target.velY);
@@ -109,14 +114,7 @@ public class ShipObj extends GameObj {
     	missile.setAngle(fireAngle+ (Math.random()*2-1)*inaccuracy);
     	
     	fireTimer = Global.state.time + fireDelay;
-    	
-    	//FUCK YO SHIT NIGGA
-    	/*
-    public MissileObj(String image, URL spritecontext, GameObj shipObj, GameObj targetObj, 
-    	int dmg, double turnRate, double speed, double maxSpeed, double acceleration, double time) {
-    		*/
-    	//missile.Init();
-    	//Init(GameObj targetObj, int dmg, double turnRate, double speed, double maxSpeed, double accelaration, double time)
+
     }
     
     /*** Find how much to rotate this step ***/

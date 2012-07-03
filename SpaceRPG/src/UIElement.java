@@ -43,6 +43,34 @@ public class UIElement extends Obj {
     }
     
     
+    public boolean CheckClick(PointS clickedPt){
+    	if(mouseOpacity == 0) return false;
+    	
+    	//if the coordinates are not close to the sprite's bounding box... return false
+		double dx = clickedPt.x - x;//Relative X
+		double dy = clickedPt.y - y;//Relative Y
+		if(dx < 0) return false;
+		if(dy < 0) return false;
+		if(dx > sprite.frameX) return false;
+		if(dy > sprite.frameY) return false;
+		
+		if(mouseOpacity == 2) return true;
+		
+		//Now from relative coordinates to local sprite coordinates...
+		//Sprite coordinates, I believe, are relative to the top left corner of the sprite
+		dx += sprite.frameX/2;
+		dy = sprite.frameY/2 - dy;
+		
+		dx = Math.max(0,Math.min(dx,sprite.frameX-1));
+		dy = Math.max(0,Math.min(dy,sprite.frameY-1));
+		
+		//Grab the RGBA
+		int RGBA = sprite.img.getRGB((int)dx,(int)dy);
+		int alpha = (RGBA  >> 24) & 0xFF;
+		
+		return (alpha > 0);
+    }
+    
     public void Init(){
     	
     	//Global.state.activeObjs.add(this);

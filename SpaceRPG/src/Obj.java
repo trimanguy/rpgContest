@@ -165,10 +165,8 @@ public class Obj implements Comparable{
     	//if the coordinates are not close to the sprite's bounding box... return false
 		double dx = clickedPt.x - x;//Relative X
 		double dy = clickedPt.y - y;//Relative Y
-		if(dx < 0) return false;
-		if(dy < 0) return false;
-		if(dx > sprite.frameX) return false;
-		if(dy > sprite.frameY) return false;
+		if(Math.abs(dx) > sprite.frameX/2) return false;
+		if(Math.abs(dy) > sprite.frameY/2) return false;
 		
 		if(mouseOpacity == 2) return true;
 		
