@@ -45,6 +45,8 @@ public class InterfaceSlider extends UIElement{
     public void setPosition(double yCoord){
     	yCoord -= y+height;
     	double npos = -yCoord/height;
+    	
+    	npos = Math.min(1,Math.max(0,npos));
     	if(npos != position){
     		position = npos;
     		callMethod();
@@ -52,6 +54,11 @@ public class InterfaceSlider extends UIElement{
     }
     
     public void mouseClicked(MouseEvent e){
+    	double my = e.getY();
+    	setPosition(my);
+    }
+    
+    public void mouseDropped(MouseEvent e){
     	double my = e.getY();
     	setPosition(my);
     }
