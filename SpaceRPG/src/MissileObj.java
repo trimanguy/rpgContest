@@ -49,10 +49,20 @@ public class MissileObj extends GameObj{
     public void Step(){
     	if (timeLeft <= 0){
     		//if missle is out of time, delete it here
-    		//delete();
     		addDelete();
     	} else{
     		timeLeft -= Global.state.dt/1000;
+        }
+        
+        
+        PointS thisMissile = new PointS(this.x, this.y);
+        //check to see if this missle hit any objects
+        for(int x=0; x<(ShipObj.allShips.size()); x++){
+        	if (ShipObj.allShips.get(x).contains(thisMissile) !=null) {
+        		//NOTE: this is where you process damage logic, ie which hitbox got hit
+        		addDelete();
+        		break;
+        	}
         }
     	
     	if (target!=null) {

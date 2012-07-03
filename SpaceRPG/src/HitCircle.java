@@ -25,4 +25,8 @@ public class HitCircle {
     	r2 = r*r;
     }
     
+    public void addSource(GameObj s){
+    	source = s;
+    }
+    
 }

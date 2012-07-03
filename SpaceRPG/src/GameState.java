@@ -35,14 +35,17 @@ public class GameState {
     	String image = "Resources/Sprites/EscortFrigate1-Thrust.png";
     	
     	ArrayList<HitCircle> gah= new ArrayList(0);
-    	Global.state.playerObj = new ShipObj(image, Global.codeContext, 50, 0.5, gah);
-    	new ShipObj(image, Global.codeContext, 35, 0.5, gah);
+    	//Global.state.playerObj = new ShipObj(image, Global.codeContext, 50, 0.5, gah);
+    	//new ShipObj(image, Global.codeContext, 35, 0.5, gah);
     	
     	File shipFile = new File("Data/ShipFile.txt");
     	Utils.parseShipFile(shipFile);
-    	ShipObj flak1 = (ShipObj)Utils.shipTable.get("flak1");
-    	new ShipObj(flak1.imageName, Global.codeContext,flak1.velocity,flak1.maxAngVel, flak1.hitCircles);
-    	
+    	Utils.createShip("flak1");
+    	Utils.createShip("escort1");
+    	Global.state.playerObj = Utils.createShip("escort1");
+    	//ShipObj flak1 = (ShipObj)Utils.shipTable.get("flak1");
+    	//new ShipObj(flak1.imageName, Global.codeContext,flak1.velocity,flak1.maxAngVel, flak1.hitCircles);
+    	System.out.print("Num ships is: "+ ShipObj.allShips.size() + System.getProperty("line.separator"));
     	new ActiveInterface ();
     }
     

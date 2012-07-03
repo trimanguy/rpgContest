@@ -8,14 +8,14 @@
 
 SHIP_NAME flak1
 SHIP_MODEL Resources/Sprites/FlakFrigate1-Thrust.png
-SPEED 1.2
+SPEED 100
 ANG_SPEED 0.5
-HITBOXES (0.0,0.0,10.0)
+HITBOXES (0.0,0.0,60.0)
 END
 
 SHIP_NAME escort1
 SHIP_MODEL Resources/Sprites/EscortFrigate1-Thrust.png
-SPEED 1.0
+SPEED 55
 ANG_SPEED 0.5 
-HITBOXES (0.0,0.0,10.0)(
+HITBOXES (0.0,0.0,60.0)
 END

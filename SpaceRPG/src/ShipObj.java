@@ -11,7 +11,7 @@ import java.net.*;
 
 
 public class ShipObj extends GameObj {
-    
+    static ArrayList<ShipObj> allShips = new ArrayList(0);
     //double destAngle;
     String imageName;
     double maxAngVel = 0.5;
@@ -32,17 +32,18 @@ public class ShipObj extends GameObj {
 	    	velocity = speed;
 	    	maxAngVel = maxAngVel;
 	    	hitCircles = hitboxes;
+	    	allShips.add(this);
 	    	Global.state.newObjBuffer.add(this);
     	}
     }
     
     /*** Ship Data Constructor, similar to C++ struct ***/
     public ShipObj(String image, double speed, double maxAngVel, ArrayList<HitCircle> hitboxes){
+    	//don't need to add to allShips cuz this just template obj
     	imageName = image;
     	velocity = speed;
     	maxAngVel = maxAngVel;
-    	hitCircles = hitboxes;
-    	
+    	hitCircles = hitboxes;	
     	
     }
     
@@ -147,6 +148,8 @@ public class ShipObj extends GameObj {
     		Global.player.cx += velX*Global.state.dt/1000;
     		Global.player.cy += velY*Global.state.dt/1000;
     	}
+    	
+    	
     }
     
     public ShipObj(String image) {
