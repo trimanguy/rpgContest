@@ -31,7 +31,7 @@
 			<path>SpaceRPG\src\GameApplet.java</path>
 			<source>true</source>
 			<index>0</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>SpaceRPG\src\Sprite.java</path>
@@ -58,22 +58,16 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\HitCircle.java</path>
+			<path>SpaceRPG\src\GameObj.java</path>
 			<source>true</source>
 			<index>5</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\TestObj.java</path>
+			<path>SpaceRPG\src\ParticleSystem.java</path>
 			<source>true</source>
 			<index>6</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\Player.java</path>
-			<source>true</source>
-			<index>7</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 	</open_files>
 	<breakpoints>

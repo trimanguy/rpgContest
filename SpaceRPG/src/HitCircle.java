@@ -25,5 +25,4 @@ public class HitCircle {
     	r2 = r*r;
     }
     
-    
 }

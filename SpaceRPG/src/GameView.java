@@ -17,7 +17,6 @@ public class GameView implements Runnable{
 	static Color bgColor = Color.black;
 	
 	ArrayList <Obj> drawObjects = new ArrayList(0);
-	ArrayList <UIElement> drawGUI = new ArrayList(0);
 	
 	long nextSecond = System.currentTimeMillis() + 1000;
 	int framesInLastSecond = 0;
@@ -101,18 +100,6 @@ public class GameView implements Runnable{
     		*/
     	}
     	
-    	//Draw UI stuff here
-    	for(int i=0;i<drawGUI.size();i++){
-    		UIElement O = (UIElement) drawGUI.get(i);
-    		O.Draw(buffergraphics,I);
-    		/*
-    		buffergraphics.setColor(O.color);
-    		buffergraphics.drawString(""+O.getClass()+" - DrawLayer: "+O.layer+
-    			" SpriteFrame: "+O.sprite.frame
-    		 	,5, sizey-10-(i*15));
-    		*/
-    	}
-    	
     	
     	
     	//Debug message here for the drawn objects list size
@@ -154,12 +141,6 @@ public class GameView implements Runnable{
     	return true;
     }
     
-    public void sortLayers(){
-    	//mergeSort.mergeSort(drawObjects);
-    	//I'm getting some strange polymorphism problems with this.
-    	//My Java is more rusty than I thought it'd be.
-    }
-    
     public void addDrawObject(Obj A){
     	if(drawObjects.contains(A)) return;
     	
@@ -168,40 +149,23 @@ public class GameView implements Runnable{
     	int index=0;
     	
     	if(drawObjects.size() > 0){
-	    	while(true){
-	    		index = (start+end)/2;
-	    		if(start == end) break;
-	    		
-	    		Obj B = drawObjects.get(index);
-	    		if(A.compareTo(B) == 0) break;
-	    		if(A.compareTo(B) > 0){ start = index;
-	    		}else{ end = index;
-	    		}
-	    	}
+    		for(int i=0;i<=end;i++){
+    			Obj B = drawObjects.get(i);
+    			if(A.compareTo(B)>0){
+    				index = i+1;
+    				break;
+    			}
+    		}
     	}
-    	drawObjects.add(index,A);
+    	if(index <= end){
+    		drawObjects.add(index,A);
+    	}else{
+    		drawObjects.add(A);
+    	}
+    	
     }
     
-    public void addGUIObject(UIElement A){
-    	if(drawGUI.contains(A)) return;
-    	
-    	int start = 0;
-    	int end = drawGUI.size()-1;
-    	int index=0;
-    	
-    	if(drawGUI.size() > 0){
-	    	while(true){
-	    		index = (start+end)/2;
-	    		if(start == end) break;
-	    		
-	    		UIElement B = drawGUI.get(index);
-	    		if(A.compareTo(B) == 0) break;
-	    		if(A.compareTo(B) > 0){ start = index;
-	    		}else{ end = index;
-	    		}
-	    	}
-    	}
-    	
-    	drawGUI.add(index,A);
+    public void removeDrawObject(Obj A){
+    	drawObjects.remove(A);
     }
 }

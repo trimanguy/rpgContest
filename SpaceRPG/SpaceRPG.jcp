@@ -39,6 +39,10 @@
 				<browser>true</browser>
 			</fileitem>
 			<fileitem>
+				<path>src\EquipObj.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\GameApplet.java</path>
 				<folder>src</folder>
 			</fileitem>
@@ -63,11 +67,23 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\ItemObj.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\mergeSort.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\MissileObj.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\Obj.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\ParticleSystem.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
@@ -79,7 +95,15 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\ShipObj.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\Sprite.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\StackableObj.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
@@ -87,11 +111,15 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
-				<path>src\TestObj.java</path>
+				<path>src\UIElement.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
-				<path>src\UIElement.java</path>
+				<path>src\Vector2D.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\WeaponObj.java</path>
 				<folder>src</folder>
 			</fileitem>
 		</include>

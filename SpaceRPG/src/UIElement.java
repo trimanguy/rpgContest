@@ -15,15 +15,24 @@ public class UIElement extends Obj {
 	
 	public double layer = 20;
 	
-	public int mouseOpacity = 1;
+	public int mouseOpacity = 2;
+	
+	public Sprite overlay;
+	public Sprite underlay;
 	
 	public UIElement parent;
 	public ArrayList<UIElement> children = new ArrayList(0);
 	
     public UIElement(double x, double y, String image, URL spritecontext) {
-    	super(image,spritecontext);
+    	if(image != null && spritecontext != null)
+    	{
+    		sprite = new Sprite(image, spritecontext, false);
+	    	context = spritecontext;
+	    	
+	    	//Init();
+	    	Global.state.newObjBuffer.add(this);
+    	}
     	move(x,y);
-    	
     }
     
     public void MovePercent(double x, double y){
@@ -31,6 +40,16 @@ public class UIElement extends Obj {
     	if(y > 1) y/= 100;
     	
     	translate(x*Global.view.sizex, y*Global.view.sizey);
+    }
+    
+    
+    public void Init(){
+    	
+    	//Global.state.activeObjs.add(this);
+    	if(CameraCanSee()){
+    		Global.view.addDrawObject(this);
+    	}
+    	
     }
     
     public void Step(){
@@ -53,7 +72,8 @@ public class UIElement extends Obj {
     }
     
     public boolean setParent(UIElement O){
-    	if(parent == O) return true;
+    	if(parent == O && parent != null) return true;
+    	if(this == O) return true;
     	
     	if(children.contains(O)) return false;
     	
@@ -99,5 +119,25 @@ public class UIElement extends Obj {
     	for(UIElement O:children){
     		O.setAngle(theta);
     	}
+    }
+    
+    public void transform(){
+    	
+    	AffineTransform transform = new AffineTransform();
+    	
+    	transform.translate(x, y);
+    	
+    	transform.scale(dx, dy);
+    	
+    	sprite.setTransform(transform);
+    	if(overlay != null) overlay.setTransform(transform);
+    	if(underlay != null) underlay.setTransform(transform);
+    }
+    
+    public void Draw(Graphics2D G, ImageObserver loc){
+    	transform(); //Applies the object's transformations to the sprite
+    	if(underlay != null) underlay.Draw(G,loc);
+    	sprite.Draw(G,loc); //Draws the object's sprite
+    	if(overlay != null) overlay.Draw(G,loc);
     }
 }

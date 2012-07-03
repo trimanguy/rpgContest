@@ -25,6 +25,7 @@ import javax.imageio.*;
 import java.net.*;
 import java.awt.geom.*;
 import java.util.*;
+import java.awt.event.*;
 
 public class Obj implements Comparable{
 	
@@ -76,6 +77,18 @@ public class Obj implements Comparable{
     
     public void setColor(Color C){
     	color = C;
+    }
+    
+    public void setLayer(int i){
+    	
+    	if(layer != i){
+    		Global.view.removeDrawObject(this);
+    	}
+    	
+    	layer = i;
+    	
+    	Global.view.addDrawObject(this);
+    	
     }
     
     public void setSprite(Sprite s){
@@ -152,8 +165,10 @@ public class Obj implements Comparable{
     	//if the coordinates are not close to the sprite's bounding box... return false
 		double dx = clickedPt.x - x;//Relative X
 		double dy = clickedPt.y - y;//Relative Y
-		if(Math.abs(dx) > sprite.frameX/2) return false;
-		if(Math.abs(dy) > sprite.frameY/2) return false;
+		if(dx < 0) return false;
+		if(dy < 0) return false;
+		if(dx > sprite.frameX) return false;
+		if(dy > sprite.frameY) return false;
 		
 		if(mouseOpacity == 2) return true;
 		
@@ -194,6 +209,14 @@ public class Obj implements Comparable{
     public void delete(){ //Note: Not guaranteed to clear this obj from memory
     	Global.state.activeObjs.remove(this);
     	Global.view.drawObjects.remove(this);
-    	System.gc();
+    	Global.state.needGC = true;
+    }
+    
+    public void mouseClicked(MouseEvent e){
+    	
+    }
+    
+    public void mouseDropped(MouseEvent e, Obj O){
+    	
     }
 }

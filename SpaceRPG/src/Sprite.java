@@ -53,20 +53,21 @@ public class Sprite {
 	}
 	
 	public void setFrame(int f){
-		if(frame == f) return;
-		frame = f;
 		if(!hasFrames) {
 			img = source;
 			frameX = source.getWidth();
 			frameY = source.getHeight();
 			return;
 		}
+		if(frame == f) return;
+		frame = f;
+		
 		//if(source == null) return;
 		int gx,gy;
 		gx = (frame-1)*frameX;
 		gy = 0;
 		
-		while(gx+frameX > source.getWidth()){
+		while(gx+frameX >= source.getWidth()){
 			frame--;
 			gx = (frame-1)*frameX;
 		}
@@ -76,6 +77,11 @@ public class Sprite {
 		//Set the current image to the new frame
 		img = source.getSubimage(gx, gy, frameX, frameY);
 		
+	}
+	
+	public void setHasFrame(boolean f){
+		hasFrames = f;
+		setFrame(frame);
 	}
 	
 	public void setTransform(AffineTransform at){

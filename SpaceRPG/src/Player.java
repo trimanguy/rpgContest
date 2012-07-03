@@ -20,7 +20,7 @@ public class Player implements MouseListener, KeyListener {
 	double zoom = 1;
 	
 	Obj mouseObj;
-	//Obj dropObj;
+	Obj dropObj;
 	
     public Player() {
     	Global.player = this;
@@ -56,6 +56,7 @@ public class Player implements MouseListener, KeyListener {
     		//clicked on nothing
     	} else { 
     		//clicked on something; nothing here for now (testing purposes)
+    		mouseObj.mouseClicked(e);
     	}
     	
     	//check if right or left clicked
@@ -71,7 +72,7 @@ public class Player implements MouseListener, KeyListener {
     }
     
     public void mouseReleased(MouseEvent e){
-    	/**
+    	
     	PointS clickedPt = new PointS(e.getX(), e.getY());
     	
     	dropObj = null;
@@ -79,17 +80,8 @@ public class Player implements MouseListener, KeyListener {
     	
     	if(dropObj == null) return;
     	
-    	if(dropObj == mouseObj){ //A click has occurred
-    		
-    		Global.view.Clicked = mouseObj;//Draw debugging info on the clicked object
-    		if(mouseObj instanceof ShipObj){
-    			Global.state.playerObj.aimTarget = (ShipObj) mouseObj;
-    		}
-	    	
-    	}else{
-    		//A drag and drop has occurred
-    	}
-    	**/
+    	if(mouseObj != null && dropObj != null)
+    		mouseObj.mouseDropped(e,dropObj);
     	
     }
     
@@ -134,19 +126,16 @@ public class Player implements MouseListener, KeyListener {
     }
     
     public Obj findClickedObj(PointS clickedPt){
-    	Obj clickedObj = null;
-    	
     	for(int x = Global.view.drawObjects.size()-1; x>=0; x--){ //check from obj closest to front
     		Obj currentObj = Global.view.drawObjects.get(x);
     		if(currentObj.CheckClick(clickedPt)){
-    			clickedObj = currentObj;
-    			break;
+    			return currentObj;
     		}
     		else {
     			continue;
     		}
     	}
-    	return clickedObj;	
+    	return null;	
     }
     //i hate retyping print lines...
     //System.out.print("Component is: " + e.getComponent().getClass().getName() + System.getProperty("line.separator"));

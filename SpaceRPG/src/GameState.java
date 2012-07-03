@@ -31,10 +31,12 @@ public class GameState {
     	Global.state = this;
     	ArrayList<PointS> Pointss = new ArrayList(0);
     	
-    	String image = "Resources/Sprites/Flak Frigate 1 - Thrust.png";
+    	String image = "Resources/Sprites/Escort Frigate 1 - Thrust.png";
     	
     	Global.state.playerObj = new ShipObj(image, Global.codeContext, 1.5);
     	new ShipObj(image, Global.codeContext, 1.0);
+    	
+    	new ActiveInterface ();
     }
     
     public void Tick(){
@@ -45,7 +47,7 @@ public class GameState {
     	//System.out.println("DELTA TIME: "+dt);
     	
     	//time = System.currentTimeMillis()/1000;
-    	dt = 10;
+    	//dt = 10;
     	
     	time += dt/1000;
     	
@@ -67,10 +69,10 @@ public class GameState {
     	deleteBuffer.clear();
     	
     	//garbage collection when needGC flag is on
-    	if ( (needGC==true)&&(time==timeOfNeedGC+1) ){
+    	if ( (needGC==true)&&(time>=timeOfNeedGC+1) ){
     		System.gc();
     		needGC = false;
-    		timeOfNeedGC = 0.0;
+    		timeOfNeedGC = time;
     	}
     }
     
