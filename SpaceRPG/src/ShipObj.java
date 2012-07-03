@@ -128,7 +128,7 @@ public class ShipObj extends GameObj {
     
     public void Step(){
     	//Combat 
-    	this.fireOn( this.findTarget() , 5, 0);
+    	this.fireOn( this.findTarget() , 200, 0);
     	
     	//Ship Rotation
     	rotate( this.findDeltaAng() );
@@ -141,12 +141,12 @@ public class ShipObj extends GameObj {
     	//Ship Movement
     	velX = velocity * Math.cos(currAngle/180*Math.PI);
     	velY = velocity * Math.sin(currAngle/180*Math.PI);
-    	move(velX,velY);
+    	move(velX*Global.state.dt/1000,velY*Global.state.dt/1000);
     	
     	//Move camera if Ship is Player's Ship
     	if (this == Global.state.playerObj){
-    		Global.player.cx += velX;
-    		Global.player.cy += velY;
+    		Global.player.cx += velX*Global.state.dt/1000;
+    		Global.player.cy += velY*Global.state.dt/1000;
     	}
     }
     

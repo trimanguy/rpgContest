@@ -41,7 +41,7 @@ public class MissileObj extends GameObj{
     	velX = velocity * Math.cos(currAngle/180*Math.PI);
     	velY = velocity * Math.sin(currAngle/180*Math.PI);
     	
-    	move(velX,velY);
+    	move(velX*Global.state.dt/1000,velY*Global.state.dt/1000);
     	
     	super.Init();
     }
@@ -77,7 +77,7 @@ public class MissileObj extends GameObj{
     	velX = velocity * Math.cos(currAngle/180*Math.PI);
     	velY = velocity * Math.sin(currAngle/180*Math.PI);
     	
-    	move(velX,velY);
+    	move(velX*Global.state.dt/1000,velY*Global.state.dt/1000);
     	/*
     	Global.player.cx += velX;
     	Global.player.cy += velY;
