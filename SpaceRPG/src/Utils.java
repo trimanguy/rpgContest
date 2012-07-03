@@ -116,6 +116,11 @@ public class Utils {
     	ShipObj test = (ShipObj)shipTable.get("flak1");
     	double test_speed = test.velocity;
     	System.out.print("shipTable[flak1]'s speed is: "+ test_speed+ System.getProperty("line.separator"));
+    	System.out.print("hitCircles size: " + test.hitCircles.size() + System.getProperty("line.separator"));
+    	double test_hitbox0 = test.hitCircles.get(0).rx;
+    	double test_hitbox1 = test.hitCircles.get(0).ry;
+    	double test_hitbox2 = test.hitCircles.get(0).radius;
+    	System.out.print("shipTable[flak1]'s hitbox is: ("+ test_hitbox0 + test_hitbox1 + test_hitbox2 +")" + System.getProperty("line.separator"));
     }
     
     /*** convert parsed hitbox string to arraylist ***/
