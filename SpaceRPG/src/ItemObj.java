@@ -10,6 +10,8 @@
 public class ItemObj extends Obj{
 
 	String descrip;
+	String name;
+	String mass;
 	
     public ItemObj() {
     	
