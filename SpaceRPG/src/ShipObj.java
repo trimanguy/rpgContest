@@ -14,13 +14,13 @@ public class ShipObj extends GameObj {
     static ArrayList<ShipObj> allShips = new ArrayList(0);
     //double destAngle;
     String imageName;
-    double maxAngVel = 0.5;
-    double velocity = 0;
+    double maxAngVel = 10; // Degrees per second
+    double velocity = 0; //Pixels per second
     ShipObj aimTarget = null; //ship's target
     
     //both the timer and delay are in seconds.
     double fireTimer;
-    double fireDelay = 0.25;
+    double fireDelay = 0.0;//25;
     
     /*** Ship Constructor, puts ship on screen ***/
     public ShipObj(String image, URL spritecontext, double speed, double maxAngVel, ArrayList<HitCircle> hitboxes) { 
@@ -30,7 +30,7 @@ public class ShipObj extends GameObj {
 	    	context = spritecontext;
 	    	
 	    	velocity = speed;
-	    	maxAngVel = maxAngVel;
+	    	this.maxAngVel = maxAngVel;
 	    	hitCircles = hitboxes;
 	    	allShips.add(this);
 	    	Global.state.newObjBuffer.add(this);
@@ -42,7 +42,7 @@ public class ShipObj extends GameObj {
     	//don't need to add to allShips cuz this just template obj
     	imageName = image;
     	velocity = speed;
-    	maxAngVel = maxAngVel;
+    	this.maxAngVel = maxAngVel;
     	hitCircles = hitboxes;	
     	
     }
@@ -97,7 +97,7 @@ public class ShipObj extends GameObj {
     		}
     	}
     	
-    	P = (new Vector2D(target.x-x,target.y-y)).add(V.multiply(t));
+    	P = PO.add(V.multiply(t));
     	
     	//Convert vector to angle in degrees
     	double fireAngle = P.toAngle();
@@ -110,28 +110,34 @@ public class ShipObj extends GameObj {
     	
     	spriteContext = Global.codeContext;
     	image = "Resources/Sprites/PlasmaSmall.png";
+    	String delImage = "Resources/Sprites/explode_2.png";
     	
-    	MissileObj missile = new MissileObj(image,spriteContext,this,null,69,0,missileSpeed,missileSpeed,0,15);
+    	MissileObj missile = new MissileObj(image,delImage,spriteContext,this,null,
+	    	0, 0, 0, 0,
+	    	this.x, this.y, 0,missileSpeed,missileSpeed,0,15);
+	    	
     	missile.setAngle(fireAngle+ (Math.random()*2-1)*inaccuracy);
     	
     	fireTimer = Global.state.time + fireDelay;
     }
     
     /*** Find how much to rotate this step ***/
-    public double findDeltaAng(){
-    	double deltaAng = (destAngle - currAngle);
+    public double findDeltaAng(double targetAngle){
+    	double deltaAng = (targetAngle - currAngle);
+    	double maxDeltaAng = maxAngVel*Global.state.dtt;
+    	
     	if(deltaAng < -180) deltaAng += 360;
     	if(deltaAng > 180) deltaAng -= 360;
-    	deltaAng = Math.min(maxAngVel,Math.max(-maxAngVel,deltaAng));
+    	deltaAng = Math.min(maxDeltaAng,Math.max(-maxDeltaAng,deltaAng));
     	return deltaAng;
     }
     
     public void Step(){
     	//Combat 
-    	this.fireOn( this.findTarget() , 250, 5);
+    	this.fireOn( this.findTarget() , 250, 0);
     	
     	//Ship Rotation
-    	rotate( this.findDeltaAng() );
+    	rotate( this.findDeltaAng(destAngle) );
     	
     	//Setting Ship Frame
     	int frame;
@@ -141,12 +147,12 @@ public class ShipObj extends GameObj {
     	//Ship Movement
     	velX = velocity * Math.cos(currAngle/180*Math.PI);
     	velY = velocity * Math.sin(currAngle/180*Math.PI);
-    	move(velX*Global.state.dt/1000,velY*Global.state.dt/1000);
+    	move(velX*Global.state.dtt,velY*Global.state.dtt);
     	
     	//Move camera if Ship is Player's Ship
     	if (this == Global.state.playerObj){
-    		Global.player.cx += velX*Global.state.dt/1000;
-    		Global.player.cy += velY*Global.state.dt/1000;
+    		Global.player.cx += velX*Global.state.dtt;
+    		Global.player.cy += velY*Global.state.dtt;
     	}
     	
     	

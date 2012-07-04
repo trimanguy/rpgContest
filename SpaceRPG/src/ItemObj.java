@@ -11,7 +11,18 @@ public class ItemObj extends Obj{
 
 	String descrip;
 	String name;
-	String mass;
+	double mass;
+	
+	int size; //This corresponds to Pylon.size
+	String type;//This corresponds to Pylon.type
+	
+	int quantity;
+	int maxQuantity=1;
+	
+	double baseHealth;
+	
+	double activateDelay;
+	boolean canActivate = false;
 	
     public ItemObj() {
     	

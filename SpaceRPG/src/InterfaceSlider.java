@@ -54,13 +54,17 @@ public class InterfaceSlider extends UIElement{
     }
     
     public void mouseClicked(MouseEvent e){
-    	double my = e.getY();
-    	setPosition(my);
+    	if(e.getButton()==1){
+	    	double my = e.getY();
+	    	setPosition(my);
+    	}
     }
     
     public void mouseDropped(MouseEvent e){
-    	double my = e.getY();
-    	setPosition(my);
+    	if(e.getButton()==1){
+	    	double my = e.getY();
+	    	setPosition(my);
+    	}
     }
     
     public void callMethod(){

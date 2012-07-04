@@ -111,8 +111,10 @@ public class Player implements MouseListener, KeyListener {
     }
     
     private void rightClick(MouseEvent e, Obj clickedObj){
-    	//make player rotate towards click-location 	
-		rotateToClick(e);	
+    	//make player rotate towards click-location 
+    	if (!(clickedObj instanceof UIElement)){	
+			rotateToClick(e);	
+    	}
     }
     
     private void middleClick(MouseEvent e, Obj clickedObj){

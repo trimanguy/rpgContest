@@ -11,28 +11,44 @@ import java.net.*;
 
 public class MissileObj extends GameObj{
 	
+	String delImage; //Filepath to the "explode" image.
+	
 	GameObj source = null;
 	GameObj target=null;
-	double maxAngVel = 0.5;
-	double maxVelocity = 2.5;
-    double velocity = 2.5;
-    double accel = 1;
-    int damage = 0;
+	double maxAngVel = 0.5;//Maximum angular velocity in Degrees per second.
+	double maxVelocity = 2.5; //Maximum velocity in Pixels per second.
+    double velocity = 2.5; //Current velocity in Pixels per second.
+    double accel = 0; // Acceleration in Pixels per second per second. 
+    //	Appropriate for actual missiles and rockets and torpedoes.
+    
+	double damageToShield;
+	double damageThruShield;
+	double damageToHull;
+	double damageArmorPiercing;
+    
     double timeLeft = 0; //how long the missle flies before it dies
     
-    public MissileObj(String image, URL spritecontext, GameObj shipObj, GameObj targetObj, 
-    	int dmg, double turnRate, double speed, double maxSpeed, double acceleration, double time) {
+    public MissileObj(String image, String killImage, URL spritecontext, GameObj shipObj, GameObj targetObj, 
+    	double dmgTS, double dmgThS, double dmgTH, double dmgAP, 
+    	double nx, double ny, double turnRate, double speed, double maxSpeed, double acceleration, double time) {
     	
     	super(image, spritecontext);
     	
-    	x = shipObj.x;
-    	y = shipObj.y;
+    	delImage = killImage;
+    	
+    	x = nx;
+    	y = ny;
     	
     	source = shipObj;
     	
     	target = targetObj;
     	timeLeft = time;
-    	damage = dmg;
+    	
+    	damageToShield = dmgTS;
+    	damageThruShield = dmgThS;
+    	damageToHull = dmgTH;
+    	damageArmorPiercing = dmgAP;
+    	
     	maxAngVel = turnRate;
     	velocity = speed;
     	maxVelocity = maxSpeed;
@@ -44,7 +60,7 @@ public class MissileObj extends GameObj{
     	velX = velocity * Math.cos(currAngle/180*Math.PI);
     	velY = velocity * Math.sin(currAngle/180*Math.PI);
     	
-    	move(velX*Global.state.dt/1000,velY*Global.state.dt/1000);
+    	move(velX*Global.state.dtt,velY*Global.state.dtt);
     	
     	layer = 10;
     	
@@ -56,7 +72,7 @@ public class MissileObj extends GameObj{
     		//if missle is out of time, delete it here
     		addDelete();
     	} else{
-    		timeLeft -= Global.state.dt/1000;
+    		timeLeft -= Global.state.dtt;
         }
         
         
@@ -65,12 +81,14 @@ public class MissileObj extends GameObj{
         for(int x=0; x<(ShipObj.allShips.size()); x++){
         	if(ShipObj.allShips.get(x)==source) continue;
         	
-        	if (ShipObj.allShips.get(x).contains(thisMissile) !=null) {
+        	HitCircle gotHit = ShipObj.allShips.get(x).contains(thisMissile);
+        	
+        	if (gotHit !=null) {
         		//NOTE: this is where you process damage logic, ie which hitbox got hit
-        		
-        		new AnimatedParticle("Resources/Sprites/explode_2.png", Global.codeContext, 
-        			0.05, this.x, this.y);
-        		
+        		if(delImage!=null){
+	        		new AnimatedParticle(delImage, Global.codeContext, 
+	        			0.05, this.x, this.y);
+        		}
         		
         		addDelete();
         		return;
@@ -79,27 +97,22 @@ public class MissileObj extends GameObj{
     	
     	if (target!=null) {
     		//Calculate destAngle from missle to target
-    		//Ant: make getAngle in Obj!!
     		double destAngle=0.0;
     		destAngle = getAngle((Obj)target);
-    	
-    		//Then rotate missle towards target
-    		double deltaAng = (destAngle - currAngle);
-    		if(deltaAng < -180) deltaAng += 360;
-    		if(deltaAng > 180) deltaAng -= 360;
-    		deltaAng = Math.min(maxAngVel,Math.max(-maxAngVel,deltaAng));
-    	
-    		rotate(deltaAng);
+    		
+    		rotate(findDeltaAng(destAngle));
     	}
     	
     	int frame;
     	frame = (int) Math.round(currAngle/5)+1;
     	sprite.setFrame(frame);
     	
+    	velocity = Math.max(0,Math.min(maxVelocity, velocity + accel * Global.state.dtt));
+    	
     	velX = velocity * Math.cos(currAngle/180*Math.PI);
     	velY = velocity * Math.sin(currAngle/180*Math.PI);
     	
-    	move(velX*Global.state.dt/1000,velY*Global.state.dt/1000);
+    	move(velX*Global.state.dtt,velY*Global.state.dtt);
     	/*
     	Global.player.cx += velX;
     	Global.player.cy += velY;
@@ -115,5 +128,15 @@ public class MissileObj extends GameObj{
     	super(image, spritecontext);
     }
     
+    
+    public double findDeltaAng(double targetAngle){
+    	double deltaAng = (targetAngle - currAngle);
+    	double maxDeltaAng = maxAngVel*Global.state.dtt;
+    	
+    	if(deltaAng < -180) deltaAng += 360;
+    	if(deltaAng > 180) deltaAng -= 360;
+    	deltaAng = Math.min(maxDeltaAng,Math.max(-maxDeltaAng,deltaAng));
+    	return deltaAng;
+    }
     
 }

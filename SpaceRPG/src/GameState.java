@@ -19,6 +19,7 @@ public class GameState {
 	double time = 0.0;
 	double timeOfNeedGC = 0.0;
 	double dt = 0.0;
+	double dtt = 0.0; //this is dtt
 	Boolean needGC = false;
 	
 	
@@ -52,14 +53,12 @@ public class GameState {
     public void Tick(){
     	
     	dt = System.currentTimeMillis() - lastTime;
+    	dtt = dt/1000;
     	lastTime = System.currentTimeMillis();
     	
     	//System.out.println("DELTA TIME: "+dt);
     	
-    	//time = System.currentTimeMillis()/1000;
-    	//dt = 10;
-    	
-    	time += dt/1000;
+    	time += dtt;
     	
     	for(Obj O:activeObjs){
     		O.Step();
