@@ -128,7 +128,7 @@ public class ShipObj extends GameObj {
     
     public void Step(){
     	//Combat 
-    	this.fireOn( this.findTarget() , 200, 0);
+    	this.fireOn( this.findTarget() , 250, 5);
     	
     	//Ship Rotation
     	rotate( this.findDeltaAng() );

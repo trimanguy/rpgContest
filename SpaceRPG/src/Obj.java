@@ -208,6 +208,18 @@ public class Obj implements Comparable{
     	Global.state.activeObjs.remove(this);
     	Global.view.drawObjects.remove(this);
     	Global.state.needGC = true;
+    	
+    	if(sprite!=null){
+    		if(sprite.img!=null){
+	    		sprite.img.flush();
+	    		sprite.img = null;
+    		}
+    		if(sprite.source!=null){
+	    		sprite.source.flush();
+	    		sprite.source = null;
+    		}
+    		sprite = null;
+    	}
     }
     
     public void mouseClicked(MouseEvent e){
