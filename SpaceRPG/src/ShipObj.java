@@ -22,6 +22,14 @@ public class ShipObj extends GameObj {
     double fireTimer;
     double fireDelay = 0.0;//25;
     
+    
+    //shield health!
+    double shieldForward;
+    double shieldLeft;
+    double shieldRight;
+    double shieldRear;
+    double shieldChargeTimer;
+    
     /*** Ship Constructor, puts ship on screen ***/
     public ShipObj(String image, URL spritecontext, double speed, double maxAngVel, ArrayList<HitCircle> hitboxes) { 
     	if(image != null && spritecontext != null)
@@ -166,4 +174,34 @@ public class ShipObj extends GameObj {
     	super(image, spritecontext);
     }
     
+    public double getShields(HitCircle H){//This will return the ship's shields that affects the Hitcircle object
+    	double shield=0;
+    	
+    	PointS point = new PointS(x+H.rx,y+H.ry);
+    	
+    	double deltaAngle = getAngle(point) - currAngle;
+    	if(deltaAngle >= 360) deltaAngle -= 360;
+    	if(deltaAngle < 0) deltaAngle += 360;
+    	
+    	if(deltaAngle >=45 && deltaAngle <135) shield = shieldLeft;
+    	if(deltaAngle >=135 && deltaAngle < 225) shield = shieldRear;
+    	if(deltaAngle >=225 && deltaAngle < 315) shield = shieldRight;
+    	if(deltaAngle < 45 || deltaAngle > 315) shield = shieldForward;
+    	
+    	return shield;
+    }
+    
+    public void setShields(double value, HitCircle H){
+    	value = Math.max(0,value);
+    	PointS point = new PointS(x+H.rx,y+H.ry);
+    	
+    	double deltaAngle = getAngle(point) - currAngle;
+    	if(deltaAngle >= 360) deltaAngle -= 360;
+    	if(deltaAngle < 0) deltaAngle += 360;
+    	
+    	if(deltaAngle >=45 && deltaAngle <135) shieldLeft = value;
+    	if(deltaAngle >=135 && deltaAngle < 225) shieldRear = value;
+    	if(deltaAngle >=225 && deltaAngle < 315) shieldRight = value;
+    	if(deltaAngle < 45 || deltaAngle > 315) shieldForward = value;
+    }
 }

@@ -12,6 +12,7 @@ C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\InterfaceSlider.jav
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\ItemObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\mergeSort.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\MissileObj.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\NavPointerObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Obj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\ParticleSystem.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Player.java

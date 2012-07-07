@@ -114,6 +114,9 @@ public class Player implements MouseListener, KeyListener {
     	//make player rotate towards click-location 
     	if (!(clickedObj instanceof UIElement)){	
 			rotateToClick(e);	
+			PointS point = (new PointS(e.getX(),e.getY())).toWorld();
+			
+			new NavPointerObj(point.x, point.y, 0.75);
     	}
     }
     
