@@ -107,12 +107,14 @@ public class Utils {
 								double y;
 								//System.out.print("Check4"+ System.getProperty("line.separator"));
 								x=Double.valueOf(pylon_st.nextToken());
+								System.out.println("x is: "+x);
 								y=Double.valueOf(pylon_st.nextToken());
 								//convert x and y into polar coord
 								double[] polar = cartesianToPolar(x,y); //radius,angle
-								Pylon pl = new Pylon(polar[0],polar[1]);
+								Pylon pl = new Pylon(null, polar[0],polar[1]);
 								pylons.add(pl);
 								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]);
+								System.out.println("pylons size: "+ pylons.size());
 							}
 						}
 	    				
@@ -172,6 +174,11 @@ public class Utils {
     		HitCircle newHitCirc = new HitCircle(newShip, currTempHC.rx, currTempHC.ry, currTempHC.radius);
     		//newShip.hitCircles.add(newHitCirc);
     	} 
+    	
+    	for(int x=0; x<template.pylons.size();x++){
+    		Pylon currTempPylon = template.pylons.get(x);
+    		Pylon newPylon = new Pylon(newShip, currTempPylon.polarRadius, currTempPylon.polarAngle);
+    	}
     	
     	return newShip;
     }

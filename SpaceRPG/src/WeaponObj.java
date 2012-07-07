@@ -39,7 +39,14 @@ public class WeaponObj extends ItemObj{
 	double damageToHull;
 	double damageArmorPiercing;
 
-    public WeaponObj() {
+    public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread) {
+    	missileImg = img;
+    	missileHitImg = hitImg;
+    	missileLife = life;
+    	missileMaxSpeed = maxSpeed;
+    	missileAcceleration = accel;
+    	missileTurnSpeed = turnSpeed;
+    	angleSpread = spread;
     }
     
     public boolean canFire(){

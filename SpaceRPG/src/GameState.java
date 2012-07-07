@@ -43,9 +43,9 @@ public class GameState {
     	Utils.parseShipFile(shipFile);
     	Utils.createShip("flak1");
     	Utils.createShip("escort1");
+    	System.out.println("pylons size test: "+ShipObj.allShips.get(1).pylons.size());
+    	//System.out.println("pylon test: "+ShipObj.allShips.get(0).pylons.get(0).polarRadius + ", " + ShipObj.allShips.get(0).pylons.get(0).polarAngle);
     	Global.state.playerObj = Utils.createShip("escort1");
-    	//ShipObj flak1 = (ShipObj)Utils.shipTable.get("flak1");
-    	//new ShipObj(flak1.imageName, Global.codeContext,flak1.velocity,flak1.maxAngVel, flak1.hitCircles);
     	System.out.print("Num ships is: "+ ShipObj.allShips.size() + System.getProperty("line.separator"));
     	new ActiveInterface ();
     }

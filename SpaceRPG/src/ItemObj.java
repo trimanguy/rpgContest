@@ -22,7 +22,7 @@ public class ItemObj extends Obj{
 	double baseHealth;
 	
 	double activateDelay;
-	boolean canActivate = false;
+	boolean canActivate = true; //da fuck is this??
 	
     public ItemObj() {
     	

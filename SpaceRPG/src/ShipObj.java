@@ -46,13 +46,13 @@ public class ShipObj extends GameObj {
     }
     
     /*** Ship Data Constructor, similar to C++ struct ***/
-    public ShipObj(String image, double speed, double maxAngVel, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> pylons){
+    public ShipObj(String image, double speed, double maxAngVel, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons){
     	//don't need to add to allShips cuz this just template obj
     	imageName = image;
     	velocity = speed;
     	this.maxAngVel = maxAngVel;
     	hitCircles = hitboxes;
-    	pylons = pylons;	
+    	pylons = newPylons;	
     	
     }
     
@@ -68,7 +68,7 @@ public class ShipObj extends GameObj {
     	}
     }
     
-    /*** Does computation and perfoms pewpew ***/
+    /*** Does computation and perfoms pewpew; deprecated, was used for testing ***/
     public void fireOn(ShipObj target, double missileSpeed, double inaccuracy){
     	
     	if(Global.state.time < fireTimer) return; //weapon cooling down
@@ -130,6 +130,15 @@ public class ShipObj extends GameObj {
     	fireTimer = Global.state.time + fireDelay;
     }
     
+    public void fireOn(ShipObj target){
+    	for(int x = 0; x<pylons.size(); x++){
+    		Pylon currPylon = pylons.get(x);
+    		if (currPylon.type == "Weapon"){
+    			currPylon.target = target;
+    		}
+    	}
+    }
+    
     /*** Find how much to rotate this step ***/
     public double findDeltaAng(double targetAngle){
     	double deltaAng = (targetAngle - currAngle);
@@ -143,7 +152,14 @@ public class ShipObj extends GameObj {
     
     public void Step(){
     	//Combat 
-    	this.fireOn( this.findTarget() , 250, 0);
+    	//this.fireOn( this.findTarget() , 250, 0);
+    	this.fireOn(this.findTarget());
+    	
+    	//Pylon actions
+    	
+    	for(int x=0;x<this.pylons.size();x++){
+    		pylons.get(x).Step();
+    	}
     	
     	//Ship Rotation
     	rotate( this.findDeltaAng(destAngle) );

@@ -31,7 +31,7 @@ public class Pylon {
 	double activateTimer;
 	//The delay should depend upon the equipped module
 	
-	boolean activated; //Is the pylon's equipped item Activated?
+	boolean activated=true; //Is the pylon's equipped item Activated?
 	int activateParams; //For some reason this seemed appropriate. I don't know how else to pass the 
 	//	Player's keypress to a sheild activation...
 	
@@ -61,21 +61,38 @@ public class Pylon {
 	//Flat armor!
 	double flatArmor;
 
-    public Pylon(double radius, double angle) {
+    public Pylon(ShipObj source, double radius, double angle) {
     	//for testing purposes
     	baseHealth = 1;
-    	type = "weapon";
-    	
+    	type = "Weapon";
+    	int size = 9999;
+    	realHealth = 1;
+    	WeaponObj testGun = new WeaponObj("Resources/Sprites/PlasmaSmall.png", "Resources/Sprites/explode_2.png", 10 , 200.0, 200.0, 360.0, 5.0); //fake guns for testing
+    	this.equipped = (ItemObj)testGun; 
+    	//
     	polarRadius = radius;
     	polarAngle = angle;	
+    	if (source!=null){
+    		source.pylons.add((Pylon)this);
+    		this.source = source;
+    	}
+    }
+    
+    public void addSource(GameObj s){
+    	source = (ShipObj)s;
     }
     
     public boolean canEquip(ItemObj O){
     	return (O.type.compareTo(type)==0 && O.size >= size);
     }
     
+    public void equipItem(ItemObj item){
+    	this.equipped = item;
+    	this.realHealth = baseHealth + item.baseHealth; 
+    }
     
     public void Step(){//This should be called by the ShipObj during ShipObj.Step()
+    	
     	if(equipped == null) return; //There is no equipped module!
     	
     	if(!equipped.canActivate) return; //Equipped is a passive module
@@ -91,26 +108,34 @@ public class Pylon {
 	    	if(type.compareTo("Weapon")==0){//Since "string"=="string" is weird...
 	    		
 	    		WeaponObj weapon = (WeaponObj) equipped;
-	    		
+	    	//	System.out.println("pylon check");
 	    		//First check if this weapon can fire based upon the context (ship power and ammunition)
 	    		if(!weapon.canFire()) return;
 	    		
+	    		//figure out where the missile's origin is
 				double nx,ny;
 				nx = source.x+polarRadius*Math.cos(Math.toRadians(polarAngle+source.currAngle));
 				ny = source.y+polarRadius*Math.sin(Math.toRadians(polarAngle+source.currAngle));
 	    		
 	    		if(target == null){
-	    			//fire the weapon regardless of target and pylon orientation?
-	    				weapon.Fire(nx,ny,currAngle, source, null);
+	    			//fire the weapon regardless of target and pylon orientation? commented out for now
+	    			//	weapon.Fire(nx,ny,currAngle, source, null);
 	    		}else{
+	    			//pewpew test
+	    			//System.out.println("FIRE!!");
 	    			//Align the weapon towards target and if the pylon pointing at target, fire.
 	    			double targetAng = findTargetAng(target,weapon.missileSpeed);
 	    			AlignTo(targetAng);
 	    			
+	    			/*** For now commented out
 	    			if(Math.abs(targetAng-currAngle)<weapon.angleSpread){
 	    				//fire
 	    				weapon.Fire(nx,ny,currAngle, source, target);
 	    			}
+	    			***/
+	    			
+	    			//this part for testing only, DELETE AFTER
+	    			weapon.Fire(nx,ny,currAngle, source, target);
 	    		}
 	    		
 	    	}else if(type.compareTo("Shield")==0){
