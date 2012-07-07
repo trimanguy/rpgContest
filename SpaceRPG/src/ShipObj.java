@@ -20,7 +20,7 @@ public class ShipObj extends GameObj {
     
     //both the timer and delay are in seconds.
     double fireTimer;
-    double fireDelay = 0.0;//25;
+    double fireDelay = 1;//25;
     
     
     //shield health!
@@ -46,12 +46,13 @@ public class ShipObj extends GameObj {
     }
     
     /*** Ship Data Constructor, similar to C++ struct ***/
-    public ShipObj(String image, double speed, double maxAngVel, ArrayList<HitCircle> hitboxes){
+    public ShipObj(String image, double speed, double maxAngVel, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> pylons){
     	//don't need to add to allShips cuz this just template obj
     	imageName = image;
     	velocity = speed;
     	this.maxAngVel = maxAngVel;
-    	hitCircles = hitboxes;	
+    	hitCircles = hitboxes;
+    	pylons = pylons;	
     	
     }
     

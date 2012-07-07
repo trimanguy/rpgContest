@@ -24,12 +24,7 @@ public class Pylon {
 	*/
 	
 	int size; //Module size. Smaller is bigger?
-	String type;//Possible types:
-	//Weapon
-	//Engine
-	//Power
-	//Shield
-	//Support
+	String type;//Possible types: "weapon","engine","power","shield","support"
 	
 	String tag;//My thought is you assign a tag to a pylon and then a tag to the associated hitCircles
 	
@@ -66,8 +61,13 @@ public class Pylon {
 	//Flat armor!
 	double flatArmor;
 
-    public Pylon() {
+    public Pylon(double radius, double angle) {
+    	//for testing purposes
+    	baseHealth = 1;
+    	type = "weapon";
     	
+    	polarRadius = radius;
+    	polarAngle = angle;	
     }
     
     public boolean canEquip(ItemObj O){

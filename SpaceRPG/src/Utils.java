@@ -17,6 +17,8 @@ public class Utils {
 	static String tempSpeed;
 	static String tempAngSpeed;
 	static String tempHitBoxes;
+	static String tempPylons;
+	static ArrayList<Pylon> pylons = new ArrayList(0);
 	static ArrayList<HitCircle> hitboxes = new ArrayList(0);
 	static boolean saveFlag = false;
 		
@@ -56,6 +58,7 @@ public class Utils {
 	    					case "SPEED":		tempSpeed = st.nextToken(); break;
 	    					case "ANG_SPEED":	tempAngSpeed = st.nextToken(); break;
 	    					case "HITBOXES":	tempHitBoxes = st.nextToken(); break;
+	    					case "PYLONS":		tempPylons = st.nextToken(); break;
 	    					case "END":			saveFlag = true; break;
 	    				}	
 	    			}
@@ -67,6 +70,7 @@ public class Utils {
 	    				double speed = Double.valueOf(tempSpeed);
 	    				double angSpeed = Double.valueOf(tempAngSpeed);
 	    				
+	    				/*** This part for Hitboxes ***/
 	    				//remove parens for use with tokenizer
 	    				tempHitBoxes = tempHitBoxes.replace('(', ' ');
 	    				tempHitBoxes = tempHitBoxes.replace(')', ' ');
@@ -74,7 +78,6 @@ public class Utils {
 	    				
 	    				//for each token of form 1.0,1.0,1.0
 	    				while(ship_st.hasMoreTokens()){    				
-	    					
 	    					StringTokenizer hitbox_st = new StringTokenizer(ship_st.nextToken(), ",");
 	    					while(hitbox_st.hasMoreTokens()){
 	    						double x;
@@ -89,7 +92,32 @@ public class Utils {
 	    					}
 	    				}
 	    				
-	    				ShipObj ship = new ShipObj(image,speed,angSpeed,hitboxes);
+	    				/*** This part for Pylons ***/
+	    				//remove parens for use with tokenizer
+	    				tempPylons = tempPylons.replace('(', ' ');
+	    				tempPylons = tempPylons.replace(')', ' ');
+	    				StringTokenizer ship_st2 = new StringTokenizer(tempPylons);
+	    				System.out.println("tempPylons: "+tempPylons);
+	    					
+	    				//for each token of form 1.0,1.0
+						while(ship_st2.hasMoreTokens()){
+							StringTokenizer pylon_st = new StringTokenizer(ship_st2.nextToken(), ",");
+							while(pylon_st.hasMoreTokens()){
+								double x;
+								double y;
+								//System.out.print("Check4"+ System.getProperty("line.separator"));
+								x=Double.valueOf(pylon_st.nextToken());
+								y=Double.valueOf(pylon_st.nextToken());
+								//convert x and y into polar coord
+								double[] polar = cartesianToPolar(x,y); //radius,angle
+								Pylon pl = new Pylon(polar[0],polar[1]);
+								pylons.add(pl);
+								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]);
+							}
+						}
+	    				
+	    				
+	    				ShipObj ship = new ShipObj(image,speed,angSpeed,hitboxes,pylons); //remember to add pylon stuff to ship
 	    				Utils.shipTable.put(Utils.name, ship);
 	    				
 	    				//clear vars for next ship
@@ -98,9 +126,11 @@ public class Utils {
 	    				tempSpeed = "";
 	    				tempAngSpeed = "";
 	    				tempHitBoxes = "";
+	    				tempPylons = "";
+	    				pylons = new ArrayList(0);
 	    				hitboxes = new ArrayList(0);
 	    				saveFlag = false;
-	    				System.out.print("Check4"+ System.getProperty("line.separator"));
+	    				
 	    			}
 	    			
 	    		}
@@ -146,5 +176,14 @@ public class Utils {
     	return newShip;
     }
     
-    
+    /*** conversion assumes x and y are coords relative to 0,0 ***/
+    public static double[] cartesianToPolar(double x,double y){
+    	double[] polar = new double[2];
+    	double radius = Math.sqrt(x*x + y*y);
+    	double angle = Math.atan2(y,x);
+    	polar[0]=radius;
+    	polar[1]=angle;
+    	
+    	return polar;
+    }
 }

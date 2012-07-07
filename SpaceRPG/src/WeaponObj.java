@@ -17,7 +17,7 @@ public class WeaponObj extends ItemObj{
 	
 	int missileLife;//missileObj's life
 
-	boolean missileHoming;//Is the missileObj homing?
+	boolean missileHoming;//Is the missileObj homing? default is no
 	double missileSpeed;//missileObj's speed in pixels per second
 	double missileMaxSpeed;//missileObj's speed in pixels per second
 	double missileAcceleration;//missileObj's speed in pixels per second
