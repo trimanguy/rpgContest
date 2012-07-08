@@ -69,6 +69,7 @@ public class ShipObj extends GameObj {
     }
     
     /*** Does computation and perfoms pewpew; deprecated, was used for testing ***/
+    /*
     public void fireOn(ShipObj target, double missileSpeed, double inaccuracy){
     	
     	if(Global.state.time < fireTimer) return; //weapon cooling down
@@ -129,6 +130,7 @@ public class ShipObj extends GameObj {
     	
     	fireTimer = Global.state.time + fireDelay;
     }
+    */
     
     public void fireOn(ShipObj target){
     	for(int x = 0; x<pylons.size(); x++){

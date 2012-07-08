@@ -187,7 +187,7 @@ public class Utils {
     public static double[] cartesianToPolar(double x,double y){
     	double[] polar = new double[2];
     	double radius = Math.sqrt(x*x + y*y);
-    	double angle = Math.atan2(y,x);
+    	double angle = Math.toDegrees(Math.atan2(y,x));
     	polar[0]=radius;
     	polar[1]=angle;
     	

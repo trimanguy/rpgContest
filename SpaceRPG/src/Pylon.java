@@ -36,7 +36,8 @@ public class Pylon {
 	//	Player's keypress to a sheild activation...
 	
 	
-	double currAngle;
+	double currAngle; //This is angle relative to world coordinates
+	double selfAngle; //This is angle relative to the ship direction
 	double maxAngVel; //Degrees per second
 	double angThrust; //angThrust = Mass*AngVel. Use this formula to calibrate. Set to 0 for static turrets.
 	
@@ -51,8 +52,8 @@ public class Pylon {
 	
 	//Polar coordinates relative to the ship in world coordinates. 
 	//Makes it convenient to concatenate ship rotation.
-	double polarRadius;
-	double polarAngle;
+	double polarRadius; //This is in pixels
+	double polarAngle; //This is in degrees
 	
 	//baseHealth and realHealth we already discussed.
 	double baseHealth;
@@ -68,6 +69,7 @@ public class Pylon {
     	int size = 9999;
     	realHealth = 1;
     	WeaponObj testGun = new WeaponObj("Resources/Sprites/PlasmaSmall.png", "Resources/Sprites/explode_2.png", 10 , 200.0, 200.0, 360.0, 5.0); //fake guns for testing
+    	//public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread) {
     	this.equipped = (ItemObj)testGun; 
     	//
     	polarRadius = radius;
@@ -104,6 +106,8 @@ public class Pylon {
     	
     	activateTimer = Global.state.time+equipped.activateDelay;
     	
+    	updateCurrentAngle();
+    	
     	if(activated){
 	    	if(type.compareTo("Weapon")==0){//Since "string"=="string" is weird...
 	    		
@@ -113,9 +117,9 @@ public class Pylon {
 	    		if(!weapon.canFire()) return;
 	    		
 	    		//figure out where the missile's origin is
-				double nx,ny;
-				nx = source.x+polarRadius*Math.cos(Math.toRadians(polarAngle+source.currAngle));
-				ny = source.y+polarRadius*Math.sin(Math.toRadians(polarAngle+source.currAngle));
+				PointS P = getCoords();
+				double nx = P.x;
+				double ny = P.y;
 	    		
 	    		if(target == null){
 	    			//fire the weapon regardless of target and pylon orientation? commented out for now
@@ -124,11 +128,18 @@ public class Pylon {
 	    			//pewpew test
 	    			//System.out.println("FIRE!!");
 	    			//Align the weapon towards target and if the pylon pointing at target, fire.
-	    			double targetAng = findTargetAng(target,weapon.missileSpeed);
+	    			double targetAng=0;
+	    			if(weapon.missileHoming){
+	    				targetAng = getAngle(target);
+	    			}
+	    			else{
+	    				targetAng = findTargetAng(target,weapon.missileSpeed);
+	    			}
+	    			
 	    			AlignTo(targetAng);
 	    			
 	    			/*** For now commented out
-	    			if(Math.abs(targetAng-currAngle)<weapon.angleSpread){
+	    			if(Math.abs(targetAng-selfAngle)<weapon.angleSpread){
 	    				//fire
 	    				weapon.Fire(nx,ny,currAngle, source, target);
 	    			}
@@ -178,26 +189,33 @@ public class Pylon {
     	if(equipped != null) realHealth += equipped.baseHealth;
     }
     
+    public void updateCurrentAngle(){
+    	currAngle = source.currAngle + selfAngle;
+    	
+    	if(currAngle >= 360) currAngle -= 360;
+    	if(currAngle < 0) currAngle += 360;
+    }
+    
     public boolean AlignTo(double targetAng){
     	//first update the maximum angular speed
     	UpdateAngVel();
-    	currAngle += findDeltaAng(targetAng);
+    	double deltaAng = findDeltaAng(targetAng);
     	
-    	if(currAngle >= 360) currAngle -= 360;
-    	if(currAngle < 0) currAngle += 360;
+    	selfAngle += deltaAng;
+    	double checkAngle = selfAngle - centerAngle;
+    	if(checkAngle < -arcAngle) selfAngle = centerAngle - arcAngle;
+    	if(checkAngle > arcAngle) selfAngle = centerAngle + arcAngle;
     	
-    	double checkAngle = currAngle - centerAngle;
-    	if(checkAngle < -arcAngle) currAngle = centerAngle - arcAngle;
-    	if(checkAngle > arcAngle) currAngle = centerAngle + arcAngle;
+    	if(selfAngle < -180) selfAngle += 360;
+    	if(selfAngle >= 180) selfAngle -= 360;   
     	
-    	if(currAngle >= 360) currAngle -= 360;
-    	if(currAngle < 0) currAngle += 360;
+    	updateCurrentAngle();
     	
-    	return (currAngle==targetAng);
+    	return (selfAngle == targetAng);
     }
     
     public double findDeltaAng(double destAngle){
-    	double deltaAng = (destAngle - currAngle);
+    	double deltaAng = (destAngle - selfAngle);
     	double maxDeltaAng = maxAngVel * Global.state.dtt;
     	
     	if(deltaAng < -180) deltaAng += 360;
@@ -244,7 +262,30 @@ public class Pylon {
     	P = PO.add(V.multiply(t)); //Vector to the target interception point relative to the source in world pixels.
     	
     	//Convert the firing vector to angle in degrees
-    	return P.toAngle();
+    	return P.toAngle()-source.currAngle;
     }
     
+    public double getAngle(GameObj O){//This reutrns an angle relative to the source object's angle.
+    	if(source == null || O == null) return 0;
+    	
+    	double sx = source.x, sy = source.y;
+    	PointS P = getCoords();
+    	sx += P.x; sy += P.y;
+    	
+    	sx = O.x-sx;
+    	sy = O.y-sy;
+    	
+    	double angle = Math.atan2(sy,sx);
+    	if(angle < 0) angle += 360;
+    	if(angle >=360) angle -= 360;
+    	angle -= source.currAngle;
+    	
+    	return angle;
+    }
+    
+    public PointS getCoords(){
+		double nx = source.x+polarRadius*Math.cos(Math.toRadians(polarAngle+source.currAngle));
+		double ny = source.y+polarRadius*Math.sin(Math.toRadians(polarAngle+source.currAngle));
+    	return new PointS(nx,ny);
+    }
 }

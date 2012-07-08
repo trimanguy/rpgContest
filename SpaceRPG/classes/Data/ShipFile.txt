@@ -22,5 +22,5 @@ SHIP_MODEL Resources/Sprites/EscortFrigate1-Thrust.png
 SPEED 75
 ANG_SPEED 45
 HITBOXES (0.0,0.0,25.0)
-PYLONS (-50.0,0.0)
+PYLONS (-30.0,0.0)(30.0,0.0)(0.0,10.0)(0.0,-10.0)
 END
