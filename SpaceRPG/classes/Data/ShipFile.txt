@@ -1,9 +1,9 @@
-#sample shipFile
+#Sample shipFile
 #
 #SHIP_NAME string
 #SHIP_MODEL string
-#HITBOXES (coord_x1,coord_y1,radius1)(coord_x2,coord_y2,radius2) no spaces
-#PYLONS (offset_x1, offset_y1, health)(offset_x2, offset_y2, health)
+#HITBOXES (coord_x1,coord_y1,radius1)(coord_x2,coord_y2,radius2)
+#PYLONS (offset_x1, offset_y1, centerAng, arcAng, angSpeed)(offset_x2, offset_y2, ...)
 #SPEED double
 #END
 
@@ -13,7 +13,7 @@ SHIP_MODEL Resources/Sprites/FlakFrigate1-Thrust.png
 SPEED 100
 ANG_SPEED 55
 HITBOXES (0.0,0.0,25.0)
-PYLONS (-30.0,0.0)
+PYLONS (-30.0,0.0,180.0,90.0,50.0)
 END
 
 #test ship
@@ -22,5 +22,5 @@ SHIP_MODEL Resources/Sprites/EscortFrigate1-Thrust.png
 SPEED 75
 ANG_SPEED 45
 HITBOXES (0.0,0.0,25.0)
-PYLONS (-30.0,0.0)(30.0,0.0)(0.0,10.0)(0.0,-10.0)
+PYLONS (-30.0,0.0,180.0,60.0,50.0)(30.0,0.0,0.0,60.0,50)(0.0,10.0,90.0,60.0,50)(0.0,-10.0,270.0,60.0,50)
 END

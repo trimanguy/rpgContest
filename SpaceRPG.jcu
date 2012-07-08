@@ -51,12 +51,24 @@
 			<path>SpaceRPG\src\GameState.java</path>
 			<source>true</source>
 			<index>2</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>SpaceRPG\src\Player.java</path>
 			<source>true</source>
 			<index>3</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\WeaponObj.java</path>
+			<source>true</source>
+			<index>4</index>
+			<active>true</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\Pylon.java</path>
+			<source>true</source>
+			<index>5</index>
 			<active>false</active>
 		</docitem>
 	</open_files>

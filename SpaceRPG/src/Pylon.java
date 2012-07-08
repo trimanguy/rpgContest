@@ -62,18 +62,21 @@ public class Pylon {
 	//Flat armor!
 	double flatArmor;
 
-    public Pylon(ShipObj source, double radius, double angle) {
+    public Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double angSpeed) {
     	//for testing purposes
     	baseHealth = 1;
     	type = "Weapon";
     	int size = 9999;
     	realHealth = 1;
-    	WeaponObj testGun = new WeaponObj("Resources/Sprites/PlasmaSmall.png", "Resources/Sprites/explode_2.png", 10 , 200.0, 200.0, 360.0, 5.0); //fake guns for testing
+    	WeaponObj testGun = new WeaponObj("Resources/Sprites/PlasmaSmall.png", "Resources/Sprites/explode_2.png", 10 , 300.0, 300.0, 0.0, 5.0); //fake guns for testing
     	//public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread) {
     	this.equipped = (ItemObj)testGun; 
     	//
     	polarRadius = radius;
-    	polarAngle = angle;	
+    	polarAngle = angle;
+    	centerAngle = centerAngle;
+    	arcAngle = arcAngle;
+    	maxAngVel = angSpeed;	
     	if (source!=null){
     		source.pylons.add((Pylon)this);
     		this.source = source;
@@ -138,15 +141,15 @@ public class Pylon {
 	    			
 	    			AlignTo(targetAng);
 	    			
-	    			/*** For now commented out
+	    		
 	    			if(Math.abs(targetAng-selfAngle)<weapon.angleSpread){
 	    				//fire
 	    				weapon.Fire(nx,ny,currAngle, source, target);
 	    			}
-	    			***/
+	    		
 	    			
 	    			//this part for testing only, DELETE AFTER
-	    			weapon.Fire(nx,ny,currAngle, source, target);
+	    			//weapon.Fire(nx,ny,currAngle, source, target);
 	    		}
 	    		
 	    	}else if(type.compareTo("Shield")==0){
@@ -179,6 +182,7 @@ public class Pylon {
     	if(equipped == null){
     		maxAngVel = 180;
     	}else{
+    		//simplify this down so maxAngVel is hardcoded in shipFile. Eliminate excess fields!
     		maxAngVel = angThrust/equipped.mass;
     	}
     }

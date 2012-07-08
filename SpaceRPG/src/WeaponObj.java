@@ -47,11 +47,12 @@ public class WeaponObj extends ItemObj{
     	missileAcceleration = accel;
     	missileTurnSpeed = turnSpeed;
     	
+    	
     	if(turnSpeed != 0){
     		missileHoming = true;
     	}
-    	
-    	activateDelay = 0.25;//temporary...
+		   	
+    	activateDelay = 0.5;//temporary...
     	
     	angleSpread = spread;
     }

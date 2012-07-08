@@ -43,6 +43,10 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\AnimatedParticle.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\EquipObj.java</path>
 				<folder>src</folder>
 			</fileitem>
@@ -91,11 +95,11 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
-				<path>src\Obj.java</path>
+				<path>src\NavPointerObj.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
-				<path>src\ParticleSystem.java</path>
+				<path>src\Obj.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
@@ -104,6 +108,10 @@
 			</fileitem>
 			<fileitem>
 				<path>src\PointS.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\Pylon.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>

@@ -25,10 +25,6 @@ public class Utils {
 
 	static Hashtable shipTable = new Hashtable();
 	
-	/*** Used for ship creation ***/
-    public static void createShip(){
-    	
-    }
     
     public static void storeShipInfo(){
     }
@@ -105,15 +101,21 @@ public class Utils {
 							while(pylon_st.hasMoreTokens()){
 								double x;
 								double y;
+								double centerAngle;
+								double arcAngle;
+								double pylonAngSpeed;
 								//System.out.print("Check4"+ System.getProperty("line.separator"));
-								x=Double.valueOf(pylon_st.nextToken());
-								System.out.println("x is: "+x);
-								y=Double.valueOf(pylon_st.nextToken());
+								x = Double.valueOf(pylon_st.nextToken());
+								y = Double.valueOf(pylon_st.nextToken());
+								centerAngle = Double.valueOf(pylon_st.nextToken());
+								arcAngle = Double.valueOf(pylon_st.nextToken());
+								pylonAngSpeed = Double.valueOf(pylon_st.nextToken());
 								//convert x and y into polar coord
 								double[] polar = cartesianToPolar(x,y); //radius,angle
-								Pylon pl = new Pylon(null, polar[0],polar[1]);
+								
+								Pylon pl = new Pylon(null, polar[0],polar[1],centerAngle, arcAngle, pylonAngSpeed);
 								pylons.add(pl);
-								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]);
+								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]+" centerAngle: "+centerAngle+" arcAngle: "+arcAngle+" angSpeed: "+pylonAngSpeed);
 								System.out.println("pylons size: "+ pylons.size());
 							}
 						}
@@ -160,6 +162,7 @@ public class Utils {
     	
     }
     
+    /*** Used for ship creation ***/
     public static ShipObj createShip(String shipName){
     	//ShipObj flak1 = (ShipObj)Utils.shipTable.get("flak1");
     	//new ShipObj(flak1.imageName, Global.codeContext,flak1.velocity,flak1.maxAngVel, flak1.hitCircles);
@@ -177,7 +180,7 @@ public class Utils {
     	
     	for(int x=0; x<template.pylons.size();x++){
     		Pylon currTempPylon = template.pylons.get(x);
-    		Pylon newPylon = new Pylon(newShip, currTempPylon.polarRadius, currTempPylon.polarAngle);
+    		Pylon newPylon = new Pylon(newShip, currTempPylon.polarRadius, currTempPylon.polarAngle, currTempPylon.centerAngle, currTempPylon.arcAngle, currTempPylon.maxAngVel);
     	}
     	
     	return newShip;
