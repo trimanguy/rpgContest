@@ -113,9 +113,14 @@ public class Utils {
 								//convert x and y into polar coord
 								double[] polar = cartesianToPolar(x,y); //radius,angle
 								
-								Pylon pl = new Pylon(null, polar[0],polar[1],centerAngle, arcAngle, pylonAngSpeed);
+								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]+" centerAngle: "+centerAngle+" arcAngle: "+arcAngle);
+								//+" angSpeed: "+pylonAngSpeed);
+								
+								Pylon pl = new Pylon(null, polar[0],polar[1],centerAngle, arcAngle);
+								//Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double angSpeed)
 								pylons.add(pl);
-								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]+" centerAngle: "+centerAngle+" arcAngle: "+arcAngle+" angSpeed: "+pylonAngSpeed);
+								
+								
 								System.out.println("pylons size: "+ pylons.size());
 							}
 						}
@@ -180,7 +185,8 @@ public class Utils {
     	
     	for(int x=0; x<template.pylons.size();x++){
     		Pylon currTempPylon = template.pylons.get(x);
-    		Pylon newPylon = new Pylon(newShip, currTempPylon.polarRadius, currTempPylon.polarAngle, currTempPylon.centerAngle, currTempPylon.arcAngle, currTempPylon.maxAngVel);
+    		Pylon newPylon = new Pylon(newShip, currTempPylon.polarRadius, currTempPylon.polarAngle, currTempPylon.centerAngle, currTempPylon.arcAngle);
+    		//, currTempPylon.maxAngVel);
     	}
     	
     	return newShip;

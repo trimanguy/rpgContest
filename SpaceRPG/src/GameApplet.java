@@ -60,7 +60,7 @@ public class GameApplet extends JApplet implements Runnable {
 		Global.state = state;
 		
 		// Start the thread, which calls the run() method.
-		view.thread.start();
+		//view.thread.start();
 		thread.start();
 	}
 	

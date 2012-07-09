@@ -39,7 +39,7 @@ public class WeaponObj extends ItemObj{
 	double damageToHull;
 	double damageArmorPiercing;
 
-    public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread) {
+    public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread, double itemTurnSpeed) {
     	missileImg = img;
     	missileHitImg = hitImg;
     	missileLife = life;
@@ -47,6 +47,9 @@ public class WeaponObj extends ItemObj{
     	missileAcceleration = accel;
     	missileTurnSpeed = turnSpeed;
     	
+    	this.turnSpeed = itemTurnSpeed;
+    	
+    	mass = 1;
     	
     	if(turnSpeed != 0){
     		missileHoming = true;
@@ -68,6 +71,7 @@ public class WeaponObj extends ItemObj{
     	
     	MissileObj O = new MissileObj(missileImg, missileHitImg, Global.codeContext, source, target, 
     		damageToShield, damageThruShield, damageToHull, damageArmorPiercing, 
-    		nx, ny, missileTurnSpeed, missileSpeed, missileMaxSpeed,missileAcceleration, missileLife);
+    		nx, ny, missileTurnSpeed, missileSpeed, missileMaxSpeed,missileAcceleration, missileLife,
+    		angle);
     }
 }

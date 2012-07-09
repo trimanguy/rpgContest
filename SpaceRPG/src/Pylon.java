@@ -39,7 +39,7 @@ public class Pylon {
 	double currAngle; //This is angle relative to world coordinates
 	double selfAngle; //This is angle relative to the ship direction
 	double maxAngVel; //Degrees per second
-	double angThrust; //angThrust = Mass*AngVel. Use this formula to calibrate. Set to 0 for static turrets.
+	//double angThrust; //angThrust = Mass*AngVel. Use this formula to calibrate. Set to 0 for static turrets.
 	
 	//All angles must be in degrees from 0 to 360
 	
@@ -62,23 +62,26 @@ public class Pylon {
 	//Flat armor!
 	double flatArmor;
 
-    public Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double angSpeed) {
+    public Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle) {
     	//for testing purposes
     	baseHealth = 1;
     	type = "Weapon";
     	int size = 9999;
     	realHealth = 1;
-    	WeaponObj testGun = new WeaponObj("Resources/Sprites/PlasmaSmall.png", "Resources/Sprites/explode_2.png", 10 , 300.0, 300.0, 0.0, 5.0); //fake guns for testing
+    	WeaponObj testGun = new WeaponObj("Resources/Sprites/PlasmaSmall.png", "Resources/Sprites/explode_2.png", 10 , 300.0, 30000.0, 0.0, 2.0, 180); //fake guns for testing
     	//public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread) {
     	this.equipped = (ItemObj)testGun; 
     	//
-    	polarRadius = radius;
-    	polarAngle = angle;
-    	centerAngle = centerAngle;
-    	arcAngle = arcAngle;
-    	maxAngVel = angSpeed;	
+    	this.polarRadius = radius;
+    	this.polarAngle = angle;
+    	this.centerAngle = centerAngle;
+    	this.arcAngle = arcAngle;
+    	//this.angThrust = angSpeed;
+    	
+    	this.selfAngle = centerAngle;
+    		
     	if (source!=null){
-    		source.pylons.add((Pylon)this);
+    		source.pylons.add(this);
     		this.source = source;
     	}
     }
@@ -136,13 +139,16 @@ public class Pylon {
 	    				targetAng = getAngle(target);
 	    			}
 	    			else{
-	    				targetAng = findTargetAng(target,weapon.missileSpeed);
+	    				targetAng = findTargetAng(target,weapon.missileMaxSpeed);
 	    			}
+	    			
 	    			
 	    			AlignTo(targetAng);
 	    			
-	    		
-	    			if(Math.abs(targetAng-selfAngle)<weapon.angleSpread){
+	    			
+	    			System.out.println(""+targetAng+", "+selfAngle+": "+(targetAng-selfAngle));
+	    			
+	    			if(Math.abs(targetAng-selfAngle)<=weapon.angleSpread){
 	    				//fire
 	    				weapon.Fire(nx,ny,currAngle, source, target);
 	    			}
@@ -183,7 +189,8 @@ public class Pylon {
     		maxAngVel = 180;
     	}else{
     		//simplify this down so maxAngVel is hardcoded in shipFile. Eliminate excess fields!
-    		maxAngVel = angThrust/equipped.mass;
+    		//System.out.println(""+this.angThrust+", "+equipped.mass);
+    		maxAngVel = equipped.turnSpeed;
     	}
     }
     
@@ -202,8 +209,8 @@ public class Pylon {
     
     public boolean AlignTo(double targetAng){
     	//first update the maximum angular speed
-    	UpdateAngVel();
     	double deltaAng = findDeltaAng(targetAng);
+    	
     	
     	selfAngle += deltaAng;
     	double checkAngle = selfAngle - centerAngle;
@@ -219,8 +226,12 @@ public class Pylon {
     }
     
     public double findDeltaAng(double destAngle){
+    	UpdateAngVel();
+    	
     	double deltaAng = (destAngle - selfAngle);
     	double maxDeltaAng = maxAngVel * Global.state.dtt;
+    	
+    	//System.out.println(""+deltaAng+", "+maxDeltaAng);
     	
     	if(deltaAng < -180) deltaAng += 360;
     	if(deltaAng > 180) deltaAng -= 360;
@@ -266,7 +277,11 @@ public class Pylon {
     	P = PO.add(V.multiply(t)); //Vector to the target interception point relative to the source in world pixels.
     	
     	//Convert the firing vector to angle in degrees
-    	return P.toAngle()-source.currAngle;
+    	double returnAngle = P.toAngle()-source.currAngle;
+    	if(returnAngle < -180) returnAngle += 360;
+    	if(returnAngle > 180) returnAngle -= 360;
+    	
+    	return returnAngle;
     }
     
     public double getAngle(GameObj O){//This reutrns an angle relative to the source object's angle.

@@ -16,6 +16,8 @@ public class ItemObj extends Obj{
 	int size; //This corresponds to Pylon.size
 	String type;//This corresponds to Pylon.type
 	
+	double turnSpeed;//Degrees/second
+	
 	int quantity;
 	int maxQuantity=1;
 	

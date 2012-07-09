@@ -63,12 +63,36 @@
 			<path>SpaceRPG\src\WeaponObj.java</path>
 			<source>true</source>
 			<index>4</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 		<docitem>
 			<path>SpaceRPG\src\Pylon.java</path>
 			<source>true</source>
 			<index>5</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\ItemObj.java</path>
+			<source>true</source>
+			<index>6</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\Utils.java</path>
+			<source>true</source>
+			<index>7</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\GameApplet.java</path>
+			<source>true</source>
+			<index>8</index>
+			<active>true</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\GameView.java</path>
+			<source>true</source>
+			<index>9</index>
 			<active>false</active>
 		</docitem>
 	</open_files>

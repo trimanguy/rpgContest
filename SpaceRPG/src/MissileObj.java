@@ -30,7 +30,8 @@ public class MissileObj extends GameObj{
     
     public MissileObj(String image, String killImage, URL spritecontext, GameObj shipObj, GameObj targetObj, 
     	double dmgTS, double dmgThS, double dmgTH, double dmgAP, 
-    	double nx, double ny, double turnRate, double speed, double maxSpeed, double acceleration, double time) {
+    	double nx, double ny, double turnRate, double speed, double maxSpeed, double acceleration, double time,
+    	double nAngle) {
     	
     	super(image, spritecontext);
     	
@@ -40,6 +41,7 @@ public class MissileObj extends GameObj{
     	y = ny;
     	
     	source = shipObj;
+    	currAngle = nAngle;
     	
     	target = targetObj;
     	timeLeft = time;
@@ -56,6 +58,8 @@ public class MissileObj extends GameObj{
     }
     
     public void Init(){
+    	
+    	velocity = Math.max(0,Math.min(maxVelocity, velocity + accel * Global.state.dtt));
     	
     	velX = velocity * Math.cos(currAngle/180*Math.PI);
     	velY = velocity * Math.sin(currAngle/180*Math.PI);
