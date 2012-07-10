@@ -25,6 +25,11 @@ public class GameApplet extends JApplet implements Runnable {
   	public GameState state;
   	public GameView view;
   	
+  	public void paint(Graphics g){
+		Graphics2D graphics = (Graphics2D) g;
+		if(g == null || graphics == null) return;
+		if(view != null) view.Draw(graphics,board);
+  	}
 
 	// Called once when Applet is first opened in browser 	  
 	public void init() {
@@ -60,7 +65,7 @@ public class GameApplet extends JApplet implements Runnable {
 		Global.state = state;
 		
 		// Start the thread, which calls the run() method.
-		//view.thread.start();
+		view.thread.start();
 		thread.start();
 	}
 	
