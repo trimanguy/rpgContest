@@ -15,6 +15,7 @@ import java.awt.Color;
 public class InterfacePylon extends UIElement{
 
 	Pylon pylon;
+	double percent= -1.0;
 
     public InterfacePylon(double nx, double ny, String img, URL imagecontext){
     	super(nx,ny,img,imagecontext);
@@ -55,10 +56,14 @@ public class InterfacePylon extends UIElement{
     	//Compute the color stuff
     	int cr=-32,cg=-32,cb=-32,ca = -64;
     	
-    	double percent=0;
+    	double newPercent = percent;
     	
     	if(pylon!=null){
-    		percent = pylon.realHealth/(pylon.baseHealth + (pylon.equipped!=null? pylon.equipped.baseHealth : 0));
+    		newPercent = pylon.realHealth/(pylon.baseHealth + (pylon.equipped!=null? pylon.equipped.baseHealth : 0));
+    	}
+    	
+    	if(pylon!=null && newPercent != percent){
+    		
     		if(percent != 0) ca = 0;
     		
     		int colorIncrement = 48;
@@ -72,11 +77,12 @@ public class InterfacePylon extends UIElement{
     			cr = (int) (colorIncrement);
     			cg = (int) (percent*2*colorIncrement);
     		}
-    		
     	}
     	
-    	//Call sprite.addColors()
-    	sprite.addColors(cr,cg,cb,ca);
+    	if(newPercent != percent){
+	    	//Call sprite.addColors()
+	    	sprite.addColors(cr,cg,cb,ca);
+    	}
     	
     	
     	//Draw the sprite

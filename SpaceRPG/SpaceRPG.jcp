@@ -32,6 +32,9 @@
 			<folderitem>
 				<path>src</path>
 			</folderitem>
+			<folderitem>
+				<path>src\ImageFiltersLib</path>
+			</folderitem>
 			<fileitem>
 				<path>classes\SpaceRPG.htm</path>
 				<folder>classes</folder>
@@ -76,6 +79,10 @@
 			</fileitem>
 			<fileitem>
 				<path>src\InterfaceButton.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\InterfacePylon.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
@@ -145,6 +152,14 @@
 			<fileitem>
 				<path>src\WeaponObj.java</path>
 				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\ImageFiltersLib\HSBAdjustFilter.java</path>
+				<folder>src\ImageFiltersLib</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\ImageFiltersLib\PointFilter.java</path>
+				<folder>src\ImageFiltersLib</folder>
 			</fileitem>
 		</include>
 	</files>
