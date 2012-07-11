@@ -161,15 +161,15 @@ public class Player implements MouseListener, KeyListener {
     }
     
     private void increaseSpeed(){
-    	double currSpeed = Global.playerObj.velocity;
-    	double maxSpeed = Global.playerObj.maxVelocity;
-    	Global.playerObj.velocity = Math.min(maxSpeed, currSpeed+(maxSpeed/20)); 
+    	double currSpeed = Global.state.playerObj.velocity;
+    	double maxSpeed = Global.state.playerObj.maxVelocity;
+    	Global.state.playerObj.velocity = Math.min(maxSpeed, currSpeed+(maxSpeed/30)); 
     }
     
     private void decreaseSpeed(){
-    	double currSpeed = Global.playerObj.velocity;
-    	double maxSpeed = Global.playerObj.maxVelocity;
-    	Global.playerObj.velocity = Math.max(0, currSpeed-(maxSpeed/20)); 
+    	double currSpeed = Global.state.playerObj.velocity;
+    	double maxSpeed = Global.state.playerObj.maxVelocity;
+    	Global.state.playerObj.velocity = Math.max(0, currSpeed-(maxSpeed/30)); 
     }
     
     //i hate retyping print lines...

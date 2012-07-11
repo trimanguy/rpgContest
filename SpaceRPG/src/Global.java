@@ -15,7 +15,7 @@ public class Global {
 	public static GameState state;
 	public static GameView view;
 	public static Player player;
-	public static ShipObj playerObj;
+
 	
 	public static URL codeContext;
 	
