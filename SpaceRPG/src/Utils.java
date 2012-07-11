@@ -169,12 +169,10 @@ public class Utils {
     
     /*** Used for ship creation ***/
     public static ShipObj createShip(String shipName){
-    	//ShipObj flak1 = (ShipObj)Utils.shipTable.get("flak1");
-    	//new ShipObj(flak1.imageName, Global.codeContext,flak1.velocity,flak1.maxAngVel, flak1.hitCircles);
     	
     	ShipObj template = (ShipObj)Utils.shipTable.get(shipName);
     	ArrayList<HitCircle> copiedHitCircles = new ArrayList(0);
-    	ShipObj newShip = new ShipObj(template.imageName, Global.codeContext, template.velocity, template.maxAngVel, copiedHitCircles);
+    	ShipObj newShip = new ShipObj(template.imageName, Global.codeContext, template.maxVelocity, template.maxAngVel, copiedHitCircles);
     	
     	//copy over each HitCircle from hitCircles to copiedHitCircles
     	for(int x=0; x<(template.hitCircles.size()); x++){

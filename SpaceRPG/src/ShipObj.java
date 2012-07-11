@@ -16,6 +16,7 @@ public class ShipObj extends GameObj {
     String imageName;
     double maxAngVel = 10; // Degrees per second
     double velocity = 0; //Pixels per second
+    double maxVelocity;
     ShipObj aimTarget = null; //ship's target
     
     //both the timer and delay are in seconds.
@@ -30,14 +31,19 @@ public class ShipObj extends GameObj {
     double shieldRear;
     double shieldChargeTimer;
     
+    public double getSpeed(){
+    	return this.velocity;
+    }
+    
     /*** Ship Constructor, puts ship on screen ***/
-    public ShipObj(String image, URL spritecontext, double speed, double maxAngVel, ArrayList<HitCircle> hitboxes) { 
+    public ShipObj(String image, URL spritecontext, double maxSpeed, double maxAngVel, ArrayList<HitCircle> hitboxes) { 
     	if(image != null && spritecontext != null)
     	{
     		sprite = new Sprite(image, spritecontext, true);
 	    	context = spritecontext;
 	    	
-	    	velocity = speed;
+	    	velocity = maxSpeed;
+	    	maxVelocity = maxSpeed;
 	    	this.maxAngVel = maxAngVel;
 	    	hitCircles = hitboxes;
 	    	allShips.add(this);
@@ -46,10 +52,10 @@ public class ShipObj extends GameObj {
     }
     
     /*** Ship Data Constructor, similar to C++ struct ***/
-    public ShipObj(String image, double speed, double maxAngVel, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons){
+    public ShipObj(String image, double maxSpeed, double maxAngVel, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons){
     	//don't need to add to allShips cuz this just template obj
     	imageName = image;
-    	velocity = speed;
+    	maxVelocity = maxSpeed;
     	this.maxAngVel = maxAngVel;
     	hitCircles = hitboxes;
     	pylons = newPylons;	

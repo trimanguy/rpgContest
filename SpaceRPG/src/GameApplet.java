@@ -36,7 +36,7 @@ public class GameApplet extends JApplet implements Runnable {
 		//Applet dimensions
 		int x=1024;
 		int y=768;
-		
+		this.setFocusable( true ); //NOTE: Must let GameApplet allow itself to be focused for keypresses to work 
 		// Set GUI attributes
 		this.setLayout(new FlowLayout());
 		board.setMaximumSize(new Dimension(x,y));
@@ -53,6 +53,7 @@ public class GameApplet extends JApplet implements Runnable {
 		Player p = new Player();
 		addKeyListener(p);
 		addMouseListener(p);
+
 		
 		
 		//Initialize the global variables

@@ -5,6 +5,8 @@
  * Later on, it may be necessary to add a new Character class for character stats and such.
  */
 import java.awt.event.*;
+import java.io.*;
+
 
 
 public class Player implements MouseListener, KeyListener {
@@ -90,6 +92,19 @@ public class Player implements MouseListener, KeyListener {
     }
     
     public void keyPressed(KeyEvent e){
+    	char key = e.getKeyChar();
+    	int modNum = e.getModifiers();
+    	String modifiers = KeyEvent.getKeyModifiersText(modNum);
+    	System.out.print("Key pressed: "+ key +" with mod "+ modifiers +" modNum: "+modNum+ " with effect: ");
+    	switch (key){
+    		case '`':	System.out.println("All Ctrl groups selected"); break;
+    		case '1':	System.out.println("Ctrl Group1 selected"); break;
+    		case '2':	System.out.println("Ctrl Group2 selected"); break;
+    		case '3':	System.out.println("Ctrl Group3 selected"); break;
+    		case '4':	System.out.println("Ctrl Group4 selected"); break;
+    		case 'r':  	increaseSpeed(); System.out.println("Speed increased!"); break;
+    		case 'f':	decreaseSpeed(); System.out.println("Speed decreased!"); break;
+    	}
     	
     }
     
@@ -111,6 +126,7 @@ public class Player implements MouseListener, KeyListener {
     }
     
     private void rightClick(MouseEvent e, Obj clickedObj){
+    	//System.out.println("TEST: "+ Global.playerObj.getSpeed());
     	//make player rotate towards click-location 
     	if (!(clickedObj instanceof UIElement)){	
 			rotateToClick(e);	
@@ -121,7 +137,7 @@ public class Player implements MouseListener, KeyListener {
     }
     
     private void middleClick(MouseEvent e, Obj clickedObj){
-    	
+    	System.out.println("AHHH");
     }
     
     private void rotateToClick(MouseEvent e){
@@ -143,6 +159,19 @@ public class Player implements MouseListener, KeyListener {
     	}
     	return null;	
     }
+    
+    private void increaseSpeed(){
+    	double currSpeed = Global.playerObj.velocity;
+    	double maxSpeed = Global.playerObj.maxVelocity;
+    	Global.playerObj.velocity = Math.min(maxSpeed, currSpeed+(maxSpeed/20)); 
+    }
+    
+    private void decreaseSpeed(){
+    	double currSpeed = Global.playerObj.velocity;
+    	double maxSpeed = Global.playerObj.maxVelocity;
+    	Global.playerObj.velocity = Math.max(0, currSpeed-(maxSpeed/20)); 
+    }
+    
     //i hate retyping print lines...
     //System.out.print("Component is: " + e.getComponent().getClass().getName() + System.getProperty("line.separator"));
 }
