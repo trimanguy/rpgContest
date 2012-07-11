@@ -23,6 +23,8 @@ public class Pylon {
 	 * ArrayList<Point2D> offsets = new(ArrayList(0);
 	*/
 	
+	String interfaceImg;
+	
 	int size; //Module size. Smaller is bigger?
 	String type;//Possible types: "weapon","engine","power","shield","support"
 	

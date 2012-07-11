@@ -43,7 +43,7 @@ public class GameView implements Runnable{
     }
     
     public void initialize(){
-    	buffergraphics = (Graphics2D) buffer.getGraphics();
+    	//buffergraphics = (Graphics2D) buffer.getGraphics();
     	starField = new StarField();
     }
     
@@ -69,6 +69,9 @@ public class GameView implements Runnable{
     		sortLayers();
     	*/	
     	//Initialize and fill the drawing buffer here.
+    	
+    	buffergraphics = (Graphics2D) buffer.getGraphics();
+    	
 		buffergraphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     	buffergraphics.setColor(bgColor);
     	
@@ -127,6 +130,8 @@ public class GameView implements Runnable{
     	
     	//Draw the buffer onto the screen
     	G.drawImage(buffer,0,0,I);
+    	buffergraphics.dispose();
+    	G.dispose();
     }
     
     public boolean checkSortedLayers(){

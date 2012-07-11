@@ -23,6 +23,10 @@ public class UIElement extends Obj {
 	public UIElement parent;
 	public ArrayList<UIElement> children = new ArrayList(0);
 	
+	public UIElement(){
+		
+	}
+	
     public UIElement(double x, double y, String image, URL spritecontext) {
     	if(image != null && spritecontext != null)
     	{
