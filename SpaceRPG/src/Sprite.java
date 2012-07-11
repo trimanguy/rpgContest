@@ -58,7 +58,7 @@ public class Sprite {
 	
 	public void setFrame(int f){
 		if(!hasFrames) {
-			img.flush();
+			if(img != null) img.flush();
 			frameX = source.getWidth();
 			frameY = source.getHeight();
 			
@@ -78,7 +78,7 @@ public class Sprite {
 			gx = (frame-1)*frameX;
 		}
 		//Garbage Collector Sanity shit
-		img.flush();
+		if(img != null) img.flush();
 		img = null;
 		
 		//Set the current image to the new frame

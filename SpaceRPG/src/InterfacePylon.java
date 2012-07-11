@@ -53,7 +53,7 @@ public class InterfacePylon extends UIElement{
     
     public void Draw(Graphics2D g, ImageObserver I){
     	//Compute the color stuff
-    	int cr=-32,cg=-32,cb=-32,ca = -128;
+    	int cr=-32,cg=-32,cb=-32,ca = -64;
     	
     	double percent=0;
     	
