@@ -9,12 +9,6 @@ import java.util.*;
 
 public class UIElement extends Obj {
 	
-	//These are screen coordinates in pixels relative to the top left
-	//public double x=0;
-	//public double y=0;
-	
-	//public double layer = 20;
-	
 	public int mouseOpacity = 2;
 	
 	public Sprite overlay;
@@ -27,7 +21,8 @@ public class UIElement extends Obj {
 		
 	}
 	
-    public UIElement(double x, double y, String image, URL spritecontext) {
+    public UIElement(double x, double y, String image, URL spritecontext, double nlayer) {
+    	layer = nlayer;
     	if(image != null && spritecontext != null)
     	{
     		sprite = new Sprite(image, spritecontext, false);
@@ -37,7 +32,21 @@ public class UIElement extends Obj {
 	    	Global.state.newObjBuffer.add(this);
     	}
     	
+    	
+    	move(x,y);
+    }
+    
+    public UIElement(double x, double y, String image, URL spritecontext) {
     	layer = 20;
+    	if(image != null && spritecontext != null)
+    	{
+    		sprite = new Sprite(image, spritecontext, false);
+	    	context = spritecontext;
+	    	
+	    	//Init();
+	    	Global.state.newObjBuffer.add(this);
+    	}
+    	
     	
     	move(x,y);
     }

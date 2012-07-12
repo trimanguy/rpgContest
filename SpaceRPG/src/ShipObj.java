@@ -12,6 +12,8 @@ import java.net.*;
 
 public class ShipObj extends GameObj {
     static ArrayList<ShipObj> allShips = new ArrayList(0);
+	ArrayList<Pylon> pylons = new ArrayList(0);
+	
     //double destAngle;
     String imageName;
     double maxAngVel = 10; // Degrees per second

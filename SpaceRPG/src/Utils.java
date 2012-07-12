@@ -21,7 +21,7 @@ public class Utils {
 	//ShipFile vars
 	static String tempSpeed;
 	static String tempAngSpeed;
-	static String tempHitBoxes;
+	static String tempHitBoxes="";
 	static String tempPylons="";
 	static ArrayList<Pylon> pylons = new ArrayList(0);
 	static ArrayList<HitCircle> hitboxes = new ArrayList(0);
@@ -119,7 +119,7 @@ public class Utils {
 								double y;
 								double centerAngle;
 								double arcAngle;
-								double pylonAngSpeed;
+								//double pylonAngSpeed;
 								double screenX;
 								double screenY;
 								String pylonImg="";
@@ -128,14 +128,17 @@ public class Utils {
 								y = Double.valueOf(pylon_st.nextToken());
 								centerAngle = Double.valueOf(pylon_st.nextToken());
 								arcAngle = Double.valueOf(pylon_st.nextToken());
-								pylonAngSpeed = Double.valueOf(pylon_st.nextToken());
+								
+								//Pylon angular speed is deprecated
+								//pylonAngSpeed = Double.valueOf(pylon_st.nextToken());
 								screenX = Double.valueOf(pylon_st.nextToken());
 								screenY = Double.valueOf(pylon_st.nextToken());
-								pylonImg = pylon_st.nextToken();
+								if(pylon_st.hasMoreTokens())
+									pylonImg = pylon_st.nextToken();
 								//convert x and y into polar coord
 								double[] polar = cartesianToPolar(x,y); //radius,angle
 								
-								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]+" centerAngle: "+centerAngle+" arcAngle: "+arcAngle+" angSpeed: "+pylonAngSpeed
+								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]+" centerAngle: "+centerAngle+" arcAngle: "+arcAngle
 									+" screenX: "+screenX+" screenY: "+screenY+" pylonImg: "+pylonImg);
 								
 								Pylon pl = new Pylon(null, polar[0],polar[1],centerAngle, arcAngle, screenX, screenY, pylonImg);

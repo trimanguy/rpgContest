@@ -23,8 +23,6 @@ public class Pylon {
 	 * ArrayList<Point2D> offsets = new(ArrayList(0);
 	*/
 	
-	String interfaceImg;
-	
 	int size; //Module size. Smaller is bigger?
 	String type;//Possible types: "weapon","engine","power","shield","support"
 	
@@ -52,6 +50,7 @@ public class Pylon {
 	double screenX; 
 	double screenY;
 	String gui; //For gui
+	
 	//Polar coordinates relative to the ship in world coordinates. 
 	//Makes it convenient to concatenate ship rotation.
 	double polarRadius; //This is in pixels
@@ -70,10 +69,10 @@ public class Pylon {
 
     public Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double screenX, double screenY, String image) {
     	//for testing purposes
-    	baseHealth = 1;
+    	baseHealth = 100;
     	type = "Weapon";
     	int size = 9999;
-    	realHealth = 1;
+    	realHealth = 100;
     	//WeaponObj testGun = new WeaponObj("Resources/Sprites/PlasmaSmall.png", "Resources/Sprites/explode_2.png", 10 , 300.0, 30000.0, 0.0, 2.0, 180); //fake guns for testing
     	//public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread) {
     	//this.equipped = (ItemObj)testGun; 
@@ -110,6 +109,9 @@ public class Pylon {
     
     public void Step(){//This should be called by the ShipObj during ShipObj.Step()
     	
+    	realHealth = baseHealth/2*(Math.sin(Global.state.time/10)+1);
+    	System.out.println(realHealth);
+    	
     	if(equipped == null) return; //There is no equipped module!
     	
     	if(!equipped.canActivate) return; //Equipped is a passive module
@@ -122,6 +124,7 @@ public class Pylon {
     	activateTimer = Global.state.time+equipped.activateDelay;
     	
     	updateCurrentAngle();
+    	
     	
     	if(activated){
 	    	if(type.compareTo("Weapon")==0){//Since "string"=="string" is weird...
@@ -194,12 +197,12 @@ public class Pylon {
     
     public void UpdateAngVel(){ 
     	//This is used to compute the maximum angular velocity based upon equipped itemObj
-    	if(equipped == null){
-    		maxAngVel = 180;
-    	}else{
+    	maxAngVel = 180;
+    	if(type.compareTo("Weapon")==0 && equipped != null){
     		//simplify this down so maxAngVel is hardcoded in shipFile. Eliminate excess fields!
     		//System.out.println(""+this.angThrust+", "+equipped.mass);
-    		maxAngVel = equipped.turnSpeed;
+    		WeaponObj weapon = (WeaponObj) equipped;
+    		maxAngVel = weapon.turnSpeed;
     	}
     }
     

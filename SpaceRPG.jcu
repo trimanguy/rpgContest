@@ -13,6 +13,18 @@
 				<dir>classes</dir>
 			</folderitem>
 			<folderitem>
+				<path>SpaceRPG\classes\com</path>
+				<dir>classes\com</dir>
+			</folderitem>
+			<folderitem>
+				<path>SpaceRPG\classes\com\jhlabs</path>
+				<dir>classes\com\jhlabs</dir>
+			</folderitem>
+			<folderitem>
+				<path>SpaceRPG\classes\com\jhlabs\image</path>
+				<dir>classes\com\jhlabs\image</dir>
+			</folderitem>
+			<folderitem>
 				<path>SpaceRPG\classes\Data</path>
 				<dir>classes\Data</dir>
 			</folderitem>
@@ -32,79 +44,29 @@
 				<path>SpaceRPG\src</path>
 				<dir>src</dir>
 			</folderitem>
+			<folderitem>
+				<path>SpaceRPG\src\ImageFiltersLib</path>
+				<dir>src\ImageFiltersLib</dir>
+			</folderitem>
 		</project>
 	</projects>
 	<open_files>
 		<docitem>
-			<path>SpaceRPG\src\InterfacePylon.java</path>
-			<source>true</source>
+			<path>..\..\..\..\..\Windows\system32\about:blank</path>
+			<source>false</source>
 			<index>0</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\UIElement.java</path>
+			<path>SpaceRPG\src\InterfaceManager.java</path>
 			<source>true</source>
 			<index>1</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\NavPointerObj.java</path>
-			<source>true</source>
-			<index>2</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\Sprite.java</path>
-			<source>true</source>
-			<index>3</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\PointS.java</path>
-			<source>true</source>
-			<index>4</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\Obj.java</path>
-			<source>true</source>
-			<index>5</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\Pylon.java</path>
-			<source>true</source>
-			<index>6</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\Utils.java</path>
-			<source>true</source>
-			<index>7</index>
 			<active>true</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\WeaponObj.java</path>
+			<path>SpaceRPG\src\ActiveInterface.java</path>
 			<source>true</source>
-			<index>8</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\ShipObj.java</path>
-			<source>true</source>
-			<index>9</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\ItemObj.java</path>
-			<source>true</source>
-			<index>10</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
-			<path>SpaceRPG\src\MissileObj.java</path>
-			<source>true</source>
-			<index>11</index>
+			<index>2</index>
 			<active>false</active>
 		</docitem>
 	</open_files>

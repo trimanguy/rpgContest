@@ -17,7 +17,8 @@ public class InterfacePylon extends UIElement{
 	Pylon pylon;
 	double percent= -1.0;
 	double updateTimer;
-
+	double offX,offY;
+	
     public InterfacePylon(double nx, double ny, String img, URL imagecontext){
     	super(nx,ny,img,imagecontext);
     }
@@ -28,20 +29,17 @@ public class InterfacePylon extends UIElement{
     	pylon = P;
     	
     	//Grab the pylon GUI image
-    	String image = P.interfaceImg;
+    	String image = P.gui;
     	URL spritecontext = Global.codeContext;
     	
     	//Set the graphic coordinates
-    	double nx = P.screenX + cornerX, ny = P.screenY + cornerY;
+    	offX = P.screenX; offY = P.screenY;
     	
     	//initialize other attributes
     	mouseOpacity = 0;
     	
     	layer = 25;
     	
-    	x = nx; y = ny;
-    	
-    	move(nx,ny);
     	
     	if(image != null && spritecontext != null)
     	{
@@ -51,6 +49,8 @@ public class InterfacePylon extends UIElement{
 	    	//Init();
 	    	Global.state.newObjBuffer.add(this);
     	}
+    	move(cornerX,cornerY);
+    	transform();
     }
     
     public void Draw(Graphics2D g, ImageObserver I){
@@ -63,28 +63,28 @@ public class InterfacePylon extends UIElement{
     		newPercent = pylon.realHealth/(pylon.baseHealth + (pylon.equipped!=null? pylon.equipped.baseHealth : 0));
     	}
     	
-    	if(pylon!=null && newPercent != percent){
+    	if(pylon!=null && newPercent != percent && newPercent > 0){
+    		int colorIncrement = 64;
     		
-    		if(percent != 0) ca = 0;
-    		
-    		int colorIncrement = 48;
-    		
-    		cb = 0;
-    		if(percent > 0.5) {
-    			cr = (int) ((1-percent)*2*colorIncrement);
+    		ca = 0;
+    		cb = -32;
+    		if(percent >= 0.5) {
+    			cr = (int) ((1-newPercent)*2*colorIncrement);
     			cg = (int) (colorIncrement);
     		}
     		else {
     			cr = (int) (colorIncrement);
-    			cg = (int) (percent*2*colorIncrement);
+    			cg = (int) (newPercent*2*colorIncrement);
     		}
     	}
     	
     	if(newPercent != percent && Global.state.time >= updateTimer){
 	    	//Call sprite.addColors()
+	    	
 	    	sprite.addColors(cr,cg,cb,ca);
-	    	updateTimer = Global.state.time + 0.5;
+	    	updateTimer = Global.state.time +  1;
     	}
+    	percent = newPercent;
     	
     	
     	//Draw the sprite
@@ -93,20 +93,22 @@ public class InterfacePylon extends UIElement{
     	//Draw the pylon pointer
     	if(pylon!=null && percent > 0){
     		double dx,dy;
-    		dx = x+sprite.frameX/2;
-    		dy = y+sprite.frameY/2;
+    		dx = x+sprite.frameX/2 + offX;
+    		dy = y+sprite.frameY/2 + offY;
     		
     		//This will be the center of whereever the thing is drawn.
     		
-    		int radius = 4;
+    		int radius = 8;
     		
     		g.setColor(Color.yellow);
     		g.drawOval((int) (dx-radius), (int) (dy-radius), radius*2, radius*2);
-    		if(pylon.type.compareTo("Weapon")==0){
-    			double fx = dx+radius*2*Math.cos(Math.toRadians(pylon.currAngle));
-    			double fy = dy+radius*2*Math.sin(Math.toRadians(pylon.currAngle));
-    			g.drawLine((int) dx, (int) dy, (int) fx, (int) fy);
-    		}
+    		g.drawOval((int) (dx-radius), (int) (dy-radius), radius*2, radius*2);
+    		//if(pylon.type.compareTo("Weapon")==0){
+			double fx = dx+radius*2*Math.cos(Math.toRadians(pylon.currAngle));
+			double fy = dy+radius*2*Math.sin(Math.toRadians(pylon.currAngle));
+			g.drawLine((int) dx, (int) dy, (int) fx, (int) fy);
+			g.drawLine((int) dx, (int) dy, (int) fx, (int) fy);
+    		//}
     		
     	}
     	

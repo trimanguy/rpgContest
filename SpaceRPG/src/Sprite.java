@@ -57,12 +57,14 @@ public class Sprite {
 	}
 	
 	public void setFrame(int f){
-		if(!hasFrames) {
+		if(hasFrames==false) {
 			if(img != null) img.flush();
+			
 			frameX = source.getWidth();
 			frameY = source.getHeight();
 			
-			img = source.getSubimage(0,0,frameX,frameY);
+			img = deepCopy(source.getSubimage(0, 0, frameX, frameY));
+			
 			return;
 		}
 		if(frame == f) return;
@@ -82,7 +84,7 @@ public class Sprite {
 		img = null;
 		
 		//Set the current image to the new frame
-		img = source.getSubimage(gx, gy, frameX, frameY);
+		img = (source.getSubimage(gx, gy, frameX, frameY));
 		
 	}
 	
@@ -103,21 +105,20 @@ public class Sprite {
 		graphic.drawImage(img, transform, loc);
 	}
 	
-	public void addColors(int r, int g, int b, int a){
-		img.flush();
+	public void addColors(int r, int g, int b, int a){		
+		setFrame(frame);
 		
-		int nf = frame;
-		frame = -1;
-		setFrame(nf);
-		for(int x=0;x<=frameX;x++){
-			for(int y=0;y<=frameY;y++){
+		for(int x=0;x<frameX;x++){
+			for(int y=0;y<frameY;y++){
 				
 				int cr, cg, cb, ca;
 				int color = img.getRGB(x,y);
 				
-				cr = r + ((color) & 0xFF);
+				if(((color  >> 24) & 0xFF) == 0) continue;
+				
+				cb = b + ((color) & 0xFF);
 				cg = g + ((color  >> 8) & 0xFF);
-				cb = b + ((color  >> 16) & 0xFF);
+				cr = r + ((color  >> 16) & 0xFF);
 				ca = a + ((color  >> 24) & 0xFF);
 				
 				cr = Math.max(0,Math.min(255,cr));
@@ -126,11 +127,18 @@ public class Sprite {
 				ca = Math.max(0,Math.min(255,ca));
 				
 				color = 0;
-				color = (cr) | (cg << 8) | (cb << 16) | (ca << 24);
+				color = (cb) | (cg << 8) | (cr << 16) | (ca << 24);
 				
 				img.setRGB(x,y,color);
 			}
 			
 		}
+	}
+	
+	static BufferedImage deepCopy(BufferedImage bi) {
+		ColorModel cm = bi.getColorModel();
+		boolean isAlphaPremultiplied = cm.isAlphaPremultiplied();
+		WritableRaster raster = bi.copyData(null);
+		return new BufferedImage(cm, raster, isAlphaPremultiplied, null);
 	}
 }

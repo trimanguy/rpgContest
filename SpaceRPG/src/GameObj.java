@@ -20,7 +20,6 @@ public class GameObj extends Obj {
 	//public double y=0;
 	
 	ArrayList<HitCircle> hitCircles = new ArrayList(0);
-	ArrayList<Pylon> pylons = new ArrayList(0);
 	
 	public boolean density = true;//Set to false if this object cannot collide
 	public boolean passThroughTag; //Objects with the same passThroughTag will never register hits with eachother

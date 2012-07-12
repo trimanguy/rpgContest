@@ -110,6 +110,7 @@ public class GameView implements Runnable{
     	buffergraphics.drawString("Objects drawn: "+drawObjects.size(), 5, 10);
     	
     	
+    	
     	//Compute and display the current framerate
 	    long currentTime = System.currentTimeMillis();
 	    if (currentTime > nextSecond) {

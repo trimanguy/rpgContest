@@ -41,7 +41,7 @@ public class GameState {
     	Utils.createShip("flak1");
     	Utils.createShip("escort1");
     	Global.state.playerObj = Utils.createShip("escort1");
-    	new ActiveInterface ();
+    	Global.GUI = new ActiveInterface ();
     }
     
     public void Tick(){

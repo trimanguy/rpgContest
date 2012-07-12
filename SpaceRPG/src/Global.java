@@ -15,6 +15,7 @@ public class Global {
 	public static GameState state;
 	public static GameView view;
 	public static Player player;
+	public static InterfaceManager GUI;
 
 	
 	public static URL codeContext;
