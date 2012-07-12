@@ -163,6 +163,10 @@ public class ShipObj extends GameObj {
     	//this.fireOn( this.findTarget() , 250, 0);
     	this.fireOn(this.findTarget());
     	
+    	//Process power generation
+    	
+    	//Process shield actions
+    	
     	//Pylon actions
     	
     	for(int x=0;x<this.pylons.size();x++){

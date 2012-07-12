@@ -1,5 +1,6 @@
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\ActiveInterface.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\AnimatedParticle.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\EngineObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\EquipObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameApplet.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameObj.java
@@ -17,7 +18,9 @@ C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\NavPointerObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Obj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Player.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\PointS.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\PowerCoreObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Pylon.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\ShieldObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\ShipObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Sprite.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\StackableObj.java

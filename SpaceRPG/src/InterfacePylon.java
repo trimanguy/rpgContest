@@ -16,6 +16,7 @@ public class InterfacePylon extends UIElement{
 
 	Pylon pylon;
 	double percent= -1.0;
+	double updateTimer;
 
     public InterfacePylon(double nx, double ny, String img, URL imagecontext){
     	super(nx,ny,img,imagecontext);
@@ -79,9 +80,10 @@ public class InterfacePylon extends UIElement{
     		}
     	}
     	
-    	if(newPercent != percent){
+    	if(newPercent != percent && Global.state.time >= updateTimer){
 	    	//Call sprite.addColors()
 	    	sprite.addColors(cr,cg,cb,ca);
+	    	updateTimer = Global.state.time + 0.5;
     	}
     	
     	
