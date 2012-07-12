@@ -32,10 +32,6 @@
 				<path>SpaceRPG\src</path>
 				<dir>src</dir>
 			</folderitem>
-			<folderitem>
-				<path>SpaceRPG\src\ImageFiltersLib</path>
-				<dir>src\ImageFiltersLib</dir>
-			</folderitem>
 		</project>
 	</projects>
 	<open_files>
@@ -85,7 +81,7 @@
 			<path>SpaceRPG\src\Utils.java</path>
 			<source>true</source>
 			<index>7</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
 			<path>SpaceRPG\src\ShipObj.java</path>
@@ -94,16 +90,22 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\ImageFiltersLib\HSBAdjustFilter.java</path>
+			<path>SpaceRPG\src\ItemObj.java</path>
 			<source>true</source>
 			<index>9</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\ImageFiltersLib\PointFilter.java</path>
+			<path>SpaceRPG\src\WeaponObj.java</path>
 			<source>true</source>
 			<index>10</index>
-			<active>true</active>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\MissileObj.java</path>
+			<source>true</source>
+			<index>11</index>
+			<active>false</active>
 		</docitem>
 	</open_files>
 	<breakpoints>

@@ -16,15 +16,16 @@ public class ItemObj extends Obj{
 	int size; //This corresponds to Pylon.size
 	String type;//This corresponds to Pylon.type
 	
-	double turnSpeed;//Degrees/second
+	
 	
 	int quantity;
 	int maxQuantity=1;
 	
 	double baseHealth;
+	double armor;
 	
 	double activateDelay;
-	boolean canActivate = true; //da fuck is this??
+	boolean canActivate; //da fuck is this??
 	
     public ItemObj() {
     	

@@ -1,0 +1,15 @@
+#Sample WeaponFile
+#
+#WEAPON_NAME name
+#WEAPON_MODEL image //might be used in future for hangar screen
+#MISSILE whenTravelling,whenHit,lifeTime,maxSpeed,accel,missileTurnSpeed 
+#ACCURACY angleSpread
+#DAMAGE toShield,shieldPierce,toHull,hullPierce
+#TURNSPEED
+#HEALTH
+#ARMOR
+#DELAY
+#MASS weight
+#DESCRIP txt-description
+#ACTIVATEABLE (only if you can activate item; default=false)
+#END

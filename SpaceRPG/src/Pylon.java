@@ -51,7 +51,7 @@ public class Pylon {
 	//This should be relative to the top left corner of the displayed sprite...
 	double screenX; 
 	double screenY;
-	
+	String gui; //For gui
 	//Polar coordinates relative to the ship in world coordinates. 
 	//Makes it convenient to concatenate ship rotation.
 	double polarRadius; //This is in pixels
@@ -63,21 +63,28 @@ public class Pylon {
 	
 	//Flat armor!
 	double flatArmor;
+	
+	
 
-    public Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle) {
+	
+
+    public Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double screenX, double screenY, String image) {
     	//for testing purposes
     	baseHealth = 1;
     	type = "Weapon";
     	int size = 9999;
     	realHealth = 1;
-    	WeaponObj testGun = new WeaponObj("Resources/Sprites/PlasmaSmall.png", "Resources/Sprites/explode_2.png", 10 , 300.0, 30000.0, 0.0, 2.0, 180); //fake guns for testing
+    	//WeaponObj testGun = new WeaponObj("Resources/Sprites/PlasmaSmall.png", "Resources/Sprites/explode_2.png", 10 , 300.0, 30000.0, 0.0, 2.0, 180); //fake guns for testing
     	//public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread) {
-    	this.equipped = (ItemObj)testGun; 
+    	//this.equipped = (ItemObj)testGun; 
     	//
     	this.polarRadius = radius;
     	this.polarAngle = angle;
     	this.centerAngle = centerAngle;
     	this.arcAngle = arcAngle;
+    	this.screenX=screenX;
+    	this.screenY=screenY;
+    	this.gui=image;
     	//this.angThrust = angSpeed;
     	
     	this.selfAngle = centerAngle;
