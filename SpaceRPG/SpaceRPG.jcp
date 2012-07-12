@@ -47,6 +47,10 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\EngineObj.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\EquipObj.java</path>
 				<folder>src</folder>
 			</fileitem>
@@ -115,7 +119,15 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\PowerCoreObj.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\Pylon.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\ShieldObj.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>

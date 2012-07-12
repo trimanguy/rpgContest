@@ -69,7 +69,7 @@ public class Utils {
 	    					case "SHIP_MODEL":	image = st.nextToken(); break;
 	    					case "SPEED":		tempSpeed = st.nextToken(); break;
 	    					case "ANG_SPEED":	tempAngSpeed = st.nextToken(); break;
-	    					case "HITBOXES":	tempHitBoxes = st.nextToken(); break;
+	    					case "HITBOXES":	tempHitBoxes += st.nextToken(); break;
 	    					case "PYLONS":		tempPylons += st.nextToken(); break;
 	    					case "END":			saveFlag = true; break;
 	    				}	
