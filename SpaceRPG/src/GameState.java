@@ -46,7 +46,7 @@ public class GameState {
     	Global.state.playerObj = Utils.createShip("escort1");
     	Global.GUI = new ActiveInterface ();
     	for(Pylon P:Global.state.playerObj.pylons){
-    		P.equipItem(Utils.createWeapon("test1"));
+    		P.equipItem(Utils.createWeapon("testMissile"));
     	}
     }
     

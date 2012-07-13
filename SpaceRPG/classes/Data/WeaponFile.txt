@@ -26,3 +26,16 @@ DELAY 0.5
 MASS 1
 DESCRIP testweapon
 END
+
+WEAPON_NAME testMissile
+WEAPON_MODEL none
+MISSILE Resources/Sprites/RedMissile1.png,Resources/Sprites/explode_3.png,20,600,250,90
+ACCURACY 10
+DAMAGE 0,0,0,1
+TURNSPEED 0
+HEALTH 1
+ARMOR 1
+DELAY 1
+MASS 1
+DESCRIP testMissile
+END
