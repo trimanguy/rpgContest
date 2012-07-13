@@ -72,6 +72,7 @@ public class WeaponObj extends ItemObj{
     	if(turnSpeed != 0){
     		missileHoming = true;
     	}
+    	type = "Weapon";
 		   	
     	
     	

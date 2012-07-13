@@ -94,7 +94,7 @@ public class InterfacePylon extends UIElement{
     	if(pylon!=null && percent > 0){
     		double dx,dy;
     		dx = x+sprite.frameX/2 + offX;
-    		dy = y+sprite.frameY/2 + offY;
+    		dy = y+sprite.frameY/2 - offY;
     		
     		//This will be the center of whereever the thing is drawn.
     		
@@ -104,8 +104,8 @@ public class InterfacePylon extends UIElement{
     		g.drawOval((int) (dx-radius), (int) (dy-radius), radius*2, radius*2);
     		g.drawOval((int) (dx-radius), (int) (dy-radius), radius*2, radius*2);
     		//if(pylon.type.compareTo("Weapon")==0){
-			double fx = dx+radius*2*Math.cos(Math.toRadians(pylon.currAngle));
-			double fy = dy+radius*2*Math.sin(Math.toRadians(pylon.currAngle));
+			double fx = dx+radius*2*Math.cos(Math.toRadians(pylon.selfAngle));
+			double fy = dy-radius*2*Math.sin(Math.toRadians(pylon.selfAngle));
 			g.drawLine((int) dx, (int) dy, (int) fx, (int) fy);
 			g.drawLine((int) dx, (int) dy, (int) fx, (int) fy);
     		//}

@@ -99,10 +99,12 @@ public class Pylon {
     }
     
     public boolean canEquip(ItemObj O){
+    	if(type==null) return true;
     	return (O.type.compareTo(type)==0 && O.size >= size);
     }
     
     public void equipItem(ItemObj item){
+    	if(!canEquip(item)) return;
     	this.equipped = item;
     	this.realHealth = baseHealth + item.baseHealth; 
     }
@@ -110,7 +112,7 @@ public class Pylon {
     public void Step(){//This should be called by the ShipObj during ShipObj.Step()
     	
     	realHealth = baseHealth/2*(Math.sin(Global.state.time/10)+1);
-    	System.out.println(realHealth);
+    	//System.out.println(realHealth);
     	
     	if(equipped == null) return; //There is no equipped module!
     	
@@ -158,7 +160,7 @@ public class Pylon {
 	    			AlignTo(targetAng);
 	    			
 	    			
-	    			System.out.println(""+targetAng+", "+selfAngle+": "+(targetAng-selfAngle));
+	    			//System.out.println(""+targetAng+", "+selfAngle+": "+(targetAng-selfAngle));
 	    			
 	    			if(Math.abs(targetAng-selfAngle)<=weapon.angleSpread){
 	    				//fire
@@ -223,9 +225,13 @@ public class Pylon {
     	//first update the maximum angular speed
     	double deltaAng = findDeltaAng(targetAng);
     	
+    	//System.out.println("DELTA ANG: "+(targetAng-selfAngle)+", "+deltaAng+", "+centerAngle+": "+selfAngle);
     	
     	selfAngle += deltaAng;
     	double checkAngle = selfAngle - centerAngle;
+    	if(checkAngle < -180) checkAngle += 360;
+    	if(checkAngle >= 180) checkAngle -= 360;
+    	
     	if(checkAngle < -arcAngle) selfAngle = centerAngle - arcAngle;
     	if(checkAngle > arcAngle) selfAngle = centerAngle + arcAngle;
     	
@@ -243,10 +249,10 @@ public class Pylon {
     	double deltaAng = (destAngle - selfAngle);
     	double maxDeltaAng = maxAngVel * Global.state.dtt;
     	
-    	//System.out.println(""+deltaAng+", "+maxDeltaAng);
     	
     	if(deltaAng < -180) deltaAng += 360;
-    	if(deltaAng > 180) deltaAng -= 360;
+    	if(deltaAng >= 180) deltaAng -= 360;
+    	
     	deltaAng = Math.min(maxDeltaAng,Math.max(-maxDeltaAng,deltaAng));
     	return deltaAng;
     }
@@ -256,10 +262,12 @@ public class Pylon {
     	
     	if( (target==null)||(target==source) ) return currAngle; //Ship can't fire on itself
     	
+    	PointS point = getCoords();
+    	
     	//Compute the firing vector
     	double a,b,c,d,distance,t0,t1,t;
     	Vector2D V = new Vector2D(target.velX,target.velY);
-    	Vector2D PO = new Vector2D(target.x-source.x,target.y-source.y);
+    	Vector2D PO = new Vector2D(target.x-point.x,target.y-point.y);
     	Vector2D P = null;
     	
     	distance = PO.length;
@@ -288,10 +296,14 @@ public class Pylon {
     	
     	P = PO.add(V.multiply(t)); //Vector to the target interception point relative to the source in world pixels.
     	
+    	
+    	
     	//Convert the firing vector to angle in degrees
     	double returnAngle = P.toAngle()-source.currAngle;
     	if(returnAngle < -180) returnAngle += 360;
     	if(returnAngle > 180) returnAngle -= 360;
+    	
+    	//System.out.println(returnAngle);
     	
     	return returnAngle;
     }
@@ -299,17 +311,15 @@ public class Pylon {
     public double getAngle(GameObj O){//This reutrns an angle relative to the source object's angle.
     	if(source == null || O == null) return 0;
     	
-    	double sx = source.x, sy = source.y;
+    	double sx, sy;
     	PointS P = getCoords();
-    	sx += P.x; sy += P.y;
-    	
-    	sx = O.x-sx;
-    	sy = O.y-sy;
+    	sx = O.x - P.x; sy = O.y - P.y;
     	
     	double angle = Math.atan2(sy,sx);
-    	if(angle < 0) angle += 360;
-    	if(angle >=360) angle -= 360;
     	angle -= source.currAngle;
+    	
+    	while(angle < 0) angle += 360;
+    	while(angle >=360) angle -= 360;
     	
     	return angle;
     }

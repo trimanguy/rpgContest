@@ -38,10 +38,16 @@ public class GameState {
     	File shipFile = new File("Data/ShipFile.txt");
     	Utils.parseShipFile(shipFile);
     	
+    	File weaponFile = new File("Data/WeaponFile.txt");
+    	Utils.parseWeaponFile(weaponFile);
+    	
     	Utils.createShip("flak1");
     	Utils.createShip("escort1");
     	Global.state.playerObj = Utils.createShip("escort1");
     	Global.GUI = new ActiveInterface ();
+    	for(Pylon P:Global.state.playerObj.pylons){
+    		P.equipItem(Utils.createWeapon("test1"));
+    	}
     }
     
     public void Tick(){

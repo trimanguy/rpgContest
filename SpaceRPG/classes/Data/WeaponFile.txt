@@ -13,3 +13,16 @@
 #DESCRIP txt-description
 #ACTIVATEABLE (only if you can activate item; default=false)
 #END
+
+WEAPON_NAME test1
+WEAPON_MODEL none
+MISSILE Resources/Sprites/PlasmaSmall.png,Resources/Sprites/explode_2.png,20,300,3000,0
+ACCURACY 5
+DAMAGE 0,0,0,1
+TURNSPEED 1200
+HEALTH 1
+ARMOR 1
+DELAY 0.5
+MASS 1
+DESCRIP testweapon
+END

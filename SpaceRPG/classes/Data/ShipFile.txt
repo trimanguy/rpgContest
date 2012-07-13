@@ -23,7 +23,7 @@ SPEED 75
 ANG_SPEED 45
 HITBOXES (0,0,25)
 PYLONS (30,0,0,60,127,0,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS (0,10,90,60,44,-25,Resources/Sprites/Escort1-Pylon2.png)
-PYLONS (0,-10,270,60,44,25,Resources/Sprites/Escort1-Pylon3.png)
-PYLONS (0,0,0,135,0,0,Resources/Sprites/Escort1-Pylon4.png)
+PYLONS (15,10,67.5,75,44,25,Resources/Sprites/Escort1-Pylon2.png)
+PYLONS (15,-10,-67.5,75,44,-25,Resources/Sprites/Escort1-Pylon3.png)
+PYLONS (0,0,0,150,0,0,Resources/Sprites/Escort1-Pylon4.png)
 END
