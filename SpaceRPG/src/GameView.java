@@ -17,6 +17,7 @@ public class GameView implements Runnable{
 	static Color bgColor = Color.black;
 	
 	ArrayList <Obj> drawObjects = new ArrayList(0);
+	boolean drawObjectsLock = false;
 	
 	long nextSecond = System.currentTimeMillis() + 1000;
 	int framesInLastSecond = 0;
@@ -88,7 +89,7 @@ public class GameView implements Runnable{
     	}
     	
     	
-    	
+    	drawObjectsLock = true;
     	//Draw active objects here. Things like ships, particles, asteroids, projectiles, etc...
     	for(int i=0;i<drawObjects.size();i++){
     		Obj O = (Obj) drawObjects.get(i);
@@ -102,6 +103,7 @@ public class GameView implements Runnable{
     		 	,5, sizey-10-(i*15));
     		*/
     	}
+    	drawObjectsLock = false;
     	
     	
     	
@@ -149,6 +151,7 @@ public class GameView implements Runnable{
     
     public void addDrawObject(Obj A){
     	if(drawObjects.contains(A)) return;
+    	if(drawObjectsLock) return;
     	
     	int start = 0;
     	int end = drawObjects.size()-1;
@@ -171,6 +174,7 @@ public class GameView implements Runnable{
     }
     
     public void removeDrawObject(Obj A){
+    	if(drawObjectsLock) return;
     	drawObjects.remove(A);
     }
 }

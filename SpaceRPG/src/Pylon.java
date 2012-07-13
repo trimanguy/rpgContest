@@ -162,7 +162,7 @@ public class Pylon {
 	    			
 	    			//System.out.println(""+targetAng+", "+selfAngle+": "+(targetAng-selfAngle));
 	    			
-	    			if(Math.abs(targetAng-selfAngle)<=weapon.angleSpread || (maxAngVel == 0&&weapon.missileHoming)){
+	    			if(Math.abs(targetAng-selfAngle)<=weapon.angleSpread || (weapon.missileHoming)){
 	    				//fire
 	    				weapon.Fire(nx,ny,currAngle, source, target);
 	    			}

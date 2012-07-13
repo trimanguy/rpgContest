@@ -41,13 +41,26 @@ public class GameState {
     	File weaponFile = new File("Data/WeaponFile.txt");
     	Utils.parseWeaponFile(weaponFile);
     	
-    	Utils.createShip("flak1");
-    	Utils.createShip("escort1");
     	Global.state.playerObj = Utils.createShip("escort1");
     	Global.GUI = new ActiveInterface ();
     	for(Pylon P:Global.state.playerObj.pylons){
     		P.equipItem(Utils.createWeapon("testMissile"));
     	}
+    	
+    	ShipObj ship1 = Utils.createShip("flak1");
+        ship1.aimTarget=Global.state.playerObj;
+        
+        for(Pylon P:ship1.pylons){
+        	P.equipItem(Utils.createWeapon("test1"));
+        }
+        ShipObj ship2 = Utils.createShip("escort1");
+        
+        ship2.aimTarget=Global.state.playerObj;
+        
+        for(Pylon P:ship2.pylons){
+        	P.equipItem(Utils.createWeapon("test1"));
+        }
+        ship2.velocity = 65;
     }
     
     public void Tick(){
@@ -64,6 +77,8 @@ public class GameState {
     		O.Step();
     		if(O.CameraCanSee()){
     			Global.view.addDrawObject(O);
+    		}else{
+    			Global.view.removeDrawObject(O);
     		}
     	}
     	
