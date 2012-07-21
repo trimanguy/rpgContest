@@ -144,7 +144,7 @@ public class ShipObj extends GameObj {
     	for(int x = 0; x<pylons.size(); x++){
     		Pylon currPylon = pylons.get(x);
     		if (currPylon.type == "Weapon"){
-    			currPylon.target = target;
+    			currPylon.setTarget = target;
     		}
     	}
     }

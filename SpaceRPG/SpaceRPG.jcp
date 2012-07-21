@@ -32,9 +32,6 @@
 			<folderitem>
 				<path>src</path>
 			</folderitem>
-			<folderitem>
-				<path>src\ImageFiltersLib</path>
-			</folderitem>
 			<fileitem>
 				<path>classes\SpaceRPG.htm</path>
 				<folder>classes</folder>

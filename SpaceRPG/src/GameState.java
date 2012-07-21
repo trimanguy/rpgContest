@@ -44,21 +44,21 @@ public class GameState {
     	Global.state.playerObj = Utils.createShip("escort1");
     	Global.GUI = new ActiveInterface ();
     	for(Pylon P:Global.state.playerObj.pylons){
-    		P.equipItem(Utils.createWeapon("testMissile"));
+    		P.equipItem(Utils.createWeapon("testBlaster"));
     	}
     	
     	ShipObj ship1 = Utils.createShip("flak1");
         ship1.aimTarget=Global.state.playerObj;
         
         for(Pylon P:ship1.pylons){
-        	P.equipItem(Utils.createWeapon("test1"));
+        	P.equipItem(Utils.createWeapon("testBlaster"));
         }
         ShipObj ship2 = Utils.createShip("escort1");
         
         ship2.aimTarget=Global.state.playerObj;
         
         for(Pylon P:ship2.pylons){
-        	P.equipItem(Utils.createWeapon("test1"));
+        	P.equipItem(Utils.createWeapon("testBlaster"));
         }
         ship2.velocity = 65;
     }

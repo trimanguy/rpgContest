@@ -10,7 +10,8 @@ public class Pylon {
 
 	ShipObj source;
 	
-	GameObj target; //if it's appropriate. you know.
+	GameObj setTarget; //player-set target
+	GameObj autoTarget; //default target if no player-set target available
 	
 	ItemObj equipped;
 	
@@ -136,40 +137,22 @@ public class Pylon {
 	    		//First check if this weapon can fire based upon the context (ship power and ammunition)
 	    		if(!weapon.canFire()) return;
 	    		
-	    		//figure out where the missile's origin is
-				PointS P = getCoords();
-				double nx = P.x;
-				double ny = P.y;
-	    		
-	    		if(target == null){
-	    			//fire the weapon regardless of target and pylon orientation? commented out for now
-	    			//	weapon.Fire(nx,ny,currAngle, source, null);
+	    		if((setTarget!=null)&&(this.canFireOn(setTarget))){
+	    			//There is a player-set target and we can fire on it
+	    			this.shootAt(setTarget);
 	    		}else{
-	    			//pewpew test
-	    			//System.out.println("FIRE!!");
-	    			//Align the weapon towards target and if the pylon pointing at target, fire.
-	    			double targetAng=0;
-	    			if(weapon.missileHoming){
-	    				targetAng = getAngle(target);
+	    			//Check if we can fire on current autoTarget
+	    			if((autoTarget!=null)&&(this.canFireOn(autoTarget))){
+	    				this.shootAt(autoTarget);
+	    			}else{
+	    				this.autoTarget=null;
+	    				//Must find new autoTarget
+	    				
+	    				//And then fire on it if there is a new autoTarget
+	    				if (this.autoTarget!=null){
+	    					this.shootAt(autoTarget);
+	    				}
 	    			}
-	    			else{
-	    				targetAng = findTargetAng(target,weapon.missileMaxSpeed);
-	    			}
-	    			
-	    			
-	    			AlignTo(targetAng);
-	    			
-	    			
-	    			//System.out.println(""+targetAng+", "+selfAngle+": "+(targetAng-selfAngle));
-	    			
-	    			if(Math.abs(targetAng-selfAngle)<=weapon.angleSpread || (weapon.missileHoming)){
-	    				//fire
-	    				weapon.Fire(nx,ny,currAngle, source, target);
-	    			}
-	    		
-	    			
-	    			//this part for testing only, DELETE AFTER
-	    			//weapon.Fire(nx,ny,currAngle, source, target);
 	    		}
 	    		
 	    	}else if(type.compareTo("Shield")==0){
@@ -195,6 +178,38 @@ public class Pylon {
     		AlignTo(centerAngle);
     	}
     	
+    }
+    
+    public Boolean canFireOn(GameObj target){
+    	//Check if target is alive
+    	
+    	//Check if target is within fire arc
+    	
+    	return true;
+    }
+    
+    public void shootAt(GameObj target){
+    	WeaponObj weapon = (WeaponObj) equipped;
+    	
+    	//figure out where the missile's origin is
+		PointS P = this.getCoords();
+		double nx = P.x;
+		double ny = P.y;
+		
+		//Align the weapon towards target and if the pylon pointing at target, fire.
+	    double targetAng=0;
+	    if(weapon.missileHoming){
+	    	targetAng = this.getAngle(target);
+	    }else{
+	    	targetAng = findTargetAng(target,weapon.missileMaxSpeed);
+	    }
+	    			
+	    this.AlignTo(targetAng);
+		System.out.println("centerAngle :"+ this.centerAngle+" currAngle "+this.currAngle +" selfAngle: "+this.selfAngle);
+	    if(Math.abs(targetAng-selfAngle)<=weapon.angleSpread || (weapon.missileHoming)){
+	    	//fire
+	    	weapon.Fire(nx,ny,this.currAngle, this.source, target);
+	    }
     }
     
     public void UpdateAngVel(){ 

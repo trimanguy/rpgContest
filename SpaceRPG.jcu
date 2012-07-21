@@ -13,18 +13,6 @@
 				<dir>classes</dir>
 			</folderitem>
 			<folderitem>
-				<path>SpaceRPG\classes\com</path>
-				<dir>classes\com</dir>
-			</folderitem>
-			<folderitem>
-				<path>SpaceRPG\classes\com\jhlabs</path>
-				<dir>classes\com\jhlabs</dir>
-			</folderitem>
-			<folderitem>
-				<path>SpaceRPG\classes\com\jhlabs\image</path>
-				<dir>classes\com\jhlabs\image</dir>
-			</folderitem>
-			<folderitem>
 				<path>SpaceRPG\classes\Data</path>
 				<dir>classes\Data</dir>
 			</folderitem>
@@ -44,29 +32,19 @@
 				<path>SpaceRPG\src</path>
 				<dir>src</dir>
 			</folderitem>
-			<folderitem>
-				<path>SpaceRPG\src\ImageFiltersLib</path>
-				<dir>src\ImageFiltersLib</dir>
-			</folderitem>
 		</project>
 	</projects>
 	<open_files>
 		<docitem>
-			<path>..\..\..\..\..\Windows\system32\about:blank</path>
-			<source>false</source>
-			<index>0</index>
-			<active>false</active>
-		</docitem>
-		<docitem>
 			<path>SpaceRPG\src\InterfaceManager.java</path>
 			<source>true</source>
-			<index>1</index>
+			<index>0</index>
 			<active>true</active>
 		</docitem>
 		<docitem>
 			<path>SpaceRPG\src\ActiveInterface.java</path>
 			<source>true</source>
-			<index>2</index>
+			<index>1</index>
 			<active>false</active>
 		</docitem>
 	</open_files>
