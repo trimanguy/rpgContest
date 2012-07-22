@@ -20,7 +20,7 @@ public class WeaponObj extends ItemObj{
 
 	boolean missileHoming;//Is the missileObj homing? default is no
 	double missileSpeed;//missileObj's speed in pixels per second
-	double missileMaxSpeed;//missileObj's speed in pixels per second
+	double missileMaxSpeed;//missileObj's max speed in pixels per second
 	double missileAcceleration;//missileObj's speed in pixels per second
 	double missileTurnSpeed;//degrees per second.
 	double angleSpread;//angular inaccuracy in degrees.

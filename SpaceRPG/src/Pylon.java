@@ -5,6 +5,7 @@
  */
 
 import java.util.ArrayList;
+import java.awt.geom.Point2D;
 
 public class Pylon {
 
@@ -147,13 +148,23 @@ public class Pylon {
 	    			}else{
 	    				this.autoTarget=null;
 	    				//Must find new autoTarget
-	    				
-	    				//And then fire on it if there is a new autoTarget
-	    				if (this.autoTarget!=null){
-	    					this.shootAt(autoTarget);
+	    				for(int x=0; x<Global.state.activeObjs.size();x++){
+	    					//Look at things we can shoot at only; Which is only shipObj for now
+	    					Obj currObj = Global.state.activeObjs.get(x);
+	    					if(currObj instanceof ShipObj){
+	    						if(this.canFireOn((ShipObj) currObj){
+	    							this.autoTarget = currObj;
+	    						}
+	    					}
 	    				}
 	    			}
+	    			
+	    			//And then fire on it if there is a new autoTarget
+	    			if (this.autoTarget!=null){
+	    				this.shootAt(autoTarget);
+	    			}
 	    		}
+	    	}
 	    		
 	    	}else if(type.compareTo("Shield")==0){
 	    		//First check the ship power and if the direction determined 
@@ -181,10 +192,33 @@ public class Pylon {
     }
     
     public Boolean canFireOn(GameObj target){
-    	//Check if target is alive
-    	
+    	PointS P = this.getCoords();
+    	PointS T = new PointS(target.x,target.y);
+    	//Check if target is alive; TODO: implement ship health?
+    	if (target.coreHealth<1){
+    		return false;
+    	}
+    	//Check if target is within range (distance < missileLife*maxSpeed)
+    	WeaponObj weapon = (WeaponObj) equipped;
+
+    	double distance = P.distance(T);
+    	//System.out.println("distance to target: "+distance+" maxMissileSpeed: "+ weapon.missileMaxSpeed+" missileLife: "+weapon.missileLife);
+    	if (distance > weapon.missileMaxSpeed*weapon.missileLife){
+    		return false;
+    	}
+    	/***ANTHONY CHECK THIS PART OUT***/
     	//Check if target is within fire arc
+    	double targetAng = this.getAngle(target);
+    	double diffAng = targetAng - this.centerAngle;
+    	if(this.source == Global.state.playerObj){
+    		System.out.println("targetAng: "+targetAng+" centerAngle: "+this.centerAngle+" diffAng: "+diffAng +" arcAngle: "+arcAngle);
+    	}
+    	if(diffAng>this.arcAngle){
+    		return false;
+    	}
     	
+    	/***END OF ANTHONY CHECK PART***/
+
     	return true;
     }
     
@@ -205,7 +239,7 @@ public class Pylon {
 	    }
 	    			
 	    this.AlignTo(targetAng);
-		System.out.println("centerAngle :"+ this.centerAngle+" currAngle "+this.currAngle +" selfAngle: "+this.selfAngle);
+		//System.out.println("centerAngle :"+ this.centerAngle+" currAngle "+this.currAngle +" selfAngle: "+this.selfAngle +" with targetAng: "+targetAng);
 	    if(Math.abs(targetAng-selfAngle)<=weapon.angleSpread || (weapon.missileHoming)){
 	    	//fire
 	    	weapon.Fire(nx,ny,this.currAngle, this.source, target);

@@ -28,6 +28,9 @@ public class GameObj extends Obj {
 	
 	public double destAngle;//Destination angle for ShipObj and MissileObj
 	
+	//core health!
+    double coreHealth=1;
+	
 	public GameObj(){} //triman added
 	
     public GameObj(String image) {

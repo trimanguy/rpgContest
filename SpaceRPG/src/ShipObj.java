@@ -33,6 +33,8 @@ public class ShipObj extends GameObj {
     double shieldRear;
     double shieldChargeTimer;
     
+
+    
     public double getSpeed(){
     	return this.velocity;
     }
