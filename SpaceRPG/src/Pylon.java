@@ -152,8 +152,8 @@ public class Pylon {
 	    					//Look at things we can shoot at only; Which is only shipObj for now
 	    					Obj currObj = Global.state.activeObjs.get(x);
 	    					if(currObj instanceof ShipObj){
-	    						if(this.canFireOn((ShipObj) currObj){
-	    							this.autoTarget = currObj;
+	    						if(this.canFireOn((ShipObj) currObj)){
+	    							this.autoTarget = (ShipObj)currObj;
 	    						}
 	    					}
 	    				}
@@ -164,8 +164,6 @@ public class Pylon {
 	    				this.shootAt(autoTarget);
 	    			}
 	    		}
-	    	}
-	    		
 	    	}else if(type.compareTo("Shield")==0){
 	    		//First check the ship power and if the direction determined 
 	    		//	by activateParam is full health or not
@@ -208,10 +206,10 @@ public class Pylon {
     	}
     	/***ANTHONY CHECK THIS PART OUT***/
     	//Check if target is within fire arc
-    	double targetAng = this.getAngle(target);
-    	double diffAng = targetAng - this.centerAngle;
+    	Double targetAng = this.getAngle(target);
+    	Double diffAng = targetAng - this.centerAngle;
     	if(this.source == Global.state.playerObj){
-    		System.out.println("targetAng: "+targetAng+" centerAngle: "+this.centerAngle+" diffAng: "+diffAng +" arcAngle: "+arcAngle);
+    		System.out.println("targetAng: "+targetAng.intValue()+" centerAngle: "+this.centerAngle+" diffAng: "+diffAng.intValue() +" arcAngle: "+arcAngle);
     	}
     	if(diffAng>this.arcAngle){
     		return false;
