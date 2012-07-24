@@ -193,7 +193,12 @@ public class Pylon {
     	PointS P = this.getCoords();
     	PointS T = new PointS(target.x,target.y);
     	//Check if target is alive; TODO: implement ship health?
-    	if (target.coreHealth<1){
+    	
+    	if(!source.isHostile(target)){
+    		return false;
+    	}
+    	
+    	if (target.coreHealth<=0){
     		return false;
     	}
     	//Check if target is within range (distance < missileLife*maxSpeed)
@@ -204,18 +209,21 @@ public class Pylon {
     	if (distance > weapon.missileMaxSpeed*weapon.missileLife){
     		return false;
     	}
-    	/***ANTHONY CHECK THIS PART OUT***/
     	//Check if target is within fire arc
     	Double targetAng = this.getAngle(target);
     	Double diffAng = targetAng - this.centerAngle;
+    	
+    	
+    	if(diffAng < -180) diffAng += 360;
+    	if(diffAng >= 180) diffAng -= 360;
+    	
     	if(this.source == Global.state.playerObj){
     		System.out.println("targetAng: "+targetAng.intValue()+" centerAngle: "+this.centerAngle+" diffAng: "+diffAng.intValue() +" arcAngle: "+arcAngle);
     	}
-    	if(diffAng>this.arcAngle){
+    	
+    	if(Math.abs(diffAng)>this.arcAngle){
     		return false;
     	}
-    	
-    	/***END OF ANTHONY CHECK PART***/
 
     	return true;
     }

@@ -154,6 +154,10 @@ public class GameObj extends Obj {
     	sprite.setTransform(transform);
     }
     
+    public Vector2D getDistance(GameObj O){
+    	return new Vector2D(O.x-x,O.y-y);
+    }
+    
     public void Draw(Graphics2D G, ImageObserver loc){
     	transform(); //Applies the object's transformations to the sprite
     	sprite.Draw(G,loc); //Draws the object's sprite

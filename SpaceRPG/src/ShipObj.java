@@ -78,69 +78,10 @@ public class ShipObj extends GameObj {
     	}
     }
     
-    /*** Does computation and perfoms pewpew; deprecated, was used for testing ***/
-    /*
-    public void fireOn(ShipObj target, double missileSpeed, double inaccuracy){
-    	
-    	if(Global.state.time < fireTimer) return; //weapon cooling down
-    	
-    	if( (target==null)||(target==this) ) return; //Ship can't fire on itself
-    	
-    	//Compute the firing vector
-    	double a,b,c,d,distance,t0,t1,t;
-    	Vector2D V = new Vector2D(target.velX,target.velY);
-    	Vector2D PO = new Vector2D(target.x-x,target.y-y);
-    	Vector2D P = null;
-    	
-    	distance = PO.length;
-    	
-    	a = (V.dot(V))-(missileSpeed*missileSpeed);
-    	b = PO.dot(V.multiply(2));
-    	c = PO.dot(PO);
-    	d = b*b - 4*a*c; //Doesn't this look familiar?
-    	
-    	if(d < 0) {
-    		System.out.println("NO TARGET LEADING SOLUTION: "+d);
-    		return; //No solution.
-    	//d < 0 means that any bullet travelling at missileSpeed will never hit the target
-    	
-    	}
-    	
-    	t0 = (-b - Math.sqrt(d))/(2*a);
-    	t1 = (-b + Math.sqrt(d))/(2*a);
-    	
-    	if(t0 < 0){ t = t1;
-    	}else{
-    		if(t1 < 0){ t = t0;
-    		}else{
-    			t = Math.min(t0,t1);
-    		}
-    	}
-    	
-    	P = PO.add(V.multiply(t));
-    	
-    	//Convert vector to angle in degrees
-    	double fireAngle = P.toAngle();
-    	
-    	//Then create a missle shooting with that angle
-    	//leaving the rate-of-fire stuff for a little later
-    	
-    	String image;
-    	URL spriteContext;
-    	
-    	spriteContext = Global.codeContext;
-    	image = "Resources/Sprites/PlasmaSmall.png";
-    	String delImage = "Resources/Sprites/explode_2.png";
-    	
-    	MissileObj missile = new MissileObj(image,delImage,spriteContext,this,null,
-	    	0, 0, 0, 0,
-	    	this.x, this.y, 0,missileSpeed,missileSpeed,0,15);
-	    	
-    	missile.setAngle(fireAngle+ (Math.random()*2-1)*inaccuracy);
-    	
-    	fireTimer = Global.state.time + fireDelay;
+    public boolean isHostile(GameObj target){
+    	//hostility stuff has to be processed here?
+    	return this != target;
     }
-    */
     
     public void fireOn(ShipObj target){
     	for(int x = 0; x<pylons.size(); x++){
