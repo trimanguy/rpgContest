@@ -3,7 +3,7 @@
 #SHIP_NAME string
 #SHIP_MODEL string
 #HITBOXES (coord_x1,coord_y1,radius1)(coord_x2,coord_y2,radius2)
-#PYLONS (offset_x1,offset_y1,centerAng,arcAng,screenx,screeny,gui)
+#PYLONS (offset_x1,offset_y1,centerAng,arcAng,screenx,screeny,gui) //need ot add size to pylon
 #SPEED double
 #END
 

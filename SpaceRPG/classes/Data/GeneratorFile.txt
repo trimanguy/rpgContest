@@ -1,0 +1,8 @@
+#Sample GeneratorFile
+#
+#GEN_NAME name
+#GEN_MODEL image
+#POWER number //how much power generated
+#HEALTH
+#ARMOR
+#SIZE number //size to determine if generator can fit into pylon?

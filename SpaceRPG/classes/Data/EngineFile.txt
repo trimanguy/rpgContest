@@ -1,0 +1,10 @@
+#Sample EngineFile
+#
+#ENG_NAME name
+#ENG_MODEL image
+#ENG_MAXSPD number //max speed
+#ROT_SPEED number //ship rotation
+#HEALTH
+#ARMOR
+#POWER_REQ number
+#SIZE number

@@ -1,0 +1,11 @@
+#Sample ShieldFile
+#
+#SHIELD_NAME name
+#SHIELD_MODEL image //might be used in hangar screen
+#SHIELD_AMT number //how much max shield per side
+#REGEN_DELAY number //how long until shield regen starts
+#HEALTH
+#ARMOR
+#POWER_REQ number
+#BOOST_COST number //energy cost to boost
+#SIZE number //for fitting into pylon

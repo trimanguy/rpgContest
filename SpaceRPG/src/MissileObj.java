@@ -84,7 +84,7 @@ public class MissileObj extends GameObj{
         //check to see if this missle hit any objects
         for(int x=0; x<(ShipObj.allShips.size()); x++){
         	if(ShipObj.allShips.get(x)==source) continue;
-        	
+        	if(!ShipObj.allShips.get(x).isHostile(source)) continue;
         	HitCircle gotHit = ShipObj.allShips.get(x).contains(thisMissile);
         	
         	if (gotHit !=null) {

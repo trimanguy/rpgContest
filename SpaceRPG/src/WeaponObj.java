@@ -28,7 +28,7 @@ public class WeaponObj extends ItemObj{
 	double turnSpeed;//Degrees/second for the weapon itself
 	double health;
 	double armor;
-	double mass;
+	double size;
 	String descrip;
 	
 	/* Damage is computed as follows:
@@ -45,7 +45,7 @@ public class WeaponObj extends ItemObj{
 	double damageArmorPiercing;
 
     public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread, double itemTurnSpeed, String damage,
-    	double health, double armor, double delay, double mass, String descrip, boolean activateAble) {
+    	double health, double armor, double delay, double size, String descrip, boolean activateAble) {
     		
     	missileImg = img;
     	missileHitImg = hitImg;
@@ -58,7 +58,7 @@ public class WeaponObj extends ItemObj{
     	this.health = health;
     	this.armor = armor;
     	activateDelay = delay;
-    	this.mass = mass;
+    	this.size = size;
     	this.descrip = descrip;
     	this.canActivate = true;
     	

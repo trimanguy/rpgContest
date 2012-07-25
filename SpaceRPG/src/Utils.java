@@ -34,7 +34,7 @@ public class Utils {
 	static String tempHealth;
 	static String tempArmor;
 	static String tempDelay;
-	static String tempMass;
+	static String tempSize;
 	static boolean activateAble;
 	
 	
@@ -216,7 +216,7 @@ public class Utils {
 	    					case "HEALTH":			tempHealth = st.nextToken(); break;
 	    					case "ARMOR":			tempArmor = st.nextToken(); break;
 	    					case "DELAY":			tempDelay = st.nextToken(); break;
-	    					case "MASS":			tempMass = st.nextToken(); break;//
+	    					case "SIZE":			tempSize = st.nextToken(); break;//
 	    					case "DESCRIP":			descrip = st.nextToken(); break;//
 	    					case "ACTIVATEABLE":	activateAble = true; break;//
 	    					case "END":				saveFlag = true; break;
@@ -231,7 +231,7 @@ public class Utils {
 	    				double armor = Double.valueOf(tempArmor);
 	    				double delay = Double.valueOf(tempDelay);
 	    				double weaponTurnSpeed = Double.valueOf(tempWeaponTurnSpeed);
-	    				double mass = Double.valueOf(tempMass);
+	    				double size = Double.valueOf(tempSize);
 	    				
 	    				/*** This part for Missiles ***/
 	    				//for token of form string,string,double,double,double,double
@@ -244,7 +244,7 @@ public class Utils {
 	    				double missileTurnSpeed = Double.valueOf(st_missile.nextToken());
 	    				
 	    				WeaponObj weapon = new WeaponObj(img,hitImg,lifeTime,maxSpeed,accel,missileTurnSpeed,accuracy,weaponTurnSpeed,
-	    					tempDamage,health,armor,delay,mass,descrip,activateAble); 
+	    					tempDamage,health,armor,delay,size,descrip,activateAble); 
 	    				Utils.weaponTable.put(Utils.name, weapon);
 	    				
 	    				//clear vars for next ship
@@ -257,7 +257,7 @@ public class Utils {
 	    				tempHealth = "";
 	    				tempArmor = "";
 	    				tempDelay = "";
-	    				tempMass = "";
+	    				tempSize = "";
 	    				activateAble = false;
 	    				descrip = "";
 	    				saveFlag = false;
@@ -316,7 +316,7 @@ public class Utils {
     	WeaponObj template = (WeaponObj)Utils.weaponTable.get(weaponName);
     	String damage = ""+template.damageToShield+","+template.damageThruShield+","+template.damageToHull+","+template.damageArmorPiercing;
     	WeaponObj newWeapon = new WeaponObj(template.missileImg,template.missileHitImg,template.missileLife,template.missileMaxSpeed,template.missileAcceleration,
-    		template.missileTurnSpeed,template.angleSpread,template.turnSpeed,damage,template.health,template.armor,template.activateDelay,template.mass,template.descrip,template.canActivate);
+    		template.missileTurnSpeed,template.angleSpread,template.turnSpeed,damage,template.health,template.armor,template.activateDelay,template.size,template.descrip,template.canActivate);
     	
     	return newWeapon;
     }

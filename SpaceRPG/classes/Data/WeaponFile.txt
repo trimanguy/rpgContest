@@ -9,7 +9,7 @@
 #HEALTH
 #ARMOR
 #DELAY
-#MASS weight
+#SIZE number
 #DESCRIP txt-description
 #ACTIVATEABLE (only if you can activate item; default=false)
 #END
@@ -23,7 +23,7 @@ TURNSPEED 1200
 HEALTH 1
 ARMOR 1
 DELAY 0.5
-MASS 1
+SIZE 1
 DESCRIP testweapon
 END
 
@@ -36,6 +36,6 @@ TURNSPEED 0
 HEALTH 1
 ARMOR 1
 DELAY 2
-MASS 1
+SIZE 1
 DESCRIP testMissile
 END
