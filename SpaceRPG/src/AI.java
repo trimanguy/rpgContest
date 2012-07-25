@@ -35,7 +35,26 @@ public class AI {
     			
     			//Find aim targets!
     			//I can't think of a way to do this that's faster than O(N^2)
-    			
+    			for(Obj E:Global.state.activeObjs){
+    				if(!(E instanceof ShipObj)) continue;
+    				
+    				ShipObj targ = (ShipObj) E;
+    				
+    				if(!ship.isHostile(targ)) continue;
+    				
+    				if(ship.aimTarget!=null){
+    					
+    					double targetAng = ship.getAngle(ship.aimTarget) - ship.currAngle - ship.idealTargetAng;
+    					double EAng = ship.getAngle(targ) - ship.currAngle - ship.idealTargetAng;
+    					
+    					if(Math.abs(EAng) < Math.abs(targetAng)){
+    						ship.aimTarget = targ;
+    					}
+    					
+    				}else{
+    					ship.aimTarget = targ;
+    				}
+    			}
     			
     			if(ship.aimTarget == null){
     				//Ship idle or natural behavior happens here.
