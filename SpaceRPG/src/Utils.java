@@ -17,6 +17,7 @@ public class Utils {
 	static String image;
 	static boolean saveFlag = false;
 	static String descrip;
+	static String tempSize;
 	
 	//ShipFile vars
 	static String tempSpeed;
@@ -34,7 +35,7 @@ public class Utils {
 	static String tempHealth;
 	static String tempArmor;
 	static String tempDelay;
-	static String tempSize;
+	
 	static boolean activateAble;
 	
 	
@@ -122,6 +123,7 @@ public class Utils {
 								//double pylonAngSpeed;
 								double screenX;
 								double screenY;
+								int size;
 								String pylonImg="";
 								//System.out.print("Check4"+ System.getProperty("line.separator"));
 								x = Double.valueOf(pylon_st.nextToken());
@@ -133,6 +135,7 @@ public class Utils {
 								//pylonAngSpeed = Double.valueOf(pylon_st.nextToken());
 								screenX = Double.valueOf(pylon_st.nextToken());
 								screenY = Double.valueOf(pylon_st.nextToken());
+								size = Integer.valueOf(pylon_st.nextToken());
 								if(pylon_st.hasMoreTokens())
 									pylonImg = pylon_st.nextToken();
 								//convert x and y into polar coord
@@ -141,12 +144,11 @@ public class Utils {
 								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]+" centerAngle: "+centerAngle+" arcAngle: "+arcAngle
 									+" screenX: "+screenX+" screenY: "+screenY+" pylonImg: "+pylonImg);
 								
-								Pylon pl = new Pylon(null, polar[0],polar[1],centerAngle, arcAngle, screenX, screenY, pylonImg);
+								Pylon pl = new Pylon(null, polar[0],polar[1],centerAngle, arcAngle, screenX, screenY, size, pylonImg);
 								//Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double angSpeed)
 								pylons.add(pl);
 								
 								
-								System.out.println("pylons size: "+ pylons.size());
 							}
 						}
 	    				
@@ -231,7 +233,7 @@ public class Utils {
 	    				double armor = Double.valueOf(tempArmor);
 	    				double delay = Double.valueOf(tempDelay);
 	    				double weaponTurnSpeed = Double.valueOf(tempWeaponTurnSpeed);
-	    				double size = Double.valueOf(tempSize);
+	    				int size = Integer.valueOf(tempSize);
 	    				
 	    				/*** This part for Missiles ***/
 	    				//for token of form string,string,double,double,double,double
@@ -303,7 +305,7 @@ public class Utils {
     	for(int x=0; x<template.pylons.size();x++){
     		Pylon currTempPylon = template.pylons.get(x);
     		Pylon newPylon = new Pylon(newShip, currTempPylon.polarRadius, currTempPylon.polarAngle, currTempPylon.centerAngle, currTempPylon.arcAngle,
-    			currTempPylon.screenX, currTempPylon.screenY, currTempPylon.gui);
+    			currTempPylon.screenX, currTempPylon.screenY, currTempPylon.size, currTempPylon.gui);
     		//, currTempPylon.maxAngVel);
     	}
     	

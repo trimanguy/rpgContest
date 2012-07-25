@@ -72,11 +72,14 @@ public class AI {
     			
     			Vector2D DifPos = ship.getDistance(ship.aimTarget);
     			
-    			if((ship.maxVelocity >= ship.aimTarget.maxVelocity || Math.abs(targetDeltaAng)>90) && 
+    			if (ship.currCoreHealth<(ship.maxCoreHealth/10)){ //flee if heavily damaged
+    				ship.destAngle = targetAng + 180; 
+    			}else if((ship.maxVelocity >= ship.aimTarget.maxVelocity || Math.abs(targetDeltaAng)>90) && 
     				(DifPos.length < ship.minIdealRange || DifPos.length > ship.maxIdealRange)){
     				//Control distance
-    				
-    				if(DifPos.length < ship.minIdealRange) ship.destAngle = targetAng + 180;
+    				//if we are too close then move away
+    				if(DifPos.length < ship.minIdealRange) ship.destAngle = targetAng + 180; 
+    				//if we are too far, move closer
     				if(DifPos.length > ship.maxIdealRange) ship.destAngle = targetAng;
     				
     				ship.velocity += ship.tweenFactor * (ship.maxVelocity - ship.velocity);

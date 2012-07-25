@@ -25,7 +25,7 @@ public class Pylon {
 	 * ArrayList<Point2D> offsets = new(ArrayList(0);
 	*/
 	
-	int size; //Module size. Smaller is bigger?
+	int size; //Module size. 1=tiny;2=small;3=medium;4=large;5=huge
 	String type;//Possible types: "weapon","engine","power","shield","support"
 	
 	String tag;//My thought is you assign a tag to a pylon and then a tag to the associated hitCircles
@@ -69,11 +69,10 @@ public class Pylon {
 
 	
 
-    public Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double screenX, double screenY, String image) {
+    public Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double screenX, double screenY, int size, String image) {
     	//for testing purposes
     	baseHealth = 100;
     	type = "Weapon";
-    	int size = 9999;
     	realHealth = 100;
     	//WeaponObj testGun = new WeaponObj("Resources/Sprites/PlasmaSmall.png", "Resources/Sprites/explode_2.png", 10 , 300.0, 30000.0, 0.0, 2.0, 180); //fake guns for testing
     	//public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread) {
@@ -86,6 +85,7 @@ public class Pylon {
     	this.screenX=screenX;
     	this.screenY=screenY;
     	this.gui=image;
+    	this.size = size;
     	//this.angThrust = angSpeed;
     	
     	this.selfAngle = centerAngle;
@@ -102,7 +102,7 @@ public class Pylon {
     
     public boolean canEquip(ItemObj O){
     	if(type==null) return true;
-    	return (O.type.compareTo(type)==0 && O.size >= size);
+    	return (O.type.compareTo(type)==0 && O.size <= this.size);
     }
     
     public void equipItem(ItemObj item){
@@ -194,7 +194,7 @@ public class Pylon {
     		return false;
     	}
     	
-    	if (target.coreHealth<=0){
+    	if (target.currCoreHealth<=0){
     		return false;
     	}
     	//Check if target is within range (distance < missileLife*maxSpeed)
