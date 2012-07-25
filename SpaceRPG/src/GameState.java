@@ -26,12 +26,12 @@ public class GameState {
 	ArrayList<Obj> activeObjs = new ArrayList(0);
 	ArrayList<Obj> newObjBuffer = new ArrayList(0);
 	ArrayList<Obj> deleteBuffer = new ArrayList(0);
-	
-	AI activeAI;
-	
+	AI activeAI = new AI();
+
 	ShipObj playerObj = null;
 
     public GameState() {
+    	
     	Global.state = this;
     	ArrayList<PointS> Pointss = new ArrayList(0);
     	
@@ -49,20 +49,52 @@ public class GameState {
     		P.equipItem(Utils.createWeapon("testBlaster"));
     	}
     	
-    	ShipObj ship1 = Utils.createShip("flak1");
-        //ship1.aimTarget=Global.state.playerObj;
-        
+    	ShipObj ship1 = Utils.createShip("flak1"); 
         for(Pylon P:ship1.pylons){
         	P.equipItem(Utils.createWeapon("testBlaster"));
         }
-        ShipObj ship2 = Utils.createShip("escort1");
         
-        //ship2.aimTarget=Global.state.playerObj;
-        
+        ShipObj ship2 = Utils.createShip("escort1", "alliance");
+        ship2.y = 50; ship2.x=30;
         for(Pylon P:ship2.pylons){
         	P.equipItem(Utils.createWeapon("testBlaster"));
         }
-        ship2.velocity = 65;
+        ship2.velocity = 50;
+        
+        ShipObj ship3 = Utils.createShip("flak1");
+        ship3.y = -40;ship3.x=10;
+        for(Pylon P:ship3.pylons){
+        	P.equipItem(Utils.createWeapon("testBlaster"));
+        }
+        ship3.velocity = 50;
+        
+        ShipObj ship4 = Utils.createShip("escort1", "alliance");
+        ship4.x = -20; ship4.y=100;
+        for(Pylon P:ship4.pylons){
+        	P.equipItem(Utils.createWeapon("testBlaster"));
+        }
+        ship4.velocity = 50;
+        
+        ShipObj ship5 = Utils.createShip("escort1", "alliance");
+        ship5.x = -30; ship5.y=150;
+        for(Pylon P:ship5.pylons){
+        	P.equipItem(Utils.createWeapon("testBlaster"));
+        }
+        ship5.velocity = 50;
+        
+        ShipObj ship6 = Utils.createShip("escort1","alliance");
+        ship6.x = -20; ship6.y=200;
+        for(Pylon P:ship6.pylons){
+        	P.equipItem(Utils.createWeapon("testBlaster"));
+        }
+        ship6.velocity = 50;
+        
+        ShipObj ship7 = Utils.createShip("escort1","alliance");
+        ship7.x = -20; ship7.y=-100;
+        for(Pylon P:ship7.pylons){
+        	P.equipItem(Utils.createWeapon("testBlaster"));
+        }
+        ship7.velocity = 50;
     }
     
     public void Tick(){

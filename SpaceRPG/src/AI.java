@@ -13,7 +13,7 @@ public class AI {
 	double stepDelay = 0.1;
 
     public AI() {
-    	Global.state.activeAI = this;
+    	//Global.state.activeAI = this;
     	
     }
     

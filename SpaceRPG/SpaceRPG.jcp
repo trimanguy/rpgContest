@@ -43,6 +43,10 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\AI.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\AnimatedParticle.java</path>
 				<folder>src</folder>
 			</fileitem>
