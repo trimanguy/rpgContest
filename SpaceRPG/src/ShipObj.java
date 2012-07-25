@@ -35,12 +35,11 @@ public class ShipObj extends GameObj {
 	//ship's faction, defaults to pirate
 	String faction = "pirate";
 	
-	
 	//AI related fields
 	boolean hasAI = true;
-	double minIdealRange = 200;
-	double maxIdealRange = 300;
-	double tweenFactor = 1/5;
+	double minIdealRange = 600;
+	double maxIdealRange = 800;
+	double tweenFactor = 0.05;
 	double idealTargetAng = 0;
     
     public double getSpeed(){
@@ -60,6 +59,7 @@ public class ShipObj extends GameObj {
 	    	hitCircles = hitboxes;
 	    	allShips.add(this);
 	    	Global.state.newObjBuffer.add(this);
+	    	size = 32;
     	}
     }
     
@@ -148,8 +148,34 @@ public class ShipObj extends GameObj {
     	
     	//Move camera if Ship is Player's Ship
     	if (this == Global.state.playerObj){
-    		Global.player.cx += velX*Global.state.dtt;
-    		Global.player.cy += velY*Global.state.dtt;
+    		Global.player.cx=x; //+= velX*Global.state.dtt;
+    		Global.player.cy=y; // += velY*Global.state.dtt;
+    	}
+    	
+    	for(Obj O:Global.state.activeObjs){
+    		if(!density) break;
+    		if(!(O instanceof ShipObj)) continue;
+    		if(O == this) continue;
+    		
+    		GameObj object = (GameObj) O;
+    		
+    		if(!object.density) continue;
+    		
+    		if(getDistance(object).length <=size + object.size){
+    		//if(checkCollision(object)!=null){
+    			//push eachother out of the way
+    			
+    			double radii = object.size+size;
+    			
+    			//first get the unit vector between the two objects
+    			Vector2D difPos = this.getDistance(object);
+    			Vector2D unit = difPos.unit();
+    			
+    			//then apply the push
+    			move(-radii * tweenFactor * tweenFactor * unit.x, -radii*tweenFactor * unit.y);
+    			
+    			O.move(radii * tweenFactor * tweenFactor * unit.x, radii*tweenFactor * unit.y);
+    		}
     	}
     	
     	

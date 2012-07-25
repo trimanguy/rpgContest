@@ -87,6 +87,8 @@ public class AI {
     				ship.destAngle = targetAng + ship.idealTargetAng;
     				
     				ship.velocity += ship.tweenFactor * (0 - ship.velocity);
+    				
+    				//System.out.println ("SHIP VELOCITY SLOWDOWN: "+(ship.tweenFactor * (0 - ship.velocity)));
     			}
     			
     			ship.fireOn(ship.aimTarget);

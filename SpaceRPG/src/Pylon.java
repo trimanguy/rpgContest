@@ -213,9 +213,6 @@ public class Pylon {
     	if(diffAng < -180) diffAng += 360;
     	if(diffAng >= 180) diffAng -= 360;
     	
-    	if(this.source == Global.state.playerObj){
-    		System.out.println("targetAng: "+targetAng.intValue()+" centerAngle: "+this.centerAngle+" diffAng: "+diffAng.intValue() +" arcAngle: "+arcAngle);
-    	}
     	
     	if(Math.abs(diffAng)>this.arcAngle){
     		return false;

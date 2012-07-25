@@ -36,6 +36,10 @@ public class Vector2D {
     	return new Vector2D(A.x*x,A.y*y);
     }
     
+    public Vector2D unit(){
+    	return multiply(1/length);
+    }
+    
     public double toAngle(){
     	double a = Math.atan2(y,x)*180/Math.PI;
     	if(a < 0) a += 360;

@@ -33,6 +33,8 @@ public class GameObj extends Obj {
 	
 	public GameObj(){} //triman added
 	
+	double size = 0;
+	
     public GameObj(String image) {
     	if(image != null) {
 	    	sprite = new Sprite(image, true);
