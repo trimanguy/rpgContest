@@ -22,6 +22,8 @@ public class GameState {
 	double dtt = 0.0; //this is dtt
 	Boolean needGC = false;
 	
+	double speedMultiplier = 0.25;
+	
 	
 	ArrayList<Obj> activeObjs = new ArrayList(0);
 	ArrayList<Obj> newObjBuffer = new ArrayList(0);
@@ -99,7 +101,7 @@ public class GameState {
     
     public void Tick(){
     	
-    	dt = System.currentTimeMillis() - lastTime;
+    	dt = (System.currentTimeMillis() - lastTime) * speedMultiplier;
     	dtt = dt/1000;
     	lastTime = System.currentTimeMillis();
     	

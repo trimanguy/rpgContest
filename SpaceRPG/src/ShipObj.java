@@ -123,6 +123,11 @@ public class ShipObj extends GameObj {
     	//Process shield actions
     	
     	//Pylon actions
+    	/*
+    	for(Pylon P:pylons){
+    		P.Step();
+    	}
+    	*/
     	
     	for(int x=0;x<this.pylons.size();x++){
     		pylons.get(x).Step();

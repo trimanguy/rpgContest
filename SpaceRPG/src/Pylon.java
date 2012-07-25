@@ -65,7 +65,7 @@ public class Pylon {
 	//Flat armor!
 	double flatArmor;
 	
-	
+	boolean autoAttack = true;
 
 	
 
@@ -113,7 +113,7 @@ public class Pylon {
     
     public void Step(){//This should be called by the ShipObj during ShipObj.Step()
     	
-    	realHealth = baseHealth/2*(Math.sin(Global.state.time/10)+1);
+    	//realHealth = baseHealth/2*(Math.sin(Global.state.time/10)+1);
     	//System.out.println(realHealth);
     	
     	if(equipped == null) return; //There is no equipped module!
@@ -122,10 +122,6 @@ public class Pylon {
     	
     	if(realHealth <= 0) return; //Pylon's been knocked out and will not function.
     	
-    	
-    	if(Global.state.time < activateTimer) return;
-    	
-    	activateTimer = Global.state.time+equipped.activateDelay;
     	
     	updateCurrentAngle();
     	
@@ -141,7 +137,7 @@ public class Pylon {
 	    		if((setTarget!=null)&&(this.canFireOn(setTarget))){
 	    			//There is a player-set target and we can fire on it
 	    			this.shootAt(setTarget);
-	    		}else{
+	    		}else if(autoAttack){
 	    			//Check if we can fire on current autoTarget
 	    			if((autoTarget!=null)&&(this.canFireOn(autoTarget))){
 	    				this.shootAt(autoTarget);
@@ -229,6 +225,10 @@ public class Pylon {
     }
     
     public void shootAt(GameObj target){
+    	if(Global.state.time < activateTimer) return;
+    	
+    	activateTimer = Global.state.time+equipped.activateDelay;
+    	
     	WeaponObj weapon = (WeaponObj) equipped;
     	
     	//figure out where the missile's origin is
