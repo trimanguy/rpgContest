@@ -42,21 +42,21 @@ public class GameState {
     	File weaponFile = new File("Data/WeaponFile.txt");
     	Utils.parseWeaponFile(weaponFile);
     	
-    	Global.state.playerObj = Utils.createShip("escort1");
+    	Global.state.playerObj = Utils.createShip("escort1","alliance");
     	Global.GUI = new ActiveInterface ();
     	for(Pylon P:Global.state.playerObj.pylons){
     		P.equipItem(Utils.createWeapon("testBlaster"));
     	}
     	
     	ShipObj ship1 = Utils.createShip("flak1");
-        ship1.aimTarget=Global.state.playerObj;
+        //ship1.aimTarget=Global.state.playerObj;
         
         for(Pylon P:ship1.pylons){
         	P.equipItem(Utils.createWeapon("testBlaster"));
         }
         ShipObj ship2 = Utils.createShip("escort1");
         
-        ship2.aimTarget=Global.state.playerObj;
+        //ship2.aimTarget=Global.state.playerObj;
         
         for(Pylon P:ship2.pylons){
         	P.equipItem(Utils.createWeapon("testBlaster"));

@@ -25,7 +25,6 @@ public class ShipObj extends GameObj {
     double fireTimer;
     double fireDelay = 1;//25;
     
-    
     //shield health!
     double shieldForward;
     double shieldLeft;
@@ -33,7 +32,8 @@ public class ShipObj extends GameObj {
     double shieldRear;
     double shieldChargeTimer;
     
-
+	//ship's faction, defaults to pirate
+	String faction = "pirate";
     
     public double getSpeed(){
     	return this.velocity;
@@ -80,7 +80,7 @@ public class ShipObj extends GameObj {
     
     public boolean isHostile(GameObj target){
     	//hostility stuff has to be processed here?
-    	return this != target;
+    	return this.faction != ((ShipObj)target).faction;
     }
     
     public void fireOn(ShipObj target){

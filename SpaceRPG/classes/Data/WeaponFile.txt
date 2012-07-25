@@ -16,7 +16,7 @@
 
 WEAPON_NAME testBlaster
 WEAPON_MODEL none
-MISSILE Resources/Sprites/PlasmaSmall.png,Resources/Sprites/explode_2.png,20,300,3000,0
+MISSILE Resources/Sprites/PlasmaSmall.png,Resources/Sprites/explode_2.png,1,300,3000,0
 ACCURACY 5
 DAMAGE 0,0,0,1
 TURNSPEED 1200

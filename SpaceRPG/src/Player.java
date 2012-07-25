@@ -19,7 +19,7 @@ public class Player implements MouseListener, KeyListener {
 	
 	//Camera zoom. Any value > 1 will magnify.
 	//This should not affect interface rendering.
-	double zoom = 1;
+	double zoom = .5;
 	
 	Obj mouseObj;
 	Obj dropObj;

@@ -281,6 +281,12 @@ public class Utils {
     }
     
     /*** Used for ship creation ***/
+    public static ShipObj createShip(String shipName, String faction){
+    	ShipObj newShip = createShip(shipName);
+    	newShip.faction = faction;
+    	return newShip;
+    }
+    
     public static ShipObj createShip(String shipName){
     	
     	ShipObj template = (ShipObj)Utils.shipTable.get(shipName);
