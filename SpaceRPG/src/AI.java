@@ -8,107 +8,72 @@
 
 
 public class AI {
+	
+	double stepTimer;
+	double stepDelay = 0.1;
 
-	ShipObj ship;
-	ShipObj target;
-	
-	String team;
-	
-	double idealTargetAngle;
-	
-	double minTargetDistance;
-	double maxTargetDistance;
-	
-	double velocityTween = 1/2;
-	
-	double turnTimer;
-	
-
-    public AI(ShipObj nship) {
-    	ship = nship;
+    public AI() {
+    	Global.state.activeAI = this;
+    	
     }
     
     public void Step(){
-    	if(target == null){
-    		IdleProcess();
-    	}else{
-    		HostileProcess();
-    	}
-    }
-    
-    public void IdleProcess(){
-    	//This looks for hostile ships
-    	//If there aren't any, then just fly around. Maybe sometimes dock at some place.
-    	for(Obj E:Global.state.activeObjs){
-    		if(E instanceof ShipObj){
-    			if(ship.isHostile((GameObj) E)){
-    				ShipObj O = (ShipObj) E;
+    	if(Global.state.time < stepTimer) return;
+    	stepTimer = Global.state.time + stepDelay;
+    	
+    	//go through all vessels
+    	
+    	for(Obj O:Global.state.activeObjs){
+    		if(!(O instanceof ShipObj)) continue;
+    		if(O == Global.state.playerObj) continue;
+    		
+    		ShipObj ship = (ShipObj) O;
+    		
+    		if(!ship.hasAI) continue;
+    		
+    		if(ship.aimTarget == null){
+    			
+    			//Find aim targets!
+    			//I can't think of a way to do this that's faster than O(N^2)
+    			
+    			
+    			if(ship.aimTarget == null){
+    				//Ship idle or natural behavior happens here.
     				
-    				if(O.coreHealth <=0) continue;
+    				ship.destAngle = Math.random()*360;
     				
-    				if(target == null){
-    					target = O;
-    				}else{
-    					
-    					double targetAngle = ship.getAngle(target);
-    					double OAngle = ship.getAngle(O);
-    					
-    					if(Math.abs(targetAngle-ship.currAngle-idealTargetAngle) > 
-    						Math.abs(OAngle-ship.currAngle-idealTargetAngle)){
-    							
-    						target = O;
-    					}
-    				}
+    				ship.velocity += ship.tweenFactor * (ship.maxVelocity * Math.random() - ship.velocity);
     			}
-    		}
-    	}
-    	//Child classes to AI can have different behaviors here
-    	if(target == null){
-    		if(Global.state.time >= turnTimer){
-    			ship.destAngle = Math.random() * 360;
     			
-    			ship.velocity += velocityTween * (ship.maxVelocity - ship.velocity);
+    		}else{
+    			double targetAng = ship.getAngle(ship.aimTarget);
+    			double targetDeltaAng = (targetAng+180) - ship.aimTarget.currAngle;
+    			while(targetDeltaAng < -180) targetDeltaAng += 360;
+    			while(targetDeltaAng > 180) targetDeltaAng -= 360;
     			
-    			turnTimer = Global.state.time + Math.random() * 20;
+    			Vector2D DifPos = ship.getDistance(ship.aimTarget);
+    			
+    			if((ship.maxVelocity >= ship.aimTarget.maxVelocity || Math.abs(targetDeltaAng)>90) && 
+    				(DifPos.length < ship.minIdealRange || DifPos.length > ship.maxIdealRange)){
+    				//Control distance
+    				
+    				if(DifPos.length < ship.minIdealRange) ship.destAngle = targetAng + 180;
+    				if(DifPos.length > ship.maxIdealRange) ship.destAngle = targetAng;
+    				
+    				ship.velocity += ship.tweenFactor * (ship.maxVelocity - ship.velocity);
+    				
+    			}else{
+    				//Control direction
+    				
+    				ship.destAngle = targetAng + ship.idealTargetAng;
+    				
+    				ship.velocity += ship.tweenFactor * (0 - ship.velocity);
+    			}
+    			
+    			ship.fireOn(ship.aimTarget);
+    				
     		}
     	}
     }
     
-    public void HostileProcess(){
-    	
-    	if(target.coreHealth <=0){
-    		target = null;
-    		return;
-    	}
-    	
-    	Vector2D DifPos = ship.getDistance(target);
-    	double targetAngle = ship.getAngle(target);
-    	
-    	double targetDeltaAngle = target.destAngle-targetAngle+180;
-    	if(targetDeltaAngle > 180) targetDeltaAngle -= 360;
-    	if(targetDeltaAngle < -180) targetDeltaAngle += 360;
-    	//First: If this ship has more speed than target or target isn't flying towards ship,
-    	//	then engage distance control
-    	
-    	if((ship.maxVelocity >= target.maxVelocity || Math.abs(targetDeltaAngle) > 90) 
-    		&& (DifPos.length < minTargetDistance || DifPos.length > maxTargetDistance)){
-    		
-    		ship.velocity += velocityTween * (ship.maxVelocity - ship.velocity); 
-    		
-    		if(DifPos.length < minTargetDistance) ship.destAngle = targetAngle + 180;
-    		if(DifPos.length > maxTargetDistance) ship.destAngle = targetAngle;
-    		
-    	}else{
-    		//Otherwise: Engage direction control.
-    		
-    		ship.velocity += velocityTween * (0-ship.velocity);
-    		
-    		ship.destAngle = targetAngle + idealTargetAngle;
-    	}
-    	
-    	ship.fireOn(target);
-    	
-    	
-    	
-    }
 }

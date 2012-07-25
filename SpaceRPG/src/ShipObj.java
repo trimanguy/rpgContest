@@ -34,6 +34,14 @@ public class ShipObj extends GameObj {
     
 	//ship's faction, defaults to pirate
 	String faction = "pirate";
+	
+	
+	//AI related fields
+	boolean hasAI = true;
+	double minIdealRange = 200;
+	double maxIdealRange = 300;
+	double tweenFactor = 1/5;
+	double idealTargetAng = 0;
     
     public double getSpeed(){
     	return this.velocity;
@@ -94,6 +102,8 @@ public class ShipObj extends GameObj {
     
     /*** Find how much to rotate this step ***/
     public double findDeltaAng(double targetAngle){
+    	if(targetAngle >= 360) targetAngle -= 360;
+    	if(targetAngle <0) targetAngle += 360;
     	double deltaAng = (targetAngle - currAngle);
     	double maxDeltaAng = maxAngVel*Global.state.dtt;
     	

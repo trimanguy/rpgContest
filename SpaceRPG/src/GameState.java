@@ -24,9 +24,10 @@ public class GameState {
 	
 	
 	ArrayList<Obj> activeObjs = new ArrayList(0);
-	ArrayList<AI> activeAI = new ArrayList(0);
 	ArrayList<Obj> newObjBuffer = new ArrayList(0);
 	ArrayList<Obj> deleteBuffer = new ArrayList(0);
+	
+	AI activeAI;
 	
 	ShipObj playerObj = null;
 
@@ -74,9 +75,7 @@ public class GameState {
     	
     	time += dtt;
     	
-    	for(AI A:activeAI){
-    		A.Step();
-    	}
+    	activeAI.Step();
     	
     	for(Obj O:activeObjs){
     		O.Step();
