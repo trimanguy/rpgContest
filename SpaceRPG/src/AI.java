@@ -31,6 +31,9 @@ public class AI {
     		
     		if(!ship.hasAI) continue;
     		
+    		if(ship.aimTarget != null && ship.aimTarget.currCoreHealth <=0)
+    				ship.aimTarget = null;
+    		
     		if(ship.aimTarget == null){
     			
     			//Find aim targets!
@@ -41,6 +44,8 @@ public class AI {
     				ShipObj targ = (ShipObj) E;
     				
     				if(!ship.isHostile(targ)) continue;
+    				
+    				if(targ.currCoreHealth <=0) continue;
     				
     				if(ship.aimTarget!=null){
     					

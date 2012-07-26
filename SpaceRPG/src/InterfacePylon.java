@@ -63,7 +63,7 @@ public class InterfacePylon extends UIElement{
     		newPercent = pylon.realHealth/(pylon.baseHealth + (pylon.equipped!=null? pylon.equipped.baseHealth : 0));
     	}
     	
-    	if(pylon!=null && newPercent != percent && newPercent > 0){
+    	if(pylon!=null && newPercent != percent && newPercent > 0.05){
     		int colorIncrement = 64;
     		
     		ca = 0;
@@ -82,7 +82,7 @@ public class InterfacePylon extends UIElement{
 	    	//Call sprite.addColors()
 	    	
 	    	sprite.addColors(cr,cg,cb,ca);
-	    	updateTimer = Global.state.time +  1;
+	    	updateTimer = Global.state.time +  0.5;
     	}
     	percent = newPercent;
     	
@@ -91,7 +91,7 @@ public class InterfacePylon extends UIElement{
     	sprite.Draw(g,I);
     	
     	//Draw the pylon pointer
-    	if(pylon!=null && percent > 0){
+    	if(pylon!=null && percent > 0.05){
     		double dx,dy;
     		dx = x+sprite.frameX/2 + offX;
     		dy = y+sprite.frameY/2 - offY;

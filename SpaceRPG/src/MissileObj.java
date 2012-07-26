@@ -85,11 +85,19 @@ public class MissileObj extends GameObj{
         for(int i=0; i<(ShipObj.allShips.size()); i++){
         	if(ShipObj.allShips.get(i)==source) continue;
         	if(!ShipObj.allShips.get(i).isHostile(source)) continue;
-        	HitCircle gotHit = ShipObj.allShips.get(i).contains(thisMissile);
+        	
+        	ShipObj ship = ShipObj.allShips.get(i);
+        	
+        	if(ship.currCoreHealth <=0) continue;
+        	
+        	HitCircle gotHit = ship.contains(thisMissile);
+        	
+        	
         	
         	if (gotHit !=null) {
         		//NOTE: this is where you process damage logic, ie which hitbox got hit
         		ArrayList<Pylon> affected = new ArrayList(0);
+        		
         		for(int j=0; j<((ShipObj)gotHit.source).pylons.size(); j++){ //make a list of all affected pylons
         			Pylon currPylon = ((ShipObj)gotHit.source).pylons.get(j);
         			//System.out.println("currPylon health: "+currPylon.realHealth);
@@ -104,8 +112,13 @@ public class MissileObj extends GameObj{
         			Double h = Math.floor(Math.random()*affected.size());
         			int hit = h.intValue();
         			Pylon pylonHit = affected.get(hit);
-        			pylonHit.takeDmg((this.damageToHull-pylonHit.flatArmor)+this.damageArmorPiercing);
+        			
+        			//check the shields for the pylon
+        			
+        			pylonHit.dealDamage(this,gotHit);
+        			
         		} else { //damage the core if all pylons destroyed
+        		
         			((ShipObj)gotHit.source).takeDmg(this.damageToHull+this.damageArmorPiercing);
         		}
         		

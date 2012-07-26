@@ -13,6 +13,8 @@ SHIP_MODEL Resources/Sprites/FlakFrigate1-Thrust.png
 SPEED 50
 ANG_SPEED 55
 HITBOXES (back,0,0,25)
+HITBOXES (front,29,0,28)
+HITBOXES (back,-29,0,28)
 PYLONS (back,-30,0,180,180,0,0,5)
 END
 
@@ -21,6 +23,7 @@ SHIP_NAME escort1
 SHIP_MODEL Resources/Sprites/EscortFrigate1-Thrust.png
 SPEED 75
 ANG_SPEED 45
+HITBOXES (front,0,0,24)
 HITBOXES (front,16,0,16)
 HITBOXES (back,-15,0,15)
 PYLONS (front,30,0,0,180,127,0,3,Resources/Sprites/Escort1-Pylon1.png)

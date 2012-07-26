@@ -115,12 +115,49 @@ public class ShipObj extends GameObj {
     
     public void takeDmg(double amount){
     	this.currCoreHealth -= amount;
-    	/*
+    	
     	if (this.currCoreHealth<=0){
-    		this.pylons=null;
-    		this.delete();
+    		//this.pylons=null;
+    		this.addDelete();
     	}
-    	*/
+    	
+    }
+    
+    public void addDelete(){
+    	super.addDelete();
+    	
+    	double nx = this.x + (Math.random()-0.5)*2*10;
+    	double ny = this.y + (Math.random()-0.5)*2*10;
+    	
+    	new AnimatedParticle("Resources/Sprites/explode_1.png", Global.codeContext, 
+	        			0.05, nx, ny);
+	        			
+    	nx = this.x + (Math.random()-0.5)*2*10;
+    	ny = this.y + (Math.random()-0.5)*2*10;
+    	
+    	new AnimatedParticle("Resources/Sprites/explode_1.png", Global.codeContext, 
+	        			0.05, nx, ny);
+	        			
+    	nx = this.x + (Math.random()-0.5)*2*size;
+    	ny = this.y + (Math.random()-0.5)*2*size;
+    	
+    	new AnimatedParticle("Resources/Sprites/explode_3.png", Global.codeContext, 
+	        			0.05, nx, ny);
+    	nx = this.x + (Math.random()-0.5)*2*size;
+    	ny = this.y + (Math.random()-0.5)*2*size;
+    	
+    	new AnimatedParticle("Resources/Sprites/explode_3.png", Global.codeContext, 
+	        			0.05, nx, ny);
+    	nx = this.x + (Math.random()-0.5)*2*size;
+    	ny = this.y + (Math.random()-0.5)*2*size;
+    	
+    	new AnimatedParticle("Resources/Sprites/explode_3.png", Global.codeContext, 
+	        			0.05, nx, ny);
+    	nx = this.x + (Math.random()-0.5)*2*size;
+    	ny = this.y + (Math.random()-0.5)*2*size;
+    	
+    	new AnimatedParticle("Resources/Sprites/explode_3.png", Global.codeContext, 
+	        			0.05, nx, ny);
     }
     
     public void Step(){
@@ -138,11 +175,6 @@ public class ShipObj extends GameObj {
     	//Process shield actions
     	
     	//Pylon actions
-    	/*
-    	for(Pylon P:pylons){
-    		P.Step();
-    	}
-    	*/
     	
     	for(int x=0;x<this.pylons.size();x++){
     		pylons.get(x).Step();

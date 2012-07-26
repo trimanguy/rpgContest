@@ -253,10 +253,29 @@ public class Pylon {
 	    }
     }
     
-    public void takeDmg(double amount){
-    	this.realHealth-=amount;
+    //public void takeDmg(){
+    public void dealDamage(MissileObj O, HitCircle H){  
+       
+        double shields = source.getShields(H);
+        shields = Math.max(0,shields-O.damageToShield);
+       
+        double damageHull;
+        if(shields > 0) damageHull = O.damageThruShield;
+        else damageHull = O.damageToHull;
+     
+        damageHull -= Math.max(0,flatArmor - O.damageArmorPiercing);
+     
+        source.setShields(shields,H);
+        setLife(realHealth-damageHull);
+    }
+    
+    public void setLife(double life){
+    	realHealth = life;
+    	
     	if(this.realHealth<=0){
     		this.activated=false;
+    	}else{
+    		this.activated = true;
     	}
     }
     
