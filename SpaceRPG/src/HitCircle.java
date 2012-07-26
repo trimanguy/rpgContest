@@ -17,7 +17,8 @@ public class HitCircle {
 	String tag;//My thought is you assign a tag to a pylon and then a tag to the associated hitCircles
 	
 	
-    public HitCircle(GameObj s, double nx, double ny, double r) {
+    public HitCircle(GameObj s, String t, double nx, double ny, double r) {
+    	tag=t;
     	rx = nx; ry = ny;
     	source = s;
     	if(s != null) s.hitCircles.add(this);

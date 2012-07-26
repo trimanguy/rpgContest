@@ -113,7 +113,22 @@ public class ShipObj extends GameObj {
     	return deltaAng;
     }
     
+    public void takeDmg(double amount){
+    	this.currCoreHealth -= amount;
+    	/*
+    	if (this.currCoreHealth<=0){
+    		this.pylons=null;
+    		this.delete();
+    	}
+    	*/
+    }
+    
     public void Step(){
+    	//Ship alive?
+    	if(this.currCoreHealth>0){
+			
+    	
+    	
     	//Combat 
     	//this.fireOn( this.findTarget() , 250, 0);
     	this.fireOn(this.findTarget());
@@ -178,7 +193,7 @@ public class ShipObj extends GameObj {
     		}
     	}
     	
-    	
+    	}
     }
     
     public ShipObj(String image) {

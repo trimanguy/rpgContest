@@ -29,8 +29,8 @@ public class GameObj extends Obj {
 	public double destAngle;//Destination angle for ShipObj and MissileObj
 	
 	//core health!
-    double maxCoreHealth=1;
-    double currCoreHealth=1;
+    double maxCoreHealth=10;
+    double currCoreHealth=10;
 	
 	public GameObj(){} //triman added
 	

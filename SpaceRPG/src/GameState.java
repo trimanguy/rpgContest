@@ -45,7 +45,7 @@ public class GameState {
     	File weaponFile = new File("Data/WeaponFile.txt");
     	Utils.parseWeaponFile(weaponFile);
     	
-    	Global.state.playerObj = Utils.createShip("escort1","alliance");
+    	Global.state.playerObj = Utils.createShip("escort1","player");
     	Global.GUI = new ActiveInterface ();
     	for(Pylon P:Global.state.playerObj.pylons){
     		P.equipItem(Utils.createWeapon("testBlaster"));

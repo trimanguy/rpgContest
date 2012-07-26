@@ -93,14 +93,16 @@ public class Utils {
 	    				while(ship_st.hasMoreTokens()){    				
 	    					StringTokenizer hitbox_st = new StringTokenizer(ship_st.nextToken(), ",");
 	    					while(hitbox_st.hasMoreTokens()){
+	    						String tag;
 	    						double x;
 	    						double y;
 	    						double radius;
-	    					
+	    						
+	    						tag=hitbox_st.nextToken();
 	    						x=Double.valueOf(hitbox_st.nextToken());
 	    						y=Double.valueOf(hitbox_st.nextToken());
 	    						radius=Double.valueOf(hitbox_st.nextToken());
-	    						HitCircle hc = new HitCircle(null,x,y,radius);
+	    						HitCircle hc = new HitCircle(null,tag,x,y,radius);
 	    						hitboxes.add(hc);
 	    					}
 	    				}
@@ -116,6 +118,7 @@ public class Utils {
 						while(ship_st2.hasMoreTokens()){
 							StringTokenizer pylon_st = new StringTokenizer(ship_st2.nextToken(), ",");
 							while(pylon_st.hasMoreTokens()){
+								String tag;
 								double x;
 								double y;
 								double centerAngle;
@@ -126,13 +129,12 @@ public class Utils {
 								int size;
 								String pylonImg="";
 								//System.out.print("Check4"+ System.getProperty("line.separator"));
+								tag = pylon_st.nextToken();
 								x = Double.valueOf(pylon_st.nextToken());
 								y = Double.valueOf(pylon_st.nextToken());
 								centerAngle = Double.valueOf(pylon_st.nextToken());
 								arcAngle = Double.valueOf(pylon_st.nextToken());
 								
-								//Pylon angular speed is deprecated
-								//pylonAngSpeed = Double.valueOf(pylon_st.nextToken());
 								screenX = Double.valueOf(pylon_st.nextToken());
 								screenY = Double.valueOf(pylon_st.nextToken());
 								size = Integer.valueOf(pylon_st.nextToken());
@@ -144,7 +146,7 @@ public class Utils {
 								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]+" centerAngle: "+centerAngle+" arcAngle: "+arcAngle
 									+" screenX: "+screenX+" screenY: "+screenY+" pylonImg: "+pylonImg);
 								
-								Pylon pl = new Pylon(null, polar[0],polar[1],centerAngle, arcAngle, screenX, screenY, size, pylonImg);
+								Pylon pl = new Pylon(null, tag, polar[0],polar[1],centerAngle, arcAngle, screenX, screenY, size, pylonImg);
 								//Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double angSpeed)
 								pylons.add(pl);
 								
@@ -298,13 +300,13 @@ public class Utils {
     	//copy over each HitCircle from hitCircles to copiedHitCircles
     	for(int x=0; x<(template.hitCircles.size()); x++){
     		HitCircle currTempHC = template.hitCircles.get(x); 
-    		HitCircle newHitCirc = new HitCircle(newShip, currTempHC.rx, currTempHC.ry, currTempHC.radius);
+    		HitCircle newHitCirc = new HitCircle(newShip, currTempHC.tag, currTempHC.rx, currTempHC.ry, currTempHC.radius);
     		//newShip.hitCircles.add(newHitCirc);
     	} 
     	
     	for(int x=0; x<template.pylons.size();x++){
     		Pylon currTempPylon = template.pylons.get(x);
-    		Pylon newPylon = new Pylon(newShip, currTempPylon.polarRadius, currTempPylon.polarAngle, currTempPylon.centerAngle, currTempPylon.arcAngle,
+    		Pylon newPylon = new Pylon(newShip, currTempPylon.tag, currTempPylon.polarRadius, currTempPylon.polarAngle, currTempPylon.centerAngle, currTempPylon.arcAngle,
     			currTempPylon.screenX, currTempPylon.screenY, currTempPylon.size, currTempPylon.gui);
     		//, currTempPylon.maxAngVel);
     	}

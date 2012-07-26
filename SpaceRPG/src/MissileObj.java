@@ -82,13 +82,33 @@ public class MissileObj extends GameObj{
         
         PointS thisMissile = new PointS(this.x, this.y);
         //check to see if this missle hit any objects
-        for(int x=0; x<(ShipObj.allShips.size()); x++){
-        	if(ShipObj.allShips.get(x)==source) continue;
-        	if(!ShipObj.allShips.get(x).isHostile(source)) continue;
-        	HitCircle gotHit = ShipObj.allShips.get(x).contains(thisMissile);
+        for(int i=0; i<(ShipObj.allShips.size()); i++){
+        	if(ShipObj.allShips.get(i)==source) continue;
+        	if(!ShipObj.allShips.get(i).isHostile(source)) continue;
+        	HitCircle gotHit = ShipObj.allShips.get(i).contains(thisMissile);
         	
         	if (gotHit !=null) {
         		//NOTE: this is where you process damage logic, ie which hitbox got hit
+        		ArrayList<Pylon> affected = new ArrayList(0);
+        		for(int j=0; j<((ShipObj)gotHit.source).pylons.size(); j++){ //make a list of all affected pylons
+        			Pylon currPylon = ((ShipObj)gotHit.source).pylons.get(j);
+        			//System.out.println("currPylon health: "+currPylon.realHealth);
+        			//System.out.println("currPylon tag: "+currPylon.tag+" gotHit tag: "+gotHit.tag );
+        			if( (currPylon.tag.equals(gotHit.tag) )&&(currPylon.realHealth>0)) { affected.add(currPylon);}
+        		}
+        		
+        		//TODO: damage ship shield first
+        		//damage effected pylon (if theres remaning dmg or shieldpierce dmg
+        		if(affected.size()>0){
+        			
+        			Double h = Math.floor(Math.random()*affected.size());
+        			int hit = h.intValue();
+        			Pylon pylonHit = affected.get(hit);
+        			pylonHit.takeDmg((this.damageToHull-pylonHit.flatArmor)+this.damageArmorPiercing);
+        		} else { //damage the core if all pylons destroyed
+        			((ShipObj)gotHit.source).takeDmg(this.damageToHull+this.damageArmorPiercing);
+        		}
+        		
         		if(delImage!=null){
 	        		new AnimatedParticle(delImage, Global.codeContext, 
 	        			0.05, this.x, this.y);

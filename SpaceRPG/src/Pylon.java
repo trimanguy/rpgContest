@@ -69,7 +69,7 @@ public class Pylon {
 
 	
 
-    public Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double screenX, double screenY, int size, String image) {
+    public Pylon(ShipObj source, String t, double radius, double angle, double centerAngle, double arcAngle, double screenX, double screenY, int size, String image) {
     	//for testing purposes
     	baseHealth = 100;
     	type = "Weapon";
@@ -78,6 +78,7 @@ public class Pylon {
     	//public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread) {
     	//this.equipped = (ItemObj)testGun; 
     	//
+    	this.tag=t;
     	this.polarRadius = radius;
     	this.polarAngle = angle;
     	this.centerAngle = centerAngle;
@@ -115,6 +116,9 @@ public class Pylon {
     	
     	//realHealth = baseHealth/2*(Math.sin(Global.state.time/10)+1);
     	//System.out.println(realHealth);
+    	if (this.source == Global.state.playerObj){
+    		System.out.println("pylonHealth: "+this.realHealth+", playerShip health: "+this.source.currCoreHealth);
+    	}
     	
     	if(equipped == null) return; //There is no equipped module!
     	
@@ -247,6 +251,13 @@ public class Pylon {
 	    	//fire
 	    	weapon.Fire(nx,ny,this.currAngle, this.source, target);
 	    }
+    }
+    
+    public void takeDmg(double amount){
+    	this.realHealth-=amount;
+    	if(this.realHealth<=0){
+    		this.activated=false;
+    	}
     }
     
     public void UpdateAngVel(){ 
