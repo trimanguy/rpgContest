@@ -1,0 +1,18 @@
+#Sample PowercoreFile
+#
+#PNAME	name
+#PMODEL	image
+#POWER	number //how much power generated
+#HEALTH	
+#ARMOR	
+#SIZE	number //size to determine if generator can fit into pylon?
+#DESCRIP 
+#END
+
+PNAME
+PMODEL
+POWER
+HEALTH
+ARMOR
+SIZE
+DESCRIP

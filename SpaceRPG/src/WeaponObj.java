@@ -26,10 +26,6 @@ public class WeaponObj extends ItemObj{
 	double angleSpread;//angular inaccuracy in degrees.
 	
 	double turnSpeed;//Degrees/second for the weapon itself
-	double health;
-	double armor;
-	int size;
-	String descrip;
 	
 	/* Damage is computed as follows:
 	 *
@@ -39,14 +35,18 @@ public class WeaponObj extends ItemObj{
 	 *
 	 * if has shields: hullDamage = damageThruShield-max(0,flatArmor-damageArmorPiercing);
 	 */
+	 
 	double damageToShield;
 	double damageThruShield;
 	double damageToHull;
 	double damageArmorPiercing;
 
-    public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread, double itemTurnSpeed, String damage,
+    public WeaponObj(String name, String model, String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread, double itemTurnSpeed, String damage,
     	double health, double armor, double delay, int size, String descrip, boolean activateAble) {
-    		
+    	
+    	type = "Weapon";
+    	this.name = name;
+    	this.model = model;	
     	missileImg = img;
     	missileHitImg = hitImg;
     	missileLife = life;
@@ -55,12 +55,12 @@ public class WeaponObj extends ItemObj{
     	missileTurnSpeed = turnSpeed;
     	angleSpread = spread;
     	this.turnSpeed = itemTurnSpeed;
-    	this.health = health;
+    	this.baseHealth = health;
     	this.armor = armor;
     	activateDelay = delay;
     	this.size = size;
     	this.descrip = descrip;
-    	this.canActivate = true;
+    	this.canActivate = activateAble;
     	
     	//parse damage
     	StringTokenizer st = new StringTokenizer(damage, ",");
@@ -72,10 +72,6 @@ public class WeaponObj extends ItemObj{
     	if(turnSpeed != 0){
     		missileHoming = true;
     	}
-    	type = "Weapon";
-		   	
-    	
-    	
     	
     }
     

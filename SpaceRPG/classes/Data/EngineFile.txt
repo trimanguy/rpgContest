@@ -1,10 +1,21 @@
 #Sample EngineFile
 #
-#ENG_NAME name
-#ENG_MODEL image
-#ENG_MAXSPD number //max speed
-#ROT_SPEED number //ship rotation
-#HEALTH
-#ARMOR
-#POWER_REQ number
-#SIZE number
+#ENAME	name
+#EMODEL	image
+#MAXSPD	number //max speed
+#ROTSPD	number //ship rotation
+#HEALTH	
+#ARMOR	
+#PWRREQ	number
+#SIZE 	number
+#DESCRIP
+
+ENAME	testEng
+EMODEL
+MAXSPD	100
+ROTSPD	30
+HEALTH	50
+ARMOR	1
+PWRREQ	0
+SIZE	1
+DESCRIP	testEngine is this

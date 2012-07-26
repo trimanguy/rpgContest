@@ -20,8 +20,7 @@ public class Utils {
 	static String tempSize;
 	
 	//ShipFile vars
-	static String tempSpeed;
-	static String tempAngSpeed;
+
 	static String tempHitBoxes="";
 	static String tempPylons="";
 	static ArrayList<Pylon> pylons = new ArrayList(0);
@@ -36,12 +35,24 @@ public class Utils {
 	static String tempArmor;
 	static String tempDelay;
 	
-	static boolean activateAble;
+	//EngineFile vars
+	static String tempSpeed;
+	static String tempAngSpeed;
+	static String tempPwr;
+	
+	//ShieldFile vars
+	static String tempShield;
+	static String tempBoostCost;
+	
+	static boolean activateAble=true;
 	
 	
 	/*** We store parsed data in these hashtables ***/
 	static Hashtable shipTable = new Hashtable();
 	static Hashtable weaponTable = new Hashtable();
+	static Hashtable engineTable = new Hashtable();
+	static Hashtable powerCoreTable = new Hashtable();
+	static Hashtable shieldTable = new Hashtable();
     
     public static void storeShipInfo(){
     }
@@ -59,19 +70,17 @@ public class Utils {
 	    				//System.out.print("Check1"+ System.getProperty("line.separator"));
 	    				continue;
 	    			}
-	    			StringTokenizer st = new StringTokenizer(line);
+	    			StringTokenizer st = new StringTokenizer(line,"\t");
 	    			String identifier;
 	    			
 	    			while(st.hasMoreTokens()){
 	    				identifier = st.nextToken();
-	    				//System.out.print("Check2"+ System.getProperty("line.separator"));
 	    				switch (identifier) {
-	    					case "SHIP_NAME":	name = st.nextToken(); break;
-	    					case "SHIP_MODEL":	image = st.nextToken(); break;
-	    					case "SPEED":		tempSpeed = st.nextToken(); break;
-	    					case "ANG_SPEED":	tempAngSpeed = st.nextToken(); break;
-	    					case "HITBOXES":	tempHitBoxes += st.nextToken(); break;
+	    					case "SNAME":	name = st.nextToken(); break;
+	    					case "SMODEL":	image = st.nextToken(); break;
+	    					case "HB":	tempHitBoxes += st.nextToken(); break;
 	    					case "PYLONS":		tempPylons += st.nextToken(); break;
+	    					case "DESCRIP":		descrip = st.nextToken(); break;//
 	    					case "END":			saveFlag = true; break;
 	    				}	
 	    			}
@@ -80,8 +89,8 @@ public class Utils {
 	    			if (saveFlag){
 	    				//System.out.print("Check3"+ System.getProperty("line.separator"));
 	    				//convert stuff to correct datatypes then call constructor in shipObj
-	    				double speed = Double.valueOf(tempSpeed);
-	    				double angSpeed = Double.valueOf(tempAngSpeed);
+	    				//double speed = Double.valueOf(tempSpeed);
+	    				//double angSpeed = Double.valueOf(tempAngSpeed);
 	    				
 	    				/*** This part for Hitboxes ***/
 	    				//remove parens for use with tokenizer
@@ -106,13 +115,13 @@ public class Utils {
 	    						hitboxes.add(hc);
 	    					}
 	    				}
-	    				System.out.println("tempPylons before: "+tempPylons);
+	    				//System.out.println("tempPylons before: "+tempPylons);
 	    				/*** This part for Pylons ***/
 	    				//remove parens for use with tokenizer
 	    				tempPylons = tempPylons.replace('(', ' ');
 	    				tempPylons = tempPylons.replace(')', ' ');
 	    				StringTokenizer ship_st2 = new StringTokenizer(tempPylons);
-	    				System.out.println("tempPylons after: "+tempPylons);
+	    				//System.out.println("tempPylons after: "+tempPylons);
 	    					
 	    				//for each token of form 1.0,1.0
 						while(ship_st2.hasMoreTokens()){
@@ -143,28 +152,28 @@ public class Utils {
 								//convert x and y into polar coord
 								double[] polar = cartesianToPolar(x,y); //radius,angle
 								
+								/*
 								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]+" centerAngle: "+centerAngle+" arcAngle: "+arcAngle
 									+" screenX: "+screenX+" screenY: "+screenY+" pylonImg: "+pylonImg);
+								*/
 								
 								Pylon pl = new Pylon(null, tag, polar[0],polar[1],centerAngle, arcAngle, screenX, screenY, size, pylonImg);
 								//Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double angSpeed)
-								pylons.add(pl);
-								
-								
+								pylons.add(pl);	
 							}
 						}
 	    				
-	    				
-	    				ShipObj ship = new ShipObj(image,speed,angSpeed,hitboxes,pylons); //remember to add pylon stuff to ship
+	    				ShipObj ship = new ShipObj(image,hitboxes,pylons,descrip); //remember to add pylon stuff to ship
 	    				Utils.shipTable.put(Utils.name, ship);
 	    				
 	    				//clear vars for next ship
 	    				name = "";
 	    				image = "";
-	    				tempSpeed = "";
-	    				tempAngSpeed = "";
+	    				//tempSpeed = "";
+	    				//tempAngSpeed = "";
 	    				tempHitBoxes = "";
 	    				tempPylons = "";
+	    				descrip = "";
 	    				pylons = new ArrayList(0);
 	    				hitboxes = new ArrayList(0);
 	    				saveFlag = false;
@@ -180,6 +189,7 @@ public class Utils {
     	catch (IOException ex){
     		ex.printStackTrace();
     	}
+    	/*
     	System.out.print("Check5"+ System.getProperty("line.separator"));
     	ShipObj test = (ShipObj)shipTable.get("flak1");
     	double test_speed = test.velocity;
@@ -189,6 +199,7 @@ public class Utils {
     	double test_hitbox1 = test.hitCircles.get(0).ry;
     	double test_hitbox2 = test.hitCircles.get(0).radius;
     	System.out.print("shipTable[flak1]'s hitbox is: ("+ test_hitbox0 + test_hitbox1 + test_hitbox2 +")" + System.getProperty("line.separator"));
+    	*/
     }
     
     public static void parseWeaponFile(File filename){
@@ -204,25 +215,25 @@ public class Utils {
 	    				//System.out.print("Check1"+ System.getProperty("line.separator"));
 	    				continue;
 	    			}
-	    			StringTokenizer st = new StringTokenizer(line);
+	    			StringTokenizer st = new StringTokenizer(line, "\t");
 	    			String identifier;
 	    			
 	    			while(st.hasMoreTokens()){
 	    				identifier = st.nextToken();
 	    				//System.out.print("Check2"+ System.getProperty("line.separator"));
 	    				switch (identifier) {
-	    					case "WEAPON_NAME":		name = st.nextToken(); break;
-	    					case "WEAPON_MODEL":	image = st.nextToken(); break; //none for now, maybe use later for hangar screen
+	    					case "WNAME":			name = st.nextToken(); break;
+	    					case "WMODEL":			image = st.nextToken(); break; //none for now, maybe use later for hangar screen
 	    					case "MISSILE":			missile = st.nextToken(); break;
-	    					case "ACCURACY":		tempAccuracy = st.nextToken(); break;
+	    					case "ACCR":			tempAccuracy = st.nextToken(); break;
 	    					case "DAMAGE":			tempDamage = st.nextToken(); break;
-	    					case "TURNSPEED":		tempWeaponTurnSpeed = st.nextToken(); break; 
+	    					case "TURNSPD":			tempWeaponTurnSpeed = st.nextToken(); break; 
 	    					case "HEALTH":			tempHealth = st.nextToken(); break;
 	    					case "ARMOR":			tempArmor = st.nextToken(); break;
 	    					case "DELAY":			tempDelay = st.nextToken(); break;
 	    					case "SIZE":			tempSize = st.nextToken(); break;//
 	    					case "DESCRIP":			descrip = st.nextToken(); break;//
-	    					case "ACTIVATEABLE":	activateAble = true; break;//
+	    					case "PASSIVE":			activateAble = false; break;//
 	    					case "END":				saveFlag = true; break;
 	    				}	
 	    			}
@@ -247,7 +258,7 @@ public class Utils {
 	    				double accel = Double.valueOf(st_missile.nextToken());
 	    				double missileTurnSpeed = Double.valueOf(st_missile.nextToken());
 	    				
-	    				WeaponObj weapon = new WeaponObj(img,hitImg,lifeTime,maxSpeed,accel,missileTurnSpeed,accuracy,weaponTurnSpeed,
+	    				WeaponObj weapon = new WeaponObj(name,image,img,hitImg,lifeTime,maxSpeed,accel,missileTurnSpeed,accuracy,weaponTurnSpeed,
 	    					tempDamage,health,armor,delay,size,descrip,activateAble); 
 	    				Utils.weaponTable.put(Utils.name, weapon);
 	    				
@@ -262,12 +273,11 @@ public class Utils {
 	    				tempArmor = "";
 	    				tempDelay = "";
 	    				tempSize = "";
-	    				activateAble = false;
+	    				activateAble = true;
 	    				descrip = "";
 	    				saveFlag = false;
 	    				
 	    			}
-	    			
 	    		}
 	    	}
 	    	finally {
@@ -278,6 +288,213 @@ public class Utils {
     		ex.printStackTrace();
     	}
     }
+    
+    public static void parseEngineFile(File filename){
+    	StringBuilder contents = new StringBuilder();
+    	
+    	try {
+    		BufferedReader input = new BufferedReader(new FileReader(filename));
+	    	try {
+	    		String line = null;
+	    		//for each line in the file
+	    		while ((line=input.readLine()) != null){
+	    			if(line.startsWith("#")){
+	    				continue;
+	    			}
+	    			StringTokenizer st = new StringTokenizer(line, "\t");
+	    			String identifier;
+	    			
+	    			while(st.hasMoreTokens()){
+	    				identifier = st.nextToken();
+	    				switch (identifier) {
+	    					case "ENAME":		name = st.nextToken(); break;
+	    					case "EMODEL":		image = st.nextToken(); break; //none for now, maybe use later for hangar screen
+	    					case "MAXSPD":		tempSpeed = st.nextToken(); break;
+	    					case "ROTSPD":		tempAngSpeed = st.nextToken(); break;
+	    					case "HEALTH":		tempHealth = st.nextToken(); break;
+	    					case "ARMOR":		tempArmor = st.nextToken(); break;
+	    					case "PWRREQ":		tempPwr = st.nextToken(); break;
+	    					case "SIZE":		tempSize = st.nextToken(); break;//
+	    					case "DESCRIP":		descrip = st.nextToken(); break;//
+	    					case "PASSIVE":		activateAble = false; break;//
+	    					case "END":			saveFlag = true; break;
+	    				}	
+	    			}
+	    			
+	    			//we finished reading info; need to save it
+	    			if (saveFlag){
+	    				//convert stuff to correct datatypes then call constructor in EngineObj
+	    				double maxSpd = Double.valueOf(tempSpeed);
+	    				double rotSpd = Double.valueOf(tempAngSpeed);
+	    				double health = Double.valueOf(tempHealth);
+	    				double armor = Double.valueOf(tempArmor);
+	    				double powerReq = Double.valueOf(tempPwr);
+	    				int size = Integer.valueOf(tempSize);
+	    			
+	    				EngineObj engine = new EngineObj(name,image,maxSpd,rotSpd,health,armor,powerReq,size,descrip);
+	    					
+	    				//stick it in EngineTable	
+	    				Utils.engineTable.put(Utils.name, engine);
+	    				
+	    				//clear vars for next engine
+	    				name = "";
+	    				image = "";
+	    				tempSpeed = "";
+	    				tempAngSpeed = "";
+	    				tempHealth = "";
+	    				tempArmor = "";
+	    				tempPwr = "";
+	    				tempSize = "";
+	    				activateAble = true;
+	    				descrip = "";
+	    				saveFlag = false;	
+	    			}
+	    		}
+	    	}
+	    	finally {
+	    		input.close();
+	    	}
+    	}
+    	catch (IOException ex){
+    		ex.printStackTrace();
+    	}
+    }
+    
+    public static void parsePowerCoreFile(File filename){
+    	StringBuilder contents = new StringBuilder();
+    	
+    	try {
+    		BufferedReader input = new BufferedReader(new FileReader(filename));
+	    	try {
+	    		String line = null;
+	    		//for each line in the file
+	    		while ((line=input.readLine()) != null){
+	    			if(line.startsWith("#")){
+	    				continue;
+	    			}
+	    			StringTokenizer st = new StringTokenizer(line, "\t");
+	    			String identifier;
+	    			
+	    			while(st.hasMoreTokens()){
+	    				identifier = st.nextToken();
+	    				switch (identifier) {
+	    					case "GNAME":		name = st.nextToken(); break;
+	    					case "GMODEL":		image = st.nextToken(); break; //none for now, maybe use later for hangar screen
+	    					case "POWER":		tempPwr = st.nextToken(); break;
+	    					case "HEALTH":		tempHealth = st.nextToken(); break;
+	    					case "ARMOR":		tempArmor = st.nextToken(); break;
+	    					case "SIZE":		tempSize = st.nextToken(); break;//
+	    					case "DESCRIP":		descrip = st.nextToken(); break;//
+	    					case "END":			saveFlag = true; break;
+	    				}	
+	    			}
+	    			
+	    			//we finished reading info; need to save it
+	    			if (saveFlag){
+	    				//convert stuff to correct datatypes then call constructor 
+	    				double health = Double.valueOf(tempHealth);
+	    				double armor = Double.valueOf(tempArmor);
+	    				double power = Double.valueOf(tempPwr);
+	    				int size = Integer.valueOf(tempSize);
+	    			
+	    				PowerCoreObj powerCore = new PowerCoreObj(name,image,power,health,armor,size,descrip);
+	    					
+	    				//stick it in PowerCoreTable	
+	    				Utils.powerCoreTable.put(Utils.name, powerCore);
+	    				
+	    				//clear vars for next powerCore
+	    				name = "";
+	    				image = "";
+	    				tempPwr = "";
+	    				tempHealth = "";
+	    				tempArmor = "";
+	    				tempSize = "";
+	    				descrip = "";
+	    				saveFlag = false;	
+	    			}
+	    		}
+	    	}
+	    	finally {
+	    		input.close();
+	    	}
+    	}
+    	catch (IOException ex){
+    		ex.printStackTrace();
+    	}
+    }
+    
+    public static void parseShieldFile(File filename){
+    	StringBuilder contents = new StringBuilder();
+    	
+    	try {
+    		BufferedReader input = new BufferedReader(new FileReader(filename));
+	    	try {
+	    		String line = null;
+	    		//for each line in the file
+	    		while ((line=input.readLine()) != null){
+	    			if(line.startsWith("#")){
+	    				continue;
+	    			}
+	    			StringTokenizer st = new StringTokenizer(line, "\t");
+	    			String identifier;
+	    			
+	    			while(st.hasMoreTokens()){
+	    				identifier = st.nextToken();
+	    				switch (identifier) {
+	    					case "SNAME":		name = st.nextToken(); break;
+	    					case "SMODEL":		image = st.nextToken(); break; //none for now, maybe use later for hangar screen
+	    					case "SAMT":		tempShield = st.nextToken(); break;
+	    					case "RDELAY":		tempDelay = st.nextToken(); break;
+	    					case "HEALTH":		tempHealth = st.nextToken(); break;
+	    					case "ARMOR":		tempArmor = st.nextToken(); break;
+	    					case "PWRREQ":		tempPwr = st.nextToken(); break;
+	    					case "BSTCOST":		tempBoostCost = st.nextToken(); break;
+	    					case "SIZE":		tempSize = st.nextToken(); break;//
+	    					case "DESCRIP":		descrip = st.nextToken(); break;//
+	    					case "END":			saveFlag = true; break;
+	    				}	
+	    			}
+	    			
+	    			//we finished reading info; need to save it
+	    			if (saveFlag){
+	    				//convert stuff to correct datatypes then call constructor 
+	    				double shieldAmt = Double.valueOf(tempShield);
+	    				double regenDelay = Double.valueOf(tempDelay);
+	    				double boostCost = Double.valueOf(tempBoostCost);
+	    				double health = Double.valueOf(tempHealth);
+	    				double armor = Double.valueOf(tempArmor);
+	    				double powerReq = Double.valueOf(tempPwr);
+	    				int size = Integer.valueOf(tempSize);
+	    			
+	    				ShieldObj newShield = new ShieldObj(name,image,shieldAmt,regenDelay,boostCost,health,armor,powerReq,size,descrip);
+	    					
+	    				//stick it in PowerCoreTable	
+	    				Utils.shieldTable.put(Utils.name, newShield);
+	    				
+	    				//clear vars for next powerCore
+	    				name = "";
+	    				image = "";
+	    				tempShield = "";
+	    				tempDelay = "";
+	    				tempBoostCost = "";
+	    				tempHealth = "";
+	    				tempArmor = "";
+	    				tempPwr = "";
+	    				tempSize = "";
+	    				descrip = "";
+	    				saveFlag = false;	
+	    			}
+	    		}
+	    	}
+	    	finally {
+	    		input.close();
+	    	}
+    	}
+    	catch (IOException ex){
+    		ex.printStackTrace();
+    	}
+    }
+    
     
     /*** convert parsed hitbox string to arraylist ***/
     public static void convertHitboxes(String hitboxes){
@@ -295,34 +512,61 @@ public class Utils {
     	
     	ShipObj template = (ShipObj)Utils.shipTable.get(shipName);
     	ArrayList<HitCircle> copiedHitCircles = new ArrayList(0);
-    	ShipObj newShip = new ShipObj(template.imageName, Global.codeContext, template.maxVelocity, template.maxAngVel, copiedHitCircles);
+    	ArrayList<Pylon> copiedPylons = new ArrayList(0);
+    	ShipObj newShip = new ShipObj(template.imageName, Global.codeContext, copiedHitCircles, copiedPylons, descrip);
     	
     	//copy over each HitCircle from hitCircles to copiedHitCircles
     	for(int x=0; x<(template.hitCircles.size()); x++){
     		HitCircle currTempHC = template.hitCircles.get(x); 
     		HitCircle newHitCirc = new HitCircle(newShip, currTempHC.tag, currTempHC.rx, currTempHC.ry, currTempHC.radius);
-    		//newShip.hitCircles.add(newHitCirc);
-    	} 
+    		copiedHitCircles.add(newHitCirc);
+    	}
+    	newShip.hitCircles=copiedHitCircles; 
+    	
     	
     	for(int x=0; x<template.pylons.size();x++){
     		Pylon currTempPylon = template.pylons.get(x);
     		Pylon newPylon = new Pylon(newShip, currTempPylon.tag, currTempPylon.polarRadius, currTempPylon.polarAngle, currTempPylon.centerAngle, currTempPylon.arcAngle,
     			currTempPylon.screenX, currTempPylon.screenY, currTempPylon.size, currTempPylon.gui);
-    		//, currTempPylon.maxAngVel);
+			copiedPylons.add(newPylon);
     	}
+    	newShip.pylons=copiedPylons;
     	
     	return newShip;
     }
     
-    /*** Used for weapon creation ***/
+    /*** Shield Creator ***/
+    public static ShieldObj createShield(String shieldName){
+    	ShieldObj template = (ShieldObj)Utils.shieldTable.get(shieldName);
+    	ShieldObj newShield = new ShieldObj(template.name,template.model,template.maxShield,template.regenDelay,template.boostCost,
+    		template.baseHealth,template.armor,template.shieldPowerConsumption,template.size,template.descrip);
+    	return newShield;
+    	
+    }
+    
+    /*** PowerCore Creator ***/
+    public static PowerCoreObj createPowerCore(String powerCoreName){
+    	PowerCoreObj template = (PowerCoreObj)Utils.powerCoreTable.get(powerCoreName);
+    	PowerCoreObj newPowerCore = new PowerCoreObj(template.name,template.model,template.maxPower,template.baseHealth,template.armor, template.size,template.descrip);
+   		return newPowerCore;
+    }
+    
+    /*** Weapon Creator ***/
     public static WeaponObj createWeapon(String weaponName){
     	
     	WeaponObj template = (WeaponObj)Utils.weaponTable.get(weaponName);
     	String damage = ""+template.damageToShield+","+template.damageThruShield+","+template.damageToHull+","+template.damageArmorPiercing;
-    	WeaponObj newWeapon = new WeaponObj(template.missileImg,template.missileHitImg,template.missileLife,template.missileMaxSpeed,template.missileAcceleration,
-    		template.missileTurnSpeed,template.angleSpread,template.turnSpeed,damage,template.health,template.armor,template.activateDelay,template.size,template.descrip,template.canActivate);
+    	WeaponObj newWeapon = new WeaponObj(template.name, template.model, template.missileImg,template.missileHitImg,template.missileLife,template.missileMaxSpeed,template.missileAcceleration,
+    		template.missileTurnSpeed,template.angleSpread,template.turnSpeed,damage,template.baseHealth,template.armor,template.activateDelay,template.size,template.descrip,template.canActivate);
     	
     	return newWeapon;
+    }
+    
+    /*** Engine Creator ***/
+    public static EngineObj createEngine(String engineName){
+    	EngineObj template = (EngineObj)Utils.engineTable.get(engineName);
+    	EngineObj newEngine = new EngineObj(template.name, template.model,template.maxVelocity,template.maxAngVelocity,template.baseHealth,template.armor,template.maxPowerConsumption,template.size,template.descrip);
+    	return newEngine;
     }
     
     /*** conversion assumes x and y are coords relative to 0,0 ***/

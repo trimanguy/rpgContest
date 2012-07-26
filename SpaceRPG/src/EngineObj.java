@@ -9,11 +9,29 @@
 
 public class EngineObj extends ItemObj{
 
+	//deprecated
 	double acceleration=1;
 	double maxThrust=1;
+	//
+	
+	double maxVelocity;
+	double maxAngVelocity;
 	double maxPowerConsumption=1;
 	
 	double sigmoidPower = 10;
+
+	public EngineObj(String name, String model,double maxSpeed,double rotSpeed, double health, double armor, double pwrReq, int size, String descrip){
+		this.type = "Engine";
+		this.name = name;
+    	this.model = model;	
+    	this.maxVelocity = maxSpeed;
+    	this.maxAngVelocity = rotSpeed;
+    	this.baseHealth = health;
+    	this.armor = armor;
+    	this.maxPowerConsumption = pwrReq;
+    	this.size = size;
+    	this.descrip = descrip;
+	}
 
     public double getThrust(double percent){
     	return percent * maxThrust;

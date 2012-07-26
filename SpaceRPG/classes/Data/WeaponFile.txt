@@ -1,11 +1,11 @@
 #Sample WeaponFile
 #
-#WEAPON_NAME name
-#WEAPON_MODEL image //might be used in future for hangar screen
+#WNAME name
+#WMODEL image //might be used in future for hangar screen
 #MISSILE whenTravelling,whenHit,lifeTime,maxSpeed,accel,missileTurnSpeed 
-#ACCURACY angleSpread
+#ACCR angleSpread
 #DAMAGE toShield,shieldPierce,toHull,hullPierce
-#TURNSPEED
+#TURNSPD
 #HEALTH
 #ARMOR
 #DELAY
@@ -14,28 +14,28 @@
 #ACTIVATEABLE (only if you can activate item; default=false)
 #END
 
-WEAPON_NAME testBlaster
-WEAPON_MODEL none
-MISSILE Resources/Sprites/PlasmaSmall.png,Resources/Sprites/explode_2.png,3,300,3000,0
-ACCURACY 5
-DAMAGE 0,0,1,0
-TURNSPEED 1200
-HEALTH 1
-ARMOR 1
-DELAY 0.5
-SIZE 1
+WNAME	testBlaster
+WMODEL	none
+MISSILE	Resources/Sprites/PlasmaSmall.png,Resources/Sprites/explode_2.png,3,300,3000,0
+ACCR	5
+DAMAGE	0,0,1,0
+TURNSPD	1200
+HEALTH	1
+ARMOR	1
+DELAY	0.5
+SIZE	1
 DESCRIP testweapon
 END
 
-WEAPON_NAME testMissile
-WEAPON_MODEL none
-MISSILE Resources/Sprites/RedMissile1.png,Resources/Sprites/explode_3.png,20,600,250,90
-ACCURACY 10
-DAMAGE 0,0,0,1
-TURNSPEED 0
-HEALTH 1
-ARMOR 1
-DELAY 2
-SIZE 1
-DESCRIP testMissile
+WNAME	testMissile
+WMODEL	none
+MISSILE	Resources/Sprites/RedMissile1.png,Resources/Sprites/explode_3.png,20,600,250,90
+ACCR	10
+DAMAGE	0,0,0,1
+TURNSPD	0
+HEALTH	1
+ARMOR	1
+DELAY	2
+SIZE	1
+DESCRIP	testMissile
 END

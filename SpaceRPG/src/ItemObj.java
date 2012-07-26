@@ -8,15 +8,13 @@
 
 
 public class ItemObj extends Obj{
-
-	String descrip;
+	
 	String name;
-	double mass;
+	String model; //path to model img (hangar use)
+	String descrip;
 	
 	int size; //This corresponds to Pylon.size
 	String type;//This corresponds to Pylon.type
-	
-	
 	
 	int quantity;
 	int maxQuantity=1;

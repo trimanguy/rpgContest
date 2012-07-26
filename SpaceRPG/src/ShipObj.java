@@ -11,11 +11,16 @@ import java.net.*;
 
 
 public class ShipObj extends GameObj {
+
+    //Important imports from GameObj:
+    //	ArrayList hitBoxes
+    //	ArrayList pylons
+    
     static ArrayList<ShipObj> allShips = new ArrayList(0);
-	ArrayList<Pylon> pylons = new ArrayList(0);
 	
     //double destAngle;
     String imageName;
+    String descrip;
     double maxAngVel = 10; // Degrees per second
     double velocity = 0; //Pixels per second
     double maxVelocity;
@@ -42,21 +47,21 @@ public class ShipObj extends GameObj {
 	double tweenFactor = 0.05;
 	double idealTargetAng = 0;
     
+    
     public double getSpeed(){
     	return this.velocity;
     }
     
     /*** Ship Constructor, puts ship on screen ***/
-    public ShipObj(String image, URL spritecontext, double maxSpeed, double maxAngVel, ArrayList<HitCircle> hitboxes) { 
+    public ShipObj(String image, URL spritecontext, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons, String descrip) { 
     	if(image != null && spritecontext != null)
     	{
     		sprite = new Sprite(image, spritecontext, true);
 	    	context = spritecontext;
 	    	
-	    	velocity = maxSpeed;
-	    	maxVelocity = maxSpeed;
-	    	this.maxAngVel = maxAngVel;
 	    	hitCircles = hitboxes;
+	    	pylons = newPylons;
+	    	this.descrip = descrip;
 	    	allShips.add(this);
 	    	Global.state.newObjBuffer.add(this);
 	    	size = 32;
@@ -64,13 +69,12 @@ public class ShipObj extends GameObj {
     }
     
     /*** Ship Data Constructor, similar to C++ struct ***/
-    public ShipObj(String image, double maxSpeed, double maxAngVel, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons){
+    public ShipObj(String image, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons, String descrip){
     	//don't need to add to allShips cuz this just template obj
     	imageName = image;
-    	maxVelocity = maxSpeed;
-    	this.maxAngVel = maxAngVel;
     	hitCircles = hitboxes;
-    	pylons = newPylons;	
+    	pylons = newPylons;
+    	this.descrip = descrip;	
     	
     }
     

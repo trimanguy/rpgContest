@@ -1,33 +1,30 @@
 #Sample ShipFile
 #
-#SHIP_NAME string
-#SHIP_MODEL string
-#HITBOXES (coord_x1,coord_y1,radius1)(coord_x2,coord_y2,radius2)
-#PYLONS (offset_x1,offset_y1,centerAng,arcAng,screenx,screeny,size,gui) //need ot add size to pylon
-#SPEED double
+#SNAME	string
+#SMODEL	string
+#HB	(coord_x1,coord_y1,radius1)(coord_x2,coord_y2,radius2) //hitboxes
+#PYLONS	(offset_x1,offset_y1,centerAng,arcAng,screenx,screeny,size,gui) //need ot add size to pylon
+#SPEED	double
 #END
 
 #test ship
-SHIP_NAME flak1
-SHIP_MODEL Resources/Sprites/FlakFrigate1-Thrust.png
-SPEED 50
-ANG_SPEED 55
-HITBOXES (back,0,0,25)
-HITBOXES (front,29,0,28)
-HITBOXES (back,-29,0,28)
-PYLONS (back,-30,0,180,180,0,0,5)
+SNAME	flak1
+SMODEL	Resources/Sprites/FlakFrigate1-Thrust.png
+SPEED	50
+HB	(back,0,0,25)
+PYLONS	(back,-30,0,180,180,0,0,5)
+DESCRIP	testShip flak1
 END
 
 #test ship
-SHIP_NAME escort1
-SHIP_MODEL Resources/Sprites/EscortFrigate1-Thrust.png
-SPEED 75
-ANG_SPEED 45
-HITBOXES (front,0,0,24)
-HITBOXES (front,16,0,16)
-HITBOXES (back,-15,0,15)
-PYLONS (front,30,0,0,180,127,0,3,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS (front,15,10,67.5,180,44,25,3,Resources/Sprites/Escort1-Pylon2.png)
-PYLONS (front,15,-10,-67.5,180,44,-25,3,Resources/Sprites/Escort1-Pylon3.png)
-PYLONS (back,-10,0,0,180,0,0,2,Resources/Sprites/Escort1-Pylon4.png)
+SNAME	escort1
+SMODEL	Resources/Sprites/EscortFrigate1-Thrust.png
+SPEED	75
+HB	(front,29,0,28)
+HB	(back,-29,0,28)
+PYLONS	(front,30,0,0,180,127,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(front,15,10,67.5,180,44,25,3,Resources/Sprites/Escort1-Pylon2.png)
+PYLONS	(front,15,-10,-67.5,180,44,-25,3,Resources/Sprites/Escort1-Pylon3.png)
+PYLONS	(back,-10,0,0,180,0,0,2,Resources/Sprites/Escort1-Pylon4.png)
+DESCRIP	testShip escort1
 END

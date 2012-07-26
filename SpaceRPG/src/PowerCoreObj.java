@@ -10,6 +10,19 @@
 public class PowerCoreObj extends ItemObj{
 
 	double maxPower;
-	double powerRate;
+	double powerRate; //what this?
+	
+	public PowerCoreObj(String name, String model, Double power, Double health, Double armor, int size, String descrip){
+		
+		this.type = "PowerCore";
+		this.name = name;
+		this.model = model;
+		this.maxPower = power;
+		this.baseHealth = health;
+		this.armor = armor;
+		this.size = size;
+		this.descrip = descrip;
+		
+	}
 
 }

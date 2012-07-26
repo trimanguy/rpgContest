@@ -9,3 +9,4 @@
 #POWER_REQ number
 #BOOST_COST number //energy cost to boost
 #SIZE number //for fitting into pylon
+#DESCRIP
