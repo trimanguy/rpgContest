@@ -64,6 +64,7 @@ public class InterfacePylon extends UIElement{
     	}
     	
     	if(pylon!=null && newPercent != percent && newPercent > 0.05){
+    		newPercent = Math.min(newPercent,0.95);
     		int colorIncrement = 64;
     		
     		ca = 0;

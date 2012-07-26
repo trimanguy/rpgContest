@@ -202,12 +202,19 @@ public class Obj implements Comparable{
     
     public void addDelete(){
     	Global.state.deleteBuffer.add(this);
+    	
     }
     
     public void delete(){ //Note: Not guaranteed to clear this obj from memory
     	Global.state.activeObjs.remove(this);
     	Global.view.drawObjects.remove(this);
     	Global.state.needGC = true;
+    	
+    	if(Global.player.mouseObj == this)
+    		Global.player.mouseObj = null;
+    	
+    	if(Global.player.dropObj == this)
+    		Global.player.dropObj = null;
     	
     	if(sprite!=null){
     		if(sprite.img!=null){

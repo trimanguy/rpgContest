@@ -28,6 +28,9 @@ public class MissileObj extends GameObj{
     
     double timeLeft = 0; //how long the missle flies before it dies
     
+    double lastx;
+    double lasty;
+    
     public MissileObj(String image, String killImage, URL spritecontext, GameObj shipObj, GameObj targetObj, 
     	double dmgTS, double dmgThS, double dmgTH, double dmgAP, 
     	double nx, double ny, double turnRate, double speed, double maxSpeed, double acceleration, double time,
@@ -115,7 +118,7 @@ public class MissileObj extends GameObj{
         			
         			//check the shields for the pylon
         			
-        			pylonHit.dealDamage(this,gotHit);
+        			pylonHit.takeDamageFrom(this);
         			
         		} else { //damage the core if all pylons destroyed
         		
@@ -149,11 +152,10 @@ public class MissileObj extends GameObj{
     	velX = velocity * Math.cos(currAngle/180*Math.PI);
     	velY = velocity * Math.sin(currAngle/180*Math.PI);
     	
+    	lastx = x;
+    	lasty = y;
+    	
     	move(velX*Global.state.dtt,velY*Global.state.dtt);
-    	/*
-    	Global.player.cx += velX;
-    	Global.player.cy += velY;
-    	*/
     }
     
     

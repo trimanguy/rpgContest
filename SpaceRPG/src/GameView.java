@@ -93,6 +93,8 @@ public class GameView implements Runnable{
     	//Draw active objects here. Things like ships, particles, asteroids, projectiles, etc...
     	for(int i=0;i<drawObjects.size();i++){
     		Obj O = (Obj) drawObjects.get(i);
+    		
+    		if(O == null) continue;
     		O.Draw(buffergraphics,I);
     		
     		/*

@@ -114,6 +114,20 @@ public class GameState {
         	P.equipItem(Utils.createWeapon("testMissile"));
         }
         ship9.velocity = 50;
+        
+        ShipObj ship10 = Utils.createShip("flak1");
+        ship10.y = (Math.random()-0.5)*2*placeSize;ship10.x=(Math.random()-0.5)*2*placeSize;
+        for(Pylon P:ship10.pylons){
+        	P.equipItem(Utils.createWeapon("testMissile"));
+        }
+        ship10.velocity = 50;
+        
+        ShipObj ship11 = Utils.createShip("flak1");
+        ship11.y = (Math.random()-0.5)*2*placeSize;ship11.x=(Math.random()-0.5)*2*placeSize;
+        for(Pylon P:ship11.pylons){
+        	P.equipItem(Utils.createWeapon("testMissile"));
+        }
+        ship11.velocity = 50;
     }
     
     public void Tick(){

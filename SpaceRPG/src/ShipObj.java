@@ -8,6 +8,9 @@
  
 import java.util.*;
 import java.net.*;
+import java.awt.Graphics2D;
+import java.awt.image.ImageObserver;
+import java.awt.Color;
 
 
 public class ShipObj extends GameObj {
@@ -31,11 +34,12 @@ public class ShipObj extends GameObj {
     double fireDelay = 1;//25;
     
     //shield health!
-    double shieldForward;
-    double shieldLeft;
-    double shieldRight;
-    double shieldRear;
+    double shieldForward=500;
+    double shieldLeft=500;
+    double shieldRight=500;
+    double shieldRear=500;
     double shieldChargeTimer;
+    double maxShield=500;
     
 	//ship's faction, defaults to pirate
 	String faction = "pirate";
@@ -130,6 +134,10 @@ public class ShipObj extends GameObj {
     public void addDelete(){
     	super.addDelete();
     	
+    	if(Global.state.playerObj.aimTarget == this)
+    		Global.state.playerObj.aimTarget = null;
+    	
+    	
     	double nx = this.x + (Math.random()-0.5)*2*10;
     	double ny = this.y + (Math.random()-0.5)*2*10;
     	
@@ -197,12 +205,6 @@ public class ShipObj extends GameObj {
     	velY = velocity * Math.sin(currAngle/180*Math.PI);
     	move(velX*Global.state.dtt,velY*Global.state.dtt);
     	
-    	//Move camera if Ship is Player's Ship
-    	if (this == Global.state.playerObj){
-    		Global.player.cx=x; //+= velX*Global.state.dtt;
-    		Global.player.cy=y; // += velY*Global.state.dtt;
-    	}
-    	
     	for(Obj O:Global.state.activeObjs){
     		if(!density) break;
     		if(!(O instanceof ShipObj)) continue;
@@ -232,6 +234,16 @@ public class ShipObj extends GameObj {
     	}
     }
     
+	public void move(double nx, double ny){
+		super.move(nx,ny);
+		
+    	//Move camera if Ship is Player's Ship
+    	if (this == Global.state.playerObj){
+    		Global.player.cx=x; //+= velX*Global.state.dtt;
+    		Global.player.cy=y; // += velY*Global.state.dtt;
+    	}
+	}
+    
     public ShipObj(String image) {
     	super(image);
     }
@@ -240,10 +252,10 @@ public class ShipObj extends GameObj {
     	super(image, spritecontext);
     }
     
-    public double getShields(HitCircle H){//This will return the ship's shields that affects the Hitcircle object
+    public double getShields(double nx, double ny){//This will return the ship's shields that affects the Hitcircle object
     	double shield=0;
     	
-    	PointS point = new PointS(x+H.rx,y+H.ry);
+    	PointS point = new PointS(nx-x,ny-y);
     	
     	double deltaAngle = getAngle(point) - currAngle;
     	if(deltaAngle >= 360) deltaAngle -= 360;
@@ -252,14 +264,14 @@ public class ShipObj extends GameObj {
     	if(deltaAngle >=45 && deltaAngle <135) shield = shieldLeft;
     	if(deltaAngle >=135 && deltaAngle < 225) shield = shieldRear;
     	if(deltaAngle >=225 && deltaAngle < 315) shield = shieldRight;
-    	if(deltaAngle < 45 || deltaAngle > 315) shield = shieldForward;
+    	if(deltaAngle < 45 || deltaAngle >= 315) shield = shieldForward;
     	
     	return shield;
     }
     
-    public void setShields(double value, HitCircle H){
+    public void setShields(double value, double nx, double ny){
     	value = Math.max(0,value);
-    	PointS point = new PointS(x+H.rx,y+H.ry);
+    	PointS point = new PointS(nx-x,ny-y);
     	
     	double deltaAngle = getAngle(point) - currAngle;
     	if(deltaAngle >= 360) deltaAngle -= 360;
@@ -268,6 +280,65 @@ public class ShipObj extends GameObj {
     	if(deltaAngle >=45 && deltaAngle <135) shieldLeft = value;
     	if(deltaAngle >=135 && deltaAngle < 225) shieldRear = value;
     	if(deltaAngle >=225 && deltaAngle < 315) shieldRight = value;
-    	if(deltaAngle < 45 || deltaAngle > 315) shieldForward = value;
+    	if(deltaAngle < 45 || deltaAngle >= 315) shieldForward = value;
+    }
+    
+    public void Draw(Graphics2D G, ImageObserver loc){
+    	if(sprite == null) return;
+    	//Draw shields
+    	
+    	if(this == Global.state.playerObj || this == Global.state.playerObj.aimTarget)
+    		drawShields(G, 20, 150, 240);
+    	
+    	transform(); //Applies the object's transformations to the sprite
+    	
+    	sprite.Draw(G,loc); //Draws the object's sprite
+    }
+    
+    public void drawShields(Graphics2D G, int red, int green, int blue){
+		if(maxShield > 0){
+			double dx = x - Global.player.cx - sprite.frameX/2 * 1.25;
+			double dy = y - Global.player.cy + sprite.frameY/2 * 1.25 + 1;
+			PointS coords = (new PointS(dx,dy)).toScreen();
+			
+			
+			int width = (int) (sprite.frameX * Global.player.zoom * 1.25);
+			int height = (int) (Global.xyRatio * sprite.frameY * Global.player.zoom * 1.25);
+			
+			float alpha;
+			Color dColor;
+			
+			//-44 degrees to 44 degrees
+			alpha = (float) (shieldForward/maxShield * 255);
+			alpha = Math.min(255,Math.max(alpha,0));
+			dColor = new Color(red,green,blue,(int) alpha);
+			G.setColor(dColor);
+			G.drawArc((int) coords.x,(int) coords.y,width,height,-40+(int) currAngle,80);
+			G.drawArc((int) coords.x+1,(int) coords.y+1,width-2,height-2,-40+(int) currAngle,80);
+			
+			//46 degrees to 134 degrees
+			alpha = (float) (shieldLeft/maxShield * 255);
+			alpha = Math.min(255,Math.max(alpha,0));
+			dColor = new Color(red,green,blue,(int) alpha);
+			G.setColor(dColor);
+			G.drawArc((int) coords.x,(int) coords.y,width,height,50+(int) currAngle,80);
+			G.drawArc((int) coords.x+1,(int) coords.y+1,width-2,height-2,50+(int) currAngle,80);
+			
+			//136 degrees to 224 degrees
+			alpha = (float) (shieldRear/maxShield * 255);
+			alpha = Math.min(255,Math.max(alpha,0));
+			dColor = new Color(red,green,blue,(int) alpha);
+			G.setColor(dColor);
+			G.drawArc((int) coords.x,(int) coords.y,width,height,140+(int) currAngle,80);
+			G.drawArc((int) coords.x+1,(int) coords.y+1,width-2,height-2,140+(int) currAngle,80);
+			
+			//226 degrees to 314 degrees
+			alpha = (float) (shieldRight/maxShield * 255);
+			alpha = Math.min(255,Math.max(alpha,0));
+			dColor = new Color(red,green,blue,(int) alpha);
+			G.setColor(dColor);
+			G.drawArc((int) coords.x,(int) coords.y,width,height,230+(int) currAngle,80);
+			G.drawArc((int) coords.x+1,(int) coords.y+1,width-2,height-2,230+(int) currAngle,80);
+		}
     }
 }

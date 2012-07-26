@@ -66,7 +66,7 @@ public class NavPointerObj extends GameObj {
     	G.setColor(new Color(color.getRed(),color.getGreen(),color.getBlue(),alpha));
     	G.drawOval((int) dx-1,(int) dy-1,(int) 2,(int) 2);
     	
-    	double radiusY = Global.xyRatio*radius*2/3, radiusX = radius;
+    	double radiusY = Global.xyRatio*radius * 3/4, radiusX = radius;
     	
     	G.drawOval((int) (dx-radiusX+0.5),(int) (dy-radiusY+0.5),(int) radiusX*2,(int) radiusY*2);
     }

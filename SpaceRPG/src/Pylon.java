@@ -116,9 +116,11 @@ public class Pylon {
     	
     	//realHealth = baseHealth/2*(Math.sin(Global.state.time/10)+1);
     	//System.out.println(realHealth);
+    	/*
     	if (this.source == Global.state.playerObj){
     		System.out.println("pylonHealth: "+this.realHealth+", playerShip health: "+this.source.currCoreHealth);
     	}
+    	*/
     	
     	if(equipped == null) return; //There is no equipped module!
     	
@@ -254,9 +256,9 @@ public class Pylon {
     }
     
     //public void takeDmg(){
-    public void dealDamage(MissileObj O, HitCircle H){  
+    public void takeDamageFrom(MissileObj O){  
        
-        double shields = source.getShields(H);
+        double shields = source.getShields(O.lastx,O.lasty);
         shields = Math.max(0,shields-O.damageToShield);
        
         double damageHull;
@@ -265,7 +267,7 @@ public class Pylon {
      
         damageHull -= Math.max(0,flatArmor - O.damageArmorPiercing);
      
-        source.setShields(shields,H);
+        source.setShields(shields,O.lastx,O.lasty);
         setLife(realHealth-damageHull);
     }
     
