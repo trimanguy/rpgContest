@@ -175,62 +175,58 @@ public class ShipObj extends GameObj {
     public void Step(){
     	//Ship alive?
     	if(this.currCoreHealth>0){
-			
-    	
-    	
-    	//Combat 
-    	//this.fireOn( this.findTarget() , 250, 0);
-    	this.fireOn(this.findTarget());
-    	
-    	//Process power generation
-    	
-    	//Process shield actions
-    	
-    	//Pylon actions
-    	
-    	for(int x=0;x<this.pylons.size();x++){
-    		pylons.get(x).Step();
-    	}
-    	
-    	//Ship Rotation
-    	rotate( this.findDeltaAng(destAngle) );
-    	
-    	//Setting Ship Frame
-    	int frame;
-    	frame = (int) Math.round(currAngle/5)+1;
-    	sprite.setFrame(frame);
-    	
-    	//Ship Movement
-    	velX = velocity * Math.cos(currAngle/180*Math.PI);
-    	velY = velocity * Math.sin(currAngle/180*Math.PI);
-    	move(velX*Global.state.dtt,velY*Global.state.dtt);
-    	
-    	for(Obj O:Global.state.activeObjs){
-    		if(!density) break;
-    		if(!(O instanceof ShipObj)) continue;
-    		if(O == this) continue;
     		
-    		GameObj object = (GameObj) O;
-    		
-    		if(!object.density) continue;
-    		
-    		if(getDistance(object).length <=size + object.size){
-    		//if(checkCollision(object)!=null){
-    			//push eachother out of the way
-    			
-    			double radii = object.size+size;
-    			
-    			//first get the unit vector between the two objects
-    			Vector2D difPos = this.getDistance(object);
-    			Vector2D unit = difPos.unit();
-    			
-    			//then apply the push
-    			move(-radii * tweenFactor * tweenFactor * unit.x, -radii*tweenFactor * unit.y);
-    			
-    			O.move(radii * tweenFactor * tweenFactor * unit.x, radii*tweenFactor * unit.y);
-    		}
-    	}
-    	
+	    	//Combat 
+	    	this.fireOn(this.findTarget());
+	    	
+	    	//Process power generation
+	    		
+	    	//Process shield actions
+	    	
+	    	//Pylon actions
+	    	for(int x=0;x<this.pylons.size();x++){
+	    		pylons.get(x).Step();
+	    	}
+	    	
+	    	//Ship Rotation
+	    	rotate( this.findDeltaAng(destAngle) );
+	    	
+	    	//Setting Ship Frame
+	    	int frame;
+	    	frame = (int) Math.round(currAngle/5)+1;
+	    	sprite.setFrame(frame);
+	    	
+	    	//Ship Movement
+	    	velX = velocity * Math.cos(currAngle/180*Math.PI);
+	    	velY = velocity * Math.sin(currAngle/180*Math.PI);
+	    	move(velX*Global.state.dtt,velY*Global.state.dtt);
+	    	
+	    	for(Obj O:Global.state.activeObjs){
+	    		if(!density) break;
+	    		if(!(O instanceof ShipObj)) continue;
+	    		if(O == this) continue;
+	    		
+	    		GameObj object = (GameObj) O;
+	    		
+	    		if(!object.density) continue;
+	    		
+	    		if(getDistance(object).length <=size + object.size){
+	    		//if(checkCollision(object)!=null){
+	    			//push eachother out of the way
+	    			
+	    			double radii = object.size+size;
+	    			
+	    			//first get the unit vector between the two objects
+	    			Vector2D difPos = this.getDistance(object);
+	    			Vector2D unit = difPos.unit();
+	    			
+	    			//then apply the push
+	    			move(-radii * tweenFactor * tweenFactor * unit.x, -radii*tweenFactor * unit.y);
+	    			
+	    			O.move(radii * tweenFactor * tweenFactor * unit.x, radii*tweenFactor * unit.y);
+	    		}
+	    	}
+
     	}
     }
     
@@ -297,11 +293,19 @@ public class ShipObj extends GameObj {
     
     public void drawShields(Graphics2D G, int red, int green, int blue){
 		if(maxShield > 0){
-			double dx = x - Global.player.cx - sprite.frameX/2 * 1.25;
-			double dy = y - Global.player.cy + sprite.frameY/2 * 1.25 + 1;
+			double dx,dy;
+			
+			dx = this.x  - (sprite.frameX/2 * 1.25);
+			dy = this.y  + (sprite.frameY/2 * 1.25) + 1;
+			
 			PointS coords = (new PointS(dx,dy)).toScreen();
 			
-			
+			/*
+			if (this == Global.state.playerObj){
+    			//System.out.println("player's x,y: "+this.x+" "+this.y+" and dx,dy: "+dx+" "+dy);
+    			System.out.println("player's x,y: "+(int)this.x+" "+(int)this.y+" player's cx,cy: "+(int)Global.player.cx+" "+(int)Global.player.cy+" and dx,dy: "+dx+" "+dy);
+    		}
+			*/
 			int width = (int) (sprite.frameX * Global.player.zoom * 1.25);
 			int height = (int) (Global.xyRatio * sprite.frameY * Global.player.zoom * 1.25);
 			

@@ -119,7 +119,7 @@ public class Pylon {
     	
     	
     	//System.out.println("cant equip "+O.name+" for some reason");
-    	System.out.println("cant equip!");
+    	//System.out.println("cant equip!");
     	return false;
     }
     

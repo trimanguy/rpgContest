@@ -57,7 +57,7 @@ public class GameState {
     		P.autoAttack = false;
     	}
     	Global.state.playerObj.pylons.get(Global.state.playerObj.pylons.size()-1).equipItem(Utils.createEngine("testEngine"));
-    	
+    	Global.state.playerObj.velocity = 50;
     	
         double placeSize = 500;
     	
