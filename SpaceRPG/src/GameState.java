@@ -57,85 +57,39 @@ public class GameState {
     		P.autoAttack = false;
     	}
     	Global.state.playerObj.pylons.get(Global.state.playerObj.pylons.size()-1).equipItem(Utils.createEngine("testEngine"));
-    	Global.state.playerObj.velocity = 50;
-    	
-        double placeSize = 500;
-    	
-    	ShipObj ship1 = Utils.createShip("flak1"); 
-        ship1.y = (Math.random()-0.5)*2*placeSize; ship1.x=(Math.random()-0.5)*2*placeSize;
-        for(Pylon P:ship1.pylons){
-        	P.equipItem(Utils.createWeapon("testBlaster"));
-        }
-        
-        ShipObj ship2 = Utils.createShip("escort1", "alliance");
-        ship2.y = (Math.random()-0.5)*2*placeSize; ship2.x=(Math.random()-0.5)*2*placeSize;
-        for(Pylon P:ship2.pylons){
-        	P.equipItem(Utils.createWeapon("testBlaster"));
-        }
-        ship2.velocity = 50;
-        
-        ShipObj ship3 = Utils.createShip("flak1");
-        ship3.y = (Math.random()-0.5)*2*placeSize;ship3.x=(Math.random()-0.5)*2*placeSize;
-        for(Pylon P:ship3.pylons){
-        	P.equipItem(Utils.createWeapon("testBlaster"));
-        }
-        ship3.velocity = 50;
-        
-        ShipObj ship4 = Utils.createShip("escort1", "alliance");
-        ship4.x = (Math.random()-0.5)*2*placeSize; ship4.y=(Math.random()-0.5)*2*placeSize;
-        for(Pylon P:ship4.pylons){
-        	P.equipItem(Utils.createWeapon("testBlaster"));
-        }
-        ship4.velocity = 50;
-        
-        ShipObj ship5 = Utils.createShip("escort1", "alliance");
-        ship5.x = (Math.random()-0.5)*2*placeSize; ship5.y=(Math.random()-0.5)*2*placeSize;
-        for(Pylon P:ship5.pylons){
-        	P.equipItem(Utils.createWeapon("testBlaster"));
-        }
-        ship5.velocity = 50;
-        
-        ShipObj ship6 = Utils.createShip("escort1","alliance");
-        ship6.x = (Math.random()-0.5)*2*placeSize; ship6.y=(Math.random()-0.5)*2*placeSize;
-        for(Pylon P:ship6.pylons){
-        	P.equipItem(Utils.createWeapon("testBlaster"));
-        }
-        ship6.velocity = 50;
-        
-        ShipObj ship7 = Utils.createShip("escort1","alliance");
-        ship7.x = (Math.random()-0.5)*2*placeSize; ship7.y = (Math.random()-0.5)*2*placeSize;
-        for(Pylon P:ship7.pylons){
-        	P.equipItem(Utils.createWeapon("testBlaster"));
-        }
-        ship7.velocity = 50;
-        
-        ShipObj ship8 = Utils.createShip("flak1");
-        ship8.y = (Math.random()-0.5)*2*placeSize;ship8.x=(Math.random()-0.5)*2*placeSize;
-        for(Pylon P:ship8.pylons){
-        	P.equipItem(Utils.createWeapon("testMissile"));
-        }
-        ship8.velocity = 50;
-        
-        ShipObj ship9 = Utils.createShip("flak1");
-        ship9.y = (Math.random()-0.5)*2*placeSize;ship9.x=(Math.random()-0.5)*2*placeSize;
-        for(Pylon P:ship9.pylons){
-        	P.equipItem(Utils.createWeapon("testMissile"));
-        }
-        ship9.velocity = 50;
-        
-        ShipObj ship10 = Utils.createShip("flak1");
-        ship10.y = (Math.random()-0.5)*2*placeSize;ship10.x=(Math.random()-0.5)*2*placeSize;
-        for(Pylon P:ship10.pylons){
-        	P.equipItem(Utils.createWeapon("testMissile"));
-        }
-        ship10.velocity = 50;
-        
-        ShipObj ship11 = Utils.createShip("flak1");
-        ship11.y = (Math.random()-0.5)*2*placeSize;ship11.x=(Math.random()-0.5)*2*placeSize;
-        for(Pylon P:ship11.pylons){
-        	P.equipItem(Utils.createWeapon("testMissile"));
-        }
-        ship11.velocity = 50;
+
+        createEscort1(500);
+        createEscort1(500);
+        createEscort1(500);
+        createEscort1(500);
+        createEscort1(500);
+        createFlak1(500);
+        createFlak1(500);
+        createFlak1(500);
+        createFlak1(500);
+        createFlak1(500);
+    }
+    
+    public ShipObj createEscort1(int placeSize){
+    	ShipObj ship = Utils.createShip("escort1","alliance");
+    	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
+    	for(int z=0; z<ship.pylons.size()-1;z++){
+    		Pylon P = ship.pylons.get(z);
+    		P.equipItem(Utils.createWeapon("testBlaster"));
+    	}
+    	ship.pylons.get(ship.pylons.size()-1).equipItem(Utils.createEngine("testEngine"));
+    	return ship;
+    }
+    
+    public ShipObj createFlak1(int placeSize){
+    	ShipObj ship = Utils.createShip("flak1");
+    	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
+    	for(int z=0; z<ship.pylons.size()-1;z++){
+    		Pylon P = ship.pylons.get(z);
+    		P.equipItem(Utils.createWeapon("testMissile"));
+    	}
+    	ship.pylons.get(ship.pylons.size()-1).equipItem(Utils.createEngine("testEngine"));
+    	return ship;
     }
     
     public void Tick(){
