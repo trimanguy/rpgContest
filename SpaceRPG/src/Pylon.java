@@ -105,19 +105,21 @@ public class Pylon {
     }
     
     public boolean canEquip(ItemObj O){
-    	if(allowedType==null) return false; //null pylon??
-    	if(O.size>this.size) return false; //item too big!
-    		
+    	if(allowedType==null) {return false;} //null pylon??
+    	if(O.size>this.size) {return false;} //item too big!
+    	
+    	
     	switch(O.type){
-    		case "Weapon":		if(allowedType.indexOf("w")>=0){return true;}
-    		case "Shield":		if(allowedType.indexOf("s")>=0){return true;}
-    		case "PowerCore":	if(allowedType.indexOf("c")>=0){return true;}
-    		case "Engine":		if(allowedType.indexOf("e")>=0){return true;}
-    		case "Support":		if(allowedType.indexOf("p")>=0){return true;}
+    		case "Weapon":		if(allowedType.indexOf("w")>=0){return true;}else{break;}
+    		case "Shield":		if(allowedType.indexOf("s")>=0){return true;}else{break;}
+    		case "PowerCore":	if(allowedType.indexOf("c")>=0){return true;}else{break;}
+    		case "Engine":		if(allowedType.indexOf("e")>=0){return true;}else{break;}
+    		case "Support":		if(allowedType.indexOf("p")>=0){return true;}else{break;}
     	}
     	
     	
     	//System.out.println("cant equip "+O.name+" for some reason");
+    	System.out.println("cant equip!");
     	return false;
     }
     

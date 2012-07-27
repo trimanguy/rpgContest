@@ -29,6 +29,8 @@ HB	(back,-30,0,15)
 PYLONS	(front,ws,50,30,0,0,180,127,0,3,Resources/Sprites/Escort1-Pylon1.png)
 PYLONS	(front,ws,50,15,10,67.5,180,44,25,3,Resources/Sprites/Escort1-Pylon2.png)
 PYLONS	(front,ws,50,15,-10,-67.5,180,44,-25,3,Resources/Sprites/Escort1-Pylon3.png)
-PYLONS	(back,wse,50,-10,0,0,180,0,0,2,Resources/Sprites/Escort1-Pylon4.png)
+PYLONS	(back,ws,50,-10,0,0,180,0,0,2,Resources/Sprites/Escort1-Pylon4.png)
+PYLONS	(back,s,30,-30,20,0,180,-70,30,2,Resources/Sprites/Escort1-PylonShields.png)
+PYLONS	(back,e,30,-50,0,0,0,-135,0,2,Resources/Sprites/Escort1-PylonEngine.png)
 DESCRIP	testShip escort1
 END
