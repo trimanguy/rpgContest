@@ -174,12 +174,6 @@
 	</files>
 	<tasks>
 		<todotaskitem>
-			<description>TODO: autotarget, do auto-targetting here</description>
-			<filepath>src\ShipObj.java</filepath>
-			<line>71</line>
-			<timestamp>1342057265</timestamp>
-		</todotaskitem>
-		<todotaskitem>
 			<description>TODO: damage ship shield first</description>
 			<filepath>src\MissileObj.java</filepath>
 			<line>110</line>
@@ -188,8 +182,14 @@
 		<todotaskitem>
 			<description>TODO: implement ship health?</description>
 			<filepath>src\Pylon.java</filepath>
-			<line>215</line>
-			<timestamp>1343339383</timestamp>
+			<line>232</line>
+			<timestamp>1343383786</timestamp>
+		</todotaskitem>
+		<todotaskitem>
+			<description>TODO: autotarget, do auto-targetting here</description>
+			<filepath>src\ShipObj.java</filepath>
+			<line>97</line>
+			<timestamp>1343383985</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>

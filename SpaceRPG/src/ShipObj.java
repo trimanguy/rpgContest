@@ -41,6 +41,13 @@ public class ShipObj extends GameObj {
     double shieldChargeTimer;
     double maxShield=500;
     
+    //ship's power
+    double maxPower; //energy bar size
+    double powerMade; //base energy bar regen speed/sec
+    double powerUsed; //sum of all energy used/sec (including engine, so remember to update upon speed up/down)
+    double powerRegen; //maxPower-powerUsed; this is how much energy is in energy bar
+    double currPower; //how much power we currently has available
+    
 	//ship's faction, defaults to pirate
 	String faction = "pirate";
 	

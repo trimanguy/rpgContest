@@ -15,7 +15,7 @@ HB	(back,0,0,25)
 HB	(back,20,0,10)
 HB	(back,-20,0,10)
 PYLONS	(back,w,50,-30,0,180,180,0,0,5)
-PYLONS	(back,e,50,-30,0,180,180,0,0,5)
+PYLONS 	(back,e,50,-50,0,  0,  0,0,0,5)
 DESCRIP	testShip flak1
 END
 
@@ -26,13 +26,12 @@ SPEED	75
 HB	(front,0,10,20)
 HB	(front,0,-10,20)
 HB	(front,30,0,15)
-HB	(back,-30,0,15)
+HB	(back,-50,0,15)
 PYLONS	(front,ws,50,30,0,0,180,127,0,3,Resources/Sprites/Escort1-Pylon1.png)
 PYLONS	(front,ws,50,15,10,67.5,180,44,25,3,Resources/Sprites/Escort1-Pylon2.png)
 PYLONS	(front,ws,50,15,-10,-67.5,180,44,-25,3,Resources/Sprites/Escort1-Pylon3.png)
-PYLONS	(back,ws,50,-10,0,0,180,0,0,2,Resources/Sprites/Escort1-Pylon4.png)
-PYLONS	(back,s,30,-30,20,0,180,-70,20,2,Resources/Sprites/Escort1-PylonShields.png)
-PYLONS	(back,p,30,-30,-20,0,180,-70,-20,2,Resources/Sprites/Escort1-PylonPowerCore.png)
-PYLONS	(back,e,30,-50,0,0,0,-135,0,2,Resources/Sprites/Escort1-PylonEngine.png)
+PYLONS	(back,c,50,-10,0,0,180,0,0,2,Resources/Sprites/Escort1-Pylon4.png)
+PYLONS	(back,s,30,-30,20,0,180,-70,30,2,Resources/Sprites/Escort1-PylonShields.png)
+PYLONS	(back,e,10,-50,0,0,0,-135,0,2,Resources/Sprites/Escort1-PylonEngine.png)
 DESCRIP	testShip escort1
 END

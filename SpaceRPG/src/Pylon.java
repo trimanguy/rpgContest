@@ -133,6 +133,12 @@ public class Pylon {
     	if(item instanceof EngineObj){
     		this.source.maxVelocity=((EngineObj)item).maxVelocity;
     		this.source.maxAngVel=((EngineObj)item).maxAngVelocity;
+    		//haven't added power consumption for engines yet...
+    	}
+    	else if(item instanceof PowerCoreObj){
+    		this.source.maxPower = ((PowerCoreObj)item).maxPower;
+    		this.source.powerMade = ((PowerCoreObj)item).regenRate;
+    		this.source.currPower = this.source.maxPower;
     	}
     }
     
@@ -317,6 +323,10 @@ public class Pylon {
     	if (this.equipped.type.equals("Engine")){
     		this.source.maxVelocity-=50;
     		this.source.velocity=Math.max(0,this.source.velocity-50);
+    	}
+    	else if(this.equipped.type.equals("PowerCore")){
+    		this.source.powerMade -= this.source.powerMade*(Math.random()/5 + 0.4); //random 40-60% penalty in energy made
+    		this.source.currPower = Math.max(0, this.source.currPower - this.source.maxPower*(Math.random()/5 + 0.4)); //random chunk of energy lost
     	}
     }
     

@@ -44,6 +44,9 @@ public class Utils {
 	static String tempShield;
 	static String tempBoostCost;
 	
+	//PowerCoreFile vars
+	static String tempRegen;
+	
 	static boolean activateAble=true;
 	
 	
@@ -348,6 +351,7 @@ public class Utils {
 	    				tempHealth = "";
 	    				tempArmor = "";
 	    				tempPwr = "";
+	    				tempRegen = "";
 	    				tempSize = "";
 	    				activateAble = true;
 	    				descrip = "";
@@ -385,6 +389,7 @@ public class Utils {
 	    					case "GNAME":		name = st.nextToken(); break;
 	    					case "GMODEL":		image = st.nextToken(); break; //none for now, maybe use later for hangar screen
 	    					case "POWER":		tempPwr = st.nextToken(); break;
+	    					case "REGEN":		tempRegen = st.nextToken(); break;
 	    					case "HEALTH":		tempHealth = st.nextToken(); break;
 	    					case "ARMOR":		tempArmor = st.nextToken(); break;
 	    					case "SIZE":		tempSize = st.nextToken(); break;//
@@ -399,9 +404,10 @@ public class Utils {
 	    				double health = Double.valueOf(tempHealth);
 	    				double armor = Double.valueOf(tempArmor);
 	    				double power = Double.valueOf(tempPwr);
+	    				double regen = Double.valueOf(tempRegen);
 	    				int size = Integer.valueOf(tempSize);
 	    			
-	    				PowerCoreObj powerCore = new PowerCoreObj(name,image,power,health,armor,size,descrip);
+	    				PowerCoreObj powerCore = new PowerCoreObj(name,image,power,regen,health,armor,size,descrip);
 	    					
 	    				//stick it in PowerCoreTable	
 	    				Utils.powerCoreTable.put(Utils.name, powerCore);
@@ -551,7 +557,7 @@ public class Utils {
     /*** PowerCore Creator ***/
     public static PowerCoreObj createPowerCore(String powerCoreName){
     	PowerCoreObj template = (PowerCoreObj)Utils.powerCoreTable.get(powerCoreName);
-    	PowerCoreObj newPowerCore = new PowerCoreObj(template.name,template.model,template.maxPower,template.baseHealth,template.armor, template.size,template.descrip);
+    	PowerCoreObj newPowerCore = new PowerCoreObj(template.name,template.model,template.maxPower,template.regenRate,template.baseHealth,template.armor, template.size,template.descrip);
    		return newPowerCore;
     }
     
