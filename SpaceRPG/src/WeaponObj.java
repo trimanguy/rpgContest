@@ -46,7 +46,7 @@ public class WeaponObj extends ItemObj{
     	
     	type = "Weapon";
     	this.name = name;
-    	this.model = model;	
+    	//this.model = model;	
     	missileImg = img;
     	missileHitImg = hitImg;
     	missileLife = life;
@@ -60,7 +60,7 @@ public class WeaponObj extends ItemObj{
     	activateDelay = delay;
     	this.size = size;
     	this.descrip = descrip;
-    	this.canActivate = activateAble;
+    	this.isActive = activateAble;
     	
     	//parse damage
     	StringTokenizer st = new StringTokenizer(damage, ",");

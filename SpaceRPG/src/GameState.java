@@ -45,11 +45,19 @@ public class GameState {
     	File weaponFile = new File("Data/WeaponFile.txt");
     	Utils.parseWeaponFile(weaponFile);
     	
+    	File engineFile = new File("Data/EngineFile.txt");
+    	Utils.parseEngineFile(engineFile);
+    	
+    	
     	Global.state.playerObj = Utils.createShip("escort1","player");
     	Global.GUI = new ActiveInterface ();
-    	for(Pylon P:Global.state.playerObj.pylons){
+    	for(int z=0; z<Global.state.playerObj.pylons.size()-1;z++){
+    		Pylon P = Global.state.playerObj.pylons.get(z);
     		P.equipItem(Utils.createWeapon("testBlaster"));
+    		P.autoAttack = false;
     	}
+    	Global.state.playerObj.pylons.get(Global.state.playerObj.pylons.size()-1).equipItem(Utils.createEngine("testEngine"));
+    	
     	
         double placeSize = 500;
     	

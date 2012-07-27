@@ -23,7 +23,7 @@ public class ItemObj extends Obj{
 	double armor;
 	
 	double activateDelay;
-	boolean canActivate; //da fuck is this??
+	boolean isActive; //false = item is passive
 	
     public ItemObj() {
     	

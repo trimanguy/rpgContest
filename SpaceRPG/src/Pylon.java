@@ -6,6 +6,7 @@
 
 import java.util.ArrayList;
 import java.awt.geom.Point2D;
+import java.io.*;
 
 public class Pylon {
 
@@ -26,14 +27,14 @@ public class Pylon {
 	*/
 	
 	int size; //Module size. 1=tiny;2=small;3=medium;4=large;5=huge
-	String type;//Possible types: "weapon","engine","power","shield","support"
+	String allowedType;//allowed item types for this pylon
 	
 	String tag;//My thought is you assign a tag to a pylon and then a tag to the associated hitCircles
 	
 	double activateTimer;
 	//The delay should depend upon the equipped module
 	
-	boolean activated=true; //Is the pylon's equipped item Activated?
+	boolean activated=false; //Is the pylon's ability activated? (weapon firing, shield boost, engine boost, etc??)
 	int activateParams; //For some reason this seemed appropriate. I don't know how else to pass the 
 	//	Player's keypress to a sheild activation...
 	
@@ -65,19 +66,22 @@ public class Pylon {
 	//Flat armor!
 	double flatArmor;
 	
+	//is this pylon set to autoAttack?
 	boolean autoAttack = true;
 
 	
 
-    public Pylon(ShipObj source, String t, double radius, double angle, double centerAngle, double arcAngle, double screenX, double screenY, int size, String image) {
+    public Pylon(ShipObj source, String t, String allowedType, double health, double radius, double angle, double centerAngle, double arcAngle, double screenX, double screenY, int size, String image) {
     	//for testing purposes
-    	baseHealth = 100;
-    	type = "Weapon";
-    	realHealth = 100;
+    	//baseHealth = 50;
+    	//type = "Weapon";
+    	//realHealth = 100;
     	//WeaponObj testGun = new WeaponObj("Resources/Sprites/PlasmaSmall.png", "Resources/Sprites/explode_2.png", 10 , 300.0, 30000.0, 0.0, 2.0, 180); //fake guns for testing
     	//public WeaponObj(String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread) {
     	//this.equipped = (ItemObj)testGun; 
     	//
+    	this.baseHealth = health;
+    	this.allowedType = allowedType; 
     	this.tag=t;
     	this.polarRadius = radius;
     	this.polarAngle = angle;
@@ -87,7 +91,6 @@ public class Pylon {
     	this.screenY=screenY;
     	this.gui=image;
     	this.size = size;
-    	//this.angThrust = angSpeed;
     	
     	this.selfAngle = centerAngle;
     		
@@ -102,14 +105,31 @@ public class Pylon {
     }
     
     public boolean canEquip(ItemObj O){
-    	if(type==null) return true;
-    	return (O.type.compareTo(type)==0 && O.size <= this.size);
+    	if(allowedType==null) return false; //null pylon??
+    	if(O.size>this.size) return false; //item too big!
+    		
+    	switch(O.type){
+    		case "Weapon":		if(allowedType.indexOf("w")>=0){return true;}
+    		case "Shield":		if(allowedType.indexOf("s")>=0){return true;}
+    		case "PowerCore":	if(allowedType.indexOf("c")>=0){return true;}
+    		case "Engine":		if(allowedType.indexOf("e")>=0){return true;}
+    		case "Support":		if(allowedType.indexOf("p")>=0){return true;}
+    	}
+    	
+    	
+    	//System.out.println("cant equip "+O.name+" for some reason");
+    	return false;
     }
     
     public void equipItem(ItemObj item){
     	if(!canEquip(item)) return;
     	this.equipped = item;
     	this.realHealth = baseHealth + item.baseHealth; 
+    	
+    	if(item instanceof EngineObj){
+    		this.source.maxVelocity=((EngineObj)item).maxVelocity;
+    		this.source.maxAngVel=((EngineObj)item).maxAngVelocity;
+    	}
     }
     
     public void Step(){//This should be called by the ShipObj during ShipObj.Step()
@@ -124,16 +144,21 @@ public class Pylon {
     	
     	if(equipped == null) return; //There is no equipped module!
     	
-    	if(!equipped.canActivate) return; //Equipped is a passive module
+    	if(!equipped.isActive) return; //Equipped is a passive module
     	
     	if(realHealth <= 0) return; //Pylon's been knocked out and will not function.
     	
+    	//check if weapon has a setTarget of if its on autoAttack
+    	if(this.equipped.type.equals("Weapon")){
+    		if(this.autoAttack==true){activated=true;}
+    		else if((this.setTarget!=null)&&(this.setTarget.currCoreHealth>0)){activated=true;}
+    	}
     	
     	updateCurrentAngle();
     	
     	
     	if(activated){
-	    	if(type.compareTo("Weapon")==0){//Since "string"=="string" is weird...
+	    	if(this.equipped.type.compareTo("Weapon")==0){//Since "string"=="string" is weird...
 	    		
 	    		WeaponObj weapon = (WeaponObj) equipped;
 	    	//	System.out.println("pylon check");
@@ -166,13 +191,13 @@ public class Pylon {
 	    				this.shootAt(autoTarget);
 	    			}
 	    		}
-	    	}else if(type.compareTo("Shield")==0){
+	    	}else if(this.equipped.type.compareTo("Shield")==0){
 	    		//First check the ship power and if the direction determined 
 	    		//	by activateParam is full health or not
 	    		
 	    		//Activate the shield; activateParam correlates with shield direction
 	    		
-	    	}else if(type.compareTo("Support")==0){
+	    	}else if(this.equipped.type.compareTo("Support")==0){
 	    		//check if this support item can fire based upon the context (ship power and ammunition)
 	    		
 	    		//Activate the support module.
@@ -253,6 +278,8 @@ public class Pylon {
 	    	//fire
 	    	weapon.Fire(nx,ny,this.currAngle, this.source, target);
 	    }
+	    
+	    this.activated = false;
     }
     
     //public void takeDmg(){
@@ -284,7 +311,7 @@ public class Pylon {
     public void UpdateAngVel(){ 
     	//This is used to compute the maximum angular velocity based upon equipped itemObj
     	maxAngVel = 180;
-    	if(type.compareTo("Weapon")==0 && equipped != null){
+    	if(equipped.type.compareTo("Weapon")==0 && equipped != null){
     		//simplify this down so maxAngVel is hardcoded in shipFile. Eliminate excess fields!
     		//System.out.println(""+this.angThrust+", "+equipped.mass);
     		WeaponObj weapon = (WeaponObj) equipped;

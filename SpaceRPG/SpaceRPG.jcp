@@ -180,10 +180,16 @@
 			<timestamp>1342057265</timestamp>
 		</todotaskitem>
 		<todotaskitem>
+			<description>TODO: damage ship shield first</description>
+			<filepath>src\MissileObj.java</filepath>
+			<line>110</line>
+			<timestamp>1343337763</timestamp>
+		</todotaskitem>
+		<todotaskitem>
 			<description>TODO: implement ship health?</description>
 			<filepath>src\Pylon.java</filepath>
-			<line>196</line>
-			<timestamp>1343206818</timestamp>
+			<line>215</line>
+			<timestamp>1343339383</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>

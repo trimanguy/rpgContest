@@ -127,7 +127,9 @@ public class Utils {
 						while(ship_st2.hasMoreTokens()){
 							StringTokenizer pylon_st = new StringTokenizer(ship_st2.nextToken(), ",");
 							while(pylon_st.hasMoreTokens()){
-								String tag;
+								String hbTag;
+								String typeTag;
+								double health;
 								double x;
 								double y;
 								double centerAngle;
@@ -138,7 +140,9 @@ public class Utils {
 								int size;
 								String pylonImg="";
 								//System.out.print("Check4"+ System.getProperty("line.separator"));
-								tag = pylon_st.nextToken();
+								hbTag = pylon_st.nextToken();
+								typeTag = pylon_st.nextToken();
+								health = Double.valueOf(pylon_st.nextToken());
 								x = Double.valueOf(pylon_st.nextToken());
 								y = Double.valueOf(pylon_st.nextToken());
 								centerAngle = Double.valueOf(pylon_st.nextToken());
@@ -157,7 +161,7 @@ public class Utils {
 									+" screenX: "+screenX+" screenY: "+screenY+" pylonImg: "+pylonImg);
 								*/
 								
-								Pylon pl = new Pylon(null, tag, polar[0],polar[1],centerAngle, arcAngle, screenX, screenY, size, pylonImg);
+								Pylon pl = new Pylon(null, hbTag, typeTag, health, polar[0],polar[1],centerAngle, arcAngle, screenX, screenY, size, pylonImg);
 								//Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double angSpeed)
 								pylons.add(pl);	
 							}
@@ -291,7 +295,6 @@ public class Utils {
     
     public static void parseEngineFile(File filename){
     	StringBuilder contents = new StringBuilder();
-    	
     	try {
     		BufferedReader input = new BufferedReader(new FileReader(filename));
 	    	try {
@@ -334,6 +337,7 @@ public class Utils {
 	    				EngineObj engine = new EngineObj(name,image,maxSpd,rotSpd,health,armor,powerReq,size,descrip);
 	    					
 	    				//stick it in EngineTable	
+	    				System.out.println("before");
 	    				Utils.engineTable.put(Utils.name, engine);
 	    				
 	    				//clear vars for next engine
@@ -526,7 +530,7 @@ public class Utils {
     	
     	for(int x=0; x<template.pylons.size();x++){
     		Pylon currTempPylon = template.pylons.get(x);
-    		Pylon newPylon = new Pylon(newShip, currTempPylon.tag, currTempPylon.polarRadius, currTempPylon.polarAngle, currTempPylon.centerAngle, currTempPylon.arcAngle,
+    		Pylon newPylon = new Pylon(newShip, currTempPylon.tag, currTempPylon.allowedType, currTempPylon.baseHealth, currTempPylon.polarRadius, currTempPylon.polarAngle, currTempPylon.centerAngle, currTempPylon.arcAngle,
     			currTempPylon.screenX, currTempPylon.screenY, currTempPylon.size, currTempPylon.gui);
 			copiedPylons.add(newPylon);
     	}
@@ -557,7 +561,7 @@ public class Utils {
     	WeaponObj template = (WeaponObj)Utils.weaponTable.get(weaponName);
     	String damage = ""+template.damageToShield+","+template.damageThruShield+","+template.damageToHull+","+template.damageArmorPiercing;
     	WeaponObj newWeapon = new WeaponObj(template.name, template.model, template.missileImg,template.missileHitImg,template.missileLife,template.missileMaxSpeed,template.missileAcceleration,
-    		template.missileTurnSpeed,template.angleSpread,template.turnSpeed,damage,template.baseHealth,template.armor,template.activateDelay,template.size,template.descrip,template.canActivate);
+    		template.missileTurnSpeed,template.angleSpread,template.turnSpeed,damage,template.baseHealth,template.armor,template.activateDelay,template.size,template.descrip,template.isActive);
     	
     	return newWeapon;
     }
@@ -565,6 +569,7 @@ public class Utils {
     /*** Engine Creator ***/
     public static EngineObj createEngine(String engineName){
     	EngineObj template = (EngineObj)Utils.engineTable.get(engineName);
+    	System.out.println("got here "+engineTable.size());
     	EngineObj newEngine = new EngineObj(template.name, template.model,template.maxVelocity,template.maxAngVelocity,template.baseHealth,template.armor,template.maxPowerConsumption,template.size,template.descrip);
     	return newEngine;
     }

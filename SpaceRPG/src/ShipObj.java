@@ -102,7 +102,7 @@ public class ShipObj extends GameObj {
     public void fireOn(ShipObj target){
     	for(int x = 0; x<pylons.size(); x++){
     		Pylon currPylon = pylons.get(x);
-    		if (currPylon.type == "Weapon"){
+    		if ((currPylon.equipped!=null)&&(currPylon.equipped.type == "Weapon")){
     			currPylon.setTarget = target;
     		}
     	}
