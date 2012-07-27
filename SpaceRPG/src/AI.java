@@ -63,10 +63,10 @@ public class AI {
     			
     			if(ship.aimTarget == null){
     				//Ship idle or natural behavior happens here.
-    				if(ship.currAngle == ship.destAngle){
+    				if(ship.currAngle == ship.destAngle && Math.random() > 0.9){
 	    				ship.destAngle = Math.random()*360;
 	    				
-	    				ship.velocity += ship.tweenFactor * (ship.maxVelocity * Math.random() - ship.velocity);
+	    				ship.velocity += ship.tweenFactor * (ship.maxVelocity - ship.velocity);
     				}
     			}
     			

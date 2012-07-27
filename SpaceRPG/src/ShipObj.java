@@ -48,7 +48,7 @@ public class ShipObj extends GameObj {
 	boolean hasAI = true;
 	double minIdealRange = 600;
 	double maxIdealRange = 800;
-	double tweenFactor = 0.05;
+	double tweenFactor = 0.1;
 	double idealTargetAng = 0;
     
     

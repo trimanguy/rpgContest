@@ -92,6 +92,8 @@ public class Pylon {
     	this.gui=image;
     	this.size = size;
     	
+    	realHealth = baseHealth;
+    	
     	this.selfAngle = centerAngle;
     		
     	if (source!=null){
@@ -310,6 +312,8 @@ public class Pylon {
     
     public void disable(){
     	//set penalties for pylon getting destroyed here
+    	if(this.equipped == null) return;
+    	
     	if (this.equipped.type.equals("Engine")){
     		this.source.maxVelocity-=50;
     		this.source.velocity=Math.max(0,this.source.velocity-50);
