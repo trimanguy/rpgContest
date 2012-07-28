@@ -11,7 +11,7 @@
 #END
 
 PNAME	testCore
-PMODEL	Resources/Sprites/Escort1-Pylon1.png
+PMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
 POWER	100
 REGEN	20
 HEALTH	50

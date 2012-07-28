@@ -180,16 +180,16 @@
 			<timestamp>1343337763</timestamp>
 		</todotaskitem>
 		<todotaskitem>
-			<description>TODO: implement ship health?</description>
-			<filepath>src\Pylon.java</filepath>
-			<line>232</line>
-			<timestamp>1343383786</timestamp>
-		</todotaskitem>
-		<todotaskitem>
 			<description>TODO: autotarget, do auto-targetting here</description>
 			<filepath>src\ShipObj.java</filepath>
-			<line>97</line>
-			<timestamp>1343383985</timestamp>
+			<line>98</line>
+			<timestamp>1343385632</timestamp>
+		</todotaskitem>
+		<todotaskitem>
+			<description>TODO: implement ship health?</description>
+			<filepath>src\Pylon.java</filepath>
+			<line>234</line>
+			<timestamp>1343386804</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>

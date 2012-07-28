@@ -11,3 +11,15 @@
 #SIZE number //for fitting into pylon
 #DESCRIP
 #END
+
+SNAME	testShield
+SMODEL	blah!
+SAMT	50
+RDELAY	5
+HEALTH	50
+ARMOR	1
+PWRREQ	3
+BSTCOST	5
+SIZE	1
+DESCRIP	test shield
+END

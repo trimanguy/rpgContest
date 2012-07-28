@@ -79,9 +79,9 @@ public class Utils {
 	    			while(st.hasMoreTokens()){
 	    				identifier = st.nextToken();
 	    				switch (identifier) {
-	    					case "SNAME":	name = st.nextToken(); break;
-	    					case "SMODEL":	image = st.nextToken(); break;
-	    					case "HB":	tempHitBoxes += st.nextToken(); break;
+	    					case "SNAME":		name = st.nextToken(); break;
+	    					case "SMODEL":		image = st.nextToken(); break;
+	    					case "HB":			tempHitBoxes += st.nextToken(); break;
 	    					case "PYLONS":		tempPylons += st.nextToken(); break;
 	    					case "DESCRIP":		descrip = st.nextToken(); break;//
 	    					case "END":			saveFlag = true; break;
@@ -124,7 +124,6 @@ public class Utils {
 	    				tempPylons = tempPylons.replace('(', ' ');
 	    				tempPylons = tempPylons.replace(')', ' ');
 	    				StringTokenizer ship_st2 = new StringTokenizer(tempPylons);
-	    				//System.out.println("tempPylons after: "+tempPylons);
 	    					
 	    				//for each token of form 1.0,1.0
 						while(ship_st2.hasMoreTokens()){
@@ -142,7 +141,6 @@ public class Utils {
 								double screenY;
 								int size;
 								String pylonImg="";
-								//System.out.print("Check4"+ System.getProperty("line.separator"));
 								hbTag = pylon_st.nextToken();
 								typeTag = pylon_st.nextToken();
 								health = Double.valueOf(pylon_st.nextToken());
@@ -159,13 +157,8 @@ public class Utils {
 								//convert x and y into polar coord
 								double[] polar = cartesianToPolar(x,y); //radius,angle
 								
-								/*
-								System.out.println("radius: "+ polar[0]+" angle: "+ polar[1]+" centerAngle: "+centerAngle+" arcAngle: "+arcAngle
-									+" screenX: "+screenX+" screenY: "+screenY+" pylonImg: "+pylonImg);
-								*/
-								
 								Pylon pl = new Pylon(null, hbTag, typeTag, health, polar[0],polar[1],centerAngle, arcAngle, screenX, screenY, size, pylonImg);
-								//Pylon(ShipObj source, double radius, double angle, double centerAngle, double arcAngle, double angSpeed)
+
 								pylons.add(pl);	
 							}
 						}
@@ -176,8 +169,6 @@ public class Utils {
 	    				//clear vars for next ship
 	    				name = "";
 	    				image = "";
-	    				//tempSpeed = "";
-	    				//tempAngSpeed = "";
 	    				tempHitBoxes = "";
 	    				tempPylons = "";
 	    				descrip = "";
@@ -196,17 +187,6 @@ public class Utils {
     	catch (IOException ex){
     		ex.printStackTrace();
     	}
-    	/*
-    	System.out.print("Check5"+ System.getProperty("line.separator"));
-    	ShipObj test = (ShipObj)shipTable.get("flak1");
-    	double test_speed = test.velocity;
-    	System.out.print("shipTable[flak1]'s speed is: "+ test_speed+ System.getProperty("line.separator"));
-    	System.out.print("hitCircles size: " + test.hitCircles.size() + System.getProperty("line.separator"));
-    	double test_hitbox0 = test.hitCircles.get(0).rx;
-    	double test_hitbox1 = test.hitCircles.get(0).ry;
-    	double test_hitbox2 = test.hitCircles.get(0).radius;
-    	System.out.print("shipTable[flak1]'s hitbox is: ("+ test_hitbox0 + test_hitbox1 + test_hitbox2 +")" + System.getProperty("line.separator"));
-    	*/
     }
     
     public static void parseWeaponFile(File filename){
@@ -386,8 +366,8 @@ public class Utils {
 	    			while(st.hasMoreTokens()){
 	    				identifier = st.nextToken();
 	    				switch (identifier) {
-	    					case "GNAME":		name = st.nextToken(); break;
-	    					case "GMODEL":		image = st.nextToken(); break; //none for now, maybe use later for hangar screen
+	    					case "PNAME":		name = st.nextToken(); break;
+	    					case "PMODEL":		image = st.nextToken(); break; //none for now, maybe use later for hangar screen
 	    					case "POWER":		tempPwr = st.nextToken(); break;
 	    					case "REGEN":		tempRegen = st.nextToken(); break;
 	    					case "HEALTH":		tempHealth = st.nextToken(); break;
@@ -523,25 +503,18 @@ public class Utils {
     	ShipObj template = (ShipObj)Utils.shipTable.get(shipName);
     	ArrayList<HitCircle> copiedHitCircles = new ArrayList(0);
     	ArrayList<Pylon> copiedPylons = new ArrayList(0);
-    	ShipObj newShip = new ShipObj(template.imageName, Global.codeContext, copiedHitCircles, copiedPylons, descrip);
+    	ShipObj newShip = new ShipObj(template.imageName, Global.codeContext, copiedHitCircles, new ArrayList(0), descrip);
     	
     	//copy over each HitCircle from hitCircles to copiedHitCircles
     	for(int x=0; x<(template.hitCircles.size()); x++){
     		HitCircle currTempHC = template.hitCircles.get(x); 
     		HitCircle newHitCirc = new HitCircle(newShip, currTempHC.tag, currTempHC.rx, currTempHC.ry, currTempHC.radius);
-    		copiedHitCircles.add(newHitCirc);
     	}
-    	newShip.hitCircles=copiedHitCircles; 
     	
-    	
-    	for(int x=0; x<template.pylons.size();x++){
-    		Pylon currTempPylon = template.pylons.get(x);
-    		Pylon newPylon = new Pylon(newShip, currTempPylon.tag, currTempPylon.allowedType, currTempPylon.baseHealth, currTempPylon.polarRadius, currTempPylon.polarAngle, currTempPylon.centerAngle, currTempPylon.arcAngle,
-    			currTempPylon.screenX, currTempPylon.screenY, currTempPylon.size, currTempPylon.gui);
-			copiedPylons.add(newPylon);
+    	for(Pylon P:template.pylons){
+    		Pylon newPylon = new Pylon(newShip, P.tag, P.allowedType, P.baseHealth, P.polarRadius, P.polarAngle, P.centerAngle, P.arcAngle,
+    			P.screenX, P.screenY, P.size, P.gui);
     	}
-    	newShip.pylons=copiedPylons;
-    	
     	return newShip;
     }
     
@@ -556,9 +529,10 @@ public class Utils {
     
     /*** PowerCore Creator ***/
     public static PowerCoreObj createPowerCore(String powerCoreName){
-    	PowerCoreObj template = (PowerCoreObj)Utils.powerCoreTable.get(powerCoreName);
-    	PowerCoreObj newPowerCore = new PowerCoreObj(template.name,template.model,template.maxPower,template.regenRate,template.baseHealth,template.armor, template.size,template.descrip);
+    	PowerCoreObj template = (PowerCoreObj)(Utils.powerCoreTable.get(powerCoreName));
+    	PowerCoreObj newPowerCore = new PowerCoreObj(template.name,template.model,template.maxPower,template.regenRate,template.baseHealth,template.armor,template.size,template.descrip);
    		return newPowerCore;
+   		
     }
     
     /*** Weapon Creator ***/
@@ -575,7 +549,7 @@ public class Utils {
     /*** Engine Creator ***/
     public static EngineObj createEngine(String engineName){
     	EngineObj template = (EngineObj)Utils.engineTable.get(engineName);
-    	System.out.println("got here "+engineTable.size());
+    	//System.out.println("got here "+engineTable.size());
     	EngineObj newEngine = new EngineObj(template.name, template.model,template.maxVelocity,template.maxAngVelocity,template.baseHealth,template.armor,template.maxPowerConsumption,template.size,template.descrip);
     	return newEngine;
     }

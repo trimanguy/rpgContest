@@ -71,7 +71,7 @@ public class Pylon {
 
 	
 
-    public Pylon(ShipObj source, String t, String allowedType, double health, double radius, double angle, double centerAngle, double arcAngle, double screenX, double screenY, int size, String image) {
+    public Pylon(ShipObj source, String t, String allowed, double health, double radius, double angle, double centerAngle, double arcAngle, double screenX, double screenY, int size, String image) {
     	//for testing purposes
     	//baseHealth = 50;
     	//type = "Weapon";
@@ -81,7 +81,7 @@ public class Pylon {
     	//this.equipped = (ItemObj)testGun; 
     	//
     	this.baseHealth = health;
-    	this.allowedType = allowedType; 
+    	this.allowedType = allowed; 
     	this.tag=t;
     	this.polarRadius = radius;
     	this.polarAngle = angle;
@@ -121,7 +121,7 @@ public class Pylon {
     	
     	
     	//System.out.println("cant equip "+O.name+" for some reason");
-    	//System.out.println("cant equip!");
+    	System.out.println("cant equip item "+O.name);
     	return false;
     }
     
@@ -139,6 +139,14 @@ public class Pylon {
     		this.source.maxPower = ((PowerCoreObj)item).maxPower;
     		this.source.powerMade = ((PowerCoreObj)item).regenRate;
     		this.source.currPower = this.source.maxPower;
+    	}
+    	else if(item instanceof ShieldObj){
+    		this.source.maxShield=((ShieldObj)item).maxShield;
+    		this.source.shieldChargeTimer=((ShieldObj)item).regenDelay;
+    		this.source.shieldForward=((ShieldObj)item).maxShield;
+    		this.source.shieldLeft=((ShieldObj)item).maxShield;
+    		this.source.shieldRight=((ShieldObj)item).maxShield;
+    		this.source.shieldRear=((ShieldObj)item).maxShield;
     	}
     }
     
