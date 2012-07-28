@@ -147,6 +147,7 @@ public class Pylon {
     		this.source.shieldLeft=((ShieldObj)item).maxShield;
     		this.source.shieldRight=((ShieldObj)item).maxShield;
     		this.source.shieldRear=((ShieldObj)item).maxShield;
+    		this.source.powerUsed+=((ShieldObj)item).shieldPowerConsumption;
     	}
     }
     
