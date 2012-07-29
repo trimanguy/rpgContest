@@ -55,7 +55,6 @@ public class GameState {
     	Utils.parseShieldFile(shieldFile);
     	
     	Global.state.playerObj = createEscort1(0,"ally");
-    	Global.GUI = new ActiveInterface ();
     
     	for(int z=0; z<Global.state.playerObj.pylons.size()-1;z++){
     		Pylon P = Global.state.playerObj.pylons.get(z);
@@ -76,6 +75,8 @@ public class GameState {
         createFlak1(500,"none");
         createFlak1(500,"none");
         createFlak1(500,"none");
+        
+    	Global.GUI = new ActiveInterface ();
     }
     
     public ShipObj createEscort1(int placeSize, String faction){
@@ -91,6 +92,8 @@ public class GameState {
     	
     	ship.pylons.get(6).equipItem(Utils.createEngine("testEngine"));
     	
+    	ship.setAngle(Math.random()*360);
+    	
     	return ship;
     }
     
@@ -105,6 +108,9 @@ public class GameState {
     	ship.pylons.get(4).equipItem(Utils.createPowerCore("testCore"));
     	ship.pylons.get(5).equipItem(Utils.createWeapon("testMissile"));
     	ship.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
+    	
+    	ship.setAngle(Math.random()*360);
+    	
     	return ship;
     }
     
@@ -113,6 +119,9 @@ public class GameState {
     	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
 		ship.pylons.get(0).equipItem(Utils.createWeapon("testMissile"));
     	ship.pylons.get(1).equipItem(Utils.createEngine("testEngine"));
+    	
+    	ship.setAngle(Math.random()*360);
+    	
     	return ship;
     }
     

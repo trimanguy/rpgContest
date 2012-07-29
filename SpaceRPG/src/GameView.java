@@ -110,8 +110,10 @@ public class GameView implements Runnable{
     	
     	
     	//Debug message here for the drawn objects list size
-    	buffergraphics.setColor(Color.white);
-    	buffergraphics.drawString("Objects drawn: "+drawObjects.size(), 5, 10);
+    	if(drawObjects != null && buffergraphics != null){
+	    	buffergraphics.setColor(Color.white);
+	    	buffergraphics.drawString("Objects drawn: "+drawObjects.size(), 5, 10);
+    	}
     	
     	
     	

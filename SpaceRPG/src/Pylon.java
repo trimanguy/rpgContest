@@ -137,11 +137,13 @@ public class Pylon {
     		this.source.maxVelocity=((EngineObj)item).maxVelocity;
     		this.source.maxAngVel=((EngineObj)item).maxAngVelocity;
     		//haven't added power consumption for engines yet...
+    		this.source.engine = (EngineObj) item;
     	}
     	else if(item instanceof PowerCoreObj){
     		this.source.maxPower = ((PowerCoreObj)item).maxPower;
     		this.source.powerMade = ((PowerCoreObj)item).regenRate;
     		this.source.currPower = this.source.maxPower;
+    		this.source.generator = (PowerCoreObj) item;
     	}
     	else if(item instanceof ShieldObj){
     		this.source.maxShield=((ShieldObj)item).maxShield;
@@ -277,11 +279,12 @@ public class Pylon {
     	int n = (int) targetAng;
     	int m = (int) diffAng;
     	
-    	
+    	/*
     	if(this.source==Global.state.playerObj){
     		System.out.println("targetAng :"+n+" diffAng: "+m+" ship's angle: "+(int)this.source.currAngle);
     		//System.out.println("targetAng :"+n+" pylon's center angle: "+this.centerAngle+ " ship's angle: "+(int)this.source.currAngle);
     	}
+    	*/
     	
     	if(diffAng < -180) diffAng += 360;
     	if(diffAng >= 180) diffAng -= 360;
@@ -318,11 +321,13 @@ public class Pylon {
 		//if(this.source==Global.state.playerObj){System.out.println("selfAngle: "+this.selfAngle +" with targetAng: "+targetAng);}
 	    if(Math.abs(targetAng-selfAngle)<=weapon.angleSpread || (weapon.missileHoming)){
 	    	//fire
+	    	/*
 	    	if(this.source==Global.state.playerObj){
-	    		System.out.println("fire "+test);
+	    		//System.out.println("fire "+test);
 	    		test+=1;
 	    		
 	    		}
+	    	*/
 	    	weapon.Fire(nx,ny,this.currAngle, this.source, target);
 	    }
 	    

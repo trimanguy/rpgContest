@@ -134,6 +134,7 @@ public class Obj implements Comparable{
     }
     
     public void Draw(Graphics2D G, ImageObserver loc){
+    	if(sprite == null) return;
     	transform(); //Applies the object's transformations to the sprite
     	sprite.Draw(G,loc); //Draws the object's sprite
     }

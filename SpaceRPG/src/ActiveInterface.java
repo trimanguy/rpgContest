@@ -26,14 +26,14 @@ public class ActiveInterface extends InterfaceManager {
     	setElement("shortcutThree", new UIElement(555,701,"Resources/Interface/Shortcut 3.png",spriteContext,21));
     	setElement("shortcutFour", new UIElement(597,701,"Resources/Interface/Shortcut 4.png",spriteContext,21));
     	
-    	UIElement powerBar = new UIElement(425,681,"Resources/Interface/PowerBar Front.png",spriteContext);
+    	InterfaceBar powerBar = new InterfaceBar(425,681,"Resources/Interface/PowerBar Front.png",spriteContext,6,1);
     	powerBar.underlay = new Sprite("Resources/Interface/PowerBar Back.png",spriteContext, false);
     	
     	powerBar.setLayer(22);
     	setElement("powerBar", powerBar);
     	
     	InterfaceSlider speedBar = new InterfaceSlider(400,681,"Resources/Interface/SpeedBar Back.png",spriteContext,
-    		"Resources/Interface/SpeedBar Slider.png",null,null,0,100,78);
+    		"Resources/Interface/SpeedBar Slider.png","setVelocity",Global.state.playerObj,0,100,78);
     	setElement("speedBar",speedBar);
     	
     	speedBar.setLayer(22);

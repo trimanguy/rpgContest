@@ -40,6 +40,9 @@ public class InterfaceSlider extends UIElement{
     	low = lo;
     	high = hi;
     	height = h;
+    	//String cM, Obj cC
+    	callContext = cC;
+    	callMethod = cM;
     }
     
     public void setPosition(double yCoord){
@@ -50,6 +53,15 @@ public class InterfaceSlider extends UIElement{
     	if(npos != position){
     		position = npos;
     		callMethod();
+    	}
+    }
+    
+    public void setValue(double nValue){
+    	nValue = Math.min(1,Math.max(0,nValue));
+    	
+    	if(position != nValue){
+	    	position = nValue;
+	    	callMethod();
     	}
     }
     
@@ -68,8 +80,14 @@ public class InterfaceSlider extends UIElement{
     }
     
     public void callMethod(){
-		if(callMethod == null || callMethod == "") return;
-		if(callContext == null) return;
+		
+		if(callMethod == null || callMethod == "") {
+			return;
+		}
+		if(callContext == null) {
+			return;
+		}
+		
 		
 		Method method=null;
 		try {
@@ -80,7 +98,7 @@ public class InterfaceSlider extends UIElement{
 			// ...
 		}
 		try {
-			method.invoke(callContext,position*high+low);
+			method.invoke(callContext,position);
 		} catch (IllegalArgumentException e) {
 		} catch (IllegalAccessException e) {
 		} catch (InvocationTargetException e) {

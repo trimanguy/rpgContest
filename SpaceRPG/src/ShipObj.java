@@ -59,6 +59,9 @@ public class ShipObj extends GameObj {
 	double tweenFactor = 0.1;
 	double idealTargetAng = 0;
     
+    //ship's specific pylon references...
+    EngineObj engine;
+    PowerCoreObj generator;
     
     public double getSpeed(){
     	return this.velocity;
@@ -188,17 +191,67 @@ public class ShipObj extends GameObj {
 	    	//Combat 
 	    	this.fireOn(this.findTarget());
 	    	
-	    	//Process power generation
+	    	//Process power generation and consumption
+	    	double powerRate = powerMade - powerUsed;
+	    	
+	    	//Process engine power consumption
+	    	if(engine != null){
+	    		powerRate -= engine.getPowerConsumption(velocity/maxVelocity);
+	    	}
+	    	
+	    	currPower += powerRate * Global.state.dtt;
+	    	
+	    	if(currPower <=0 && engine != null && generator != null){
+	    		//shut down shit. ship goes to sleep.
+	    		velocity = engine.getPowerEquals(Math.max(Math.max(currPower,powerMade),powerMade - powerUsed))*maxVelocity;
+	    		if(velocity < 0) velocity = 0;
+	    		if(Double.isNaN(velocity)) velocity = 0;
+	    	}
+	    	
+	    	currPower = Math.max(0,Math.min(maxPower,currPower));
+	    	
+	    	
+	    	if(this == Global.state.playerObj){
 	    		
+		    	//Update interface
+		    	//1. Update power
+		    	InterfaceBar powerBar = (InterfaceBar) Global.GUI.getElement("powerBar");
+		    	double powerPercent = 0;
+		    	if(maxPower > 0) powerPercent = currPower/maxPower;
+		    	powerBar.setValue(powerPercent);
+		    	
+		    	//2. Update velocity
+		    	InterfaceSlider speedSlider = (InterfaceSlider) Global.GUI.getElement("speedBar");
+		    	double velPercent = 0;
+		    	if(maxVelocity > 0) velPercent = velocity/maxVelocity;
+		    	speedSlider.setValue(velPercent);
+		    	
+		    	UIElement speedLevel = Global.GUI.getElement("speedLevel");
+		    	
+		    	double sx = speedSlider.x - 7, sy = speedSlider.y + speedSlider.height-5;
+		    	
+		    	sy -= engine.getPowerEquals(powerMade - powerUsed) * speedSlider.height;
+		    	
+		    	speedLevel.translate(sx,sy);
+		    	speedSlider.powerPosition = engine.getPowerEquals(powerMade - powerUsed);
+		    	
+		    	//3. Update buttons
+	    	
+	    	}
+	    	
+	    	
 	    	//Process shield actions
 	    	shieldChargeDelay = Math.max(0, shieldChargeDelay-Global.state.dtt);
 	    	if((shieldChargeDelay==0)){ //10% shield regen/sec
 	    		
 	    		if((shieldForward<maxShield)||(shieldLeft<maxShield)||(shieldRight<maxShield)||(shieldRear<maxShield)){ 
-	    			shieldForward=Math.min(maxShield, shieldForward+maxShield/10);
-	    			shieldLeft=Math.min(maxShield, shieldLeft+maxShield/10);
-	    			shieldRight=Math.min(maxShield, shieldRight+maxShield/10);
-	    			shieldRear=Math.min(maxShield, shieldRear+maxShield/10);
+	    			
+	    			double shieldRate = maxShield/10; //maxshield/10 tentative for testing
+	    			
+	    			shieldForward=Math.min(maxShield, shieldForward+shieldRate);
+	    			shieldLeft=Math.min(maxShield, shieldLeft+shieldRate);
+	    			shieldRight=Math.min(maxShield, shieldRight+shieldRate);
+	    			shieldRear=Math.min(maxShield, shieldRear+shieldRate);
 	  
 	    			shieldChargeDelay+=1;
 	    		}
@@ -300,32 +353,45 @@ public class ShipObj extends GameObj {
     	if(deltaAngle < 45 || deltaAngle >= 315) shieldForward = value;
     }
     
+    public void setVelocity(double percent){//sets the velocity. percent goes from 0 to 1
+    	
+    	/*
+    	//Commented out for the time being
+    	if(engine != null)
+    		if(engine.getPowerConsumption(percent)+powerUsed > currPower + powerMade)
+    			return;
+    	*/
+    	
+    	//System.out.println("SET VELOCITY: "+percent);
+    	
+    	velocity = maxVelocity * percent;
+    }
+    
+    
     public void Draw(Graphics2D G, ImageObserver loc){
     	if(sprite == null) return;
     	//Draw shields
     	
     	if(this == Global.state.playerObj || this == Global.state.playerObj.aimTarget)
-    		drawShields(G, 20, 150, 240);
+    		drawShields(G, 20, 150, 240, 1.25);
     	
     	if(this != Global.state.playerObj){
     		if(Global.state.playerObj.isHostile(this)){
-    			drawHostilePlate(G, 255, 0, 0, 64, 1.1);
+    			drawPlate(G, 255, 0, 0, 64, 1.1);
     		}
     		if(this == Global.state.playerObj.aimTarget){
-    			drawHostilePlate(G, 255, 255, 255, 64, 0.9);
+    			drawPlate(G, 255, 255, 255, 64, 0.9);
     		}
     	}
     	
     	transform(); //Applies the object's transformations to the sprite
     	
-    	sprite.Draw(G,loc); //Draws the object's sprite
+    	if(sprite != null) sprite.Draw(G,loc); //Draws the object's sprite
     }
     
-    public void drawHostilePlate(Graphics2D G, int red, int green, int blue, int alpha, double radiusMult){
+    public void drawPlate(Graphics2D G, int red, int green, int blue, int alpha, double radiusMult){
     	
 			double dx,dy;
-			
-			//double radiusMult = 1.1;
 			
 			dx = this.x  - (sprite.frameX/2 * radiusMult);
 			dy = this.y  + (sprite.frameY/2 * radiusMult) + 1;
@@ -346,23 +412,17 @@ public class ShipObj extends GameObj {
 			
     }
     
-    public void drawShields(Graphics2D G, int red, int green, int blue){
+    public void drawShields(Graphics2D G, int red, int green, int blue, double radiusMult){
 		if(maxShield > 0){
 			double dx,dy;
 			
-			dx = this.x  - (sprite.frameX/2 * 1.25);
-			dy = this.y  + (sprite.frameY/2 * 1.25) + 1;
+			dx = this.x  - (sprite.frameX/2 * radiusMult);
+			dy = this.y  + (sprite.frameY/2 * radiusMult) + 1;
 			
 			PointS coords = (new PointS(dx,dy)).toScreen();
 			
-			/*
-			if (this == Global.state.playerObj){
-    			//System.out.println("player's x,y: "+this.x+" "+this.y+" and dx,dy: "+dx+" "+dy);
-    			System.out.println("player's x,y: "+(int)this.x+" "+(int)this.y+" player's cx,cy: "+(int)Global.player.cx+" "+(int)Global.player.cy+" and dx,dy: "+dx+" "+dy);
-    		}
-			*/
-			int width = (int) (sprite.frameX * Global.player.zoom * 1.25);
-			int height = (int) (Global.xyRatio * sprite.frameY * Global.player.zoom * 1.25);
+			int width = (int) (sprite.frameX * Global.player.zoom * radiusMult);
+			int height = (int) (Global.xyRatio * sprite.frameY * Global.player.zoom * radiusMult);
 			
 			float alpha;
 			Color dColor;

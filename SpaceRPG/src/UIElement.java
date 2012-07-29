@@ -173,15 +173,16 @@ public class UIElement extends Obj {
     	
     	transform.scale(dx, dy);
     	
-    	sprite.setTransform(transform);
+    	if(sprite != null) sprite.setTransform(transform);
     	if(overlay != null) overlay.setTransform(transform);
     	if(underlay != null) underlay.setTransform(transform);
     }
     
     public void Draw(Graphics2D G, ImageObserver loc){
+    	if(sprite == null) return;
     	transform(); //Applies the object's transformations to the sprite
     	if(underlay != null) underlay.Draw(G,loc);
-    	sprite.Draw(G,loc); //Draws the object's sprite
+    	if(sprite != null) sprite.Draw(G,loc); //Draws the object's sprite
     	if(overlay != null) overlay.Draw(G,loc);
     }
 }

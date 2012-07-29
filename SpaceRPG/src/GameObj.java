@@ -148,6 +148,8 @@ public class GameObj extends Obj {
     	rx = R.x; ry = R.y;
     	R = null;
     	
+    	if(sprite == null) return;
+    	
     	rx -= (sprite.frameX/2) * Global.player.zoom;
     	ry -= (sprite.frameY/2) * Global.player.zoom;
     	
@@ -163,6 +165,7 @@ public class GameObj extends Obj {
     }
     
     public void Draw(Graphics2D G, ImageObserver loc){
+    	if(sprite == null) return;
     	transform(); //Applies the object's transformations to the sprite
     	sprite.Draw(G,loc); //Draws the object's sprite
     }

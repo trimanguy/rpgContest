@@ -88,6 +88,17 @@ public class Sprite {
 		
 	}
 	
+	public void crop(int cx, int cy, int cw, int ch){//crop x, crop y, crop width, crop height
+		if(img != null) img.flush();
+		if(cw <=0 || ch <=0 || cx <0 || cy < 0) return;
+		
+		
+		
+		setFrame(frame);
+		img = (img.getSubimage(cx, cy, cw, ch));
+		
+	}
+	
 	public void setHasFrame(boolean f){
 		hasFrames = f;
 		setFrame(frame);
