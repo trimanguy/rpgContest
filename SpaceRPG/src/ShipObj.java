@@ -293,9 +293,40 @@ public class ShipObj extends GameObj {
     	if(this == Global.state.playerObj || this == Global.state.playerObj.aimTarget)
     		drawShields(G, 20, 150, 240);
     	
+    	if(this != Global.state.playerObj){
+    		if(Global.state.playerObj.isHostile(this)){
+    			drawHostilePlate(G, 255, 0, 0, 64);
+    		}
+    	}
+    	
     	transform(); //Applies the object's transformations to the sprite
     	
     	sprite.Draw(G,loc); //Draws the object's sprite
+    }
+    
+    public void drawHostilePlate(Graphics2D G, int red, int green, int blue, int alpha){
+    	
+			double dx,dy;
+			
+			double radiusMult = 1.1;
+			
+			dx = this.x  - (sprite.frameX/2 * radiusMult);
+			dy = this.y  + (sprite.frameY/2 * radiusMult) + 1;
+			
+			PointS coords = (new PointS(dx,dy)).toScreen();
+			
+			int width = (int) (sprite.frameX * Global.player.zoom * radiusMult);
+			int height = (int) (Global.xyRatio * sprite.frameY * Global.player.zoom * radiusMult);
+			
+			Color dColor = new Color(red, green, blue, alpha);
+			
+			
+			G.setColor(dColor);
+			G.drawOval((int) coords.x,(int) coords.y,width,height);
+			G.drawOval((int) coords.x+1,(int) coords.y+1,width-2,height-2);
+			G.drawOval((int) coords.x+2,(int) coords.y+2,width-4,height-4);
+			
+			
     }
     
     public void drawShields(Graphics2D G, int red, int green, int blue){
