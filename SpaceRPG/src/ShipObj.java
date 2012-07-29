@@ -203,7 +203,7 @@ public class ShipObj extends GameObj {
 	    	
 	    	if(currPower <=0 && engine != null && generator != null){
 	    		//shut down shit. ship goes to sleep.
-	    		velocity += tweenFactor * (0-velocity);
+	    		velocity += tweenFactor * 0.5 * (0-velocity);
 	    		if(Double.isNaN(velocity)) velocity = 0;
 	    	}
 	    	
@@ -219,20 +219,22 @@ public class ShipObj extends GameObj {
 		    	if(maxPower > 0) powerPercent = currPower/maxPower;
 		    	powerBar.setValue(powerPercent);
 		    	
-		    	//2. Update velocity
-		    	InterfaceSlider speedSlider = (InterfaceSlider) Global.GUI.getElement("speedBar");
-		    	double velPercent = 0;
-		    	if(maxVelocity > 0) velPercent = velocity/maxVelocity;
-		    	speedSlider.setValue(velPercent);
-		    	
-		    	UIElement speedLevel = Global.GUI.getElement("speedLevel");
-		    	
-		    	double sx = speedSlider.x - 7, sy = speedSlider.y + speedSlider.height-5;
-		    	
-		    	sy -= engine.getPowerEquals(powerMade - powerUsed) * speedSlider.height;
-		    	
-		    	speedLevel.translate(sx,sy);
-		    	speedSlider.powerPosition = engine.getPowerEquals(powerMade - powerUsed);
+		    	if(engine != null && generator != null){
+			    	//2. Update velocity
+			    	InterfaceSlider speedSlider = (InterfaceSlider) Global.GUI.getElement("speedBar");
+			    	double velPercent = 0;
+			    	if(maxVelocity > 0) velPercent = velocity/maxVelocity;
+			    	speedSlider.setValue(velPercent);
+			    	
+			    	UIElement speedLevel = Global.GUI.getElement("speedLevel");
+			    	
+			    	double sx = speedSlider.x - 7, sy = speedSlider.y + speedSlider.height-7;
+			    	
+			    	sy -= engine.getPowerEquals(powerMade - powerUsed) * speedSlider.height;
+			    	
+			    	speedLevel.translate(sx,sy);
+			    	speedSlider.powerPosition = engine.getPowerEquals(powerMade - powerUsed);
+		    	}
 		    	
 		    	//3. Update buttons
 	    	

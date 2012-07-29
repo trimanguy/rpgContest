@@ -70,7 +70,7 @@ public class GameState {
         createFlak1(500,"ally");
         createFlak1(500,"ally");
         createFlak1(500,"ally");
-        createFlak1(500,"ally");
+        createFlak1(500,"none");
         createFlak1(500,"none");
         createFlak1(500,"none");
         createFlak1(500,"none");

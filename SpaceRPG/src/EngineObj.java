@@ -43,11 +43,15 @@ public class EngineObj extends ItemObj{
     
     public double getPowerEquals(double power){//This function finds the velocity % needed to equate given power.
     	power *= 2/maxPowerConsumption;
+    	
     	power -= 1;
+    	
+    	if(power > 1) power = 1;
     	
     	power = Math.asin(power);
     	power /= Math.PI;
     	power += 0.5;
+    	
     	
     	return power;
     }
