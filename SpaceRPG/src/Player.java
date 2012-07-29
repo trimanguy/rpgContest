@@ -65,7 +65,7 @@ public class Player implements MouseListener, MouseMotionListener, KeyListener {
     	
     	//determine REAL coord of the click 
     	PointS clickedPt = new PointS(e.getX(), e.getY());
-    	mousePressed = true;
+    	
     	
     	//determine what obj was being clicked
     	mouseObj = null;
