@@ -143,6 +143,10 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\SoundObj.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\Sprite.java</path>
 				<folder>src</folder>
 			</fileitem>
@@ -182,14 +186,8 @@
 		<todotaskitem>
 			<description>TODO: autotarget, do auto-targetting here</description>
 			<filepath>src\ShipObj.java</filepath>
-			<line>98</line>
-			<timestamp>1343385632</timestamp>
-		</todotaskitem>
-		<todotaskitem>
-			<description>TODO: implement ship health?</description>
-			<filepath>src\Pylon.java</filepath>
-			<line>243</line>
-			<timestamp>1343476723</timestamp>
+			<line>99</line>
+			<timestamp>1343549941</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>
