@@ -267,15 +267,20 @@ public class Pylon {
     		return false;
     	}
     	//Check if target is within fire arc
-    	Double targetAng = this.getAngle(target);
-    	Double diffAng = targetAng - this.centerAngle;
-    	int n = targetAng.intValue();
-    	int m = diffAng.intValue();
+    	
+    	if(target == null){
+    		System.out.println("NULL TARGET");
+    	}
+    	
+    	double targetAng = this.getAngle(target);
+    	double diffAng = targetAng - this.centerAngle;
+    	int n = (int) targetAng;
+    	int m = (int) diffAng;
     	
     	
     	if(this.source==Global.state.playerObj){
-    		//System.out.println("targetAng :"+n+" diffAng: "+m+" ship's angle: "+(int)this.source.currAngle);
-    		System.out.println("targetAng :"+n+" pylon's center angle: "+this.centerAngle+ " ship's angle: "+(int)this.source.currAngle);
+    		System.out.println("targetAng :"+n+" diffAng: "+m+" ship's angle: "+(int)this.source.currAngle);
+    		//System.out.println("targetAng :"+n+" pylon's center angle: "+this.centerAngle+ " ship's angle: "+(int)this.source.currAngle);
     	}
     	
     	if(diffAng < -180) diffAng += 360;
@@ -484,7 +489,7 @@ public class Pylon {
     	PointS P = getCoords();
     	sx = O.x - P.x; sy = O.y - P.y;
     	
-    	double angle = Math.atan2(sy,sx);
+    	double angle = Math.toDegrees(Math.atan2(sy,sx));
     	angle -= source.currAngle;
     	
     	while(angle < 0) angle += 360;
