@@ -104,12 +104,15 @@ public class InterfacePylon extends UIElement{
     		g.setColor(Color.yellow);
     		g.drawOval((int) (dx-radius), (int) (dy-radius), radius*2, radius*2);
     		g.drawOval((int) (dx-radius), (int) (dy-radius), radius*2, radius*2);
-    		//if(pylon.type.compareTo("Weapon")==0){
-			double fx = dx+radius*2*Math.cos(Math.toRadians(pylon.selfAngle));
-			double fy = dy-radius*2*Math.sin(Math.toRadians(pylon.selfAngle));
-			g.drawLine((int) dx, (int) dy, (int) fx, (int) fy);
-			g.drawLine((int) dx, (int) dy, (int) fx, (int) fy);
-    		//}
+    		
+    		if(pylon.equipped!=null){
+	    		if(pylon.allowedType.indexOf("w")>=0){
+					double fx = dx+radius*2*Math.cos(Math.toRadians(pylon.selfAngle));
+					double fy = dy-radius*2*Math.sin(Math.toRadians(pylon.selfAngle));
+					g.drawLine((int) dx, (int) dy, (int) fx, (int) fy);
+					g.drawLine((int) dx, (int) dy, (int) fx, (int) fy);
+	    		}
+    		}
     		
     	}
     	
