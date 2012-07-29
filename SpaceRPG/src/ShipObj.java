@@ -203,8 +203,7 @@ public class ShipObj extends GameObj {
 	    	
 	    	if(currPower <=0 && engine != null && generator != null){
 	    		//shut down shit. ship goes to sleep.
-	    		velocity = engine.getPowerEquals(Math.max(Math.max(currPower,powerMade),powerMade - powerUsed))*maxVelocity;
-	    		if(velocity < 0) velocity = 0;
+	    		velocity += tweenFactor * (0-velocity);
 	    		if(Double.isNaN(velocity)) velocity = 0;
 	    	}
 	    	
