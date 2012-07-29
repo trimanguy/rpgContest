@@ -9,7 +9,7 @@ import java.io.*;
 
 
 
-public class Player implements MouseListener, KeyListener {
+public class Player implements MouseListener, MouseMotionListener, KeyListener {
 	
 	
 	//Camera X and Camera Y. These are in 1:1 game world coordinates.
@@ -24,8 +24,26 @@ public class Player implements MouseListener, KeyListener {
 	Obj mouseObj;
 	Obj dropObj;
 	
+	String activeButtons=""; //which buttons currently pressed atm
+	
     public Player() {
     	Global.player = this;
+    }
+    
+    public void mouseMoved(MouseEvent e){
+    	//System.out.println("Mouse detected on "+ e.getComponent().getClass().getName()+ "at coords "+e.getX()+","+e.getY()+".");
+    }
+    
+    public void mouseDragged(MouseEvent e){
+    	//System.out.println("Mouse dragged "+e);
+    	System.out.println("mouseDragged at " +e.getX()+"," +e.getY()+ "activeButtons "+activeButtons);
+    	if((activeButtons.indexOf("r")>=0)){
+    		if (!(mouseObj instanceof UIElement)){	
+				rotateToClick(e);	
+				PointS point = (new PointS(e.getX(),e.getY())).toWorld();
+			
+    		}
+    	}
     }
     
     public void mouseClicked(MouseEvent e){
@@ -47,6 +65,7 @@ public class Player implements MouseListener, KeyListener {
     	
     	//determine REAL coord of the click 
     	PointS clickedPt = new PointS(e.getX(), e.getY());
+    	mousePressed = true;
     	
     	//determine what obj was being clicked
     	mouseObj = null;
@@ -63,11 +82,14 @@ public class Player implements MouseListener, KeyListener {
     	
     	//check if right or left clicked
 	    switch (e.getButton()) {
-	    	case 1: 	this.leftClick(e, mouseObj);  //left-button click 
+	    	case 1: 	activeButtons+="l";
+	    				this.leftClick(e, mouseObj);  //left-button click 
 	    				break;
-	    	case 2:		this.middleClick(e, mouseObj);  //right-button click
+	    	case 2:		activeButtons+="m";
+	    				this.middleClick(e, mouseObj);  //right-button click
 	    				break;
-	    	case 3: 	this.rightClick(e, mouseObj);  //middle-button click
+	    	case 3: 	activeButtons+="r";
+	    				this.rightClick(e, mouseObj);  //middle-button click
 	    				break;
 	    }
 	    
@@ -76,6 +98,12 @@ public class Player implements MouseListener, KeyListener {
     public void mouseReleased(MouseEvent e){
     	
     	PointS clickedPt = new PointS(e.getX(), e.getY());
+    	
+    	switch (e.getButton()){
+    		case 1:		activeButtons=activeButtons.replaceAll("l","");break;
+    		case 2:		activeButtons=activeButtons.replaceAll("m","");break;
+    		case 3:		activeButtons=activeButtons.replaceAll("r","");break;
+    	}
     	
     	dropObj = null;
     	dropObj = findClickedObj(clickedPt);
@@ -113,6 +141,7 @@ public class Player implements MouseListener, KeyListener {
     }
     
     private void leftClick(MouseEvent e, Obj clickedObj){
+    	
     	if (clickedObj==null){
     		Global.view.Clicked = null; //this for testing
     		Global.state.playerObj.aimTarget = null;

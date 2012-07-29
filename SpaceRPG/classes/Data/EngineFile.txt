@@ -16,8 +16,19 @@ EMODEL	Resources/Sprites/Escort1-Pylon1.png
 MAXSPD	100
 ROTSPD	30
 HEALTH	50
-ARMOR	1
-PWRREQ	0
+ARMOR	0
+PWRREQ	5
 SIZE	1
 DESCRIP	testEngine is this
 END
+
+ENAME	imbaEngine
+EMODEL	Resources/Sprites/Escort1-Pylon1.png
+MAXSPD	200
+ROTSPD	75
+HEALTH	100
+ARMOR	1
+PWRREQ	5
+SIZE	1
+DESCRIP	imbaaaa
+END	

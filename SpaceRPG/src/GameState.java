@@ -60,6 +60,7 @@ public class GameState {
     		Pylon P = Global.state.playerObj.pylons.get(z);
     		P.autoAttack = false;
     	}
+    	Global.state.playerObj.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
     	Global.state.playerObj.faction = "player";
 
         createEscort1(500);
