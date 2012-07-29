@@ -27,6 +27,19 @@ SIZE	1
 DESCRIP testweapon
 END
 
+WNAME	testBlaster2
+WMODEL	none
+MISSILE	Resources/Sprites/PlasmaSmall.png,Resources/Sprites/explode_2.png,3,400,3000,0
+ACCR	5
+DAMAGE	2,0,1,0
+TURNSPD	9999
+HEALTH	1
+ARMOR	1
+DELAY	0.5
+SIZE	1
+DESCRIP testweapon
+END
+
 WNAME	testMissile
 WMODEL	none
 MISSILE	Resources/Sprites/RedMissile1.png,Resources/Sprites/explode_3.png,5,600,250,90

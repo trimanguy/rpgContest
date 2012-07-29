@@ -54,13 +54,15 @@ public class GameState {
     	File shieldFile = new File("Data/ShieldFile.txt");
     	Utils.parseShieldFile(shieldFile);
     	
-    	Global.state.playerObj = createEscort1(0);
+    	Global.state.playerObj = createEscort2(0);
     	Global.GUI = new ActiveInterface ();
+    	/*
     	for(int z=0; z<Global.state.playerObj.pylons.size()-1;z++){
     		Pylon P = Global.state.playerObj.pylons.get(z);
     		P.autoAttack = false;
     	}
-    	Global.state.playerObj.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
+    	*/
+    	//Global.state.playerObj.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
     	Global.state.playerObj.faction = "player";
 
         createEscort1(500);
@@ -85,6 +87,19 @@ public class GameState {
     	ship.pylons.get(4).equipItem(Utils.createPowerCore("testCore"));
     	ship.pylons.get(5).equipItem(Utils.createWeapon("testMissile"));
     	ship.pylons.get(6).equipItem(Utils.createEngine("testEngine"));
+    	return ship;
+    }
+    
+    public ShipObj createEscort2(int placeSize){
+    	ShipObj ship = Utils.createShip("escort2");
+    	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
+    	ship.pylons.get(0).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(1).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(2).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(3).equipItem(Utils.createWeapon("testMissile"));
+    	ship.pylons.get(4).equipItem(Utils.createPowerCore("testCore"));
+    	ship.pylons.get(5).equipItem(Utils.createWeapon("testMissile"));
+    	ship.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
     	return ship;
     }
     
