@@ -36,7 +36,7 @@ public class Player implements MouseListener, MouseMotionListener, KeyListener {
     
     public void mouseDragged(MouseEvent e){
     	//System.out.println("Mouse dragged "+e);
-    	System.out.println("mouseDragged at " +e.getX()+"," +e.getY()+ "activeButtons "+activeButtons);
+    	//System.out.println("mouseDragged at " +e.getX()+"," +e.getY()+ "activeButtons "+activeButtons);
     	if((activeButtons.indexOf("r")>=0)){
     		if (!(mouseObj instanceof UIElement)){	
 				rotateToClick(e);	
@@ -130,8 +130,10 @@ public class Player implements MouseListener, MouseMotionListener, KeyListener {
     		case '2':	System.out.println("Ctrl Group2 selected"); break;
     		case '3':	System.out.println("Ctrl Group3 selected"); break;
     		case '4':	System.out.println("Ctrl Group4 selected"); break;
-    		case 'r':  	increaseSpeed(); System.out.println("Speed increased!"); break;
-    		case 'f':	decreaseSpeed(); System.out.println("Speed decreased!"); break;
+    		case 'r':  	increaseSpeed(); //System.out.println("Speed increased!"); 
+    					break;
+    		case 'f':	decreaseSpeed(); //System.out.println("Speed decreased!"); 
+    					break;
     	}
     	
     }

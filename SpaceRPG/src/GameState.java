@@ -56,12 +56,12 @@ public class GameState {
     	
     	Global.state.playerObj = createEscort2(0);
     	Global.GUI = new ActiveInterface ();
-    	/*
+    
     	for(int z=0; z<Global.state.playerObj.pylons.size()-1;z++){
     		Pylon P = Global.state.playerObj.pylons.get(z);
     		P.autoAttack = false;
     	}
-    	*/
+    	
     	//Global.state.playerObj.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
     	Global.state.playerObj.faction = "player";
 
@@ -80,13 +80,16 @@ public class GameState {
     public ShipObj createEscort1(int placeSize){
     	ShipObj ship = Utils.createShip("escort1","alliance");
     	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
+    	/*
     	ship.pylons.get(0).equipItem(Utils.createWeapon("testBlaster"));
     	ship.pylons.get(1).equipItem(Utils.createWeapon("testBlaster"));
     	ship.pylons.get(2).equipItem(Utils.createWeapon("testBlaster"));
     	ship.pylons.get(3).equipItem(Utils.createWeapon("testMissile"));
     	ship.pylons.get(4).equipItem(Utils.createPowerCore("testCore"));
     	ship.pylons.get(5).equipItem(Utils.createWeapon("testMissile"));
+    	
     	ship.pylons.get(6).equipItem(Utils.createEngine("testEngine"));
+    	*/
     	return ship;
     }
     
@@ -94,9 +97,9 @@ public class GameState {
     	ShipObj ship = Utils.createShip("escort2");
     	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
     	ship.pylons.get(0).equipItem(Utils.createWeapon("testBlaster2"));
-    	ship.pylons.get(1).equipItem(Utils.createWeapon("testBlaster2"));
-    	ship.pylons.get(2).equipItem(Utils.createWeapon("testBlaster2"));
-    	ship.pylons.get(3).equipItem(Utils.createWeapon("testMissile"));
+    	//ship.pylons.get(1).equipItem(Utils.createWeapon("testBlaster2"));
+    	//ship.pylons.get(2).equipItem(Utils.createWeapon("testBlaster2"));
+    	//ship.pylons.get(3).equipItem(Utils.createWeapon("testMissile"));
     	ship.pylons.get(4).equipItem(Utils.createPowerCore("testCore"));
     	ship.pylons.get(5).equipItem(Utils.createWeapon("testMissile"));
     	ship.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
@@ -107,7 +110,7 @@ public class GameState {
     	ShipObj ship = Utils.createShip("flak1");
     	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
 		ship.pylons.get(0).equipItem(Utils.createWeapon("testMissile"));
-    	ship.pylons.get(1).equipItem(Utils.createEngine("testEngine"));
+    	//ship.pylons.get(1).equipItem(Utils.createEngine("testEngine"));
     	return ship;
     }
     

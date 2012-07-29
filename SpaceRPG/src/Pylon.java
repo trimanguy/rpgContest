@@ -10,6 +10,9 @@ import java.io.*;
 
 public class Pylon {
 
+	//ERASE: var for testing ONLY
+	int test;
+	
 	ShipObj source;
 	
 	GameObj setTarget; //player-set target
@@ -185,7 +188,15 @@ public class Pylon {
 	    		if(!weapon.canFire()) return;
 	    		
 	    		if((setTarget!=null)&&(this.canFireOn(setTarget))){
+	    			//if(setTarget!=null){
+	    			
 	    			//There is a player-set target and we can fire on it
+	    			/*
+	    			if(this.source == Global.state.playerObj){
+	    				System.out.println("firing on target! "+test);
+	    				//test+=1;
+	    			}
+	    			*/
 	    			this.shootAt(setTarget);
 	    		}else if(autoAttack){
 	    			//Check if we can fire on current autoTarget
@@ -238,7 +249,7 @@ public class Pylon {
     public Boolean canFireOn(GameObj target){
     	PointS P = this.getCoords();
     	PointS T = new PointS(target.x,target.y);
-    	//Check if target is alive; TODO: implement ship health?
+    	
     	
     	if(!source.isHostile(target)){
     		return false;
@@ -258,7 +269,14 @@ public class Pylon {
     	//Check if target is within fire arc
     	Double targetAng = this.getAngle(target);
     	Double diffAng = targetAng - this.centerAngle;
+    	int n = targetAng.intValue();
+    	int m = diffAng.intValue();
     	
+    	
+    	if(this.source==Global.state.playerObj){
+    		//System.out.println("targetAng :"+n+" diffAng: "+m+" ship's angle: "+(int)this.source.currAngle);
+    		System.out.println("targetAng :"+n+" pylon's center angle: "+this.centerAngle+ " ship's angle: "+(int)this.source.currAngle);
+    	}
     	
     	if(diffAng < -180) diffAng += 360;
     	if(diffAng >= 180) diffAng -= 360;
@@ -292,9 +310,14 @@ public class Pylon {
 	    }
 	    			
 	    this.AlignTo(targetAng);
-		//System.out.println("centerAngle :"+ this.centerAngle+" currAngle "+this.currAngle +" selfAngle: "+this.selfAngle +" with targetAng: "+targetAng);
+		//if(this.source==Global.state.playerObj){System.out.println("selfAngle: "+this.selfAngle +" with targetAng: "+targetAng);}
 	    if(Math.abs(targetAng-selfAngle)<=weapon.angleSpread || (weapon.missileHoming)){
 	    	//fire
+	    	if(this.source==Global.state.playerObj){
+	    		System.out.println("fire "+test);
+	    		test+=1;
+	    		
+	    		}
 	    	weapon.Fire(nx,ny,this.currAngle, this.source, target);
 	    }
 	    
