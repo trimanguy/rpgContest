@@ -31,7 +31,7 @@ WNAME	testBlaster2
 WMODEL	none
 MISSILE	Resources/Sprites/PlasmaSmall.png,Resources/Sprites/explode_2.png,3,400,3000,0
 ACCR	5
-DAMAGE	2,0,1,0
+DAMAGE	5,0,1,0
 TURNSPD	9999
 HEALTH	1
 ARMOR	1

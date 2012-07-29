@@ -54,7 +54,7 @@ public class GameState {
     	File shieldFile = new File("Data/ShieldFile.txt");
     	Utils.parseShieldFile(shieldFile);
     	
-    	Global.state.playerObj = createEscort1(0);
+    	Global.state.playerObj = createEscort1(0,"ally");
     	Global.GUI = new ActiveInterface ();
     
     	for(int z=0; z<Global.state.playerObj.pylons.size()-1;z++){
@@ -62,24 +62,24 @@ public class GameState {
     		P.autoAttack = false;
     	}
     	
-    	//Global.state.playerObj.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
-    	Global.state.playerObj.faction = "player";
+    	Global.state.playerObj.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
 
-        createEscort1(500);
-        createEscort1(500);
-        createEscort1(500);
-        createEscort1(500);
-        createFlak1(500);
-        createFlak1(500);
-        createFlak1(500);
-        createFlak1(500);
-        createFlak1(500);
-        createFlak1(500);
-        createFlak1(500);
+        createEscort1(500,"ally");
+        createEscort1(500,"ally");
+        createEscort1(500,"none");
+        createEscort1(500,"none");
+        createFlak1(500,"ally");
+        createFlak1(500,"ally");
+        createFlak1(500,"ally");
+        createFlak1(500,"ally");
+        createFlak1(500,"none");
+        createFlak1(500,"none");
+        createFlak1(500,"none");
+        createFlak1(500,"none");
     }
     
-    public ShipObj createEscort1(int placeSize){
-    	ShipObj ship = Utils.createShip("escort1","alliance");
+    public ShipObj createEscort1(int placeSize, String faction){
+    	ShipObj ship = Utils.createShip("escort1",faction);
     	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
     	
     	ship.pylons.get(0).equipItem(Utils.createWeapon("testBlaster"));
@@ -87,15 +87,16 @@ public class GameState {
     	ship.pylons.get(2).equipItem(Utils.createWeapon("testBlaster"));
     	ship.pylons.get(3).equipItem(Utils.createWeapon("testMissile"));
     	ship.pylons.get(4).equipItem(Utils.createPowerCore("testCore"));
-    	ship.pylons.get(5).equipItem(Utils.createWeapon("testMissile"));
+    	ship.pylons.get(5).equipItem(Utils.createShield("testShield"));
     	
     	ship.pylons.get(6).equipItem(Utils.createEngine("testEngine"));
     	
     	return ship;
     }
     
-    public ShipObj createEscort2(int placeSize){
-    	ShipObj ship = Utils.createShip("escort2");
+    
+    public ShipObj createEscort2(int placeSize, String faction){
+    	ShipObj ship = Utils.createShip("escort2", faction);
     	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
     	ship.pylons.get(0).equipItem(Utils.createWeapon("testBlaster2"));
     	//ship.pylons.get(1).equipItem(Utils.createWeapon("testBlaster2"));
@@ -107,8 +108,8 @@ public class GameState {
     	return ship;
     }
     
-    public ShipObj createFlak1(int placeSize){
-    	ShipObj ship = Utils.createShip("flak1");
+    public ShipObj createFlak1(int placeSize,String faction){
+    	ShipObj ship = Utils.createShip("flak1",faction);
     	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
 		ship.pylons.get(0).equipItem(Utils.createWeapon("testMissile"));
     	ship.pylons.get(1).equipItem(Utils.createEngine("testEngine"));

@@ -34,12 +34,13 @@ public class ShipObj extends GameObj {
     double fireDelay = 1;//25;
     
     //shield health!
-    double shieldForward=500;
-    double shieldLeft=500;
-    double shieldRight=500;
-    double shieldRear=500;
-    double shieldChargeTimer;
-    double maxShield=500;
+    double shieldForward=0;
+    double shieldLeft=0;
+    double shieldRight=0;
+    double shieldRear=0;
+    double maxShield=0;
+    double shieldChargeTimer=9999; //what shieldChargeDelay gets reset to upon dmg
+    double shieldChargeDelay; //when this hits 0, begin recharging
     
     //ship's power
     double maxPower; //energy bar size
@@ -130,6 +131,7 @@ public class ShipObj extends GameObj {
     
     public void takeDmg(double amount){
     	this.currCoreHealth -= amount;
+    	this.shieldChargeDelay = this.shieldChargeTimer;
     	
     	if (this.currCoreHealth<=0){
     		//this.pylons=null;
@@ -189,6 +191,18 @@ public class ShipObj extends GameObj {
 	    	//Process power generation
 	    		
 	    	//Process shield actions
+	    	shieldChargeDelay = Math.max(0, shieldChargeDelay-Global.state.dtt);
+	    	if((shieldChargeDelay==0)){ //10% shield regen/sec
+	    		
+	    		if((shieldForward<maxShield)||(shieldLeft<maxShield)||(shieldRight<maxShield)||(shieldRear<maxShield)){ 
+	    			shieldForward=Math.min(maxShield, shieldForward+maxShield/10);
+	    			shieldLeft=Math.min(maxShield, shieldLeft+maxShield/10);
+	    			shieldRight=Math.min(maxShield, shieldRight+maxShield/10);
+	    			shieldRear=Math.min(maxShield, shieldRear+maxShield/10);
+	  
+	    			shieldChargeDelay+=1;
+	    		}
+	    	}
 	    	
 	    	//Pylon actions
 	    	for(int x=0;x<this.pylons.size();x++){
@@ -295,7 +309,10 @@ public class ShipObj extends GameObj {
     	
     	if(this != Global.state.playerObj){
     		if(Global.state.playerObj.isHostile(this)){
-    			drawHostilePlate(G, 255, 0, 0, 64);
+    			drawHostilePlate(G, 255, 0, 0, 64, 1.1);
+    		}
+    		if(this == Global.state.playerObj.aimTarget){
+    			drawHostilePlate(G, 255, 255, 255, 64, 0.9);
     		}
     	}
     	
@@ -304,11 +321,11 @@ public class ShipObj extends GameObj {
     	sprite.Draw(G,loc); //Draws the object's sprite
     }
     
-    public void drawHostilePlate(Graphics2D G, int red, int green, int blue, int alpha){
+    public void drawHostilePlate(Graphics2D G, int red, int green, int blue, int alpha, double radiusMult){
     	
 			double dx,dy;
 			
-			double radiusMult = 1.1;
+			//double radiusMult = 1.1;
 			
 			dx = this.x  - (sprite.frameX/2 * radiusMult);
 			dy = this.y  + (sprite.frameY/2 * radiusMult) + 1;

@@ -343,6 +343,7 @@ public class Pylon {
      
         source.setShields(shields,O.lastx,O.lasty);
         setLife(realHealth-damageHull);
+        this.source.shieldChargeDelay = this.source.shieldChargeTimer;
     }
     
     public void setLife(double life){
