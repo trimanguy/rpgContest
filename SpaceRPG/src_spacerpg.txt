@@ -24,7 +24,6 @@ C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\PowerCoreObj.java
 C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\Pylon.java
 C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\ShieldObj.java
 C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\ShipObj.java
-C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\SoundObj.java
 C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\Sprite.java
 C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\StackableObj.java
 C:\Users\Triman\Documents\GitHub\rpgContest\SpaceRPG\src\StarField.java
