@@ -2,6 +2,7 @@
 #
 #WNAME name
 #WMODEL image //might be used in future for hangar screen
+#WSOUND	what is weapon sound type, ie lasers, missiles, cannon?
 #MISSILE whenTravelling,whenHit,lifeTime,maxSpeed,accel,missileTurnSpeed 
 #ACCR angleSpread
 #DAMAGE toShield,shieldPierce,toHull,hullPierce
@@ -16,6 +17,7 @@
 
 WNAME	testBlaster
 WMODEL	none
+WSOUND	laser
 MISSILE	Resources/Sprites/PlasmaSmall.png,Resources/Sprites/explode_2.png,3,400,3000,0
 ACCR	5
 DAMAGE	2,0,1,0
@@ -29,6 +31,7 @@ END
 
 WNAME	testBlaster2
 WMODEL	none
+WSOUND	laser
 MISSILE	Resources/Sprites/PlasmaSmall.png,Resources/Sprites/explode_2.png,3,400,3000,0
 ACCR	5
 DAMAGE	5,0,1,0
@@ -42,6 +45,7 @@ END
 
 WNAME	testMissile
 WMODEL	none
+WSOUND	missile
 MISSILE	Resources/Sprites/RedMissile1.png,Resources/Sprites/explode_3.png,5,600,250,90
 ACCR	10
 DAMAGE	15,0,30,1

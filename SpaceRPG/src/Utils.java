@@ -8,6 +8,7 @@
 
 import java.io.*;
 import java.util.*;
+import java.util.Random; 
 
 public class Utils {
 	
@@ -34,6 +35,7 @@ public class Utils {
 	static String tempHealth;
 	static String tempArmor;
 	static String tempDelay;
+	static String soundType;
 	
 	//EngineFile vars
 	static String tempSpeed;
@@ -211,6 +213,7 @@ public class Utils {
 	    				switch (identifier) {
 	    					case "WNAME":			name = st.nextToken(); break;
 	    					case "WMODEL":			image = st.nextToken(); break; //none for now, maybe use later for hangar screen
+	    					case "WSOUND":			soundType = st.nextToken(); break;
 	    					case "MISSILE":			missile = st.nextToken(); break;
 	    					case "ACCR":			tempAccuracy = st.nextToken(); break;
 	    					case "DAMAGE":			tempDamage = st.nextToken(); break;
@@ -245,13 +248,14 @@ public class Utils {
 	    				double accel = Double.valueOf(st_missile.nextToken());
 	    				double missileTurnSpeed = Double.valueOf(st_missile.nextToken());
 	    				
-	    				WeaponObj weapon = new WeaponObj(name,image,img,hitImg,lifeTime,maxSpeed,accel,missileTurnSpeed,accuracy,weaponTurnSpeed,
+	    				WeaponObj weapon = new WeaponObj(name,image,img,hitImg,soundType,lifeTime,maxSpeed,accel,missileTurnSpeed,accuracy,weaponTurnSpeed,
 	    					tempDamage,health,armor,delay,size,descrip,activateAble); 
 	    				Utils.weaponTable.put(Utils.name, weapon);
 	    				
 	    				//clear vars for next ship
 	    				name = "";
 	    				image = "";
+	    				soundType = "";
 	    				missile = "";
 	    				tempAccuracy = "";
 	    				tempDamage = "";
@@ -540,7 +544,7 @@ public class Utils {
     	
     	WeaponObj template = (WeaponObj)Utils.weaponTable.get(weaponName);
     	String damage = ""+template.damageToShield+","+template.damageThruShield+","+template.damageToHull+","+template.damageArmorPiercing;
-    	WeaponObj newWeapon = new WeaponObj(template.name, template.model, template.missileImg,template.missileHitImg,template.missileLife,template.missileMaxSpeed,template.missileAcceleration,
+    	WeaponObj newWeapon = new WeaponObj(template.name, template.model, template.missileImg,template.missileHitImg,template.missileSoundType,template.missileLife,template.missileMaxSpeed,template.missileAcceleration,
     		template.missileTurnSpeed,template.angleSpread,template.turnSpeed,damage,template.baseHealth,template.armor,template.activateDelay,template.size,template.descrip,template.isActive);
     	
     	return newWeapon;
@@ -563,6 +567,13 @@ public class Utils {
     	polar[1]=angle;
     	
     	return polar;
+    }
+    
+    //Pick a number >= lower and < higher
+    public static int randomNumberGen(int lower, int higher){ 
+    	Random rand = new Random(); 
+ 		int pickedNumber = rand.nextInt(higher) + lower; 
+    	return pickedNumber;
     }
     
    

@@ -7,16 +7,12 @@
  */
  
 import java.util.*;
-import java.io.*;
-import javax.sound.sampled.*;
-
-
-
 
 public class WeaponObj extends ItemObj{
 
 	String missileImg; //The missileObj's sprite
 	String missileHitImg; //The missileObj's "explosion" sprite
+	String missileSoundType; //what type of missile sounds to play upon fire/hit	
 	
 	String ammoTag; //What type of ammo is used upon fire()?
 	int ammoRate; //How much ammo is consumed per fire()?
@@ -46,7 +42,7 @@ public class WeaponObj extends ItemObj{
 	double damageToHull;
 	double damageArmorPiercing;
 
-    public WeaponObj(String name, String model, String img, String hitImg, int life, double maxSpeed, double accel, double turnSpeed, double spread, double itemTurnSpeed, String damage,
+    public WeaponObj(String name, String model, String img, String hitImg, String soundType, int life, double maxSpeed, double accel, double turnSpeed, double spread, double itemTurnSpeed, String damage,
     	double health, double armor, double delay, int size, String descrip, boolean activateAble) {
     	
     	type = "Weapon";
@@ -54,6 +50,7 @@ public class WeaponObj extends ItemObj{
     	//this.model = model;	
     	missileImg = img;
     	missileHitImg = hitImg;
+    	missileSoundType = soundType; 
     	missileLife = life;
     	missileMaxSpeed = maxSpeed;
     	missileAcceleration = accel;
@@ -89,42 +86,12 @@ public class WeaponObj extends ItemObj{
     public void Fire(double nx, double ny, double angle, GameObj source, GameObj target){
     	angle += (Math.random()*2-1)*angleSpread;
     	
-    	MissileObj O = new MissileObj(missileImg, missileHitImg, Global.codeContext, source, target, 
+    	MissileObj O = new MissileObj(missileImg, missileHitImg, missileSoundType, Global.codeContext, source, target, 
     		damageToShield, damageThruShield, damageToHull, damageArmorPiercing, 
     		nx, ny, missileTurnSpeed, missileSpeed, missileMaxSpeed,missileAcceleration, missileLife,
     		angle);
     		
-    	//System.out.println("soundtable size "+Utils.soundsTable.size());
-    	if(this.name.equals("testBlaster")){
-    		//AudioClip sound = ((AudioClip)Utils.soundsTable.get("iceball"));
-    		//AudioClip test = getAudioClip(Global.codeContext,"Resources/Sounds/iceball.wav");
-    		//SoundObj test = new SoundObj("Resources/Sounds/laser1.wav");
-    		//test.play();
-    		
-    		InputStream is = this.getClass().getClassLoader().getResourceAsStream("Resources/Sounds/laser1.wav");
-    		try{
-    		
-			AudioInputStream ain = AudioSystem.getAudioInputStream(is);
-			DataLine.Info info = new DataLine.Info(Clip.class, ain.getFormat());      
-			Clip clip = (Clip)AudioSystem.getLine(info);
-			clip.open(ain);
-			clip.start();
-    		}catch (UnsupportedAudioFileException e){
-    			
-    		}catch(LineUnavailableException u){
-    		
-    		}catch(IOException i){
-    			
-    		}
-    		
-    		
-    		
-    	} else {
-    		
-    		//AudioClip test = getAudioClip(Global.codeContext,"Resources/Sounds/rlaunch.wav");
-    		//SoundObj test = new SoundObj("Resources/Sounds/rlaunch.wav");
-    		//test.play();
-    	}
-    	
     }
+    	
+    
 }

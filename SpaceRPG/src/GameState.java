@@ -76,6 +76,18 @@ public class GameState {
         createFlak1(500,"none");
         createFlak1(500,"none");
         
+        new CharacterObj();
+        new CharacterObj();
+        new CharacterObj();
+        new CharacterObj();
+        new CharacterObj();
+        new CharacterObj();
+        new CharacterObj();
+        new CharacterObj();
+        new CharacterObj();
+        new CharacterObj();
+        new CharacterObj();
+        
     	Global.GUI = new ActiveInterface ();
     }
     

@@ -8,10 +8,12 @@
  
 import java.util.*;
 import java.net.*;
+import java.io.*;
 
 public class MissileObj extends GameObj{
 	
 	String delImage; //Filepath to the "explode" image.
+	String hitSoundType; //what type of sound to play on hit
 	
 	GameObj source = null;
 	GameObj target=null;
@@ -31,7 +33,7 @@ public class MissileObj extends GameObj{
     double lastx;
     double lasty;
     
-    public MissileObj(String image, String killImage, URL spritecontext, GameObj shipObj, GameObj targetObj, 
+    public MissileObj(String image, String killImage, String hitSound, URL spritecontext, GameObj shipObj, GameObj targetObj, 
     	double dmgTS, double dmgThS, double dmgTH, double dmgAP, 
     	double nx, double ny, double turnRate, double speed, double maxSpeed, double acceleration, double time,
     	double nAngle) {
@@ -39,6 +41,7 @@ public class MissileObj extends GameObj{
     	super(image, spritecontext);
     	
     	delImage = killImage;
+    	hitSoundType = hitSound;
     	
     	x = nx;
     	y = ny;
@@ -118,6 +121,9 @@ public class MissileObj extends GameObj{
         			
         			//check the shields for the pylon
         			
+        			if(pylonHit.source==Global.state.playerObj){
+        				new SoundObj(false, this.hitSoundType);
+        			}
         			pylonHit.takeDamageFrom(this);
         			
         		} else { //damage the core if all pylons destroyed

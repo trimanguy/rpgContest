@@ -25,6 +25,10 @@
 				<dir>classes\Resources\Interface</dir>
 			</folderitem>
 			<folderitem>
+				<path>SpaceRPG\classes\Resources\Sounds</path>
+				<dir>classes\Resources\Sounds</dir>
+			</folderitem>
+			<folderitem>
 				<path>SpaceRPG\classes\Resources\Sprites</path>
 				<dir>classes\Resources\Sprites</dir>
 			</folderitem>
@@ -36,7 +40,7 @@
 	</projects>
 	<open_files>
 		<docitem>
-			<path>SpaceRPG\src\InterfaceManager.java</path>
+			<path>SpaceRPG\src\Utils.java</path>
 			<source>true</source>
 			<index>0</index>
 			<active>false</active>
@@ -66,7 +70,7 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\GameApplet.java</path>
+			<path>SpaceRPG\src\ShipObj.java</path>
 			<source>true</source>
 			<index>5</index>
 			<active>false</active>
@@ -78,13 +82,13 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\WeaponObj.java</path>
+			<path>SpaceRPG\src\GameState.java</path>
 			<source>true</source>
 			<index>7</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\Utils.java</path>
+			<path>SpaceRPG\src\InterfaceManager.java</path>
 			<source>true</source>
 			<index>8</index>
 			<active>false</active>
@@ -108,13 +112,13 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\ShipObj.java</path>
+			<path>SpaceRPG\src\GameApplet.java</path>
 			<source>true</source>
 			<index>12</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\GameState.java</path>
+			<path>SpaceRPG\src\InterfacePylon.java</path>
 			<source>true</source>
 			<index>13</index>
 			<active>false</active>
@@ -132,7 +136,7 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\HitCircle.java</path>
+			<path>SpaceRPG\src\Obj.java</path>
 			<source>true</source>
 			<index>16</index>
 			<active>false</active>
@@ -150,7 +154,7 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\Obj.java</path>
+			<path>SpaceRPG\src\HitCircle.java</path>
 			<source>true</source>
 			<index>19</index>
 			<active>false</active>
@@ -162,7 +166,7 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\InterfacePylon.java</path>
+			<path>SpaceRPG\src\WeaponObj.java</path>
 			<source>true</source>
 			<index>21</index>
 			<active>false</active>
@@ -178,6 +182,18 @@
 			<source>true</source>
 			<index>23</index>
 			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\AnimatedParticle.java</path>
+			<source>true</source>
+			<index>24</index>
+			<active>false</active>
+		</docitem>
+		<docitem>
+			<path>SpaceRPG\src\CharacterObj.java</path>
+			<source>true</source>
+			<index>25</index>
+			<active>true</active>
 		</docitem>
 	</open_files>
 	<breakpoints>

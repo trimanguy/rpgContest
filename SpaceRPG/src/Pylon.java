@@ -321,13 +321,8 @@ public class Pylon {
 		//if(this.source==Global.state.playerObj){System.out.println("selfAngle: "+this.selfAngle +" with targetAng: "+targetAng);}
 	    if(Math.abs(targetAng-selfAngle)<=weapon.angleSpread || (weapon.missileHoming)){
 	    	//fire
-	    	/*
-	    	if(this.source==Global.state.playerObj){
-	    		//System.out.println("fire "+test);
-	    		test+=1;
-	    		
-	    		}
-	    	*/
+			
+			if(this.source == Global.state.playerObj){new SoundObj(true,weapon.missileSoundType);}
 	    	weapon.Fire(nx,ny,this.currAngle, this.source, target);
 	    }
 	    

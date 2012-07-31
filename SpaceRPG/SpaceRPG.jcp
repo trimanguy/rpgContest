@@ -51,6 +51,10 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\CharacterObj.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\EngineObj.java</path>
 				<folder>src</folder>
 			</fileitem>
@@ -80,6 +84,10 @@
 			</fileitem>
 			<fileitem>
 				<path>src\HitCircle.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\InterfaceBar.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
@@ -178,16 +186,16 @@
 	</files>
 	<tasks>
 		<todotaskitem>
-			<description>TODO: damage ship shield first</description>
-			<filepath>src\MissileObj.java</filepath>
-			<line>110</line>
-			<timestamp>1343337763</timestamp>
-		</todotaskitem>
-		<todotaskitem>
 			<description>TODO: autotarget, do auto-targetting here</description>
 			<filepath>src\ShipObj.java</filepath>
 			<line>99</line>
 			<timestamp>1343549941</timestamp>
+		</todotaskitem>
+		<todotaskitem>
+			<description>TODO: damage ship shield first</description>
+			<filepath>src\MissileObj.java</filepath>
+			<line>116</line>
+			<timestamp>1343728032</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>
