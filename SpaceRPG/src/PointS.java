@@ -24,8 +24,8 @@ public class PointS extends Point2D.Double{
 	public PointS toScreen(){
         double nx,ny;
         nx = x; ny = y;
-        nx = (nx - Global.player.cx) * Global.player.zoom + Global.view.sizex/2;
-        ny = (Global.player.cy - ny) * Global.player.zoom * Global.xyRatio + Global.view.sizey/2;
+        nx = (nx - Global.player.cx - Global.player.offsetX) * Global.player.zoom + Global.view.sizex/2;
+        ny = (Global.player.cy + Global.player.offsetY - ny) * Global.player.zoom * Global.xyRatio + Global.view.sizey/2;
                    
         return new PointS(nx,ny);
     }
@@ -35,8 +35,8 @@ public class PointS extends Point2D.Double{
         nx = x; ny = y;
         nx -= Global.view.sizex/2;
         ny -= Global.view.sizey/2;
-        nx = (nx/Global.player.zoom)+Global.player.cx;
-        ny = (-ny/Global.player.zoom/Global.xyRatio)+Global.player.cy;
+        nx = (nx/Global.player.zoom)+Global.player.cx+Global.player.offsetX;
+        ny = (-ny/Global.player.zoom/Global.xyRatio)+Global.player.cy+Global.player.offsetY;
                    
         return new PointS(nx,ny);
     }

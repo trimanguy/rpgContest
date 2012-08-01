@@ -18,7 +18,7 @@ public class Global {
 	public static InterfaceManager GUI;
 
 	
-	public static URL codeContext;
+	//public static URL codeContext;
 	
 	public static double xyRatio = Math.cos(30/180*Math.PI);
 	

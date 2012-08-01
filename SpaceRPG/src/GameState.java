@@ -37,34 +37,25 @@ public class GameState {
     	Global.state = this;
     	ArrayList<PointS> Pointss = new ArrayList(0);
     	
-    	String image = "Resources/Sprites/EscortFrigate1-Thrust.png";
+    	Utils.parseShipFile("Data/ShipFile.txt");
     	
-    	File shipFile = new File("Data/ShipFile.txt");
-    	Utils.parseShipFile(shipFile);
+    	Utils.parseWeaponFile("Data/WeaponFile.txt");
     	
-    	File weaponFile = new File("Data/WeaponFile.txt");
-    	Utils.parseWeaponFile(weaponFile);
+    	Utils.parseEngineFile("Data/EngineFile.txt");
     	
-    	File engineFile = new File("Data/EngineFile.txt");
-    	Utils.parseEngineFile(engineFile);
+    	Utils.parsePowerCoreFile("Data/PowerCoreFile.txt");
     	
-    	File powerCoreFile = new File("Data/PowerCoreFile.txt");
-    	Utils.parsePowerCoreFile(powerCoreFile);
+    	Utils.parseShieldFile("Data/ShieldFile.txt");
     	
-    	File shieldFile = new File("Data/ShieldFile.txt");
-    	Utils.parseShieldFile(shieldFile);
-    	
-    	Global.state.playerObj = createPrometheus(500,"player");
-    	
-    	Global.state.playerObj.size = 128;
+    	Global.state.playerObj = createBloodHawk(500,"player");
     	
     	for(int z=0; z<Global.state.playerObj.pylons.size()-1;z++){
     		Pylon P = Global.state.playerObj.pylons.get(z);
-    		//P.autoAttack = false;
     	}
     	
     	//Global.state.playerObj.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
-
+		
+		
         createEscort1(500,"ally");
         createEscort1(500,"ally");
         createEscort1(500,"none");
@@ -77,6 +68,7 @@ public class GameState {
         createFlak1(500,"none");
         createFlak1(500,"none");
         createFlak1(500,"none");
+        
         
         /*
         new CharacterObj();
@@ -91,7 +83,9 @@ public class GameState {
         new CharacterObj();
         new CharacterObj();
         */
-    	Global.GUI = new ActiveInterface ();
+        
+        Global.GUI = new ActiveInterface();
+    	//Global.GUI = new HangarInterface();
     }
     
     public ShipObj createEscort1(int placeSize, String faction){
@@ -254,9 +248,10 @@ public class GameState {
     	dtt = dt/1000;
     	lastTime = System.currentTimeMillis();
     	
-    	//System.out.println("DELTA TIME: "+dt);
     	
     	time += dtt;
+    	
+    //	System.out.println("TIME: "+time);
     	
     	activeAI.Step();
     	
@@ -264,23 +259,30 @@ public class GameState {
     		O.Step();
     		if(O.CameraCanSee()){
     			Global.view.addDrawObject(O);
+    			//System.out.println("ADD DRAW OBJECT "+O);
     		}else{
     			Global.view.removeDrawObject(O);
+    			//System.out.println("REMOVE DRAW OBJECT "+O);
     		}
     	}
     	
+    	//System.out.println("NEW OBJECT BUFFER");
     	for(Obj O:newObjBuffer){
+    		//System.out.println("NEW OBJECT "+O);
     		O.Init();
     	}
     	newObjBuffer.clear();
     	
+    	//System.out.println("DELETE OBJECT BUFFER");
     	for(Obj O:deleteBuffer){
+    		//System.out.println("DELETE OBJECT "+O);
     		O.delete();
     	}
     	deleteBuffer.clear();
     	
     	//garbage collection when needGC flag is on
     	if ( (needGC==true)&&(time>=timeOfNeedGC+1) ){
+    		//System.out.println("GARBAGE COLLECTION INVOKATION");
     		System.gc();
     		needGC = false;
     		timeOfNeedGC = time;

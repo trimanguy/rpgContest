@@ -33,12 +33,12 @@ public class MissileObj extends GameObj{
     double lastx;
     double lasty;
     
-    public MissileObj(String image, String killImage, String hitSound, URL spritecontext, GameObj shipObj, GameObj targetObj, 
+    public MissileObj(String image, String killImage, String hitSound, GameObj shipObj, GameObj targetObj, 
     	double dmgTS, double dmgThS, double dmgTH, double dmgAP, 
     	double nx, double ny, double turnRate, double speed, double maxSpeed, double acceleration, double time,
     	double nAngle) {
     	
-    	super(image, spritecontext);
+    	super(image);
     	
     	delImage = killImage;
     	hitSoundType = hitSound;
@@ -132,7 +132,7 @@ public class MissileObj extends GameObj{
         		}
         		
         		if(delImage!=null){
-	        		new AnimatedParticle(delImage, Global.codeContext, 
+	        		new AnimatedParticle(delImage, 
 	        			0.05, this.x, this.y);
         		}
         		
@@ -167,10 +167,6 @@ public class MissileObj extends GameObj{
     
     public MissileObj(String image) {
     	super(image);
-    }
-    
-    public MissileObj(String image, URL spritecontext) {
-    	super(image, spritecontext);
     }
     
     

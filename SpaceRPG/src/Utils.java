@@ -9,6 +9,9 @@
 import java.io.*;
 import java.util.*;
 import java.util.Random; 
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.awt.Graphics;
 
 public class Utils {
 	
@@ -59,14 +62,26 @@ public class Utils {
 	static Hashtable powerCoreTable = new Hashtable();
 	static Hashtable shieldTable = new Hashtable();
     
+	public static BufferedImage imageToBufferedImage(Image im) {
+		BufferedImage bi = new BufferedImage
+			(im.getWidth(null),im.getHeight(null),BufferedImage.TYPE_INT_RGB);
+		Graphics bg = bi.getGraphics();
+		bg.drawImage(im, 0, 0, null);
+		bg.dispose();
+		return bi;
+	}
+	  
     public static void storeShipInfo(){
     }
     
-    public static void parseShipFile(File filename){
+    public static void parseShipFile(String filename){
     	StringBuilder contents = new StringBuilder();
     	
     	try {
-    		BufferedReader input = new BufferedReader(new FileReader(filename));
+    		InputStream is = Utils.class.getResourceAsStream(filename);
+    		BufferedReader input = new BufferedReader(new InputStreamReader(is));
+    		
+    		
 	    	try {
 	    		String line = null;
 	    		//for each line in the file
@@ -127,7 +142,7 @@ public class Utils {
 	    				tempPylons = tempPylons.replace(')', ' ');
 	    				StringTokenizer ship_st2 = new StringTokenizer(tempPylons);
 	    					
-	    					System.out.println("pylon "+tempPylons);
+	    					//System.out.println("pylon "+tempPylons);
 	    				//for each token of form 1.0,1.0
 						while(ship_st2.hasMoreTokens()){
 							StringTokenizer pylon_st = new StringTokenizer(ship_st2.nextToken(), ",");
@@ -200,11 +215,13 @@ public class Utils {
     	}
     }
     
-    public static void parseWeaponFile(File filename){
+    public static void parseWeaponFile(String filename){
     	StringBuilder contents = new StringBuilder();
     	
     	try {
-    		BufferedReader input = new BufferedReader(new FileReader(filename));
+    		InputStream is = Utils.class.getResourceAsStream(filename);
+    		BufferedReader input = new BufferedReader(new InputStreamReader(is));
+    		
 	    	try {
 	    		String line = null;
 	    		//for each line in the file
@@ -289,10 +306,12 @@ public class Utils {
     	}
     }
     
-    public static void parseEngineFile(File filename){
+    public static void parseEngineFile(String filename){
     	StringBuilder contents = new StringBuilder();
     	try {
-    		BufferedReader input = new BufferedReader(new FileReader(filename));
+    		InputStream is = Utils.class.getResourceAsStream(filename);
+    		BufferedReader input = new BufferedReader(new InputStreamReader(is));
+    		
 	    	try {
 	    		String line = null;
 	    		//for each line in the file
@@ -333,7 +352,7 @@ public class Utils {
 	    				EngineObj engine = new EngineObj(name,image,maxSpd,rotSpd,health,armor,powerReq,size,descrip);
 	    					
 	    				//stick it in EngineTable	
-	    				System.out.println("before");
+	    				//System.out.println("before");
 	    				Utils.engineTable.put(Utils.name, engine);
 	    				
 	    				//clear vars for next engine
@@ -361,11 +380,13 @@ public class Utils {
     	}
     }
     
-    public static void parsePowerCoreFile(File filename){
+    public static void parsePowerCoreFile(String filename){
     	StringBuilder contents = new StringBuilder();
     	
     	try {
-    		BufferedReader input = new BufferedReader(new FileReader(filename));
+    		InputStream is = Utils.class.getResourceAsStream(filename);
+    		BufferedReader input = new BufferedReader(new InputStreamReader(is));
+    		
 	    	try {
 	    		String line = null;
 	    		//for each line in the file
@@ -426,11 +447,13 @@ public class Utils {
     	}
     }
     
-    public static void parseShieldFile(File filename){
+    public static void parseShieldFile(String filename){
     	StringBuilder contents = new StringBuilder();
     	
     	try {
-    		BufferedReader input = new BufferedReader(new FileReader(filename));
+    		InputStream is = Utils.class.getResourceAsStream(filename);
+    		BufferedReader input = new BufferedReader(new InputStreamReader(is));
+    		
 	    	try {
 	    		String line = null;
 	    		//for each line in the file
@@ -516,7 +539,7 @@ public class Utils {
     	ShipObj template = (ShipObj)Utils.shipTable.get(shipName);
     	ArrayList<HitCircle> copiedHitCircles = new ArrayList(0);
     	ArrayList<Pylon> copiedPylons = new ArrayList(0);
-    	ShipObj newShip = new ShipObj(template.imageName, Global.codeContext, copiedHitCircles, new ArrayList(0), descrip);
+    	ShipObj newShip = new ShipObj(template.imageName, copiedHitCircles, copiedPylons, template.descrip, true);
     	
     	//copy over each HitCircle from hitCircles to copiedHitCircles
     	for(int x=0; x<(template.hitCircles.size()); x++){
@@ -583,6 +606,10 @@ public class Utils {
     	Random rand = new Random(); 
  		int pickedNumber = rand.nextInt(higher-lower) + lower; 
     	return pickedNumber;
+    }
+    
+    public static double randomNumberGen(double lower, double higher){
+    	return (higher-lower)*Math.random()+lower;
     }
     
    

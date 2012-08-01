@@ -19,8 +19,8 @@ public class InterfacePylon extends UIElement{
 	double updateTimer;
 	double offX,offY;
 	
-    public InterfacePylon(double nx, double ny, String img, URL imagecontext){
-    	super(nx,ny,img,imagecontext);
+    public InterfacePylon(double nx, double ny, String img){
+    	super(nx,ny,img);
     }
     
     public InterfacePylon(Pylon P) {
@@ -30,7 +30,6 @@ public class InterfacePylon extends UIElement{
     	
     	//Grab the pylon GUI image
     	String image = P.gui;
-    	URL spritecontext = Global.codeContext;
     	
     	//Set the graphic coordinates
     	offX = P.screenX; offY = P.screenY;
@@ -41,10 +40,9 @@ public class InterfacePylon extends UIElement{
     	layer = 25;
     	
     	
-    	if(image != null && spritecontext != null)
+    	if(image != null)
     	{
-    		sprite = new Sprite(image, spritecontext, false);
-	    	context = spritecontext;
+    		sprite = new Sprite(image, false);
 	    	
 	    	//Init();
 	    	Global.state.newObjBuffer.add(this);

@@ -19,16 +19,20 @@ public class Sprite {
 	int frameX;
 	int frameY;
 	
-	public Sprite(String dir, URL context, boolean hF){
+	public Sprite(String dir, boolean hF){
 		
 		hasFrames = hF;
 		
 		try {
-			URL url = new URL(context, dir);
+			URL url = Sprite.class.getResource(dir);
 			source = ImageIO.read(url);
 			
 			frameY = source.getHeight();
-			frameX = frameY;
+			if(hF) {
+				frameX = frameY;
+			}else{
+				frameX = source.getWidth();
+			}
 			
 			setFrame(1);
 		} catch (IOException e) {
@@ -36,21 +40,14 @@ public class Sprite {
 		
 	}
 	
-	public Sprite(String dir, boolean hF){
-		
-		hasFrames = hF;
-		
-		try {
-			source = ImageIO.read(new File(dir));
-			
-			frameY = source.getHeight();
-			frameX = frameY;
-			
-			setFrame(1);
-		} catch (IOException e) {
-		}
-		
+	public void Delete(){
+		source.flush();
+		img.flush();
+		source = null;
+		img = null;
+		transform = null;
 	}
+	
 	
 	public int getFrames(){
 		return source.getWidth()/frameX;

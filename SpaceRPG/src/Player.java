@@ -15,10 +15,12 @@ public class Player implements MouseListener, MouseMotionListener, MouseWheelLis
 	//This should not affect interface rendering.
 	double cx = 0;
 	double cy = 0;
+	double offsetX=0;
+	double offsetY=0;
 	
 	//Camera zoom. Any value > 1 will magnify.
 	//This should not affect interface rendering.
-	double zoom =  0.5;
+	double zoom =  0.75;
 	
 	Obj mouseObj;
 	Obj dropObj;
@@ -50,9 +52,9 @@ public class Player implements MouseListener, MouseMotionListener, MouseWheelLis
     	int notches = e.getWheelRotation()*(-1);
     	
     	if (notches<0){
-    		zoom=Math.max(0.4,(zoom+notches*0.1));
+    		zoom=Math.max(0.25,(zoom+notches*0.05));
     	} else {
-    		zoom=Math.min(2.0,(zoom+notches*0.1));
+    		zoom=Math.min(2.0,(zoom+notches*0.05));
     	}
     }
     

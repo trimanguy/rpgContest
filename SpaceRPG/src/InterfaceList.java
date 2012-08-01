@@ -16,7 +16,7 @@ public class InterfaceList extends UIElement{
 	//This only shows vertically aligned lists.
 	
 	ArrayList<Object> values = new ArrayList(0);
-	ArrayList<InterfaceIcon> holders = new ArrayList(0);
+	ArrayList<InterfaceItem> holders = new ArrayList(0);
 	
 	int width;
 	int height;
@@ -32,7 +32,7 @@ public class InterfaceList extends UIElement{
     	width = 512;
     	height = 128;
     	
-    	slider = new InterfaceSlider(x+width-sliderWidth, y, path+"genericSliderBack.png", Global.codeContext,
+    	slider = new InterfaceSlider(x+width-sliderWidth, y, path+"genericSliderBack.png",
     		path+"genericSliderButton.png", null, null, 
     		0, 100, height);
     	slider.dx = 1;
@@ -47,7 +47,7 @@ public class InterfaceList extends UIElement{
     	width = w;
     	height = h;
     	
-    	slider = new InterfaceSlider(x+width-sliderWidth, y, path+"genericSliderBack.png", Global.codeContext,
+    	slider = new InterfaceSlider(x+width-sliderWidth, y, path+"genericSliderBack.png",
     		path+"genericSliderButton.png", null, null, 
     		0, 100, h);
     	slider.dx = 1;
@@ -70,7 +70,7 @@ public class InterfaceList extends UIElement{
     	if(values.contains(O)) return;
     	
     	values.add(O);
-    	holders.add(new InterfaceIcon(O));
+    	holders.add(new InterfaceItem(O));
     }
     
     public void removeObject(Obj O){
@@ -131,7 +131,7 @@ public class InterfaceList extends UIElement{
     		G.drawLine((int) x,(int) (y+lowY), (int) (x+width), (int) (y+lowY));
     		G.drawLine((int) x,(int) (y+highY), (int) (x+width), (int) (y+highY));
     		
-    		InterfaceIcon I = holders.get(i);
+    		InterfaceItem I = holders.get(i);
     		I.move(x,lowY+y);
     		
     		Color color = new Color (0,0,0,0);

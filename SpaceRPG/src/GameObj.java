@@ -36,30 +36,14 @@ public class GameObj extends Obj {
 	public GameObj(){} //triman added
 	
 	double size = 0;
-	
-    public GameObj(String image) {
-    	if(image != null) {
-	    	sprite = new Sprite(image, true);
-	    	
-	    	//Init();
-	    	Global.state.newObjBuffer.add(this);
-    	}
-    }
-    
-    public GameObj(String image, URL spritecontext) { 
-    	if(image != null && spritecontext != null)
-    	{
-    		sprite = new Sprite(image, spritecontext, true);
-	    	context = spritecontext;
-	    	
-	    	//Init();
-	    	Global.state.newObjBuffer.add(this);
-    	}
-    }
     
     public void Init(){
     	super.Init();
     	setLayer(layer);
+    }
+    
+    public GameObj(String image) {
+    	super(image);
     }
     
     public HitCircle contains(PointS P){
@@ -95,8 +79,8 @@ public class GameObj extends Obj {
     	if(Global.player == null) return false;
     	
     	double rx, ry;
-    	rx = Math.abs(x - Global.player.cx);
-    	ry = Math.abs(y - Global.player.cy);
+    	rx = Math.abs(x - Global.player.cx - Global.player.offsetX);
+    	ry = Math.abs(y - Global.player.cy - Global.player.offsetY);
     	
     	if(sprite != null){
     		rx -= sprite.frameX/2;

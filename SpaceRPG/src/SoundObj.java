@@ -8,10 +8,13 @@
 
 import java.io.*;
 import javax.sound.sampled.*;
+import java.util.jar.*;
+import java.net.*;
 
 public class SoundObj {
 
     public SoundObj(Boolean firing, String soundType) {
+    	
     	String soundPath="";
     	
     	if(soundType.equals("laser")){
@@ -29,19 +32,24 @@ public class SoundObj {
     		if(firing){
     			soundPath = "Resources/Sounds/missile1.wav";
     		} else {
-    			soundPath = "Resources/Sounds/missileHit1.wav";
+    			soundPath = "Resources/Sounds/missilehit1.wav";
     		}
     		
     	}
     	
-	    InputStream is = this.getClass().getClassLoader().getResourceAsStream(soundPath);
-		//InputStream is = this.getClass().getClassLoader().getResourceAsStream("Resources/Sounds/laser1.wav");
 		try{
-			AudioInputStream ain = AudioSystem.getAudioInputStream(is);
+	    	URL soundURL = getClass().getClassLoader().getResource(soundPath);
+			AudioInputStream ain = AudioSystem.getAudioInputStream(soundURL);
+			
+	    	//InputStream is = getClass().getResourceAsStream(soundPath);
+			//AudioInputStream ain = AudioSystem.getAudioInputStream(is);
+			
 			DataLine.Info info = new DataLine.Info(Clip.class, ain.getFormat());      
 			Clip clip = (Clip)AudioSystem.getLine(info);
 			clip.open(ain);
+			//clip.setFramePosition(0);
 			clip.start();
+			System.out.println("PLAY SOUND CLIP "+soundPath);
 		}
 		catch(UnsupportedAudioFileException e){}
 		catch(LineUnavailableException u){}

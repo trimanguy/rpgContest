@@ -16,29 +16,29 @@ public class ActiveInterface extends InterfaceManager {
 
     public ActiveInterface() {
     	
-    	URL spriteContext = Global.codeContext;
+//    	URL spriteContext = Global.codeContext;
     	
     	//double x, double y, String image, URL spritecontext
-    	setElement("background", new UIElement(377,674,"Resources/Interface/Active Plate.png",spriteContext,20));
-    	setElement("shortcutTilde", new UIElement(429,701,"Resources/Interface/Shortcut ~.png",spriteContext,21));
-    	setElement("shortcutOne", new UIElement(471,701,"Resources/Interface/Shortcut 1.png",spriteContext,21));
-    	setElement("shortcutTwo", new UIElement(513,701,"Resources/Interface/Shortcut 2.png",spriteContext,21));
-    	setElement("shortcutThree", new UIElement(555,701,"Resources/Interface/Shortcut 3.png",spriteContext,21));
-    	setElement("shortcutFour", new UIElement(597,701,"Resources/Interface/Shortcut 4.png",spriteContext,21));
+    	setElement("background", new UIElement(377,674,"Resources/Interface/Active Plate.png",20));
+    	setElement("shortcutTilde", new UIElement(429,701,"Resources/Interface/Shortcut ~.png",21));
+    	setElement("shortcutOne", new UIElement(471,701,"Resources/Interface/Shortcut 1.png",21));
+    	setElement("shortcutTwo", new UIElement(513,701,"Resources/Interface/Shortcut 2.png",21));
+    	setElement("shortcutThree", new UIElement(555,701,"Resources/Interface/Shortcut 3.png",21));
+    	setElement("shortcutFour", new UIElement(597,701,"Resources/Interface/Shortcut 4.png",21));
     	
-    	InterfaceBar powerBar = new InterfaceBar(425,681,"Resources/Interface/PowerBar Front.png",spriteContext,6,1);
-    	powerBar.underlay = new Sprite("Resources/Interface/PowerBar Back.png",spriteContext, false);
+    	InterfaceBar powerBar = new InterfaceBar(425,681,"Resources/Interface/PowerBar Front.png",6,1);
+    	powerBar.underlay = new Sprite("Resources/Interface/PowerBar Back.png", false);
     	
     	powerBar.setLayer(22);
     	setElement("powerBar", powerBar);
     	
-    	InterfaceSlider speedBar = new InterfaceSlider(400,681,"Resources/Interface/SpeedBar Back.png",spriteContext,
+    	InterfaceSlider speedBar = new InterfaceSlider(400,681,"Resources/Interface/SpeedBar Back.png",
     		"Resources/Interface/SpeedBar Slider.png","setVelocity",Global.state.playerObj,0,100,78);
     	setElement("speedBar",speedBar);
     	
     	speedBar.setLayer(22);
     	
-    	setElement("speedLevel", new UIElement(393,698,"Resources/Interface/SpeedBar Power.png",spriteContext,21));
+    	setElement("speedLevel", new UIElement(393,698,"Resources/Interface/SpeedBar Power.png",21));
     	Init();
     }
     

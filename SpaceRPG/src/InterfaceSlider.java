@@ -31,12 +31,12 @@ public class InterfaceSlider extends UIElement{
 	
 	int dir = 1;//1 for north, 2 for east, 3 for south, 4 for west
 	
-    public InterfaceSlider(double x, double y, String image, URL spritecontext,String slideImage, String cM, Object cC, 
+    public InterfaceSlider(double x, double y, String image,String slideImage, String cM, Object cC, 
     	double lo, double hi, double h) {
-    	super(x,y,image,spritecontext);
+    	super(x,y,image);
     	
     	if(slideImage != null){
-    		slider = new Sprite(slideImage,spritecontext, false);
+    		slider = new Sprite(slideImage, false);
     	}
     	
     	low = lo;
@@ -108,13 +108,15 @@ public class InterfaceSlider extends UIElement{
     }
     
     public void sliderTransform(double ry){
+    	if(slider == null) return;
+    	if(sprite == null) return;
     	
     	AffineTransform transform = new AffineTransform();
     	
     	double rx = x;
     	
     	rx -= (slider.img.getWidth()-sprite.img.getWidth())/2-1;
-    	ry -= (slider.img.getHeight())/3*2;
+    	ry -= (slider.img.getHeight())/2;
     	
     	transform.translate(rx, ry);
     	transform.scale(dx,dy);
@@ -133,8 +135,8 @@ public class InterfaceSlider extends UIElement{
     	if(drawPosition){
     		//draw the rectangle
 	    	G.setColor(getColor());
-	    	G.fillRect((int)(x*dx)+1,(int)Math.ceil(y+dy*height*(1-position)-4),
-	    		(int) (sprite.img.getWidth()*dx)-2,(int)Math.floor(position*height*dy+3));
+	    	G.fillRect((int)(x*dx)+1,(int)Math.ceil(y+dy*height*(1-position)-2),
+	    		(int) (sprite.img.getWidth()*dx)-2,(int)Math.floor(position*height*dy+1));
     	}
     	
     	slider.Draw(G,loc);

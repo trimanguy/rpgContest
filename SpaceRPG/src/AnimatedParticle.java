@@ -17,9 +17,9 @@ public class AnimatedParticle extends GameObj{
 	int mouseOpacity = 0;
 	boolean density = false;
 	
-    public AnimatedParticle(String image, URL spritecontext, double fD, double nx, double ny) { 
+    public AnimatedParticle(String image, double fD, double nx, double ny) { 
     	
-    	super(image,spritecontext);
+    	super(image);
     	
     	frameTimer = Global.state.time+fD;
     	frameDelay = fD;

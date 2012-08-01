@@ -48,7 +48,7 @@ WMODEL	none
 WSOUND	missile
 MISSILE	Resources/Sprites/RedMissile1.png,Resources/Sprites/explode_3.png,5,600,250,90
 ACCR	10
-DAMAGE	15,0,30,1
+DAMAGE	5,0,10,1
 TURNSPD	0
 HEALTH	1
 ARMOR	1

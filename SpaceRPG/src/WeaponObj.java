@@ -92,7 +92,7 @@ public class WeaponObj extends ItemObj{
     public void Fire(double nx, double ny, double angle, GameObj source, GameObj target){
     	angle += (Math.random()*2-1)*angleSpread;
     	
-    	MissileObj O = new MissileObj(missileImg, missileHitImg, missileSoundType, Global.codeContext, source, target, 
+    	MissileObj O = new MissileObj(missileImg, missileHitImg, missileSoundType, source, target, 
     		damageToShield, damageThruShield, damageToHull, damageArmorPiercing, 
     		nx, ny, missileTurnSpeed, missileSpeed, missileMaxSpeed,missileAcceleration, missileLife,
     		angle);

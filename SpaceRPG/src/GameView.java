@@ -23,7 +23,7 @@ public class GameView implements Runnable{
 	int framesInLastSecond = 0;
 	int framesInCurrentSecond = 0;
 	
-	BufferedImage background;
+	Background background;
 	
 	StarField starField;
 	
@@ -45,6 +45,9 @@ public class GameView implements Runnable{
     
     public void initialize(){
     	//buffergraphics = (Graphics2D) buffer.getGraphics();
+    	
+    	background = new Background("Resources/Background/Planet1.png");
+    	
     	starField = new StarField();
     }
     
@@ -55,7 +58,7 @@ public class GameView implements Runnable{
 			
 			
 			//Draw the current frame
-			Draw((Graphics2D) game.board.getGraphics(), game.board);			
+			Draw((Graphics2D) game.getGraphics(), game);			
 		}
 	}
     
@@ -81,7 +84,8 @@ public class GameView implements Runnable{
     	
     	//Draw background stuff here. Things like planets, nebulae, and scrolling starfields.
     	if(background!= null){
-    		buffergraphics.drawImage(background,0,0,I);
+    		//buffergraphics.drawImage(background,0,0,I);
+    		background.Draw(buffergraphics,I);
     	}
     	
     	if(starField!=null){
@@ -110,7 +114,8 @@ public class GameView implements Runnable{
     	
     	
     	//Debug message here for the drawn objects list size
-    	if(drawObjects != null && buffergraphics != null){
+    	
+    	if(drawObjects != null && buffergraphics != null && I != null && drawObjects.size()>0){
 	    	buffergraphics.setColor(Color.white);
 	    	buffergraphics.drawString("Objects drawn: "+drawObjects.size(), 5, 10);
     	}

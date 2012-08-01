@@ -78,8 +78,8 @@ public final class StarField {
     }
     
 	public void Draw(Graphics2D graphic, ImageObserver loc){
-		int x_off = (int) Global.player.cx;// + Global.view.sizex/2;
-		int y_off = -(int) Global.player.cy;// + Global.view.sizey/2;
+		int x_off = (int) ((Global.player.cx+Global.player.offsetX));
+		int y_off = -(int) ((Global.player.cy+Global.player.offsetY));
 		
         int fsw= field_width;
         int fsh= field_height;
@@ -90,6 +90,11 @@ public final class StarField {
             int y=stars[a].y-(y_off/(z+1));
             int s=stars[a].s;
 
+			//int cx = fsw/2;
+			//int cy = fsh/2;
+
+			//x=(int)(cx+(x-cx)*Global.player.zoom);
+			//y=(int)(cy+(y-cy)*Global.player.zoom);
             
             int xx=x/fsw;
             if (xx>0){
@@ -106,9 +111,9 @@ public final class StarField {
             else if(y<0){
                 y+=(fsh*(-yy+1));
             }
-			
-			x*=Global.player.zoom;
-			y*=Global.player.zoom;
+            
+            x*=Global.player.zoom;
+            y*=Global.player.zoom;
 			s*=Global.player.zoom;
 			s = Math.max(1,s);
 			

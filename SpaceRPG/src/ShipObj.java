@@ -70,29 +70,33 @@ public class ShipObj extends GameObj {
     }
     
     /*** Ship Constructor, puts ship on screen ***/
-    public ShipObj(String image, URL spritecontext, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons, String descrip) { 
-    	if(image != null && spritecontext != null)
+    public ShipObj(String image, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons, String descrip, boolean real) { 
+    	System.out.println("NEW SHIP OBJECT GUY");
+    	if(image != null)
     	{
-    		sprite = new Sprite(image, spritecontext, true);
-	    	context = spritecontext;
+    		sprite = new Sprite(image, true);
 	    	
 	    	hitCircles = hitboxes;
 	    	pylons = newPylons;
 	    	this.descrip = descrip;
 	    	allShips.add(this);
 	    	Global.state.newObjBuffer.add(this);
-	    	size = 32;
+	    	
+	    	mouseOpacity = 1;
+	    	
+	    	size = sprite.frameX/4;
     	}
     }
     
     /*** Ship Data Constructor, similar to C++ struct ***/
     public ShipObj(String image, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons, String descrip){
+    	
+    	System.out.println("READ SHIP OBJECT GUY");
     	//don't need to add to allShips cuz this just template obj
     	imageName = image;
     	hitCircles = hitboxes;
     	pylons = newPylons;
     	this.descrip = descrip;	
-    	
     }
     
     public ShipObj findTarget(){
@@ -155,34 +159,34 @@ public class ShipObj extends GameObj {
     	double nx = this.x + (Math.random()-0.5)*2*10;
     	double ny = this.y + (Math.random()-0.5)*2*10;
     	
-    	new AnimatedParticle("Resources/Sprites/explode_1.png", Global.codeContext, 
+    	new AnimatedParticle("Resources/Sprites/explode_1.png", 
 	        			0.05, nx, ny);
 	        			
     	nx = this.x + (Math.random()-0.5)*2*10;
     	ny = this.y + (Math.random()-0.5)*2*10;
     	
-    	new AnimatedParticle("Resources/Sprites/explode_1.png", Global.codeContext, 
+    	new AnimatedParticle("Resources/Sprites/explode_1.png",
 	        			0.05, nx, ny);
 	        			
     	nx = this.x + (Math.random()-0.5)*2*size;
     	ny = this.y + (Math.random()-0.5)*2*size;
     	
-    	new AnimatedParticle("Resources/Sprites/explode_3.png", Global.codeContext, 
+    	new AnimatedParticle("Resources/Sprites/explode_3.png",
 	        			0.05, nx, ny);
     	nx = this.x + (Math.random()-0.5)*2*size;
     	ny = this.y + (Math.random()-0.5)*2*size;
     	
-    	new AnimatedParticle("Resources/Sprites/explode_3.png", Global.codeContext, 
+    	new AnimatedParticle("Resources/Sprites/explode_3.png",
 	        			0.05, nx, ny);
     	nx = this.x + (Math.random()-0.5)*2*size;
     	ny = this.y + (Math.random()-0.5)*2*size;
     	
-    	new AnimatedParticle("Resources/Sprites/explode_3.png", Global.codeContext, 
+    	new AnimatedParticle("Resources/Sprites/explode_3.png",
 	        			0.05, nx, ny);
     	nx = this.x + (Math.random()-0.5)*2*size;
     	ny = this.y + (Math.random()-0.5)*2*size;
     	
-    	new AnimatedParticle("Resources/Sprites/explode_3.png", Global.codeContext, 
+    	new AnimatedParticle("Resources/Sprites/explode_3.png",
 	        			0.05, nx, ny);
     }
     
@@ -325,10 +329,6 @@ public class ShipObj extends GameObj {
     	super(image);
     }
     
-    public ShipObj(String image, URL spritecontext) {
-    	super(image, spritecontext);
-    }
-    
     public double getShields(double nx, double ny){//This will return the ship's shields that affects the Hitcircle object
     	double shield=0;
     	
@@ -380,14 +380,14 @@ public class ShipObj extends GameObj {
     	//Draw shields
     	
     	if(this == Global.state.playerObj || this == Global.state.playerObj.aimTarget)
-    		drawShields(G, 20, 150, 240, 1.25);
+    		drawShields(G, 20, 160, 255, 1.25);
     	
     	if(this != Global.state.playerObj){
     		if(Global.state.playerObj.isHostile(this)){
-    			drawPlate(G, 255, 0, 0, 64, 1.1);
+    			drawPlate(G, 255, 0, 0, 160, 1.1);
     		}
     		if(this == Global.state.playerObj.aimTarget){
-    			drawPlate(G, 255, 255, 255, 64, 0.9);
+    			drawPlate(G, 192, 192, 192, 160, 0.9);
     		}
     	}
     	

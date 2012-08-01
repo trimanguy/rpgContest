@@ -44,29 +44,18 @@ public class Obj implements Comparable{
 	
 	public int mouseOpacity = 2; //Set to false if this object can never be clicked or dragged
 	
-	public Obj(){
-		
-	}
 	
     public Obj(String image) {
     	if(image != null) {
 	    	sprite = new Sprite(image, true);
-	    	
 	    	//Init();
 	    	Global.state.newObjBuffer.add(this);
     	}
     }
     
-    public Obj(String image, URL spritecontext) {
-    	if(image != null && spritecontext != null)
-    	{
-    		sprite = new Sprite(image, spritecontext, true);
-	    	context = spritecontext;
-	    	
-	    	//Init();
-	    	Global.state.newObjBuffer.add(this);
-    	}
-    }
+	public Obj(){
+    	//System.out.println("CREATING NEW OBJ: "+getClass());
+	}
     
     public void Init(){
     	Global.state.activeObjs.add(this);
@@ -204,6 +193,7 @@ public class Obj implements Comparable{
     public void addDelete(){
     	Global.state.deleteBuffer.add(this);
     	
+    	
     }
     
     public void delete(){ //Note: Not guaranteed to clear this obj from memory
@@ -218,14 +208,7 @@ public class Obj implements Comparable{
     		Global.player.dropObj = null;
     	
     	if(sprite!=null){
-    		if(sprite.img!=null){
-	    		sprite.img.flush();
-	    		sprite.img = null;
-    		}
-    		if(sprite.source!=null){
-	    		sprite.source.flush();
-	    		sprite.source = null;
-    		}
+    		sprite.Delete();
     		sprite = null;
     	}
     }

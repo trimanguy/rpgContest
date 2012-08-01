@@ -17,8 +17,8 @@ public class InterfaceBar extends UIElement{
 	double value=0;
 	boolean update = false;
 
-    public InterfaceBar(double x, double y, String image, URL spritecontext, int bx, double nv) {
-    	super(x,y,image,spritecontext);
+    public InterfaceBar(double x, double y, String image, int bx, double nv) {
+    	super(x,y,image);
     	
     	borderX = bx;
     	value = nv;

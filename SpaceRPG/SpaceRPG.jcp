@@ -51,6 +51,10 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\Background.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\CharacterObj.java</path>
 				<folder>src</folder>
 			</fileitem>
@@ -83,6 +87,10 @@
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
+				<path>src\HangarInterface.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\HitCircle.java</path>
 				<folder>src</folder>
 			</fileitem>
@@ -92,6 +100,14 @@
 			</fileitem>
 			<fileitem>
 				<path>src\InterfaceButton.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\InterfaceItem.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\InterfaceList.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
@@ -194,8 +210,8 @@
 		<todotaskitem>
 			<description>TODO: autotarget, do auto-targetting here</description>
 			<filepath>src\ShipObj.java</filepath>
-			<line>102</line>
-			<timestamp>1343768934</timestamp>
+			<line>108</line>
+			<timestamp>1343829214</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>

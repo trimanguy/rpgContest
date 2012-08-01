@@ -17,10 +17,10 @@ public class InterfaceButton extends UIElement{
     String callMethod;
     String callParam;
     
-    public InterfaceButton(double x, double y, String image, URL spritecontext, double nlayer,
+    public InterfaceButton(double x, double y, String image, double nlayer,
     	String cM, Object cC, String cP) {
     	
-    	super(x,y,image,spritecontext, nlayer);
+    	super(x,y,image, nlayer);
     	
     	callMethod = cM;
     	callContext = cC;	

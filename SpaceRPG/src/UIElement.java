@@ -17,31 +17,52 @@ public class UIElement extends Obj {
 	public UIElement parent;
 	public ArrayList<UIElement> children = new ArrayList(0);
 	
+	String text;
+	boolean isActive=false;
+	
+	double targetX;
+	double targetY;
+	//PID Tween controller for sexiness
+	double tweenPFactor;
+	double tweenIFactor;
+	double tweenDFactor;
+	
 	public UIElement(){
 		
 	}
 	
-    public UIElement(double x, double y, String image, URL spritecontext, double nlayer) {
+    public UIElement(double x, double y, String image, double nlayer, boolean nActive) {
     	layer = nlayer;
-    	if(image != null && spritecontext != null)
+    	if(image != null)
     	{
-    		sprite = new Sprite(image, spritecontext, false);
-	    	context = spritecontext;
-	    	
+    		sprite = new Sprite(image, false);
+    		
 	    	//Init();
 	    	Global.state.newObjBuffer.add(this);
     	}
     	
+    	isActive = nActive;
+    	move(x,y);
+    }
+    
+    public UIElement(double x, double y, String image, double nlayer) {
+    	layer = nlayer;
+    	if(image != null)
+    	{
+    		sprite = new Sprite(image, false);
+    		
+	    	//Init();
+	    	Global.state.newObjBuffer.add(this);
+    	}
     	
     	move(x,y);
     }
     
-    public UIElement(double x, double y, String image, URL spritecontext) {
+    public UIElement(double x, double y, String image) {
     	layer = 20;
-    	if(image != null && spritecontext != null)
+    	if(image != null)
     	{
-    		sprite = new Sprite(image, spritecontext, false);
-	    	context = spritecontext;
+    		sprite = new Sprite(image, false);
 	    	
 	    	//Init();
 	    	Global.state.newObjBuffer.add(this);
@@ -89,7 +110,9 @@ public class UIElement extends Obj {
     
     public void Init(){
     	
-    	//Global.state.activeObjs.add(this);
+    	if(isActive){
+    		Global.state.activeObjs.add(this);
+    	}
     	if(CameraCanSee()){
     		Global.view.addDrawObject(this);
     	}
@@ -97,6 +120,11 @@ public class UIElement extends Obj {
     }
     
     public void Step(){
+    	if(isActive && (targetX != x || targetY != y)){
+    		double dx = (targetX-x) * tweenPFactor;
+    		double dy = (targetY-y) * tweenPFactor;
+    		move(dx,dy);
+    	}
     }
     
     public void removeChild(UIElement O){
@@ -132,6 +160,8 @@ public class UIElement extends Obj {
     
     public void move(double nx,double ny){
     	super.move(nx,ny);
+    	targetX = x;
+    	targetY = y;
     	for(UIElement O:children){
     		O.translate(nx,ny);
     	}
@@ -139,6 +169,8 @@ public class UIElement extends Obj {
     
     public void translate(double nx, double ny){
     	super.translate(nx,ny);
+    	targetX = x;
+    	targetY = y;
     	for(UIElement O:children){
     		O.translate(nx,ny);
     	}
@@ -146,6 +178,8 @@ public class UIElement extends Obj {
     
     public void translate(Point2D PointS){
     	super.translate(PointS);
+    	targetX = x;
+    	targetY = y;
     	for(UIElement O:children){
     		O.translate(PointS);
     	}
@@ -184,5 +218,10 @@ public class UIElement extends Obj {
     	if(underlay != null) underlay.Draw(G,loc);
     	if(sprite != null) sprite.Draw(G,loc); //Draws the object's sprite
     	if(overlay != null) overlay.Draw(G,loc);
+    	
+    	if(text != null && text != ""){
+    		G.setColor(color);
+    		G.drawString(text,(int)x,(int)y);
+    	}
     }
 }

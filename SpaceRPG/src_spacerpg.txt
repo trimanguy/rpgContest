@@ -1,6 +1,7 @@
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\ActiveInterface.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\AI.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\AnimatedParticle.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Background.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\CharacterObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\EngineObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\EquipObj.java
@@ -9,9 +10,12 @@ C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameObj.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameState.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\GameView.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\Global.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\HangarInterface.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\HitCircle.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\InterfaceBar.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\InterfaceButton.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\InterfaceItem.java
+C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\InterfaceList.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\InterfaceManager.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\InterfacePylon.java
 C:\Users\D4RK354B3R\Documents\GitHub\rpgContest\SpaceRPG\src\InterfaceSlider.java
