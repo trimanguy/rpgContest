@@ -18,6 +18,9 @@ public class EngineObj extends ItemObj{
 	double maxAngVelocity;
 	double maxPowerConsumption=1;
 	
+	double speedMultiplier=0.5;
+	double turnMultiplier=0.5;
+	
 	double sigmoidPower = 10;
 
 	public EngineObj(String name, String model,double maxSpeed,double rotSpeed, double health, double armor, double pwrReq, int size, String descrip){

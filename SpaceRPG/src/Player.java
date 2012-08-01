@@ -9,9 +9,8 @@ import java.io.*;
 
 
 
-public class Player implements MouseListener, MouseMotionListener, KeyListener {
-	
-	
+public class Player implements MouseListener, MouseMotionListener, MouseWheelListener, KeyListener {
+  
 	//Camera X and Camera Y. These are in 1:1 game world coordinates.
 	//This should not affect interface rendering.
 	double cx = 0;
@@ -43,6 +42,17 @@ public class Player implements MouseListener, MouseMotionListener, KeyListener {
 				PointS point = (new PointS(e.getX(),e.getY())).toWorld();
 			
     		}
+    	}
+    }
+    
+    
+    public void mouseWheelMoved(MouseWheelEvent e){
+    	int notches = e.getWheelRotation()*(-1);
+    	
+    	if (notches<0){
+    		zoom=Math.max(0.4,(zoom+notches*0.1));
+    	} else {
+    		zoom=Math.min(2.0,(zoom+notches*0.1));
     	}
     }
     
@@ -196,6 +206,7 @@ public class Player implements MouseListener, MouseMotionListener, KeyListener {
     	double maxSpeed = Global.state.playerObj.maxVelocity;
     	Global.state.playerObj.velocity = Math.min(maxSpeed, currSpeed+(maxSpeed/30)); 
     	System.out.println("Current speed: "+Global.state.playerObj.velocity);
+    	System.out.println("Current Power regen: "+Global.state.playerObj.powerMade+" max power: "+Global.state.playerObj.maxPower);
     }
     
     private void decreaseSpeed(){

@@ -13,7 +13,7 @@
 PNAME	testCore
 PMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
 POWER	100
-REGEN	20
+REGEN	50
 HEALTH	50
 ARMOR	1
 SIZE	1

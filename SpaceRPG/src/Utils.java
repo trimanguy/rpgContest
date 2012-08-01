@@ -127,6 +127,7 @@ public class Utils {
 	    				tempPylons = tempPylons.replace(')', ' ');
 	    				StringTokenizer ship_st2 = new StringTokenizer(tempPylons);
 	    					
+	    					System.out.println("pylon "+tempPylons);
 	    				//for each token of form 1.0,1.0
 						while(ship_st2.hasMoreTokens()){
 							StringTokenizer pylon_st = new StringTokenizer(ship_st2.nextToken(), ",");
@@ -153,6 +154,14 @@ public class Utils {
 								
 								screenX = Double.valueOf(pylon_st.nextToken());
 								screenY = Double.valueOf(pylon_st.nextToken());
+								
+								/*
+								System.out.println("health: "+health);
+								System.out.println("centerAng: "+centerAngle);
+								System.out.println("arcAng: "+arcAngle);
+								System.out.println("screenX: "+screenX);
+								System.out.println("screenY: "+screenY);
+								*/
 								size = Integer.valueOf(pylon_st.nextToken());
 								if(pylon_st.hasMoreTokens())
 									pylonImg = pylon_st.nextToken();

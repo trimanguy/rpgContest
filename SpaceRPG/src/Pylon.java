@@ -19,6 +19,7 @@ public class Pylon {
 	GameObj autoTarget; //default target if no player-set target available
 	
 	ItemObj equipped;
+	CharacterObj crew;
 	
 	/* //Possibly deprecated... Up to you.
 	 * //This stuff is for pylon clusters and weapon stacks...
@@ -131,29 +132,131 @@ public class Pylon {
     public void equipItem(ItemObj item){
     	if(!canEquip(item)) return;
     	this.equipped = item;
-    	this.realHealth = baseHealth + item.baseHealth; 
+    	this.applyStats(true);
+    }
+    
+    
+    public void unequipItem(){
+    	if(crew != null){
+    		System.out.println("ERROR: Can't unequip item because you haven't removed crew yet!");
+    		return;
+    	}
+    	this.applyStats(false);
+    	//applyStats will remove reference to equipped item also so dont need to worry
+    }
+    
+    //apply stats that equipped item provides. When unequipping, must remove crew before allowed to remove item
+    public void applyStats(Boolean equipping){
+    	if (equipping){ //add in stats
+    		this.realHealth = this.baseHealth + equipped.baseHealth*equipped.healthMultiplier; 
+    		if(equipped instanceof EngineObj){
+    			EngineObj engine = (EngineObj)equipped;
+    			this.source.maxVelocity=engine.maxVelocity*engine.speedMultiplier;
+    			this.source.maxAngVel=engine.maxAngVelocity*engine.turnMultiplier;
+    			this.source.engine = engine;
+    			//System.out.println("maxspeed "+this.source.maxVelocity+" enginemax: "+engine.maxVelocity+" speedmult: "+engine.speedMultiplier);
+    		}
+    		else if(equipped instanceof PowerCoreObj){
+    			PowerCoreObj core = (PowerCoreObj)equipped;
+    			this.source.maxPower = core.maxPower*core.powerMultiplier;
+    			this.source.currPower = this.source.maxPower;
+    			this.source.powerMade = core.regenRate;
+    			this.source.generator = core;
+    			
+    			//System.out.println("core maxpower: "+core.maxPower+" powerMult: "+core.powerMultiplier);
+    		}
+    		else if(equipped instanceof ShieldObj){
+    			this.source.calcShield();
+    			//System.out.println("maxshield: "+this.source.maxShield+" shieldmult: "+((ShieldObj)equipped).shieldMultiplier);
+    		}
+    		
+    	} else { //subtract previously added stats
+    		
+    		this.realHealth = this.baseHealth; 
+    		if(equipped instanceof EngineObj){
+    			this.source.maxVelocity=0;
+    			this.source.maxAngVel=0;
+    			this.source.engine = null;
+    			this.equipped=null;
+    		}
+    		else if(equipped instanceof PowerCoreObj){
+    			this.source.maxPower = 0;
+    			this.source.powerMade = 0;
+    			this.source.currPower = 0;
+    			this.source.generator = null;
+    			this.equipped=null;
+    		}
+    		else if(equipped instanceof ShieldObj){
+    			this.equipped=null;
+    			this.source.calcShield();
+    		}
+    		
     	
-    	if(item instanceof EngineObj){
-    		this.source.maxVelocity=((EngineObj)item).maxVelocity;
-    		this.source.maxAngVel=((EngineObj)item).maxAngVelocity;
-    		//haven't added power consumption for engines yet...
-    		this.source.engine = (EngineObj) item;
+    	
     	}
-    	else if(item instanceof PowerCoreObj){
-    		this.source.maxPower = ((PowerCoreObj)item).maxPower;
-    		this.source.powerMade = ((PowerCoreObj)item).regenRate;
-    		this.source.currPower = this.source.maxPower;
-    		this.source.generator = (PowerCoreObj) item;
+    }
+    
+    public void equipCrew(CharacterObj person){
+    	if(crew!=null){
+    		System.out.println("Can't equip crew! Someone already in slot.");
+    		return;
     	}
-    	else if(item instanceof ShieldObj){
-    		this.source.maxShield=((ShieldObj)item).maxShield;
-    		this.source.shieldChargeTimer=((ShieldObj)item).regenDelay;
-    		this.source.shieldForward=((ShieldObj)item).maxShield;
-    		this.source.shieldLeft=((ShieldObj)item).maxShield;
-    		this.source.shieldRight=((ShieldObj)item).maxShield;
-    		this.source.shieldRear=((ShieldObj)item).maxShield;
-    		this.source.powerUsed+=((ShieldObj)item).shieldPowerConsumption;
+    	this.crew=person;
+    	
+    	//set multipliers based on person's stats
+    	if(equipped instanceof ShieldObj){
+    		ShieldObj shield = (ShieldObj)equipped;
+    		shield.shieldMultiplier = crew.engineering/100;
+    		shield.delayMultiplier = 1/(crew.efficiency/100*Math.E);
+    		this.source.calcShield();
     	}
+    	else if (equipped instanceof EngineObj){
+    		EngineObj engine = (EngineObj)equipped;
+    		engine.speedMultiplier = crew.calibration/100;
+    		engine.turnMultiplier = crew.calibration/100;
+    	}
+    	else if (equipped instanceof PowerCoreObj){
+    		PowerCoreObj core = (PowerCoreObj)equipped;
+    		core.powerMultiplier = (crew.engineering)/100;
+    		System.out.println("engineering skill of: "+crew.engineering+ " results in powerMult: "+ core.powerMultiplier);
+    	}
+    	else if (equipped instanceof WeaponObj){
+    		WeaponObj weapon = (WeaponObj)equipped;
+    		weapon.dmgMultiplier = crew.gunnery/100;
+    		weapon.spreadMultiplier = 1/(crew.accuracy/100*Math.E);
+    		weapon.rangeMultiplier = crew.accuracy/100;
+    		weapon.supplyMultiplier = 1/(crew.efficiency/100*Math.E);
+    	}
+    	this.applyStats(true);
+    }
+    
+    public void unequipCrew(){
+    	if(equipped instanceof ShieldObj){
+    		ShieldObj shield = (ShieldObj)equipped;
+    		shield.shieldMultiplier = 0.5;
+    		shield.delayMultiplier = 2;
+    		this.source.calcShield();
+    	}
+    	else if (equipped instanceof EngineObj){
+    		EngineObj engine = (EngineObj)equipped;
+    		engine.speedMultiplier = 0.5;
+    		engine.turnMultiplier = 0.5;
+    	}
+    	else if (equipped instanceof PowerCoreObj){
+    		PowerCoreObj core = (PowerCoreObj)equipped;
+    		core.powerMultiplier = 0.5;
+    	}
+    	else if (equipped instanceof WeaponObj){
+    		WeaponObj weapon = (WeaponObj)equipped;
+    		weapon.dmgMultiplier = 0.5;
+    		weapon.spreadMultiplier = 2;
+    		weapon.rangeMultiplier = 0.5;
+    		weapon.supplyMultiplier = 2;
+    	}
+    	
+    	
+    	this.crew=null;
+    	this.applyStats(true);
     }
     
     public void Step(){//This should be called by the ShipObj during ShipObj.Step()

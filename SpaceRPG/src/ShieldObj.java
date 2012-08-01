@@ -13,6 +13,9 @@ public class ShieldObj extends ItemObj{
 	
 	double shieldPowerConsumption;
 	
+	double shieldMultiplier=0.5;
+	double delayMultiplier=2;
+	
 	double shieldBoostRate;
 	double boostCost;
 	double boostAmount;

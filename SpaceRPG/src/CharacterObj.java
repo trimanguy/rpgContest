@@ -11,7 +11,7 @@ public class CharacterObj extends Obj{
 	static String[] maleNames = new String[] {"Aaron", "Adam", "Adrian", "Alan", "Alejandro", "Alex", "Allen", "Andrew", "Andy", "Anthony", "Art", 
 												"Arthur", "Barry", "Bart", "Ben", "Benjamin", "Bill", "Bobby", "Brad", "Bradley", "Brendan", "Brett", 
 												"Brian", "Bruce", "Bryan", "Carlos", "Chad", "Charles", "Chris", "Christopher", "Chuck", "Clay", 
-												"Corey", "Craig", "Dan", "Daniel", "Darren", "Dave", "David", "Dean", "Dennis", "Denny", "Derek", "Don", 
+												"Corey", "Craig", "Dan", "Daniel", "Darren", "Dave", "David", "Dean", "Dennis", "Denny", "Derek", "Derrick", "Don", 
 												"Doug", "Duane", "Edward", "Eric", "Eugene", "Evan", "Frank", "Fred", "Gary", "Gene", "George", "Gordon", 
 												"Greg", "Harry", "Henry", "Hunter", "Ivan", "Jack", "James", "Jamie", "Jason", "Jay", "Jeff", "Jeffrey", 
 												"Jeremy", "Jim", "Joe", "Joel", "John", "Jonathan", "Joseph", "Justin", "Keith", "Ken", "Kevin", "Larry", 
@@ -46,12 +46,12 @@ public class CharacterObj extends Obj{
 	String name;
 	boolean gender=false; //true=male, false=female
 	String job; //this person's class
-	int gunnery=50; 	//bonus dmg
-	int accuracy=50; 	//lowers fire spread
-	int efficiency=50; //lowers power/ammo usage and shield recharge delay
-	int dmgControl=50;	//increases life and maybe armor
-	int calibration=50;//increases engine speed or pylon turn rate
-	int engineering=50;//increases max shield or max power
+	double gunnery=50; 	//bonus dmg
+	double accuracy=50; 	//lowers fire spread
+	double efficiency=50; //lowers power/ammo usage and shield recharge delay
+	double dmgControl=50;	//increases life and maybe armor
+	double calibration=50;//increases engine speed or pylon turn rate
+	double engineering=50;//increases max shield or max power
 	
 	
     public CharacterObj() {
@@ -81,7 +81,7 @@ public class CharacterObj extends Obj{
 	  		}
     	}
     	
-    	int maxStat=Math.max(gunnery, Math.max(accuracy,Math.max(efficiency,Math.max(dmgControl,Math.max(calibration,engineering)))));
+    	double maxStat=Math.max(gunnery, Math.max(accuracy,Math.max(efficiency,Math.max(dmgControl,Math.max(calibration,engineering)))));
 		if(maxStat==gunnery) job="gunner";
     	if(maxStat==accuracy)		job="sniper";
     	if(maxStat==efficiency) 	job="logistics officer";

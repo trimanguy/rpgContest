@@ -53,3 +53,26 @@ PYLONS	(back,s,30,-30,20,0,180,-70,20,3,Resources/Sprites/Escort1-PylonShields.p
 PYLONS	(back,e,10,-50,0,0,0,-135,0,3,Resources/Sprites/Escort1-PylonEngine.png)
 DESCRIP	testShip escort1
 END
+
+#PYLONS	(Pylon clusters, Item types, Base Health, X offset, Y offset, Resting Angle, Arc Angle (times 2), Interface Location (0,0), Size 1-5, Location)
+#HB	(Bow, Aft, Starboard (right), Port (left))
+SNAME	Cerberus
+SMODEL	Resources/Sprites/Cerberus.png
+SPEED	40
+HB	(starboardbow,161,-44,35)
+HB	(portbow,161,44,35)
+HB	(center,44,0,81)
+HB	(aft,-128,0,103)
+PYLONS	(starboardbow,ws,50,185,-36,0,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(starboardbow,ws,50,112,-32,-45,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portbow,ws,50,185,36,0,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portbow,ws,50,112,32,45,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,sp,50,56,38,0,180,0,0,5,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,sp,50,56,-38,0,180,0,0,5,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(aft,sw,50,-156,53,180,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(aft,sw,50,-156,-53,180,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(aft,e,50,-96,0,180,90,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(aft,c,50,-46,0,180,90,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+DESCRIP	Cerberus Battleship
+END
+

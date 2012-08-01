@@ -22,6 +22,8 @@ public class ItemObj extends Obj{
 	double baseHealth;
 	double armor;
 	
+	double healthMultiplier=0.5;
+	
 	double activateDelay;
 	boolean isActive; //false = item is passive
 	

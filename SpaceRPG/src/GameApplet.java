@@ -54,6 +54,7 @@ public class GameApplet extends JApplet implements Runnable {
 		addKeyListener(p);
 		addMouseListener(p);
 		addMouseMotionListener(p);
+		addMouseWheelListener(p);
 
 		
 		

@@ -41,6 +41,12 @@ public class WeaponObj extends ItemObj{
 	double damageThruShield;
 	double damageToHull;
 	double damageArmorPiercing;
+	
+	//defaults for multipliers. set to very crappy stats
+	double dmgMultiplier=0.5;
+	double spreadMultiplier=2;
+	double rangeMultiplier=0.5; //actually mods missileLife
+	double supplyMultiplier=2;
 
     public WeaponObj(String name, String model, String img, String hitImg, String soundType, int life, double maxSpeed, double accel, double turnSpeed, double spread, double itemTurnSpeed, String damage,
     	double health, double armor, double delay, int size, String descrip, boolean activateAble) {

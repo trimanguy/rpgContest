@@ -12,6 +12,8 @@ public class PowerCoreObj extends ItemObj{
 	double maxPower; //energy bar size 
 	double regenRate; //base regen rate/sec
 	
+	double powerMultiplier=0.5;
+	
 	public PowerCoreObj(String name, String model, Double power, Double regen, Double health, Double armor, int size, String descrip){
 		
 		this.type = "PowerCore";

@@ -295,10 +295,12 @@ public class ShipObj extends GameObj {
 	    			Vector2D difPos = this.getDistance(object);
 	    			Vector2D unit = difPos.unit();
 	    			
-	    			//then apply the push
-	    			move(-radii * tweenFactor * tweenFactor * unit.x, -radii*tweenFactor * unit.y);
+	    			double pushingFactor = object.size/size;
 	    			
-	    			O.move(radii * tweenFactor * tweenFactor * unit.x, radii*tweenFactor * unit.y);
+	    			//then apply the push
+	    			move(-radii * tweenFactor * tweenFactor * unit.x * pushingFactor, -radii * tweenFactor * tweenFactor * unit.y * pushingFactor);
+	    			
+	    			O.move(radii * tweenFactor * tweenFactor * unit.x / pushingFactor, radii * tweenFactor * tweenFactor * unit.y / pushingFactor);
 	    		}
 	    	}
 
@@ -460,5 +462,20 @@ public class ShipObj extends GameObj {
 			G.drawArc((int) coords.x,(int) coords.y,width,height,230+(int) currAngle,80);
 			G.drawArc((int) coords.x+1,(int) coords.y+1,width-2,height-2,230+(int) currAngle,80);
 		}
+    }
+    
+    public void calcShield(){
+    	for(Pylon P:pylons){
+    		if(P.equipped instanceof ShieldObj){
+    			ShieldObj shield = (ShieldObj)P.equipped;
+    			this.maxShield += shield.maxShield*shield.shieldMultiplier;
+    			this.shieldChargeTimer = Math.max(shield.regenDelay,this.shieldChargeTimer);
+    			this.shieldForward = this.maxShield;
+    			this.shieldLeft = this.maxShield;
+    			this.shieldRight = this.maxShield;
+    			this.shieldRear = this.maxShield;
+    			this.powerUsed += shield.shieldPowerConsumption;
+    		}
+    	}
     }
 }
