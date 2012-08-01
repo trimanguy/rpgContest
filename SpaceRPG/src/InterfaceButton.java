@@ -13,14 +13,18 @@ import java.lang.reflect.*;
 
 public class InterfaceButton extends UIElement{
 
-    Obj callContext;
+    Object callContext;
     String callMethod;
+    String callParam;
     
-    public InterfaceButton(double x, double y, String image, URL spritecontext, String cM, Obj cC) {
-    	super(x,y,image,spritecontext);
+    public InterfaceButton(double x, double y, String image, URL spritecontext, double nlayer,
+    	String cM, Object cC, String cP) {
+    	
+    	super(x,y,image,spritecontext, nlayer);
     	
     	callMethod = cM;
     	callContext = cC;	
+    	callParam = cP;
     }
     
 	public void mouseClicked(MouseEvent event){
@@ -29,7 +33,8 @@ public class InterfaceButton extends UIElement{
 		
 		Method method=null;
 		try {
-		  	method = callContext.getClass().getMethod(callMethod);
+		  	if(callParam == null) method = callContext.getClass().getMethod(callMethod);
+		  	else  method = callContext.getClass().getMethod(callMethod,String.class);
 		} catch (SecurityException e) {
 		 	// ...
 		} catch (NoSuchMethodException e) {

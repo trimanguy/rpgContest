@@ -22,14 +22,16 @@ public class InterfaceSlider extends UIElement{
 	double powerPosition = 0.75;
 	double position; //Decimal from low to hi
 	
-	Obj callContext;
+	Object callContext;
 	String callMethod;
+	
+	boolean drawPosition = true;
 	
 	Sprite slider;
 	
 	int dir = 1;//1 for north, 2 for east, 3 for south, 4 for west
 	
-    public InterfaceSlider(double x, double y, String image, URL spritecontext,String slideImage, String cM, Obj cC, 
+    public InterfaceSlider(double x, double y, String image, URL spritecontext,String slideImage, String cM, Object cC, 
     	double lo, double hi, double h) {
     	super(x,y,image,spritecontext);
     	
@@ -47,7 +49,7 @@ public class InterfaceSlider extends UIElement{
     
     public void setPosition(double yCoord){
     	yCoord -= y+height;
-    	double npos = -yCoord/height;
+    	double npos = -yCoord/(height*dy);
     	
     	npos = Math.min(1,Math.max(0,npos));
     	if(npos != position){
@@ -115,21 +117,25 @@ public class InterfaceSlider extends UIElement{
     	ry -= (slider.img.getHeight())/3*2;
     	
     	transform.translate(rx, ry);
+    	transform.scale(dx,dy);
     	
     	slider.setTransform(transform);
     }
     
     public void transform(){
     	super.transform();
-    	sliderTransform((1-position) * height + y);
+    	sliderTransform((1-position) * height * dy + y);
     }
     
     public void Draw(Graphics2D G, ImageObserver loc){
     	super.Draw(G,loc);
     	
-    	//draw the rectangle
-    	G.setColor(getColor());
-    	G.fillRect((int)x+1,(int)Math.ceil(y+height*(1-position)-1),9,(int)Math.round((position)*height));
+    	if(drawPosition){
+    		//draw the rectangle
+	    	G.setColor(getColor());
+	    	G.fillRect((int)(x*dx)+1,(int)Math.ceil(y+dy*height*(1-position)-4),
+	    		(int) (sprite.img.getWidth()*dx)-2,(int)Math.floor(position*height*dy+3));
+    	}
     	
     	slider.Draw(G,loc);
     }
