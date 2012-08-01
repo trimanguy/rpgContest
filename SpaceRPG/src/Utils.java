@@ -581,7 +581,7 @@ public class Utils {
     //Pick a number >= lower and < higher
     public static int randomNumberGen(int lower, int higher){ 
     	Random rand = new Random(); 
- 		int pickedNumber = rand.nextInt(higher) + lower; 
+ 		int pickedNumber = rand.nextInt(higher-lower) + lower; 
     	return pickedNumber;
     }
     
