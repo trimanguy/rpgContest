@@ -31,11 +31,14 @@ public class InterfacePylon extends UIElement{
     }
     
     public void mouseDropped(MouseEvent e, Obj O){
-    	pylon.mouseDropped(e,O);
+    	if(O instanceof InterfaceList){
+    		ItemObj I = pylon.equipped;
+    		pylon.unequipItem();
+    		Global.state.playerVault.add(I);
+    	}
     	if(Global.GUI instanceof HangarInterface){
     		((HangarInterface) Global.GUI).updatePane();
     	}
-    	
     }
 	
     public InterfacePylon(double nx, double ny, String img){
@@ -52,7 +55,7 @@ public class InterfacePylon extends UIElement{
     	offX = P.screenX; offY = P.screenY;
     	
     	//initialize other attributes
-    	mouseOpacity = 0;
+    	mouseOpacity = 2;
     	
     	layer = 25;
     	

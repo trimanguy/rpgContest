@@ -8,53 +8,53 @@
 #END
 
 #test ship
-SNAME	flak1
+SNAME	Darter
 SMODEL	Resources/Sprites/FlakFrigate1-Thrust.png
-SPEED	50
+SPEED	75
 SIZE	32
 HB	(back,0,0,25)
 HB	(back,20,0,10)
 HB	(back,-20,0,10)
 PYLONS	(back,w,50,-30,0,180,180,0,0,5,blah)
 PYLONS	(back,e,50,-50,0,0,0,0,0,5,blah)
-DESCRIP	testShip flak1
+DESCRIP	Darter Frigate
 END
 
 #test ship
-SNAME	escort1
+SNAME	Wrangler
 SMODEL	Resources/Sprites/EscortFrigate1-Thrust.png
-SPEED	75
+SPEED	65
 SIZE	32
 HB	(front,0,10,20)
 HB	(front,0,-10,20)
 HB	(front,30,0,15)
 HB	(back,-50,0,15)
-PYLONS	(front,ws,50,30,0,0,135,127,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(front,ws,50,30,0,0,90,127,0,3,Resources/Sprites/Escort1-Pylon1.png)
 PYLONS	(front,ws,50,15,10,67.5,90,44,25,3,Resources/Sprites/Escort1-Pylon2.png)
 PYLONS	(front,ws,50,15,-10,-67.5,90,44,-25,3,Resources/Sprites/Escort1-Pylon3.png)
-PYLONS	(front,ws,50,0,0,0,135,0,0,3,Resources/Sprites/Escort1-Pylon4.png)
+PYLONS	(front,ws,50,0,0,0,180,0,0,3,Resources/Sprites/Escort1-Pylon4.png)
 PYLONS	(front,c,50,-10,0,0,180,-70,-20,3,Resources/Sprites/Escort1-PylonPowerCore.png)
 PYLONS	(back,s,30,-30,20,0,180,-70,20,3,Resources/Sprites/Escort1-PylonShields.png)
 PYLONS	(back,e,10,-50,0,0,0,-135,0,3,Resources/Sprites/Escort1-PylonEngine.png)
-DESCRIP	testShip escort1
+DESCRIP	Wrangler Frigate
 END
 
-SNAME	escort2
+SNAME	Wrangler II
 SMODEL	Resources/Sprites/EscortFrigate1-Thrust.png
-SPEED	75
+SPEED	65
 SIZE	32
 HB	(front,0,10,20)
 HB	(front,0,-10,20)
 HB	(front,30,0,15)
 HB	(back,-50,0,15)
 PYLONS	(front,ws,50,30,0,90,90,127,0,3,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(front,ws,50,15,10,0,60,44,25,3,Resources/Sprites/Escort1-Pylon2.png)
-PYLONS	(front,ws,50,15,-10,0,60,44,-25,3,Resources/Sprites/Escort1-Pylon3.png)
+PYLONS	(front,ws,50,15,10,0,135,44,25,3,Resources/Sprites/Escort1-Pylon2.png)
+PYLONS	(front,ws,50,15,-10,0,135,44,-25,3,Resources/Sprites/Escort1-Pylon3.png)
 PYLONS	(front,ws,50,15,-10,0,180,0,0,3,Resources/Sprites/Escort1-Pylon4.png)
 PYLONS	(front,c,50,-10,0,0,180,-70,-20,3,Resources/Sprites/Escort1-PylonPowerCore.png)
 PYLONS	(back,s,30,-30,20,0,180,-70,20,3,Resources/Sprites/Escort1-PylonShields.png)
 PYLONS	(back,e,10,-50,0,0,0,-135,0,3,Resources/Sprites/Escort1-PylonEngine.png)
-DESCRIP	testShip escort1
+DESCRIP	Wrangler Frigate, Second Edition
 END
 
 SNAME	Cerberus
@@ -262,7 +262,7 @@ PYLONS	(portbow,w,50,109,24,90,30,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
 PYLONS	(portbow,w,50,193,10,0,90,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
 PYLONS	(center,s,50,-20,0,0,180,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
 PYLONS	(center,c,50,0,0,0,180,0,0,5,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(center,w,50,-30,0,0,180,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,w,50,-30,0,180,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
 PYLONS	(aft,ws,50,-159,0,180,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
 PYLONS	(aft,e,50,-204,0,180,90,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
 PYLONS	(aft,w,50,-110,22,180,45,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
@@ -270,5 +270,33 @@ PYLONS	(aft,w,50,-110,-22,180,45,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
 DESCRIP	Athwart Battleship
 END
 
+#add more guns as time allows
+SNAME	Defense Platform
+SMODEL	Resources/Sprites/StationaryTurret.png
+SPEED	0
+SIZE	256
+HB	(center,0,0,212)
+PYLONS	(center,w,50,0,0,0,180,0,0,5,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,s,50,0,0,0,180,0,0,5,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,w,50,50,50,0,180,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,w,50,50,-50,0,180,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,w,50,-50,-50,0,180,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,w,50,-50,50,0,180,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+DESCRIP	A stationary defense platform
+END
 
+SNAME	Space Station
+SMODEL	Resources/Sprites/SpaceStation.png
+SPEED	0
+SIZE	512
+HB	(center,0,0,218)
+DESCRIP	A space station, serving as a trading hub.
+END
 
+SNAME	Science Station
+SMODEL	Resources/Sprites/ScienceStation.png
+SPEED	0
+SIZE	256
+HB	(center,0,0,212)
+DESCRIP	A science station for research and development purposes. Can be explored in some cases.
+END

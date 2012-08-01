@@ -152,6 +152,9 @@ public class HangarInterface extends InterfaceManager{
     		addTempElement("pylonsBack",new UIElement(295,50,path+"InterfaceItem.png",25));
     		elements.get("pylonsBack").scaleTo(576,209);
     		
+    		//pylons interface
+    		drawPylons(295, 50);
+    		
     		//hangar storage
     		addTempElement("hangarBack",new InterfaceList(232,280,342,400,25));
     		
@@ -166,7 +169,7 @@ public class HangarInterface extends InterfaceManager{
     		addTempElement("trashButton",trashButton);
     		
     	}else if(nPane.compareTo("Shop")==0){
-    		//shop tabs
+    		//shop tabs!
     		
     		//shop inventory
     		addTempElement("shopBack",new InterfaceList(270,384,300,325,25));
@@ -193,12 +196,12 @@ public class HangarInterface extends InterfaceManager{
     		
     		//buy button, sell button
     		InterfaceButton buyButton = new InterfaceButton(853,355,path+"InterfaceButton.png",25,
-    			null,this,null);
+    			"buyItem",this,null);
     		buyButton.scaleTo(96,36);
     		addTempElement("buyButton",buyButton);
     		
     		InterfaceButton sellButton = new InterfaceButton(853,685,path+"InterfaceButton.png",25,
-    			null,this,null);
+    			"sellItem",this,null);
     		sellButton.scaleTo(96,36);
     		addTempElement("sellButton",sellButton);
     		
@@ -289,33 +292,82 @@ public class HangarInterface extends InterfaceManager{
     	if(selectedObject == null) return;
     	
     }
-    /*
-	String playerName = "";
-	double playerMoney = 0;
-	ArrayList<Obj> playerCargo = new ArrayList(0);
-	ArrayList<Obj> playerVault = new ArrayList(0);
-	*/
+    
+    public void drawPylons(double x, double y){
+    	if(hangarState.playerObj!=null){
+    		ShipObj ship = hangarState.playerObj;
+    		for(int i=0;i<ship.pylons.size();i++){
+    			Pylon P = ship.pylons.get(i);
+    			
+    			if(P == null) continue;
+    			if(P.gui == null) continue;
+    			
+    			InterfacePylon gui = new InterfacePylon(P,x,y);
+    			
+    			gui.dx = 1.5;
+    			gui.dy = 1.5;
+    			
+    			addTempElement("Pylon"+P.tag+""+i,gui);
+    		}
+    	}
+    }
+    
     public void updatePane(){
     	
     	if(currPane.compareTo("Hangar")==0){
     		((InterfaceList) elements.get("hangarBack")).values = new ArrayList(hangarState.playerVault);
     		((InterfaceList) elements.get("cargoBack")).values = new ArrayList(hangarState.playerCargo);
     		
+	    	if(hangarState.playerObj!=null){
+	    		ShipObj ship = hangarState.playerObj;
+	    		for(int i=0;i<ship.pylons.size();i++){
+	    			Pylon P = ship.pylons.get(i);
+	    			
+	    			if(P == null) continue;
+	    			if(P.gui == null) continue;
+	    			String key = "Pylon"+P.tag+""+i;
+	    			InterfacePylon gui = (InterfacePylon) getElement(key);
+	    			
+	    			if(gui.pylon.equipped!=null){
+	    				if(gui.item == null) gui.item = new InterfaceItem(gui.pylon.equipped);
+	    				gui.item.base = gui.pylon.equipped;
+	    				gui.item.getIcon(gui.item.base);
+	    			}else{
+	    				gui.item = null;
+	    			}
+	    		}
+	    	}
+    		
+    		
     	}else if(currPane.compareTo("Shop")==0){
-    		//check the shop pane
     		((InterfaceList) elements.get("hangarBack")).values = new ArrayList(hangarState.playerVault);
     		((InterfaceList) elements.get("shopBack")).values = new ArrayList(hangarState.equipShop);
     		
+    		if(selectedObject != null && selectedObject instanceof ItemObj){
+    			//Update the descriptions pane
+    			
+    			//If the selected Object is in cargo, then change the shopButton to sell
+    			
+    			//Otherwise change shopButton to buy
+    		}
+    			
     	}else if(currPane.compareTo("Market")==0){
     		((InterfaceList) elements.get("hangarBack")).values = new ArrayList(hangarState.playerVault);
     		((InterfaceList) elements.get("marketBack")).values = new ArrayList(hangarState.marketShop);
     		
+    		//Nothing special here!
+    		
     	}else if(currPane.compareTo("Shipyard")==0){
     		((InterfaceList) elements.get("shipsBack")).values = new ArrayList(hangarState.shipShop);
     		
+    		//
     		
     	}else if(currPane.compareTo("Missions")==0){
     		//((InterfaceList) elements.get("shopBack")).values = new ArrayList(hangarState.missions);
+    		
+    		//Update the interfacelists for missions
+    		
+    		//Next, if a mission is selected, update the details bit
     		
     	}else if(currPane.compareTo("Bar")==0){
     		((InterfaceList) elements.get("crewBack")).values = new ArrayList(hangarState.crewShop);

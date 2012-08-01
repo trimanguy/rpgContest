@@ -86,6 +86,17 @@ public class InterfaceList extends UIElement{
     	
     }
     
+    public void mouseDropped(MouseEvent e, Obj O){
+    	if(O instanceof InterfacePylon){
+    		Pylon P = ((InterfacePylon)O).pylon;
+    		P.equipItem((ItemObj) Global.GUI.selectedObject);
+    		Global.state.playerVault.remove(Global.GUI.selectedObject);
+    		Global.state.playerCargo.remove(Global.GUI.selectedObject);
+    	}
+    	if(Global.GUI instanceof HangarInterface){
+    		((HangarInterface) Global.GUI).updatePane();
+    	}
+    }
     public void mouseClicked(MouseEvent e){
     	
     	double position = e.getY();
@@ -146,6 +157,5 @@ public class InterfaceList extends UIElement{
     		I.Draw(G,loc,(int) (x+1),(int) (y+lowY+1),width-2,height-2,color);
     	}
     }
-    
     
 }
