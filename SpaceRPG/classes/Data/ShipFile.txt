@@ -21,7 +21,7 @@ DESCRIP	Darter Frigate
 END
 
 #test ship
-SNAME	Wrangler
+SNAME	WranglerI
 SMODEL	Resources/Sprites/EscortFrigate1-Thrust.png
 SPEED	65
 SIZE	32
@@ -88,18 +88,18 @@ HB	(center,0,0,80)
 HB	(portwing,-114,100,71)
 HB	(starboardwing,-114,-100,71)
 HB	(aft,-170,0,50)
-PYLONS	(bow,w,50,145,20,0,30,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(bow,w,50,145,-20,0,30,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(center,s,50,0,20,0,180,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(center,c,50,0,-20,0,180,0,0,5,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(portwing,w,50,121,56,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(portwing,w,50,136,87,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(portwing,w,50,150,118,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(starboardwing,w,50,121,-56,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(starboardwing,w,50,136,-87,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(starboardwing,w,50,150,-118,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(aft,ws,50,-188,0,180,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
-PYLONS	(aft,e,50,-210,0,180,90,0,0,5,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(bow,w,50,145,20,0,30,260,115,4,Resources/Sprites/Valiant-Pylon1.png)
+PYLONS	(bow,w,50,145,-20,0,30,260,135,4,Resources/Sprites/Valiant-Pylon2.png)
+PYLONS	(center,s,50,0,20,0,180,105,125,4,Resources/Sprites/Valiant-PylonShield.png)
+PYLONS	(center,c,50,0,-20,0,180,155,125,5,Resources/Sprites/Valiant-PylonPower.png)
+PYLONS	(portwing,w,50,121,56,0,30,95,75,3,Resources/Sprites/Valiant-Pylon5.png)
+PYLONS	(portwing,w,50,136,87,0,30,80,37,3,Resources/Sprites/Valiant-Pylon4.png)
+PYLONS	(portwing,w,50,150,118,0,30,75,15,3,Resources/Sprites/Valiant-Pylon3.png)
+PYLONS	(starboardwing,w,50,121,-56,0,30,95,-75,3,Resources/Sprites/Valiant-Pylon6.png)
+PYLONS	(starboardwing,w,50,136,-87,0,30,80,-37,3,Resources/Sprites/Valiant-Pylon7.png)
+PYLONS	(starboardwing,w,50,150,-118,0,30,75,-15,3,Resources/Sprites/Valiant-Pylon8.png)
+PYLONS	(aft,ws,50,-188,0,180,90,75,125,3,Resources/Sprites/Valiant-PylonEngine.png)
+PYLONS	(aft,e,50,-210,0,180,90,45,125,5,Resources/Sprites/Valiant-PylonEngine.png)
 DESCRIP	Valiant-class Battleship
 END
 
