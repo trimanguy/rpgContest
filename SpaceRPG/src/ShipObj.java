@@ -243,6 +243,7 @@ public class ShipObj extends GameObj {
 	    	
 	    	//Process shield actions
 	    	shieldChargeDelay = Math.max(0, shieldChargeDelay-Global.state.dtt);
+	    	//System.out.println("shield regen delay: "+shieldChargeDelay +" with max delay: "+shieldChargeTimer);
 	    	if((shieldChargeDelay==0)){ //10% shield regen/sec
 	    		
 	    		if((shieldForward<maxShield)||(shieldLeft<maxShield)||(shieldRight<maxShield)||(shieldRear<maxShield)){ 
@@ -253,7 +254,7 @@ public class ShipObj extends GameObj {
 	    			shieldLeft=Math.min(maxShield, shieldLeft+shieldRate);
 	    			shieldRight=Math.min(maxShield, shieldRight+shieldRate);
 	    			shieldRear=Math.min(maxShield, shieldRear+shieldRate);
-	  
+	  				
 	    			shieldChargeDelay+=1;
 	    		}
 	    	}
@@ -469,7 +470,11 @@ public class ShipObj extends GameObj {
     		if(P.equipped instanceof ShieldObj){
     			ShieldObj shield = (ShieldObj)P.equipped;
     			this.maxShield += shield.maxShield*shield.shieldMultiplier;
-    			this.shieldChargeTimer = Math.max(shield.regenDelay,this.shieldChargeTimer);
+    			if(shieldChargeTimer==9999){
+    				shieldChargeTimer=shield.regenDelay*shield.delayMultiplier;	
+    			}else {
+    				this.shieldChargeTimer = Math.max(shield.regenDelay*shield.delayMultiplier,this.shieldChargeTimer);
+    			}
     			this.shieldForward = this.maxShield;
     			this.shieldLeft = this.maxShield;
     			this.shieldRight = this.maxShield;

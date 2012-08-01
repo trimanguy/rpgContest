@@ -11,6 +11,7 @@
 SNAME	flak1
 SMODEL	Resources/Sprites/FlakFrigate1-Thrust.png
 SPEED	50
+SIZE	32
 HB	(back,0,0,25)
 HB	(back,20,0,10)
 HB	(back,-20,0,10)
@@ -23,6 +24,7 @@ END
 SNAME	escort1
 SMODEL	Resources/Sprites/EscortFrigate1-Thrust.png
 SPEED	75
+SIZE	32
 HB	(front,0,10,20)
 HB	(front,0,-10,20)
 HB	(front,30,0,15)
@@ -40,6 +42,7 @@ END
 SNAME	escort2
 SMODEL	Resources/Sprites/EscortFrigate1-Thrust.png
 SPEED	75
+SIZE	32
 HB	(front,0,10,20)
 HB	(front,0,-10,20)
 HB	(front,30,0,15)
@@ -54,11 +57,10 @@ PYLONS	(back,e,10,-50,0,0,0,-135,0,3,Resources/Sprites/Escort1-PylonEngine.png)
 DESCRIP	testShip escort1
 END
 
-#PYLONS	(Pylon clusters, Item types, Base Health, X offset, Y offset, Resting Angle, Arc Angle (times 2), Interface Location (0,0), Size 1-5, Location)
-#HB	(Bow, Aft, Starboard (right), Port (left))
 SNAME	Cerberus
 SMODEL	Resources/Sprites/Cerberus.png
 SPEED	40
+SIZE	128
 HB	(starboardbow,161,-44,35)
 HB	(portbow,161,44,35)
 HB	(center,44,0,81)
@@ -75,4 +77,105 @@ PYLONS	(aft,e,50,-96,0,180,90,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
 PYLONS	(aft,c,50,-46,0,180,90,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
 DESCRIP	Cerberus Battleship
 END
+
+#FIX:wing guns dont fire from wing atm 
+SNAME	Valiant
+SMODEL	Resources/Sprites/Valiant.png
+SPEED	55
+SIZE	128
+HB	(bow,145,0,80)
+HB	(center,0,0,80)
+HB	(portwing,-114,100,71)
+HB	(starboardwing,-114,-100,71)
+HB	(aft,-170,0,50)
+PYLONS	(bow,w,50,145,20,0,30,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(bow,w,50,145,-20,0,30,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,s,50,0,20,0,180,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,c,50,0,-20,0,180,0,0,5,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portwing,w,50,121,56,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portwing,w,50,136,87,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portwing,w,50,150,118,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(starboardwing,w,50,121,-56,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(starboardwing,w,50,136,-87,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(starboardwing,w,50,150,-118,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(aft,ws,50,-188,0,180,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(aft,e,50,-210,0,180,90,0,0,5,Resources/Sprites/Escort1-Pylon1.png)
+DESCRIP	Valiant-class Battleship
+END
+
+SNAME	Blood Hawk
+SMODEL	Resources/Sprites/BloodHawk.png
+SPEED	75
+SIZE	32
+HB	(starboardaft,-8,-5,12)
+HB	(portaft,-8,5,12)
+HB	(bow,16,9,12)
+PYLONS	(starboardaft,w,50,-16,-17,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(starboardaft,e,50,-16,-2,180,90,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portaft,w,50,16,17,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portaft,c,50,16,2,0,90,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(bow,w,50,20,-9,0,90,0,0,1,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(bow,w,50,20,9,0,90,0,0,1,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(bow,s,50,6,0,0,180,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
+DESCRIP	Blood Hawk Frigate
+END
+
+SNAME	Reaver
+SMODEL	Resources/Sprites/Axe.png
+SPEED	50
+SIZE	64
+HB	(aft,-34,0,50)
+HB	(starboardbow,43,-36,22)
+HB	(portbow,43,36,22)
+PYLONS	(aft,e,50,-70,0,180,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(aft,ws,50,-55,-0,180,90,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(aft,w,50,-10,0,0,180,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(starboardbow,w,50,43,-60,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(starboardbow,ws,50,43,-10,0,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portbow,w,50,43,60,0,30,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portbow,c,50,43,40,0,180,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portbow,ws,50,43,10,0,90,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
+DESCRIP	Reaver Cruiser
+END
+
+SNAME	Clipper
+SMODEL	Resources/Sprites/Umbrella.png
+SPEED	75
+SIZE	32
+HB	(bow,20,0,20)
+HB	(center,0,0,11)
+HB	(aft,-20,0,10)
+PYLONS	(bow,w,50,17,2,0,90,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(bow,w,50,17,-2,0,90,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,w,50,0,0,0,180,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(center,s,50,0,-9,0,180,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(aft,c,50,-14,0,0,180,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(aft,e,50,-27,0,180,90,0,0,2,Resources/Sprites/Escort1-Pylon1.png)
+DESCRIP	Clipper Frigate
+END
+
+#PYLONS	(Pylon clusters, Item types, Base Health, X offset, Y offset, Resting Angle, Arc Angle (times 2), Interface Location (0,0), Size 1-5, Location)
+#HB	(Bow, Aft, Starboard (right), Port (left))
+SNAME	Prometheus
+SMODEL	Resources/Sprites/Prometheus.png
+SPEED	45
+SIZE	128
+HB	(bow,160,0,65)
+HB	(centerport,0,15,64)
+HB	(centerstarboard,0,-15,64)
+HB	(portaft,-146,22,72)
+HB	(starboardaft,-146,-22,72)
+HB	(aft,-200,-19,50)
+PYLONS	(bow,w,50,167,29,0,30,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(centerport,ws,50,0,15,90,90,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(centerstarboard,ws,50,0,-15,270,90,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portaft,w,50,-122,59,90,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(portaft,s,50,-132,43,0,180,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(starboardaft,w,50,-122,-59,270,90,0,0,3,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(starboardaft,c,50,-132,-43,0,180,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+PYLONS	(aft,e,50,-200,-19,180,90,0,0,4,Resources/Sprites/Escort1-Pylon1.png)
+DESCRIP	Prometheus Battleship
+END
+
+
 

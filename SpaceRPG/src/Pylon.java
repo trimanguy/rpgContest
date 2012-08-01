@@ -125,7 +125,7 @@ public class Pylon {
     	
     	
     	//System.out.println("cant equip "+O.name+" for some reason");
-    	System.out.println("cant equip item "+O.name);
+    	System.out.println("cant equip item "+O.name +" because allowedTypes: "+allowedType);
     	return false;
     }
     

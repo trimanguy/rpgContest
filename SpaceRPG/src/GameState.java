@@ -54,7 +54,7 @@ public class GameState {
     	File shieldFile = new File("Data/ShieldFile.txt");
     	Utils.parseShieldFile(shieldFile);
     	
-    	Global.state.playerObj = createCerb(0,"player");
+    	Global.state.playerObj = createPrometheus(500,"player");
     	
     	Global.state.playerObj.size = 128;
     	
@@ -117,9 +117,6 @@ public class GameState {
     	ShipObj ship = Utils.createShip("escort2", faction);
     	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
     	ship.pylons.get(0).equipItem(Utils.createWeapon("testBlaster2"));
-    	//ship.pylons.get(1).equipItem(Utils.createWeapon("testBlaster2"));
-    	//ship.pylons.get(2).equipItem(Utils.createWeapon("testBlaster2"));
-    	//ship.pylons.get(3).equipItem(Utils.createWeapon("testMissile"));
     	ship.pylons.get(4).equipItem(Utils.createPowerCore("testCore"));
     	ship.pylons.get(5).equipItem(Utils.createWeapon("testMissile"));
     	ship.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
@@ -140,7 +137,7 @@ public class GameState {
     	return ship;
     }
     
-    public ShipObj createCerb(int placeSize, String faction){
+    public ShipObj createCerberus(int placeSize, String faction){
     	ShipObj ship = Utils.createShip("Cerberus",faction);
     	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
     	ship.pylons.get(0).equipItem(Utils.createWeapon("testBlaster2"));
@@ -158,7 +155,97 @@ public class GameState {
     	ship.setAngle(Math.random()*360);
     	
     	return ship;
+    }
+    
+    public ShipObj createValiant(int placeSize, String faction){
+    	ShipObj ship = Utils.createShip("Valiant",faction);
+    	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
+    	ship.pylons.get(0).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(1).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(2).equipItem(Utils.createShield("testShield"));
+    	ship.pylons.get(3).equipItem(Utils.createPowerCore("testCore"));
+    	ship.pylons.get(4).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(5).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(6).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(7).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(8).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(9).equipItem(Utils.createWeapon("testMissile"));
+    	ship.pylons.get(10).equipItem(Utils.createWeapon("testMissile"));
+    	ship.pylons.get(11).equipItem(Utils.createEngine("imbaEngine"));
+    	ship.pylons.get(9).equipCrew(new CharacterObj());
     	
+    	ship.setAngle(Math.random()*360);
+    	
+    	return ship;
+    }
+    
+    //ship.pylons.get(1).equipItem(Utils.createEngine("imbaEngine"));
+    //ship.pylons.get(0).equipItem(Utils.createWeapon("testBlaster2"));
+    //ship.pylons.get(2).equipItem(Utils.createShield("testShield"));
+    
+    public ShipObj createBloodHawk(int placeSize, String faction){
+    	ShipObj ship = Utils.createShip("Blood Hawk",faction);
+    	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
+    	ship.pylons.get(0).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(1).equipItem(Utils.createEngine("imbaEngine"));
+    	ship.pylons.get(2).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(3).equipItem(Utils.createPowerCore("testCore"));
+    	ship.pylons.get(4).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(5).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(6).equipItem(Utils.createShield("testShield"));
+    	
+    	ship.setAngle(Math.random()*360);
+    	
+    	return ship;
+    }
+    
+    public ShipObj createReaver(int placeSize, String faction){
+    	ShipObj ship = Utils.createShip("Reaver",faction);
+    	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
+    	ship.pylons.get(0).equipItem(Utils.createEngine("imbaEngine"));
+    	ship.pylons.get(1).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(2).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(3).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(4).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(5).equipItem(Utils.createWeapon("testBlaster2"));
+    	ship.pylons.get(6).equipItem(Utils.createPowerCore("testCore"));
+    	ship.pylons.get(7).equipItem(Utils.createWeapon("testBlaster2"));
+    	
+    	ship.setAngle(Math.random()*360);
+    	
+    	return ship;
+    }
+   
+    public ShipObj createClipper(int placeSize, String faction){
+    	ShipObj ship = Utils.createShip("Clipper",faction);
+    	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
+    	ship.pylons.get(0).equipItem(Utils.createWeapon("imbaBlaster"));
+    	ship.pylons.get(1).equipItem(Utils.createWeapon("imbaBlaster"));
+    	ship.pylons.get(2).equipItem(Utils.createWeapon("imbaBlaster"));
+    	ship.pylons.get(3).equipItem(Utils.createShield("imbaShield"));
+    	ship.pylons.get(4).equipItem(Utils.createPowerCore("testCore"));
+		ship.pylons.get(5).equipItem(Utils.createEngine("imbaEngine"));
+    	
+    	ship.setAngle(Math.random()*360);
+    	
+    	return ship;
+    }
+    
+    public ShipObj createPrometheus(int placeSize, String faction){
+    	ShipObj ship = Utils.createShip("Prometheus",faction);
+    	ship.y = (Math.random()-0.5)*2*placeSize;ship.x=(Math.random()-0.5)*2*placeSize;
+    	ship.pylons.get(0).equipItem(Utils.createWeapon("imbaBlaster"));
+    	ship.pylons.get(1).equipItem(Utils.createWeapon("imbaBlaster"));
+    	ship.pylons.get(2).equipItem(Utils.createWeapon("imbaBlaster"));
+    	ship.pylons.get(3).equipItem(Utils.createWeapon("imbaBlaster"));
+    	ship.pylons.get(4).equipItem(Utils.createShield("imbaShield"));
+    	ship.pylons.get(5).equipItem(Utils.createWeapon("imbaBlaster"));
+    	ship.pylons.get(6).equipItem(Utils.createPowerCore("testCore"));
+		ship.pylons.get(7).equipItem(Utils.createEngine("imbaEngine"));
+    	
+    	ship.setAngle(Math.random()*360);
+    	
+    	return ship;
     }
     
     public void Tick(){

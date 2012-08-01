@@ -49,7 +49,7 @@ public class ActiveInterface extends InterfaceManager {
     		for(int i=0;i<ship.pylons.size();i++){
     			Pylon P = ship.pylons.get(i);
     			
-    			System.out.println("PYLON GUI: "+i);
+    			System.out.println("PYLON GUI: "+i +"sprite: "+P.gui);
     			
     			if(P == null) continue;
     			if(P.gui == null) continue;

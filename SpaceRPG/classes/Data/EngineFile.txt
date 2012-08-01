@@ -24,7 +24,7 @@ END
 
 ENAME	imbaEngine
 EMODEL	Resources/Sprites/Escort1-Pylon1.png
-MAXSPD	200
+MAXSPD	500
 ROTSPD	75
 HEALTH	100
 ARMOR	1
