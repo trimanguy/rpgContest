@@ -19,7 +19,7 @@ public class SoundObj {
     		if(firing){
     			int type = Utils.randomNumberGen(1,4);
     			soundPath = "Resources/Sounds/laser"+type+".wav";
-    			System.out.println("soundpath :"+soundPath);	
+    			//System.out.println("soundpath :"+soundPath);	
     		} else {
     			soundPath = "Resources/Sounds/laserhit1.wav";
     		}

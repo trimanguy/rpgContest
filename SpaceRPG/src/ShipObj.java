@@ -41,6 +41,8 @@ public class ShipObj extends GameObj {
     double maxShield=0;
     double shieldChargeTimer=9999; //what shieldChargeDelay gets reset to upon dmg
     double shieldChargeDelay; //when this hits 0, begin recharging
+    double shieldBoostDelay;
+    double shieldBoostCost;
     
     //ship's power
     double maxPower; //energy bar size
@@ -243,6 +245,7 @@ public class ShipObj extends GameObj {
 	    	
 	    	//Process shield actions
 	    	shieldChargeDelay = Math.max(0, shieldChargeDelay-Global.state.dtt);
+	    	shieldBoostDelay = Math.max(0, shieldBoostDelay-Global.state.dtt);
 	    	//System.out.println("shield regen delay: "+shieldChargeDelay +" with max delay: "+shieldChargeTimer);
 	    	if((shieldChargeDelay==0)){ //10% shield regen/sec
 	    		
@@ -480,6 +483,7 @@ public class ShipObj extends GameObj {
     			this.shieldRight = this.maxShield;
     			this.shieldRear = this.maxShield;
     			this.powerUsed += shield.shieldPowerConsumption;
+    			this.shieldBoostCost += shield.boostCost;
     		}
     	}
     }

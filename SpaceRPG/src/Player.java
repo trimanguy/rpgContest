@@ -144,6 +144,10 @@ public class Player implements MouseListener, MouseMotionListener, MouseWheelLis
     					break;
     		case 'f':	decreaseSpeed(); //System.out.println("Speed decreased!"); 
     					break;
+    		case 'W':	shieldBoost("front"); break;
+    		case 'A':	shieldBoost("left"); break;
+    		case 'S':	shieldBoost("rear"); break;
+    		case 'D':	shieldBoost("right"); break;
     	}
     	
     }
@@ -216,6 +220,41 @@ public class Player implements MouseListener, MouseMotionListener, MouseWheelLis
     	System.out.println("Current speed: "+Global.state.playerObj.velocity);
     }
     
+    private void shieldBoost(String side){
+    	ShipObj playerShip = Global.state.playerObj;
+    	
+    	if(playerShip.shieldBoostDelay!=0){
+    		System.out.println("cannot boost, cd not over. Time left: "+playerShip.shieldBoostDelay);
+    		return;
+    	}
+    	if(playerShip.shieldBoostCost>playerShip.currPower){
+    		System.out.println("cannot boost, not enough power");
+    		return;
+    	}
+    	
+    	if(side.equals("front")){
+    		playerShip.shieldForward = Math.max(playerShip.maxShield,playerShip.shieldForward+playerShip.maxShield/4);
+    		
+    	}
+    	else if(side.equals("left")){
+    		playerShip.shieldLeft = Math.max(playerShip.maxShield,playerShip.shieldLeft+playerShip.maxShield/4);
+    	}
+    	else if(side.equals("rear")){
+    		playerShip.shieldRear = Math.max(playerShip.maxShield,playerShip.shieldRear+playerShip.maxShield/4);
+    	}
+    	else if(side.equals("right")){
+    		playerShip.shieldRight = Math.max(playerShip.maxShield,playerShip.shieldRight+playerShip.maxShield/4);
+    	}
+    	
+    	playerShip.currPower-=playerShip.shieldBoostCost;
+    	playerShip.shieldBoostDelay = playerShip.shieldChargeTimer;
+    	
+    }
+    	
+    	
+    	
+    	
+    	
     //i hate retyping print lines...
     //System.out.print("Component is: " + e.getComponent().getClass().getName() + System.getProperty("line.separator"));
 }
