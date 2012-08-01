@@ -30,7 +30,13 @@ public class GameState {
 	ArrayList<Obj> deleteBuffer = new ArrayList(0);
 	AI activeAI = new AI();
 
+	//savefile stuff
 	ShipObj playerObj = null;
+	String playerName = "";
+	double playerMoney = 0;
+	double playerProgress = 0;
+	ArrayList<Obj> playerCargo = new ArrayList(0);
+	ArrayList<Obj> playerBank = new ArrayList(0);
 
     public GameState() {
     	
@@ -47,14 +53,16 @@ public class GameState {
     	
     	Utils.parseShieldFile("Data/ShieldFile.txt");
     	
-    	Global.state.playerObj = createBloodHawk(500,"player");
+    	Global.state.playerObj = createPrometheus(500,"player");
     	
     	for(int z=0; z<Global.state.playerObj.pylons.size()-1;z++){
     		Pylon P = Global.state.playerObj.pylons.get(z);
     	}
     	
     	//Global.state.playerObj.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
-		
+		Utils.filepath=Utils.getDataFolder();
+		Utils.writeToFile("hello's savefile","helloooooo");
+		Utils.writeToFile("goodbye's savefile","gooooooodbye");
 		
         createEscort1(500,"ally");
         createEscort1(500,"ally");

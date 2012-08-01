@@ -614,5 +614,44 @@ public class Utils {
     	return (higher-lower)*Math.random()+lower;
     }
     
+   	//Used for game saving/loading
+   	public static String filepath;
    
+	public static String getDataFolder(){
+		String folder = System.getProperty("user.home");
+	   	String os = System.getProperty("os.name").toLowerCase();
+	   
+	   	if(os.contains("win")){
+	    	if(os.contains("xp"))
+	        folder += "\\Application Data\\SpaceRPG\\";
+	    else if(os.contains("7") || os.contains("vista"))
+	        folder += "\\AppData\\Roaming\\SpaceRPG\\";
+	   	}
+	   	else if(os.contains("mac"))
+	      	folder += "/Library/Application Support/SpaceRPG/";
+	      	
+	    System.out.println("folder: "+folder);
+	   	return folder;
+	}
+   
+   
+  	public static void writeToFile(String filename, String text){
+  		try{
+  			File ourFolder = new File(Utils.filepath);
+  			
+  			if(!ourFolder.exists()){new File(Utils.filepath).mkdir();}
+  			
+		  	Writer output = null;
+		 	File file = new File(Utils.filepath+filename+".txt");
+		 	output = new BufferedWriter(new FileWriter(file));
+		 	output.write(text);
+		  	output.close();
+		  	System.out.println("Your file has been written"); 
+  		} 
+  		catch(IOException e){
+  		}
+  	}
+  	
+  	
 }
+   

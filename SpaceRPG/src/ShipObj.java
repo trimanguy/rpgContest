@@ -76,7 +76,7 @@ public class ShipObj extends GameObj {
     
     /*** Ship Constructor, puts ship on screen ***/
     public ShipObj(String image, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons, String descrip, boolean real) { 
-    	System.out.println("NEW SHIP OBJECT GUY");
+    	//System.out.println("NEW SHIP OBJECT GUY");
     	if(image != null)
     	{
     		sprite = new Sprite(image, true);
@@ -96,7 +96,7 @@ public class ShipObj extends GameObj {
     /*** Ship Data Constructor, similar to C++ struct ***/
     public ShipObj(String image, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons, String descrip){
     	
-    	System.out.println("READ SHIP OBJECT GUY");
+    	//System.out.println("READ SHIP OBJECT GUY");
     	//don't need to add to allShips cuz this just template obj
     	imageName = image;
     	hitCircles = hitboxes;
