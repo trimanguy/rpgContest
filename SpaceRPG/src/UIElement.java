@@ -113,9 +113,8 @@ public class UIElement extends Obj {
     	if(isActive){
     		Global.state.activeObjs.add(this);
     	}
-    	if(CameraCanSee()){
-    		Global.view.addDrawObject(this);
-    	}
+    	
+    	Global.view.addDrawObject(this);
     	
     }
     
@@ -141,6 +140,11 @@ public class UIElement extends Obj {
     	
     	parent.children.remove(this);
     	parent = null;
+    }
+    
+    public void scaleTo(double nx, double ny){
+    	dx = nx/sprite.frameX;
+    	dy = ny/sprite.frameY;
     }
     
     public boolean setParent(UIElement O){

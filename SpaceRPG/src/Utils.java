@@ -61,6 +61,8 @@ public class Utils {
 	static Hashtable engineTable = new Hashtable();
 	static Hashtable powerCoreTable = new Hashtable();
 	static Hashtable shieldTable = new Hashtable();
+	
+	static Hashtable transitionData = new Hashtable();
     
 	public static BufferedImage imageToBufferedImage(Image im) {
 		BufferedImage bi = new BufferedImage

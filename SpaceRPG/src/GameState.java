@@ -85,7 +85,6 @@ public class GameState {
         */
         
         Global.GUI = new ActiveInterface();
-    	//Global.GUI = new HangarInterface();
     }
     
     public ShipObj createEscort1(int placeSize, String faction){

@@ -41,17 +41,21 @@ public class InterfaceList extends UIElement{
     	addChild(slider);
     }
     
-    public InterfaceList(double x, double y, int w, int h) {
+    public InterfaceList(double x, double y, int w, int h, double nlayer) {
     	String path = "Resources/Interface/";
     	
     	width = w;
     	height = h;
     	
+    	
     	slider = new InterfaceSlider(x+width-sliderWidth, y, path+"genericSliderBack.png",
     		path+"genericSliderButton.png", null, null, 
     		0, 100, h);
-    	slider.dx = 1;
-    	slider.dy = h/128;
+    	
+    	slider.scaleTo(sliderWidth,h);
+    	
+    	scaleTo(w,h);
+    	layer = nlayer;
     }
     
     public void addAll(ArrayList<Obj> O){
