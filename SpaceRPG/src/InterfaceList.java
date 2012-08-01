@@ -87,14 +87,22 @@ public class InterfaceList extends UIElement{
     }
     
     public void mouseDropped(MouseEvent e, Obj O){
-    	if(O instanceof InterfacePylon){
-    		Pylon P = ((InterfacePylon)O).pylon;
-    		P.equipItem((ItemObj) Global.GUI.selectedObject);
-    		Global.state.playerVault.remove(Global.GUI.selectedObject);
-    		Global.state.playerCargo.remove(Global.GUI.selectedObject);
-    	}
     	if(Global.GUI instanceof HangarInterface){
-    		((HangarInterface) Global.GUI).updatePane();
+    		HangarInterface gui = ((HangarInterface) Global.GUI);
+    		
+	    	if(O instanceof InterfacePylon){
+	    		Pylon P = ((InterfacePylon)O).pylon;
+	    		if(gui.subPane == "crew"){
+	    			P.equipItem((ItemObj) Global.GUI.selectedObject);
+	    		}else{
+	    			P.equipCrew((CharacterObj) Global.GUI.selectedObject);
+	    		}
+	    		
+	    		Global.state.playerVault.remove(Global.GUI.selectedObject);
+	    		Global.state.playerCargo.remove(Global.GUI.selectedObject);
+	    	}
+	    	
+    		gui.updatePane();
     	}
     }
     public void mouseClicked(MouseEvent e){

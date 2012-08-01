@@ -70,6 +70,8 @@ public class ShipObj extends GameObj {
     EngineObj engine;
     PowerCoreObj generator;
     
+    double value;
+    
     public double getSpeed(){
     	return this.velocity;
     }

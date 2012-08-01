@@ -27,9 +27,14 @@ public class ItemObj extends Obj{
 	double activateDelay;
 	boolean isActive; //false = item is passive
 	
+	int value;
+	
     public ItemObj() {
     	
     }
     
+    public String getDescription(){
+    	return "";
+    }
     
 }

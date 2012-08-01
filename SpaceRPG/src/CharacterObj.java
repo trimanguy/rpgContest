@@ -7,7 +7,7 @@
  */
 
 
-public class CharacterObj extends Obj{
+public class CharacterObj extends ItemObj{
 	static String[] maleNames = new String[] {"Aaron", "Adam", "Adrian", "Alan", "Alejandro", "Alex", "Allen", "Andrew", "Andy", "Anthony", "Art", 
 												"Arthur", "Barry", "Bart", "Ben", "Benjamin", "Bill", "Bobby", "Brad", "Bradley", "Brendan", "Brett", 
 												"Brian", "Bruce", "Bryan", "Carlos", "Chad", "Charles", "Chris", "Christopher", "Chuck", "Clay", 

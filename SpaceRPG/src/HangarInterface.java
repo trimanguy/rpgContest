@@ -65,7 +65,7 @@ public class HangarInterface extends InterfaceManager{
     	elements.put("shopButton",shopButton);
     	elements.put("marketButton",marketButton);
     	elements.put("shipyardButton",shipyardButton);
-    	elements.put("missionsButton",missionsButton);
+    	//elements.put("missionsButton",missionsButton);
     	elements.put("barButton",barButton);
     	elements.put("undockButton",undockButton);
     	
@@ -268,19 +268,70 @@ public class HangarInterface extends InterfaceManager{
     public void buyItem(){
     	if(selectedObject == null) return;
     	
+    	ItemObj base = (ItemObj) selectedObject;
     	
+    	double value = base.value;
+    	if(hangarState.commodityDemand.get(base.name)!=null && hangarState.commodityDemand.get(base.name)>0){
+    		value *= hangarState.commodityDemand.get(base.name);
+    	}
+    	if(hangarState.playerMoney >= base.value){
+    		hangarState.playerMoney -= base.value;
+    	}else{
+    		return;
+    	}
     	
-    	hangarState.playerVault.add((ItemObj) selectedObject);
+    	ItemObj item = Utils.createItem(base.type,base.name);
+    	
+    	hangarState.playerVault.add(item);
+    	
+    	selectedObject = null;
+    	
+    	updatePane();
     }
     
     public void sellItem(){
     	if(selectedObject == null) return;
     	
+    	ItemObj base = (ItemObj) selectedObject;
+    	
+    	double value = base.value;
+    	if(hangarState.commodityDemand.get(base.name)!=null && hangarState.commodityDemand.get(base.name)>0){
+    		value *= hangarState.commodityDemand.get(base.name);
+    	}
+    	hangarState.playerMoney += value*0.75;
+    	
+    	hangarState.playerVault.remove(base);
+    	hangarState.playerCargo.remove(base);
+    	
+    	selectedObject = null;
+    	
+    	updatePane();
     }
     
     public void buyShip(){
     	if(selectedObject == null) return;
     	
+    	ShipObj base = (ShipObj) selectedObject;
+    	
+    	if(hangarState.playerMoney >= base.value){
+    		hangarState.playerMoney -= base.value;
+    		hangarState.playerMoney += hangarState.playerObj.value*0.75;
+    	}else{
+    		return;
+    	}
+    	
+    	for(Pylon P:hangarState.playerObj.pylons){
+    		ItemObj I = P.equipped;
+    		CharacterObj slave = P.crew;
+    		P.unequipCrew();
+    		P.unequipItem();
+    		hangarState.playerVault.add(I);
+    		hangarState.playerVault.add(slave);
+    		
+    	}
+    	hangarState.playerObj.addDelete();
+    	
+    	hangarState.playerObj = Utils.createShip(base.name,"allied");
     }
     
     public void acceptMission(){
@@ -328,9 +379,13 @@ public class HangarInterface extends InterfaceManager{
 	    			String key = "Pylon"+P.tag+""+i;
 	    			InterfacePylon gui = (InterfacePylon) getElement(key);
 	    			
-	    			if(gui.pylon.equipped!=null){
+	    			if(gui.pylon.equipped!=null && subPane == "pylons"){
 	    				if(gui.item == null) gui.item = new InterfaceItem(gui.pylon.equipped);
 	    				gui.item.base = gui.pylon.equipped;
+	    				gui.item.getIcon(gui.item.base);
+	    			}else if(gui.pylon.crew!=null && subPane == "crew"){
+	    				if(gui.item == null) gui.item = new InterfaceItem(gui.pylon.crew);
+	    				gui.item.base = gui.pylon.crew;
 	    				gui.item.getIcon(gui.item.base);
 	    			}else{
 	    				gui.item = null;
@@ -345,10 +400,23 @@ public class HangarInterface extends InterfaceManager{
     		
     		if(selectedObject != null && selectedObject instanceof ItemObj){
     			//Update the descriptions pane
+    			ItemObj item = (ItemObj) selectedObject;
+    			String text = "\n\n"+item.name;
+    			text += "\n"+item.descrip;
+    			text += "\n\n"+item.getDescription();
     			
     			//If the selected Object is in cargo, then change the shopButton to sell
     			
     			//Otherwise change shopButton to buy
+    			InterfaceButton shopButton = (InterfaceButton) getElement("shopButton");
+    			if(hangarState.playerCargo.contains(selectedObject)){
+    				shopButton.text = " Sell";
+    				shopButton.callMethod = "sellItem";
+    				
+    			}else{
+    				shopButton.text = " Buy";
+    				shopButton.callMethod = "buyItem";
+    			}
     		}
     			
     	}else if(currPane.compareTo("Market")==0){
@@ -360,7 +428,23 @@ public class HangarInterface extends InterfaceManager{
     	}else if(currPane.compareTo("Shipyard")==0){
     		((InterfaceList) elements.get("shipsBack")).values = new ArrayList(hangarState.shipShop);
     		
-    		//
+    		if(selectedObject != null && selectedObject instanceof ShipObj){
+    			ShipObj ship = (ShipObj) selectedObject;
+    			String text = "\n\n"+ship.name+"\n\n";
+    			
+    			for(Pylon P:ship.pylons){
+    				String pylonType="";
+    				if(P.allowedType.indexOf("w")>=0) pylonType = "Weapon";
+    				if(P.allowedType.indexOf("s")>=0) pylonType = "Shield";
+    				if(P.allowedType.indexOf("c")>=0) pylonType = "PowerCore";
+    				if(P.allowedType.indexOf("e")>=0) pylonType = "Engine";
+    				if(P.allowedType.indexOf("p")>=0) pylonType = "Support";
+    					
+    				text += "\n"+pylonType+" Pylon: "+P.baseHealth+" BaseHealth, "+P.arcAngle+" Angular Range";
+    			}
+    			
+    			elements.get("detailsBack").text = text;
+    		}
     		
     	}else if(currPane.compareTo("Missions")==0){
     		//((InterfaceList) elements.get("shopBack")).values = new ArrayList(hangarState.missions);

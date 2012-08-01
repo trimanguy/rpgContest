@@ -31,13 +31,26 @@ public class InterfacePylon extends UIElement{
     }
     
     public void mouseDropped(MouseEvent e, Obj O){
-    	if(O instanceof InterfaceList){
-    		ItemObj I = pylon.equipped;
-    		pylon.unequipItem();
-    		Global.state.playerVault.add(I);
-    	}
     	if(Global.GUI instanceof HangarInterface){
-    		((HangarInterface) Global.GUI).updatePane();
+    		HangarInterface gui = ((HangarInterface) Global.GUI);
+    		
+    		
+	    	if(O instanceof InterfaceList){
+	    		ItemObj I = null;
+	    		if(gui.subPane == "crew"){
+	    			I = pylon.crew;
+	    			pylon.unequipCrew();
+	    		}else{
+	    			I = pylon.equipped;
+	    			pylon.unequipItem();
+	    		}
+	    		
+	    		Global.state.playerVault.add(I);
+	    	}
+    		
+    		gui.updatePane();
+    		
+    		
     	}
     }
 	

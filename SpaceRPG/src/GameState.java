@@ -37,6 +37,8 @@ public class GameState {
 	double playerProgress = 0;
 	ArrayList<ItemObj> playerCargo = new ArrayList(0);
 	ArrayList<ItemObj> playerVault = new ArrayList(0);
+	
+	Hashtable<String, Double> commodityDemand = new Hashtable();
 
     public GameState() {
     	
