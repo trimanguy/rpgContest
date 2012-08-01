@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class HangarInterface extends InterfaceManager{
 	
 	String currPane;
+	String subPane;
 	UIElement paneObject;//This is the parent "window"
 	
 	ArrayList<String> tempPaneKeys = new ArrayList(0);
@@ -94,6 +95,9 @@ public class HangarInterface extends InterfaceManager{
     	paneObject = null;
     	currPane = null;
     	
+    	selectedObject= null;
+    	subPane = null;
+    	
     	removeTempElements();
     }
     
@@ -151,7 +155,7 @@ public class HangarInterface extends InterfaceManager{
     		
     		//trash button
     		InterfaceButton trashButton = new InterfaceButton(520,688,path+"InterfaceButton.png",25,
-    			null,null,null);
+    			"trashItem",this,null);
     		trashButton.text = "Trash Item";
     		trashButton.scaleTo(128,46);
     		addTempElement("trashButton",trashButton);
@@ -171,7 +175,7 @@ public class HangarInterface extends InterfaceManager{
     		
     		//buy button, sell button
     		InterfaceButton shopButton = new InterfaceButton(840,283,path+"InterfaceButton.png",25,
-    			null,null,null);
+    			null,this,null);
     		shopButton.scaleTo(128,46);
     		addTempElement("shopButton",shopButton);
     		
@@ -184,12 +188,12 @@ public class HangarInterface extends InterfaceManager{
     		
     		//buy button, sell button
     		InterfaceButton buyButton = new InterfaceButton(853,355,path+"InterfaceButton.png",25,
-    			null,null,null);
+    			null,this,null);
     		buyButton.scaleTo(96,36);
     		addTempElement("buyButton",buyButton);
     		
     		InterfaceButton sellButton = new InterfaceButton(853,685,path+"InterfaceButton.png",25,
-    			null,null,null);
+    			null,this,null);
     		sellButton.scaleTo(96,36);
     		addTempElement("sellButton",sellButton);
     		
@@ -203,7 +207,7 @@ public class HangarInterface extends InterfaceManager{
     		
     		//buy button
     		InterfaceButton buyButton = new InterfaceButton(418,640,path+"InterfaceButton.png",25,
-    			null,null,null);
+    			"buyShip",this,null);
     		buyButton.scaleTo(96,36);
     		addTempElement("buyButton",buyButton);
     		
@@ -219,7 +223,7 @@ public class HangarInterface extends InterfaceManager{
     		elements.get("detailsBack").scaleTo(735,275);
     		
     		InterfaceButton missionButton = new InterfaceButton(870,335,path+"InterfaceButton.png",25,
-    			null,null,null);
+    			null,this,null);
     		missionButton.scaleTo(96,36);
     		addTempElement("missionButton",missionButton);
     		
@@ -234,7 +238,7 @@ public class HangarInterface extends InterfaceManager{
     		
     		//buy button
     		InterfaceButton hireButton = new InterfaceButton(418,640,path+"InterfaceButton.png",25,
-    			null,null,null);
+    			"buyItem",this,null);
     		hireButton.scaleTo(96,36);
     		addTempElement("hireButton",hireButton);
     		
@@ -244,31 +248,51 @@ public class HangarInterface extends InterfaceManager{
     	
     }
     
+    public void trashItem(){
+    	if(selectedObject == null) return;
+    }
+    
     public void buyItem(){
+    	if(selectedObject == null) return;
     	
     }
     
     public void sellItem(){
+    	if(selectedObject == null) return;
     	
     }
     
     public void buyShip(){
+    	if(selectedObject == null) return;
     	
     }
     
     public void acceptMission(){
+    	if(selectedObject == null) return;
     	
     }
     
     public void abortMission(){
+    	if(selectedObject == null) return;
     	
     }
-    
+    /*
+	String playerName = "";
+	double playerMoney = 0;
+	ArrayList<Obj> playerCargo = new ArrayList(0);
+	ArrayList<Obj> playerVault = new ArrayList(0);
+	*/
     public void updatePane(){
     	
     	if(currPane.compareTo("Hangar")==0){
+    		((InterfaceList) elements.get("hangarBack")).values = new ArrayList(Global.state.playerVault);
+    		((InterfaceList) elements.get("cargoBack")).values = new ArrayList(Global.state.playerCargo);
+    		
+    		
     		
     	}else if(currPane.compareTo("Shop")==0){
+    		//check the shop pane
+    		((InterfaceList) elements.get("hangarBack")).values = new ArrayList(Global.state.playerVault);
     		
     	}else if(currPane.compareTo("Market")==0){
     		

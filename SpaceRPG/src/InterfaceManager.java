@@ -14,7 +14,7 @@ public class InterfaceManager {
 	
 	Hashtable<String, UIElement> elements = new Hashtable(0);
 	
-	Obj selectedObject;//This is for pane submenus and lists.
+	Object selectedObject;//This is for pane submenus and lists.
 	
     public InterfaceManager() {
     }
