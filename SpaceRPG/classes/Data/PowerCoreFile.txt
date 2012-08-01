@@ -13,9 +13,87 @@
 PNAME	testCore
 PMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
 POWER	100
-REGEN	50
+REGEN	25
 HEALTH	50
 ARMOR	1
 SIZE	1
 DESCRIP	blah
 END
+
+PNAME	TESLA Fighter Powercore
+PMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+POWER	200
+REGEN	15
+HEALTH	50
+ARMOR	0
+SIZE	1
+DESCRIP	Basic Powercore for Fighters and Bombers
+END
+
+PNAME	UTX Juicer Frigate Powercore
+PMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+POWER	300
+REGEN	30
+HEALTH	75
+ARMOR	1
+SIZE	2
+DESCRIP	Basic Powercore for frigates.
+END
+
+PNAME	BIR Energizer Frigate Powercore
+PMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+POWER	400
+REGEN	20
+HEALTH	75
+ARMOR	1
+SIZE	2
+DESCRIP	Frigate Powercore developed by Energizer Deluxe.
+END
+
+PNAME	POE Solarity Cruiser Powercore
+PMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+POWER	500
+REGEN	50
+HEALTH	150
+ARMOR	2
+SIZE	3
+DESCRIP	Basic Powercore for Cruisers, runs on solar power.
+END
+
+PNAME	MI DuraCellular Cruiser Powercore
+PMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+POWER	600
+REGEN	40
+HEALTH	150
+ARMOR	2
+SIZE	3
+DESCRIP	A cruiser powercore developed by DuraCellular Technologies.
+END
+
+PNAME	GIG PanTronic Capitol Powercore
+PMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+POWER	750
+REGEN	70
+HEALTH	250
+ARMOR	3
+SIZE	4
+DESCRIP	Basic Powercore for battleships.
+END
+
+PNAME	Zephyr Capitol Powercore
+PMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+POWER	900
+REGEN	60
+HEALTH	250
+ARMOR	3
+SIZE	4
+DESCRIP	A battleship powercore developed by DEWY Technologies.
+
+PNAME	LIGHTNING Capitol Powercore
+PMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+POWER	1000
+REGEN	90
+HEALTH	300
+ARMOR	4
+SIZE	5
+DESCRIP	A battleship powercore developed by WIZARD Research Co.

@@ -135,7 +135,7 @@ public class Player implements MouseListener, MouseMotionListener, MouseWheelLis
     	char key = e.getKeyChar();
     	int modNum = e.getModifiers();
     	String modifiers = KeyEvent.getKeyModifiersText(modNum);
-    	System.out.print("Key pressed: "+ key +" with mod "+ modifiers +" modNum: "+modNum+ " with effect: ");
+    	//System.out.print("Key pressed: "+ key +" with mod "+ modifiers +" modNum: "+modNum+ " with effect: ");
     	switch (key){
     		case '`':	System.out.println("All Ctrl groups selected"); break;
     		case '1':	System.out.println("Ctrl Group1 selected"); break;
@@ -150,6 +150,7 @@ public class Player implements MouseListener, MouseMotionListener, MouseWheelLis
     		case 'A':	shieldBoost("left"); break;
     		case 'S':	shieldBoost("rear"); break;
     		case 'D':	shieldBoost("right"); break;
+    		case '~':   weaponBoost("~"); break;
     	}
     	
     }
@@ -211,15 +212,15 @@ public class Player implements MouseListener, MouseMotionListener, MouseWheelLis
     	double currSpeed = Global.state.playerObj.velocity;
     	double maxSpeed = Global.state.playerObj.maxVelocity;
     	Global.state.playerObj.velocity = Math.min(maxSpeed, currSpeed+(maxSpeed/30)); 
-    	System.out.println("Current speed: "+Global.state.playerObj.velocity);
-    	System.out.println("Current Power regen: "+Global.state.playerObj.powerMade+" max power: "+Global.state.playerObj.maxPower);
+    	//System.out.println("Current speed: "+Global.state.playerObj.velocity);
+    	//System.out.println("Current Power regen: "+Global.state.playerObj.powerMade+" max power: "+Global.state.playerObj.maxPower);
     }
     
     private void decreaseSpeed(){
     	double currSpeed = Global.state.playerObj.velocity;
     	double maxSpeed = Global.state.playerObj.maxVelocity;
     	Global.state.playerObj.velocity = Math.max(0, currSpeed-(maxSpeed/30)); 
-    	System.out.println("Current speed: "+Global.state.playerObj.velocity);
+    	//System.out.println("Current speed: "+Global.state.playerObj.velocity);
     }
     
     private void shieldBoost(String side){
@@ -230,7 +231,7 @@ public class Player implements MouseListener, MouseMotionListener, MouseWheelLis
     		return;
     	}
     	if(playerShip.shieldBoostCost>playerShip.currPower){
-    		System.out.println("cannot boost, not enough power");
+    		//System.out.println("cannot boost, not enough power");
     		return;
     	}
     	
@@ -253,8 +254,32 @@ public class Player implements MouseListener, MouseMotionListener, MouseWheelLis
     	
     }
     	
+    Boolean boosted;
+    double timeBoostedLeft;
     	
-    	
+    private void weaponBoost(String group){
+    
+       ShipObj playerShip = Global.state.playerObj;
+       if(playerShip.currPower<(playerShip.maxPower/5)){  //not enough power?
+               System.out.println("cannot boost, lack energy");
+               return;
+       }
+       if(playerShip.boostCD>0){ //cd not over?
+               System.out.println("cannot boost, cd not over");       
+               return;
+       }
+          
+           for(Pylon P:playerShip.pylons){
+               if(P.equipped instanceof WeaponObj){
+                       ((WeaponObj)(P.equipped)).boost();
+               }
+               }
+               playerShip.currPower=Math.max(0,playerShip.currPower-playerShip.maxPower/5);
+               playerShip.boosted=true;
+               playerShip.timeBoostedLeft = 8;
+               playerShip.boostCD = 16;
+              
+    }
     	
     	
     //i hate retyping print lines...

@@ -44,6 +44,11 @@ public class ShipObj extends GameObj {
     double shieldBoostDelay;
     double shieldBoostCost;
     
+    //weapon boost fields
+    Boolean boosted=false;
+    double timeBoostedLeft=0;
+    double boostCD;
+    
     //ship's power
     double maxPower; //energy bar size
     double powerMade; //base energy bar regen speed/sec
@@ -144,6 +149,18 @@ public class ShipObj extends GameObj {
     	
     	if (this.currCoreHealth<=0){
     		//this.pylons=null;
+    		PointS deadShip= new PointS(this.x,this.y);
+            PointS player= new PointS(Global.state.playerObj.x,Global.state.playerObj.y);
+            if((deadShip.distance(player)<768)&&(this.isHostile(Global.state.playerObj))){
+                    ShipObj playerShip = (ShipObj)Global.state.playerObj;
+                    for(Pylon P:playerShip.pylons){
+                            if(P.crew!=null){
+                                    P.crew.gainExp(30);
+                            }
+                    }
+            }
+            
+            new SoundObj(true,"shipDeath");
     		this.addDelete();
     	}
     	
@@ -196,6 +213,19 @@ public class ShipObj extends GameObj {
     		
 	    	//Combat 
 	    	this.fireOn(this.findTarget());
+	    	
+	    	//Process weapon boost
+            timeBoostedLeft=Math.max(0, timeBoostedLeft-Global.state.dtt);
+            boostCD=Math.max(0, boostCD-Global.state.dtt);
+            if((boosted)&&(timeBoostedLeft==0)){
+                    for(Pylon P:pylons){
+                            if(P.equipped instanceof WeaponObj){
+                                    WeaponObj weapon = ((WeaponObj)(P.equipped));
+                                    weapon.unBoost();
+                            }
+                    }
+                    boosted=false;
+            }
 	    	
 	    	//Process power generation and consumption
 	    	double powerRate = powerMade - powerUsed;

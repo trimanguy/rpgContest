@@ -46,6 +46,8 @@ public class CharacterObj extends Obj{
 	String name;
 	boolean gender=false; //true=male, false=female
 	String job; //this person's class
+	int level=1;
+	int exp=0;
 	double gunnery=50; 	//bonus dmg
 	double accuracy=50; 	//lowers fire spread
 	double efficiency=50; //lowers power/ammo usage and shield recharge delay
@@ -66,23 +68,11 @@ public class CharacterObj extends Obj{
     		name = femaleNames[fn]+" "+surNames[ln];
     	}
     	
-    	int randomPts=180; //each stat will start at least >=50. These points are then randomly distributed
-    	while(randomPts>0){
-    	
-	  		int picked = Utils.randomNumberGen(0,6);
-	  		int quant = Math.min(Utils.randomNumberGen(3,14),randomPts);
-	  		switch (picked) {
-	    		case 0:		gunnery+=quant; randomPts-=quant; break;
-	    		case 1:		accuracy+=quant; randomPts-=quant; break;
-	    		case 2:		efficiency+=quant; randomPts-=quant; break;
-	    		case 3:		dmgControl+=quant; randomPts-=quant; break;
-	    		case 4:		calibration+=quant; randomPts-=quant; break;
-	    		case 5:		engineering+=quant; randomPts-=quant; break;
-	  		}
-    	}
+    	//each stat will start at least >=50. Need to randomly distribute these points
+    	this.distributeStats(180);
     	
     	double maxStat=Math.max(gunnery, Math.max(accuracy,Math.max(efficiency,Math.max(dmgControl,Math.max(calibration,engineering)))));
-		if(maxStat==gunnery) job="gunner";
+		if(maxStat==gunnery) 		job="gunner";
     	if(maxStat==accuracy)		job="sniper";
     	if(maxStat==efficiency) 	job="logistics officer";
     	if(maxStat==dmgControl) 	job="technician";
@@ -93,4 +83,62 @@ public class CharacterObj extends Obj{
     	System.out.println(job+" " +name+ " made! With stats: gunnery: "+gunnery+" accuracy: "
     		+accuracy+" efficiency: " +efficiency+" dmgControl: "+dmgControl+" calibration: "+calibration+" enginnering: "+engineering);
 	}
+	
+	private void distributeStats(int points){
+		while(points>0){
+			int picked = Utils.randomNumberGen(0,6);
+			int quant = Math.min(Utils.randomNumberGen(3,10),points);
+			switch (picked){
+				case 0:			gunnery+=quant; points-=quant; break;
+				case 1:         accuracy+=quant; points-=quant; break;
+				case 2:         efficiency+=quant; points-=quant; break;
+				case 3:         dmgControl+=quant; points-=quant; break;
+				case 4:         calibration+=quant; points-=quant; break;
+				case 5:         engineering+=quant; points-=quant; break;
+			}
+		}
+	}
+	
+	private void levelUp(){
+		level++;
+		distributeStats(20);
+		if(job.equals("gunner")){
+			gunnery+=10;
+		}
+		else if(job.equals("sniper")){
+			accuracy+=10;
+		}
+		else if(job.equals("logistics officer")){
+			efficiency+=10;
+		}
+		else if(job.equals("technician")){
+			dmgControl+=10;
+		}
+		else if(job.equals("calibrator")){
+			calibration+=10;
+		}
+		else if(job.equals("engineer")){
+			engineering+=10;
+		}
+		
+		System.out.println(job+" " +name+ " leveled to lv"+level+"! Stats: gunnery: "
+			+gunnery+" accuracy: "+accuracy+" efficiency: " +efficiency+" dmgControl: "+dmgControl+" calibration: "+calibration+" enginnering: "+engineering);
+		
+	}
+	
+	public void gainExp(int amount){
+		int gained=amount;
+		while(gained>0){
+			if((this.exp+gained) >= 100){
+				gained -= (100-this.exp);
+				this.exp=0;
+				this.levelUp();
+			} else {
+				this.exp+=gained;
+				gained=0;
+			}
+		}
+		
+	}
+	
 }

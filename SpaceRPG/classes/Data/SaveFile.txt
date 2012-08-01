@@ -1,0 +1,15 @@
+#Sample SaveFile
+#
+#NAME	savefile name
+#MONEY	how much money
+#PROGR	what mission # theyre on
+#SHIP	what ship
+#PYLONS	("item",itemType)(crewMember(with all stats)) //in order of the pylons in ship.pylons
+#PYLONS	("item",itemType)(crewMember)
+#PYLONS	("item",itemType)(crewMember)
+#CARGO	("item",itemType,quantity)
+#CARGO	("item",itemType,quantity)
+#CARGO	("item",itemType,quantity)
+#WAREHS	("item",itemType,quantity)
+#WAREHS	("item",itemType,quantity)
+#WAREHS	("item",itemType,quantity)

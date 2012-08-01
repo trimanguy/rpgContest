@@ -39,6 +39,10 @@
 				<browser>true</browser>
 			</fileitem>
 			<fileitem>
+				<path>classes\SpaceRPG.jar</path>
+				<folder>classes</folder>
+			</fileitem>
+			<fileitem>
 				<path>src\ActiveInterface.java</path>
 				<folder>src</folder>
 			</fileitem>
@@ -84,6 +88,10 @@
 			</fileitem>
 			<fileitem>
 				<path>src\Global.java</path>
+				<folder>src</folder>
+			</fileitem>
+			<fileitem>
+				<path>src\HangarGameState.java</path>
 				<folder>src</folder>
 			</fileitem>
 			<fileitem>
@@ -210,8 +218,8 @@
 		<todotaskitem>
 			<description>TODO: autotarget, do auto-targetting here</description>
 			<filepath>src\ShipObj.java</filepath>
-			<line>108</line>
-			<timestamp>1343829214</timestamp>
+			<line>113</line>
+			<timestamp>1343840421</timestamp>
 		</todotaskitem>
 	</tasks>
 </project>

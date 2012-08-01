@@ -32,3 +32,101 @@ PWRREQ	15
 SIZE	1
 DESCRIP	imbaaaa
 END	
+
+#ENAME	Buzzer Fighter Engine
+#EMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+#MAXSPD	90
+#ROTSPD	75
+#HEALTH	50
+#ARMOR	0
+#PWRREQ	10
+#DESCRIP	Fighter engine for Bombers.
+#END
+
+#ENAME	Corvay Fighter Engine
+#EMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+#MAXSPD	100
+#ROTSPD	85
+#HEALTH	50
+#ARMOR	0
+#PWRREQ	10
+#DESCRIP	Engine for Fighter Strikecraft.
+#END
+
+ENAME	ACE Juicer Frigate Engine
+EMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+MAXSPD	75
+ROTSPD	40
+HEALTH	100
+ARMOR	1
+PWRREQ	15
+SIZE	2
+DESCRIP	Basic Engine for Frigates.
+END
+
+ENAME	SURF Golden Frigate Engine
+EMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+MAXSPD	85
+ROTSPD	30
+HEALTH	100
+ARMOR	1
+PWRREQ	25
+SIZE	2
+DESCRIP	Frigate engine developed by Golden Industrial.
+END
+
+ENAME	Toyola PEER Cruiser Engine
+EMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+MAXSPD	50
+ROTSPD	25
+HEALTH	200
+ARMOR	2
+PWRREQ	30
+SIZE	3
+DESCRIP	Basic Engine for Cruisers.
+END
+
+ENAME	Bonga RT-1 Cruiser Engine
+EMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+MAXSPD	60
+ROTSPD	30
+HEALTH	200
+ARMOR	2
+PWRREQ	40
+SIZE	3
+DESCRIP	Cruiser engine developed by Bonga INC.
+END
+
+ENAME	Puma Battle Engine
+EMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+MAXSPD	40
+ROTSPD	20
+HEALTH	300
+ARMOR	3
+PWRREQ	45
+SIZE	4
+DESCRIP	Basic engine for battleships.
+END
+
+ENAME	Lambor Luxury Luthor Battle Engine
+EMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+MAXSPD	45
+ROTSPD	25
+HEALTH	250
+ARMOR	2
+PWRREQ	45
+SIZE	4
+DESCRIP	Battleship engine designed by Luthor UNLMTD.
+END
+
+ENAME	Hurricane Capitol Engine
+EMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+MAXSPD	50
+ROTSPD	25
+HEALTH	350
+ARMOR	4
+PWRREQ	50
+SIZE	5
+DESCRIP	A battleship engine developed by WIZARD Research Co.
+END
+

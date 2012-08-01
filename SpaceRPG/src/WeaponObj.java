@@ -47,6 +47,8 @@ public class WeaponObj extends ItemObj{
 	double spreadMultiplier=2;
 	double rangeMultiplier=0.5; //actually mods missileLife
 	double supplyMultiplier=2;
+	
+	
 
     public WeaponObj(String name, String model, String img, String hitImg, String soundType, int life, double maxSpeed, double accel, double turnSpeed, double spread, double itemTurnSpeed, String damage,
     	double health, double armor, double delay, int size, String descrip, boolean activateAble) {
@@ -99,5 +101,19 @@ public class WeaponObj extends ItemObj{
     		
     }
     	
+    
+    Boolean boosted; // weapon boosted?
+    
+    public void boost(){
+      	this.boosted=true;
+       	this.activateDelay = this.activateDelay/2;
+    }
+    
+    public void unBoost(){
+       	if(this.boosted){
+      		this.boosted=false;
+            this.activateDelay = this.activateDelay*2;
+       	}
+  	}
     
 }

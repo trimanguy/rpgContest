@@ -35,7 +35,10 @@ public class SoundObj {
     			soundPath = "Resources/Sounds/missilehit1.wav";
     		}
     		
-    	}
+    	}else if(soundType.equals("shipDeath")){
+        	int type = Utils.randomNumberGen(1,5);
+            soundPath = "Resources/Sounds/shipdeath"+type+".wav";
+       	}
     	
 		try{
 	    	URL soundURL = getClass().getClassLoader().getResource(soundPath);

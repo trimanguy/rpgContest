@@ -35,3 +35,86 @@ BSTCOST	5
 SIZE	1
 DESCRIP	IMBA shield
 END
+
+SNAME	COPPER EnerWall Shielding
+SMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+SAMT	100
+RDELAY	7
+HEALTH	100
+ARMOR	1
+PWRREQ	5
+BSTCOST	5
+SIZE	2
+DESCRIP	COPPER. Cheap, but efficient shielding for young starters.
+END
+
+SNAME	Patriot Blue Plate Shielding
+SMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+SAMT	125
+RDELAY	5
+HEALTH	100
+ARMOR	1
+PWRREQ	10
+BSTCOST	5
+SIZE	2
+DESCRIP	Shielding from Patriot Personal Protection Partnership.
+END
+
+SNAME	ARIAKE Plasma Shielding
+SMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+SAMT	200
+RDELAY	6
+HEALTH	200
+ARMOR	2
+PWRREQ	15
+BSTCOST	10
+SIZE	3
+DESCRIP	Effective shielding for the Everyman, from ARIAKE Tech.
+END
+
+SNAME	Pumper Solar Shielding
+SMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+SAMT	150
+RDELAY	4
+HEALTH	250
+ARMOR	3
+PWRREQ	15
+BSTCOST	5
+SIZE	3
+DESCRIP	Pump to your heart's content. Pumper Shielding. Environmentally friendly.
+END
+
+SNAME	Iron Curtain Shielding
+SMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+SAMT	300
+RDELAY	5
+HEALTH	300
+ARMOR	3
+PWRREQ	20
+BSTCOST	15
+SIZE	4
+DESCRIP	Iron Curtain Shielding for Battleships from Vladimir & Sons.
+END
+
+SNAME	Maginot Barrier Shielding
+SMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+SAMT	400
+RDELAY	7
+HEALTH	350
+ARMOR	3
+PWRREQ	25
+BSTCOST	20
+SIZE	4
+DESCRIP	Barrier shielding from Gerrard LMTD.
+END
+
+SNAME	GOLEM Vibrating Shielding
+SMODEL	Resources/Sprites/Escort1-PylonPowerCore.png
+SAMT	500
+RDELAY	4
+HEALTH	400
+ARMOR	5
+PWRREQ	35
+BSTCOST	25
+SIZE	5
+DESCRIP	Developed bY WIZARD Research Co.
