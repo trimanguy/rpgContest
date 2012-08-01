@@ -541,7 +541,7 @@ public class Utils {
     	ShipObj template = (ShipObj)Utils.shipTable.get(shipName);
     	ArrayList<HitCircle> copiedHitCircles = new ArrayList(0);
     	ArrayList<Pylon> copiedPylons = new ArrayList(0);
-    	ShipObj newShip = new ShipObj(template.imageName, copiedHitCircles, copiedPylons, template.descrip, true);
+    	ShipObj newShip = new ShipObj(shipName,template.imageName, copiedHitCircles, copiedPylons, template.descrip, true);
     	
     	//copy over each HitCircle from hitCircles to copiedHitCircles
     	for(int x=0; x<(template.hitCircles.size()); x++){
@@ -652,6 +652,145 @@ public class Utils {
   		}
   	}
   	
+  	public static void saveGame(String name){
+  		String contents="";
+  		GameState state = Global.state;
+  		String nl = System.getProperty("line.separator"); 
+  		contents+="NAME	"+state.playerName+nl;
+  		contents+="MONEY	"+state.playerMoney+nl;
+  		contents+="PROGR	"+state.playerProgress+nl;
+  		contents+="SHIP	"+state.playerObj.name+nl;
+  		for(Pylon P:state.playerObj.pylons){
+  			contents+="PYLONS	"+P.equipped.name+","+P.equipped.type;
+  			if(P.crew!=null){
+  				contents+=","+P.crew.name+","+P.crew.gender+","+P.crew.job+","+P.crew.level+","
+  					+P.crew.gunnery+","+P.crew.accuracy+","+P.crew.efficiency+","
+  						+P.crew.dmgControl+","+P.crew.calibration+","+P.crew.engineering+"|"+nl;
+  			} else {
+  				contents+="|"+nl;
+  			}
+  		}
+  		for(ItemObj I:state.playerCargo){
+  			contents+="CARGO	"+I.name+","+I.type+","+I.quantity+nl;
+  		}
+  		for(ItemObj I:state.playerVault){
+  			contents+="VAULT	"+I.name+","+I.type+","+I.quantity+nl;
+  		}
+  		
+  		
+  		Utils.writeToFile(name+"'s savefile",contents);
+  	}
+  	
+  	public static void loadGame(String filename){
+  		
+    	StringBuilder contents = new StringBuilder();
+    	String money="";
+    	String progress="";
+    	String ship="";
+    	
+    	
+    	try {
+    		BufferedReader input = new BufferedReader(new FileReader(filepath+filename));
+	    	try {
+	    		String line = null;
+	    		//for each line in the file
+	    		while ((line=input.readLine()) != null){
+	    			if(line.startsWith("#")){
+	    				continue;
+	    			}
+	    			//System.out.println("line "+line);
+	    			StringTokenizer st = new StringTokenizer(line, "\t");
+	    			String identifier;
+	    			
+	    			while(st.hasMoreTokens()){
+	    				identifier = st.nextToken();
+	    				switch (identifier) {
+	    					case "NAME":		name = st.nextToken(); break;
+	    					case "MONEY":		money = st.nextToken(); break; 
+	    					case "PROGR":		progress = st.nextToken(); break;
+	    					case "SHIP":		ship = st.nextToken(); break;
+	    					case "PYLONS":		tempPylons += st.nextToken(); break;
+	    					case "CARGO":		break;
+	    					case "VAULT":		break;
+	    				}	
+	    			}
+	    			
+	    					
+	    		}
+	    		
+	    		//convert strings to game info now
+				Global.state.playerName=name;
+				Global.state.playerMoney=Double.valueOf(money);
+				Global.state.playerProgress=Double.valueOf(progress);
+				Global.state.playerObj=Utils.createShip(ship,"player");
+				/*
+				for(Pylon P:Global.state.playerObj.pylons){
+					System.out.println("pylonAllowed "+P.allowedType);
+				}
+				*/
+				StringTokenizer tempPylons_st = new StringTokenizer(tempPylons,"|");
+				int pylonNum=0;
+				while(tempPylons_st.hasMoreTokens()){
+					
+					String nextPylon=tempPylons_st.nextToken();
+					//System.out.println("nextPylon "+nextPylon);
+					StringTokenizer pylon_st = new StringTokenizer(nextPylon,",");
+					String itemName = pylon_st.nextToken();
+					String itemType = pylon_st.nextToken();
+					Global.state.playerObj.pylons.get(pylonNum).equipItem(Utils.createItem(itemType,itemName));
+					if(pylon_st.hasMoreTokens()){ //pretty much theres a crew member
+						String cname=pylon_st.nextToken();
+						String gender=pylon_st.nextToken();
+						String job=pylon_st.nextToken();
+						int lv=Integer.valueOf(pylon_st.nextToken());
+						double gun = Double.valueOf(pylon_st.nextToken());
+						double acc = Double.valueOf(pylon_st.nextToken());
+						double eff = Double.valueOf(pylon_st.nextToken());
+						double dmgControl = Double.valueOf(pylon_st.nextToken());
+						double cali = Double.valueOf(pylon_st.nextToken());
+						double eng = Double.valueOf(pylon_st.nextToken());
+						Global.state.playerObj.pylons.get(pylonNum).crew=new CharacterObj(cname,gender,job,lv,gun,acc,eff,dmgControl,cali,eng);
+					}
+					pylonNum++;
+						
+						
+						
+						
+					
+				}	    			
+	    			
+	    		//clear vars
+	    		name = "";
+	    		tempPylons = "";
+	    	}
+	    	
+	    	finally {
+	    		input.close();
+	    	}
+    	}
+    	catch (IOException ex){
+    		ex.printStackTrace();
+    	}
+    
+
+  	}
+  	
+  	public static ItemObj createItem(String type, String name){
+  		if(type.equals("Weapon")){
+  			return Utils.createWeapon(name);
+  		}
+  		else if(type.equals("PowerCore")){
+  			return Utils.createPowerCore(name);
+  		}
+  		else if(type.equals("Shield")){
+  			return Utils.createShield(name);
+  		}
+  		else if(type.equals("Engine")){
+  			return Utils.createEngine(name);
+  		}
+  		
+  		return null;
+  	}
   	
 }
    

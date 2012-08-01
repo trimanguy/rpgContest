@@ -19,6 +19,8 @@ public class GameObj extends Obj {
 	//public double x=0;
 	//public double y=0;
 	
+	String name;
+	
 	ArrayList<HitCircle> hitCircles = new ArrayList(0);
 	ArrayList<Pylon> pylons = new ArrayList(0);
 	

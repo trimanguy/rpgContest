@@ -55,6 +55,21 @@ public class CharacterObj extends Obj{
 	double calibration=50;//increases engine speed or pylon turn rate
 	double engineering=50;//increases max shield or max power
 	
+	public CharacterObj(String name, String gender, String job, int level,double gun, double acc, double eff, double dmgControl, double cali, double eng ){
+		this.name=name;
+		if(gender.equals("true")){
+			this.gender=true;
+		}
+		this.job=job;
+		this.level=level;
+		this.gunnery=gun;
+		this.accuracy=acc;
+		this.efficiency=eff;
+		this.dmgControl=dmgControl;
+		this.calibration=cali;
+		this.engineering=eng;
+	}
+	
 	
     public CharacterObj() {
     	if(Utils.randomNumberGen(0,2)==1){gender=true;}
@@ -80,8 +95,8 @@ public class CharacterObj extends Obj{
     	if(maxStat==engineering) 	job="engineer";
     	
     	
-    	System.out.println(job+" " +name+ " made! With stats: gunnery: "+gunnery+" accuracy: "
-    		+accuracy+" efficiency: " +efficiency+" dmgControl: "+dmgControl+" calibration: "+calibration+" enginnering: "+engineering);
+    	//System.out.println(job+" " +name+ " made! With stats: gunnery: "+gunnery+" accuracy: "
+    		//+accuracy+" efficiency: " +efficiency+" dmgControl: "+dmgControl+" calibration: "+calibration+" enginnering: "+engineering);
 	}
 	
 	private void distributeStats(int points){

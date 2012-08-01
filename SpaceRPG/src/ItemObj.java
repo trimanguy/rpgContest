@@ -16,7 +16,7 @@ public class ItemObj extends Obj{
 	int size; //This corresponds to Pylon.size
 	String type;//This corresponds to Pylon.type
 	
-	int quantity;
+	int quantity=1;
 	int maxQuantity=1;
 	
 	double baseHealth;

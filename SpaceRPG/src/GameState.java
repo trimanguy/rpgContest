@@ -35,8 +35,8 @@ public class GameState {
 	String playerName = "";
 	double playerMoney = 0;
 	double playerProgress = 0;
-	ArrayList<Obj> playerCargo = new ArrayList(0);
-	ArrayList<Obj> playerBank = new ArrayList(0);
+	ArrayList<ItemObj> playerCargo = new ArrayList(0);
+	ArrayList<ItemObj> playerVault = new ArrayList(0);
 
     public GameState() {
     	
@@ -53,16 +53,19 @@ public class GameState {
     	
     	Utils.parseShieldFile("Data/ShieldFile.txt");
     	
-    	Global.state.playerObj = createPrometheus(500,"player");
-    	
-    	for(int z=0; z<Global.state.playerObj.pylons.size()-1;z++){
+    	//need to add method for player to change ship
+    	//playerObj = createPrometheus(500,"player");
+    	//playerShip = "Prometheus";
+    	/*
+    	for(int z=0; z<Global.state.playerObj.pylons.size();z++){
     		Pylon P = Global.state.playerObj.pylons.get(z);
+    		P.crew=new CharacterObj();
     	}
-    	
+    	*/
     	//Global.state.playerObj.pylons.get(6).equipItem(Utils.createEngine("imbaEngine"));
 		Utils.filepath=Utils.getDataFolder();
-		Utils.writeToFile("hello's savefile","helloooooo");
-		Utils.writeToFile("goodbye's savefile","gooooooodbye");
+		//Utils.writeToFile("hello's savefile","helloooooo");
+		//Utils.writeToFile("goodbye's savefile","gooooooodbye");
 		
         createEscort1(500,"ally");
         createEscort1(500,"ally");
@@ -76,21 +79,16 @@ public class GameState {
         createFlak1(500,"none");
         createFlak1(500,"none");
         createFlak1(500,"none");
-        
-        
-        /*
-        new CharacterObj();
-        new CharacterObj();
-        new CharacterObj();
-        new CharacterObj();
-        new CharacterObj();
-        new CharacterObj();
-        new CharacterObj();
-        new CharacterObj();
-        new CharacterObj();
-        new CharacterObj();
-        new CharacterObj();
-        */
+        Utils.loadGame("Triman's savefile.txt");
+        //System.out.println("playername: "+playerName+ " money "+playerMoney+ " progress "+playerProgress);
+        //playerName = "Triman";
+        //playerMoney = 100;
+        //playerProgress = 5;
+        playerCargo.add(Utils.createWeapon("testBlaster"));
+        playerCargo.add(Utils.createPowerCore("testCore"));
+        playerVault.add(Utils.createShield("testShield"));
+        playerVault.add(Utils.createWeapon("testBlaster"));
+        //Utils.saveGame(playerName);
         
         Global.GUI = new ActiveInterface();
     }

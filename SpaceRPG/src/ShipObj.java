@@ -75,10 +75,11 @@ public class ShipObj extends GameObj {
     }
     
     /*** Ship Constructor, puts ship on screen ***/
-    public ShipObj(String image, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons, String descrip, boolean real) { 
+    public ShipObj(String name,String image, ArrayList<HitCircle> hitboxes, ArrayList<Pylon> newPylons, String descrip, boolean real) { 
     	//System.out.println("NEW SHIP OBJECT GUY");
     	if(image != null)
     	{
+    		this.name=name;
     		sprite = new Sprite(image, true);
 	    	
 	    	hitCircles = hitboxes;
