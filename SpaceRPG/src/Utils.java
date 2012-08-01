@@ -630,7 +630,7 @@ public class Utils {
 	   	else if(os.contains("mac"))
 	      	folder += "/Library/Application Support/SpaceRPG/";
 	      	
-	    System.out.println("folder: "+folder);
+	    //System.out.println("folder: "+folder);
 	   	return folder;
 	}
    
@@ -661,6 +661,8 @@ public class Utils {
   		contents+="PROGR	"+state.playerProgress+nl;
   		contents+="SHIP	"+state.playerObj.name+nl;
   		for(Pylon P:state.playerObj.pylons){
+  			if(P.equipped==null){contents+="PYLONS	null|"+nl;continue;}
+  			
   			contents+="PYLONS	"+P.equipped.name+","+P.equipped.type;
   			if(P.crew!=null){
   				contents+=","+P.crew.name+","+P.crew.gender+","+P.crew.job+","+P.crew.level+","
@@ -671,10 +673,10 @@ public class Utils {
   			}
   		}
   		for(ItemObj I:state.playerCargo){
-  			contents+="CARGO	"+I.name+","+I.type+","+I.quantity+nl;
+  			contents+="CARGO	"+I.name+","+I.type+","+I.quantity+"|"+nl;
   		}
   		for(ItemObj I:state.playerVault){
-  			contents+="VAULT	"+I.name+","+I.type+","+I.quantity+nl;
+  			contents+="VAULT	"+I.name+","+I.type+","+I.quantity+"|"+nl;
   		}
   		
   		
@@ -687,6 +689,8 @@ public class Utils {
     	String money="";
     	String progress="";
     	String ship="";
+    	String tempCargo="";
+    	String tempVault="";
     	
     	
     	try {
@@ -710,8 +714,8 @@ public class Utils {
 	    					case "PROGR":		progress = st.nextToken(); break;
 	    					case "SHIP":		ship = st.nextToken(); break;
 	    					case "PYLONS":		tempPylons += st.nextToken(); break;
-	    					case "CARGO":		break;
-	    					case "VAULT":		break;
+	    					case "CARGO":		tempCargo += st.nextToken(); break;
+	    					case "VAULT":		tempVault += st.nextToken();break;
 	    				}	
 	    			}
 	    			
@@ -723,17 +727,14 @@ public class Utils {
 				Global.state.playerMoney=Double.valueOf(money);
 				Global.state.playerProgress=Double.valueOf(progress);
 				Global.state.playerObj=Utils.createShip(ship,"player");
-				/*
-				for(Pylon P:Global.state.playerObj.pylons){
-					System.out.println("pylonAllowed "+P.allowedType);
-				}
-				*/
+
 				StringTokenizer tempPylons_st = new StringTokenizer(tempPylons,"|");
 				int pylonNum=0;
 				while(tempPylons_st.hasMoreTokens()){
-					
 					String nextPylon=tempPylons_st.nextToken();
-					//System.out.println("nextPylon "+nextPylon);
+					if (nextPylon.equals("null")){
+						continue;
+					}
 					StringTokenizer pylon_st = new StringTokenizer(nextPylon,",");
 					String itemName = pylon_st.nextToken();
 					String itemType = pylon_st.nextToken();
@@ -752,12 +753,29 @@ public class Utils {
 						Global.state.playerObj.pylons.get(pylonNum).crew=new CharacterObj(cname,gender,job,lv,gun,acc,eff,dmgControl,cali,eng);
 					}
 					pylonNum++;
-						
-						
-						
-						
-					
-				}	    			
+				}	
+				
+				StringTokenizer tempCargo_st = new StringTokenizer(tempCargo,"|");
+				while(tempCargo_st.hasMoreTokens()){
+					String nextCargo = tempCargo_st.nextToken();
+					StringTokenizer cargo_st = new StringTokenizer(nextCargo,",");
+					String cname = cargo_st.nextToken();
+					String type = cargo_st.nextToken();
+					int quant = Integer.valueOf(cargo_st.nextToken());
+					Global.state.playerCargo.add(Utils.createItem(type,cname));
+					//System.out.println("added to cargo "+type+" " +cname);
+				}
+				
+				StringTokenizer tempVault_st = new StringTokenizer(tempVault,"|");
+				while(tempVault_st.hasMoreTokens()){
+					String nextVault = tempVault_st.nextToken();
+					StringTokenizer vault_st = new StringTokenizer(nextVault,",");
+					String vname = vault_st.nextToken();
+					String type = vault_st.nextToken();
+					Global.state.playerVault.add(Utils.createItem(type,vname));
+					//System.out.println("added to vault "+type+" " +vname);
+				}
+				    			
 	    			
 	    		//clear vars
 	    		name = "";

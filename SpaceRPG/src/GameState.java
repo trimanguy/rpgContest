@@ -54,8 +54,7 @@ public class GameState {
     	Utils.parseShieldFile("Data/ShieldFile.txt");
     	
     	//need to add method for player to change ship
-    	//playerObj = createPrometheus(500,"player");
-    	//playerShip = "Prometheus";
+    	//playerObj = createEscort1(500,"player");
     	/*
     	for(int z=0; z<Global.state.playerObj.pylons.size();z++){
     		Pylon P = Global.state.playerObj.pylons.get(z);
@@ -80,15 +79,18 @@ public class GameState {
         createFlak1(500,"none");
         createFlak1(500,"none");
         Utils.loadGame("Triman's savefile.txt");
-        //System.out.println("playername: "+playerName+ " money "+playerMoney+ " progress "+playerProgress);
-        //playerName = "Triman";
-        //playerMoney = 100;
-        //playerProgress = 5;
+        System.out.println("playername: "+playerName+ " money "+playerMoney+ " progress "+playerProgress);
+        /*
+        playerName = "Triman";
+        playerMoney = 99;
+        playerProgress = 9;
         playerCargo.add(Utils.createWeapon("testBlaster"));
+        playerCargo.add(Utils.createPowerCore("testCore"));
         playerCargo.add(Utils.createPowerCore("testCore"));
         playerVault.add(Utils.createShield("testShield"));
         playerVault.add(Utils.createWeapon("testBlaster"));
-        //Utils.saveGame(playerName);
+        Utils.saveGame(playerName);
+        */
         
         Global.GUI = new ActiveInterface();
     }

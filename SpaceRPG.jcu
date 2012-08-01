@@ -51,7 +51,7 @@
 			<path>SpaceRPG\src\Utils.java</path>
 			<source>true</source>
 			<index>0</index>
-			<active>false</active>
+			<active>true</active>
 		</docitem>
 		<docitem>
 			<path>SpaceRPG\src\ActiveInterface.java</path>
@@ -96,7 +96,7 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\GameState.java</path>
+			<path>SpaceRPG\src\ShieldObj.java</path>
 			<source>true</source>
 			<index>8</index>
 			<active>false</active>
@@ -108,13 +108,13 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\ItemObj.java</path>
+			<path>SpaceRPG\src\EngineObj.java</path>
 			<source>true</source>
 			<index>10</index>
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\EngineObj.java</path>
+			<path>SpaceRPG\src\ItemObj.java</path>
 			<source>true</source>
 			<index>11</index>
 			<active>false</active>
@@ -150,7 +150,7 @@
 			<active>false</active>
 		</docitem>
 		<docitem>
-			<path>SpaceRPG\src\ShieldObj.java</path>
+			<path>SpaceRPG\src\GameState.java</path>
 			<source>true</source>
 			<index>17</index>
 			<active>false</active>
@@ -213,7 +213,7 @@
 			<path>SpaceRPG\src\GameApplet.java</path>
 			<source>true</source>
 			<index>27</index>
-			<active>true</active>
+			<active>false</active>
 		</docitem>
 	</open_files>
 	<breakpoints>
