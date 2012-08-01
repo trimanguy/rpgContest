@@ -52,7 +52,7 @@ public class SoundObj {
 			clip.open(ain);
 			//clip.setFramePosition(0);
 			clip.start();
-			System.out.println("PLAY SOUND CLIP "+soundPath);
+			//System.out.println("PLAY SOUND CLIP "+soundPath);
 		}
 		catch(UnsupportedAudioFileException e){}
 		catch(LineUnavailableException u){}

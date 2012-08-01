@@ -19,8 +19,36 @@ public class InterfacePylon extends UIElement{
 	double updateTimer;
 	double offX,offY;
 	
+	
+	
     public InterfacePylon(double nx, double ny, String img){
     	super(nx,ny,img);
+    }
+    
+    public InterfacePylon(Pylon P, double cornerX, double cornerY) {
+    	pylon = P;
+    	
+    	//Grab the pylon GUI image
+    	String image = P.gui;
+    	
+    	//Set the graphic coordinates
+    	offX = P.screenX; offY = P.screenY;
+    	
+    	//initialize other attributes
+    	mouseOpacity = 0;
+    	
+    	layer = 25;
+    	
+    	
+    	if(image != null)
+    	{
+    		sprite = new Sprite(image, false);
+	    	
+	    	//Init();
+	    	Global.state.newObjBuffer.add(this);
+    	}
+    	move(cornerX,cornerY);
+    	transform();
     }
     
     public InterfacePylon(Pylon P) {

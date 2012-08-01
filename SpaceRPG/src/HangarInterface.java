@@ -244,7 +244,41 @@ public class HangarInterface extends InterfaceManager{
     	
     }
     
+    public void buyItem(){
+    	
+    }
+    
+    public void sellItem(){
+    	
+    }
+    
+    public void buyShip(){
+    	
+    }
+    
+    public void acceptMission(){
+    	
+    }
+    
+    public void abortMission(){
+    	
+    }
+    
     public void updatePane(){
+    	
+    	if(currPane.compareTo("Hangar")==0){
+    		
+    	}else if(currPane.compareTo("Shop")==0){
+    		
+    	}else if(currPane.compareTo("Market")==0){
+    		
+    	}else if(currPane.compareTo("Shipyard")==0){
+    		
+    	}else if(currPane.compareTo("Missions")==0){
+    		
+    	}else if(currPane.compareTo("Bar")==0){
+    		
+    	}
     	
     }
     
