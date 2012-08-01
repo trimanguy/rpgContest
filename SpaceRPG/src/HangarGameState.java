@@ -6,18 +6,23 @@
  * @version 1.00 2012/8/1
  */
 
+import java.util.ArrayList;
 
 public class HangarGameState extends GameState{
 	
 	//equipment sold. PREFERRABLY IN DIFFERENT LISTS SO I CAN USE TABS?
-	
+	ArrayList<ItemObj> equipShop = new ArrayList(0);
+		
 	//commodities sold
+	ArrayList<Commodity> marketShop = new ArrayList(0);
 	
 	//ships sold
+	ArrayList<ShipObj> shipShop = new ArrayList(0);
 	
 	//missions available(?)
 	
 	//crew-members hireable
+	ArrayList<CharacterObj> crewShop = new ArrayList(0);
 	
 	
     public HangarGameState() {

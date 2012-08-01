@@ -7,6 +7,7 @@
 import java.util.ArrayList;
 import java.awt.geom.Point2D;
 import java.io.*;
+import java.awt.event.MouseEvent;
 
 public class Pylon {
 
@@ -606,5 +607,13 @@ public class Pylon {
 		double nx = source.x+polarRadius*Math.cos(Math.toRadians(polarAngle+source.currAngle));
 		double ny = source.y+polarRadius*Math.sin(Math.toRadians(polarAngle+source.currAngle));
     	return new PointS(nx,ny);
+    }
+    
+    public void mouseClicked(MouseEvent e){
+    	
+    }
+    
+    public void mouseDropped(MouseEvent e, Obj O){
+    	
     }
 }

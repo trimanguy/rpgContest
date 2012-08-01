@@ -10,6 +10,8 @@ class InterfaceItem extends UIElement{
 		base = O;
 		//deduce the icon from O?
 		getIcon(O);
+		
+		mouseOpacity = 0;
 	}
 	
 	public void getIcon(Obj O){
@@ -30,6 +32,8 @@ class InterfaceItem extends UIElement{
 			path += "PowerCore.png";
 		}else if(O instanceof ShipObj){
 			path += "Ship.png";
+		}else if(O instanceof CharacterObj){
+			path += "Crew.png";
 		}else{
 			path += "Generic.png";
 		}

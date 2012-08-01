@@ -18,8 +18,13 @@ public class HangarInterface extends InterfaceManager{
 	ArrayList<String> tempPaneKeys = new ArrayList(0);
 	
     String path = "Resources/Interface/";
+    
+    HangarGameState hangarState;
 
     public HangarInterface() {
+    	
+    	hangarState = (HangarGameState) Global.state;
+    	
     	//create the background
     	//double x, double y, String image, URL spritecontext, double nlayer
     	
@@ -250,11 +255,19 @@ public class HangarInterface extends InterfaceManager{
     
     public void trashItem(){
     	if(selectedObject == null) return;
+    	
+    	if(!hangarState.playerCargo.contains(selectedObject) && !hangarState.playerVault.contains(selectedObject)) return;
+    	
+    	hangarState.playerCargo.remove(selectedObject);
+    	hangarState.playerVault.remove(selectedObject);
     }
     
     public void buyItem(){
     	if(selectedObject == null) return;
     	
+    	
+    	
+    	hangarState.playerVault.add((ItemObj) selectedObject);
     }
     
     public void sellItem(){
@@ -285,22 +298,44 @@ public class HangarInterface extends InterfaceManager{
     public void updatePane(){
     	
     	if(currPane.compareTo("Hangar")==0){
-    		((InterfaceList) elements.get("hangarBack")).values = new ArrayList(Global.state.playerVault);
-    		((InterfaceList) elements.get("cargoBack")).values = new ArrayList(Global.state.playerCargo);
-    		
-    		
+    		((InterfaceList) elements.get("hangarBack")).values = new ArrayList(hangarState.playerVault);
+    		((InterfaceList) elements.get("cargoBack")).values = new ArrayList(hangarState.playerCargo);
     		
     	}else if(currPane.compareTo("Shop")==0){
     		//check the shop pane
-    		((InterfaceList) elements.get("hangarBack")).values = new ArrayList(Global.state.playerVault);
+    		((InterfaceList) elements.get("hangarBack")).values = new ArrayList(hangarState.playerVault);
+    		((InterfaceList) elements.get("shopBack")).values = new ArrayList(hangarState.equipShop);
     		
     	}else if(currPane.compareTo("Market")==0){
+    		((InterfaceList) elements.get("hangarBack")).values = new ArrayList(hangarState.playerVault);
+    		((InterfaceList) elements.get("marketBack")).values = new ArrayList(hangarState.marketShop);
     		
     	}else if(currPane.compareTo("Shipyard")==0){
+    		((InterfaceList) elements.get("shipsBack")).values = new ArrayList(hangarState.shipShop);
+    		
     		
     	}else if(currPane.compareTo("Missions")==0){
+    		//((InterfaceList) elements.get("shopBack")).values = new ArrayList(hangarState.missions);
     		
     	}else if(currPane.compareTo("Bar")==0){
+    		((InterfaceList) elements.get("crewBack")).values = new ArrayList(hangarState.crewShop);
+    		
+    		if(selectedObject != null && selectedObject instanceof CharacterObj){
+    			CharacterObj crew = (CharacterObj) selectedObject;
+    			String text = "\n\n"+crew.name;
+    			text += "\n\n\t Profession: "+crew.job;
+    			text += "\n\t Level: "+crew.level;
+    			text += "\n\n\t Gunnery: \t"+crew.gunnery;
+    			text += "\n\t Accuracy: \t"+crew.accuracy;
+    			text += "\n\t Efficiency: \t"+crew.efficiency;
+    			text += "\n\t Damage Control: \t"+crew.dmgControl;
+    			text += "\n\t Calibration: \t"+crew.calibration;
+    			text += "\n\t Engineering: \t"+crew.engineering;
+    			
+    			text += "\n\n Hire Cost: \t$"+(crew.level*150);
+    			
+    			elements.get("detailsBack").text = text;
+    		}
     		
     	}
     	

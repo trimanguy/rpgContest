@@ -11,15 +11,32 @@ import java.net.URL;
 import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
 
 public class InterfacePylon extends UIElement{
 
 	Pylon pylon;
+	
+	InterfaceItem item;
+	
 	double percent= -1.0;
 	double updateTimer;
 	double offX,offY;
 	
-	
+    public void mouseClicked(MouseEvent e){
+    	pylon.mouseClicked(e);
+    	if(Global.GUI instanceof HangarInterface){
+    		((HangarInterface) Global.GUI).updatePane();
+    	}
+    }
+    
+    public void mouseDropped(MouseEvent e, Obj O){
+    	pylon.mouseDropped(e,O);
+    	if(Global.GUI instanceof HangarInterface){
+    		((HangarInterface) Global.GUI).updatePane();
+    	}
+    	
+    }
 	
     public InterfacePylon(double nx, double ny, String img){
     	super(nx,ny,img);
@@ -152,6 +169,13 @@ public class InterfacePylon extends UIElement{
 	    		}
     		}
     		
+    	}
+    	if(item!=null){
+    		double dx,dy;
+    		dx = x+sprite.frameX/2 + offX;
+    		dy = y+sprite.frameY/2 - offY;
+    		item.translate(dx,dy);
+    		item.Draw(g,I);
     	}
     	
     }
